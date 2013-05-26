@@ -52,7 +52,7 @@ public class CreateEmployee extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/AddUser.png"))); // NOI18N
-        jLabel1.setText("Nuevo Empleado:");
+        jLabel1.setText("Nuevo Empleado");
 
         jLabel2.setText("C.C.:");
 

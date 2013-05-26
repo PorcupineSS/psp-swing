@@ -28,16 +28,16 @@ public class FindPerson extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextFieldFind = new javax.swing.JTextField();
+        jTextFieldBuscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButtonFind = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jListResultados = new javax.swing.JList();
+        jButtonDetalles = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
+        jButtonCancelar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Find.png"))); // NOI18N
@@ -46,32 +46,32 @@ public class FindPerson extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel2.setText("Por favor ingresar C.C. o Código:");
 
-        jButtonFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/FindMin.png"))); // NOI18N
-        jButtonFind.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/FindMin.png"))); // NOI18N
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFindActionPerformed(evt);
+                jButtonBuscarActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Resultados de la búsqueda...");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        jListResultados.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Resultado 1", "Resultado 2", "..." };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jListResultados);
 
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDetalles.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonDetalles.setForeground(new java.awt.Color(0, 0, 51));
+        jButtonDetalles.setText("Detalles");
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonCancelarActionPerformed(evt);
             }
         });
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 51));
-        jButton2.setText("Detalles");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -90,16 +90,16 @@ public class FindPerson extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(7, 7, 7)
-                                .addComponent(jTextFieldFind, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonFind, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(jButtonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(jButtonDetalles)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -107,7 +107,7 @@ public class FindPerson extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonFind, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -115,7 +115,7 @@ public class FindPerson extends javax.swing.JPanel {
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextFieldFind, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -126,32 +126,32 @@ public class FindPerson extends javax.swing.JPanel {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonDetalles)
+                    .addComponent(jButtonCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonFindActionPerformed
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButtonFind;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonDetalles;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList jList1;
+    private javax.swing.JList jListResultados;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextFieldFind;
+    private javax.swing.JTextField jTextFieldBuscar;
     // End of variables declaration//GEN-END:variables
 }

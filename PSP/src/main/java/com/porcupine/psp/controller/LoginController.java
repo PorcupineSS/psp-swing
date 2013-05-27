@@ -17,6 +17,7 @@ public class LoginController {
     
     static Login login;
     static Psp psp;
+    //TODO public static EmpleadoVO usuarioActivo;
     
     public static void viewLogin() {
         psp= new Psp();
@@ -39,6 +40,16 @@ public class LoginController {
         contenedor.repaint();
         contenedor.getParent().setVisible(true);
         contenedor.setVisible(true);
+    }
+    
+    public static void close() {
+        System.exit(0);
+    }
+    
+    public static void logout() {
+        login = new Login();
+        psp.setSize(login.getPreferredSize());
+        changePanel(psp.getViewport(), login);
     }
     
 }

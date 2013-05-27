@@ -18,6 +18,7 @@ public class Psp extends javax.swing.JFrame {
      */
     public Psp() {
         initComponents();
+        this.setTitle("Porcupine Software Portal");
     }
 
     /**

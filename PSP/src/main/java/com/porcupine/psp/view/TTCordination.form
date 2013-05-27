@@ -163,7 +163,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/porcupine/psp/resources/Add.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Agregar Implemento de Trabajo"/>
+            <Property name="text" type="java.lang.String" value="Registrar Implemento"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddImplementActionPerformed"/>

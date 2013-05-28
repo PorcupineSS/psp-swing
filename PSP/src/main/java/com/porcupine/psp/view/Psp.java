@@ -88,7 +88,7 @@ public class Psp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                LoginController.viewLogin();
+                LoginController.mostrarLogin();
             }
         });
     }

@@ -4,6 +4,8 @@
  */
 package com.porcupine.psp.controller;
 
+import com.porcupine.psp.model.dao.exceptions.DataBaseException;
+import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.view.Login;
 import com.porcupine.psp.view.Psp;
@@ -17,46 +19,8 @@ import javax.swing.JViewport;
  */
 public class LoginController {
     
-    /*static Login login;
-    static Psp psp;
-    //TODO public static EmpleadoVO empleadoActivo;
-    
-    public static void viewLogin() {
-        psp= new Psp();
-        psp.setLocationRelativeTo(null);
-        login = new Login();
-        psp.setVisible(true);
-        changePanel(psp.getViewport(), login);
-    }
-    
-    public static void changePanel(JViewport contenedor, JPanel panel) {
-        contenedor.getParent().setVisible(false);
-        contenedor.setVisible(false);
-        contenedor.removeAll();
-        contenedor.add(panel);
-        contenedor.setSize(panel.getPreferredSize().getSize());
-        contenedor.getParent().setSize(panel.getPreferredSize().getSize());
-        contenedor.getParent().revalidate();
-        contenedor.getParent().repaint();
-        contenedor.revalidate();
-        contenedor.repaint();
-        contenedor.getParent().setVisible(true);
-        contenedor.setVisible(true);
-    }
-    
-    public static void close() {
-        System.exit(0);
-    }
-    
-    public static void logout() {
-        login = new Login();
-        psp.setSize(login.getPreferredSize());
-        changePanel(psp.getViewport(), login);
-    }*/
-    
     static Login login;
     static Psp psp;
-    //static Secundario secundario;
     public static EmpleadosVO empleadoActivo;
 
     public static EmpleadosVO getEmpleadoLogin() {
@@ -79,15 +43,6 @@ public class LoginController {
         System.exit(0);
     }
 
-    public static void mostrarRecuperarContrasena() {
-        secundario = new Secundario();
-        secundario.setLocationRelativeTo(principal);
-        RecuperarContrasena recuperarContrasena = new RecuperarContrasena();
-        secundario.setVisible(true);
-        secundario.setSize(recuperarContrasena.getPreferredSize());
-        cambiarPanel(secundario.getViewport(), recuperarContrasena);
-    }
-
     public static void cambiarPanel(JViewport contenedor, JPanel panel) {
         contenedor.getParent().setVisible(false);
         contenedor.setVisible(false);
@@ -104,16 +59,16 @@ public class LoginController {
     }
 
     public static void login() {
-        EmpleadosVO usuario = new EmpleadosVO();
-        String nombreUsuario = login.getUsuarioTF().getText();
-        String clave = new String(login.getContrasenaPF().getPassword());
+        EmpleadosVO empleado = new EmpleadosVO();
+        String cedulaEmpleado = login.getUsuarioTF().getText();
+        String password = new String(login.getContrasenaPF().getPassword());
 
-        usuario.setNombreDeUsuario(nombreUsuario);
-        usuario.setClave(clave);
+        empleado.setCedulaE(Long.parseLong(cedulaEmpleado.toString()));
+        empleado.setContrasenaE(password);
 
-        UsuarioVO usuarioLogin;
+        EmpleadosVO empleadoLogin;
         try {
-            usuarioLogin = ServiceFactory.getInstance().getUsuarioService().login(usuario);
+            empleadoLogin = ServiceFactory.getInstance().getEmpleadosService().login(empleado);
         } catch (DataBaseException ex) {
             int opcion = JOptionPane.showOptionDialog(login, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
             switch (opcion) {
@@ -126,54 +81,10 @@ public class LoginController {
             return;
         }
 
-        if (usuarioLogin != null) {
-            String nombreEmpresa = ServiceFactory.getInstance().getEmpresaService().find(usuarioLogin.getEmpresasNIT()).getNombre();
-            switch (usuarioLogin.getRol()) {
-                case PROVEEDOR_DE_TI:
-                    ProveedorTIPrincipal proveedorTIPrincipal = new ProveedorTIPrincipal();
-                    principal.setSize(proveedorTIPrincipal.getPreferredSize());
-                    proveedorTIPrincipal.getNombreUsuarioL().setText(usuarioLogin.getNombre());
-                    proveedorTIPrincipal.getNombreEmpresaL().setText(nombreEmpresa);
-                    proveedorTIPrincipal.getRolL().setText(usuarioLogin.getRol().getLabel());
-                    cambiarPanel(principal.getViewport(), proveedorTIPrincipal);
-                    break;
-                case PRIMER_ADMINISTRADOR:
-                    PrimerAdministradorPrincipal primerAdministradorPrincipal = new PrimerAdministradorPrincipal();
-                    principal.setSize(primerAdministradorPrincipal.getPreferredSize());
-                    primerAdministradorPrincipal.getNombreUsuarioL().setText(usuarioLogin.getNombre());
-                    primerAdministradorPrincipal.getNombreEmpresaL().setText(nombreEmpresa);
-                    primerAdministradorPrincipal.getRolL().setText(usuarioLogin.getRol().getLabel());
-                    cambiarPanel(principal.getViewport(), primerAdministradorPrincipal);
-                    break;
-                case ADMINISTRADOR:
-                    AdministradorPrincipal administradorPrincipal = new AdministradorPrincipal();
-                    principal.setSize(administradorPrincipal.getPreferredSize());
-                    administradorPrincipal.getNombreUsuarioL().setText(usuarioLogin.getNombre());
-                    administradorPrincipal.getNombreEmpresaL().setText(nombreEmpresa);
-                    administradorPrincipal.getRolL().setText(usuarioLogin.getRol().getLabel());
-                    cambiarPanel(principal.getViewport(), administradorPrincipal);
-                    break;
-                case CONSULTA:
-                    ConsultarPrincipal consultarPrincipal = new ConsultarPrincipal();
-                    principal.setSize(consultarPrincipal.getPreferredSize());
-                    consultarPrincipal.getNombreUsuarioL().setText(usuarioLogin.getNombre());
-                    consultarPrincipal.getNombreEmpresaL().setText(nombreEmpresa);
-                    consultarPrincipal.getRolL().setText(usuarioLogin.getRol().getLabel());
-                    cambiarPanel(principal.getViewport(), consultarPrincipal);
-                    break;
-                case OTRO:
-                    OtroRolPrincipal otroRolPrincipal = new OtroRolPrincipal();
-                    principal.setSize(otroRolPrincipal.getPreferredSize());
-                    otroRolPrincipal.getNombreUsuarioL().setText(usuarioLogin.getNombre());
-                    otroRolPrincipal.getNombreEmpresaL().setText(nombreEmpresa);
-                    otroRolPrincipal.getRolL().setText(usuarioLogin.getRol().getLabel());
-                    cambiarPanel(principal.getViewport(), otroRolPrincipal);
-                    principal.setTitle("Otro Rol");
-                    break;
-            }
-            empleadoActivo = usuarioLogin;
+        if (empleadoLogin != null) {
+            //TODO
         } else {
-            JOptionPane.showMessageDialog(login, "El usuario o la contraseña son incorrectos", "Error", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(login, "¡Usuario o contraseña incorrectos!", "Error", JOptionPane.ERROR_MESSAGE, null);
         }
     }
     

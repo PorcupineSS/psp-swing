@@ -21,7 +21,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
- * @author andres
+ * @author javergarav
  */
 public class EmpleadosDAO implements ICrudDAO<Empleados, Long> {
 

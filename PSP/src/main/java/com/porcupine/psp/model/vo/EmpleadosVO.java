@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author Zergio
+ * @author javergarav
  */
 public class EmpleadosVO implements IValueObject {
     //Atributos nativos

@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Zergio
+ * @author javergarav
  */
 public class ImplSeguridadVO implements IValueObject {
     

@@ -13,7 +13,7 @@ import javax.persistence.EntityNotFoundException;
 
 /**
  *
- * @author andres
+ * @author javergarav
  */
 public interface ICrudDAO<E, ID extends Serializable> {
     

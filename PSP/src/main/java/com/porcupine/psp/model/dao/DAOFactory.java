@@ -14,6 +14,10 @@ public class DAOFactory {
     public EmpleadosDAO getEmpleadosDAO() {
         return new EmpleadosDAO(PU);
     }
+    
+    public ImplSeguridadDAO getImplSeguridadDAO() {
+        return new ImplSeguridadDAO(PU);
+    }
 
     private static DAOFactory instance;
 

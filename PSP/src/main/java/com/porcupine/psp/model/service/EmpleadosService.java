@@ -2,7 +2,6 @@ package com.porcupine.psp.model.service;
 
 import com.porcupine.psp.model.entity.Empleados;
 import com.porcupine.psp.model.vo.EmpleadosVO;
-//import controller.LoginController;
 import java.util.*;
 import javax.persistence.EntityNotFoundException;
 import com.porcupine.psp.model.dao.DAOFactory;

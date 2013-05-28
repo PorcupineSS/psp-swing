@@ -4,7 +4,9 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -27,6 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Empleados.findByCoddocume", query = "SELECT e FROM Empleados e WHERE e.coddocume = :coddocume"),
     @NamedQuery(name = "Empleados.findByFechareg", query = "SELECT e FROM Empleados e WHERE e.fechareg = :fechareg")})
 public class Empleados implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -193,5 +196,41 @@ public class Empleados implements Serializable {
     public String toString() {
         return "com.porcupine.psp.model.entity.Empleados[ cedulae=" + cedulae + " ]";
     }
-    
+
+    public EmpleadosVO toVO() {
+        EmpleadosVO empleados = new EmpleadosVO();
+
+        empleados.setCedulaE(cedulae);
+        empleados.setNombreE(nombree);
+        empleados.setApellidoE(apellidoe);
+        empleados.setFechareg(fechareg);
+
+        if (getEmpPlanta() != null) {
+            empleados.setEmpPlanta(empPlanta.getCedulae());
+        }
+
+        if (getEmTemp() != null) {
+            empleados.setEmpTemp(emTemp.getCedulae());
+        }
+
+        empleados.setCodDocumE(coddocume);
+        empleados.setContrasenaE(contrasenae);
+        empleados.setDirCedulaE(dirCedulae.getCedulae());
+
+        ArrayList<BitacoraSegVO> listBitacoraSegVO = new ArrayList<BitacoraSegVO>();
+        for (BitacoraSeg entity : getBitacoraSegList()) {
+            listBitacoraSegVO.add(entity.toVO());
+        }
+
+        empleados.setBitacoraSegList(listBitacoraSegVO);
+
+        ArrayList<TelsEmpVO> listTelsEmpVO = new ArrayList<TelsEmpVO>();
+        for (TelsEmp entity : getTelsEmpList()) {
+            listTelsEmpVO.add(entity.toVO());
+        }
+
+        empleados.setTelsEmpList(listTelsEmpVO);
+
+        return empleados;
+    }
 }

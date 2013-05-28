@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.AsigImplVO;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -141,6 +142,10 @@ public class AsigImpl implements Serializable {
     @Override
     public String toString() {
         return "com.porcupine.psp.model.entity.AsigImpl[ idAsignacionI=" + idAsignacionI + " ]";
+    }
+
+    public AsigImplVO toVO() {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
     
 }

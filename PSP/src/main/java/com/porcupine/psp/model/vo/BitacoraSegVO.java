@@ -6,8 +6,8 @@ package com.porcupine.psp.model.vo;
 
 /**
  *
- * @author andres
+ * @author Zergio
  */
-public class VoClass {
+public class BitacoraSegVO {
     
 }

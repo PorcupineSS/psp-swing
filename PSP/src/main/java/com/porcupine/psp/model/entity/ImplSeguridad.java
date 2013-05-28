@@ -4,8 +4,12 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.ActuImplVO;
+import com.porcupine.psp.model.vo.AsigImplVO;
+import com.porcupine.psp.model.vo.ImplSeguridadVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -197,4 +201,32 @@ public class ImplSeguridad implements Serializable {
         return "com.porcupine.psp.model.entity.ImplSeguridad[ idImplemento=" + idImplemento + " ]";
     }
     
+    public ImplSeguridadVO toVO() {
+    
+        ImplSeguridadVO implSeguridad = new ImplSeguridadVO();
+        
+        implSeguridad.setIdImplemento(idImplemento);
+        implSeguridad.setNombreI(nombreI);
+        implSeguridad.setPrecioUnitarioI(precioUnitarioI);
+        implSeguridad.setIdPro(idPro.getIdPro());
+        implSeguridad.setFechaRegI(fechaRegIm);
+        implSeguridad.setEstadoI(estadoI);
+        implSeguridad.setDescripcionI(descripcionI);
+        implSeguridad.setCedulaE(cedulae.getCedulae());
+        
+        ArrayList<AsigImplVO> listAsigListVO = new ArrayList<AsigImplVO>();
+        for (AsigImpl entity : getAsigImplList()) {
+            listAsigListVO.add(entity.toVO());
+        }
+        implSeguridad.setAsigImplList(listAsigListVO);        
+        
+        ArrayList<ActuImplVO> listActuAsigListVO = new ArrayList<ActuImplVO>();
+        for (ActuImpl entity : getActuImplList()) {
+            listActuAsigListVO.add(entity.toVO());
+        }
+        implSeguridad.setActuImplList(listActuAsigListVO);
+        
+        return implSeguridad;     
+    }
+
 }

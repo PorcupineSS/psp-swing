@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.TelsEmpVO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -94,5 +95,16 @@ public class TelsEmp implements Serializable {
     public String toString() {
         return "com.porcupine.psp.model.entity.TelsEmp[ idTe=" + idTe + " ]";
     }
-    
+
+    public TelsEmpVO toVO() {
+        
+        TelsEmpVO telefonos = new TelsEmpVO();
+        
+        telefonos.setIdTelefono(idTe);
+        telefonos.setNumTelefonoE(numTelefonoE);
+
+                 
+                 
+        return telefonos;
+    }
 }

@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.ActuImplVO;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -128,6 +129,10 @@ public class ActuImpl implements Serializable {
     @Override
     public String toString() {
         return "com.porcupine.psp.model.entity.ActuImpl[ idActualizacionI=" + idActualizacionI + " ]";
+    }
+
+    public ActuImplVO toVO() {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
     
 }

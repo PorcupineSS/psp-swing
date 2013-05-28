@@ -5,16 +5,12 @@
 package com.porcupine.psp.model.service;
 
 import com.porcupine.psp.model.dao.DAOFactory;
-import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.exceptions.InsufficientPermissionsException;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import com.porcupine.psp.model.dao.exceptions.PreexistingEntityException;
 import com.porcupine.psp.model.dao.exceptions.RequiredAttributeException;
-import com.porcupine.psp.model.entity.Empleados;
 import com.porcupine.psp.model.entity.ImplSeguridad;
-import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
-import com.porcupine.psp.util.BCrypt;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -74,21 +70,19 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Long> {
     }
 
     @Override
-    public void update(EmpleadosVO vo) throws NonexistentEntityException {
-        Empleados entity = DAOFactory.getInstance().getEmpleadosDAO().find(vo.getCedulaE());
-        entity.setApellidoe(vo.getApellidoE());
-        entity.setBitacoraSegList((List) vo.getBitacoraSegList());
-        entity.setCedulae(vo.getCedulaE());
-        entity.setCoddocume(vo.getCodDocumE());
-        entity.setContrasenae(BCrypt.hashpw(vo.getContrasenaE(), BCrypt.gensalt()));
-        //entity.setDirCedulae(vo.getDirCedulaE());
-        //entity.setEmTemp(vo.getEmpPlanta());
-        //entity.setEmpPlanta(vo.getEmpPlanta());
-        entity.setFechareg(vo.getFechareg());
-        entity.setNombree(vo.getNombreE());
-        entity.setTelsEmpList((List) vo.getTelsEmpList());
+    public void update(ImplSeguridadVO vo) throws NonexistentEntityException {
+        ImplSeguridad entity = DAOFactory.getInstance().getImplSeguridadDAO().find(vo.getIdImplemento().longValue());
+        entity.setIdImplemento(vo.getIdImplemento());
+        entity.setNombreI(vo.getNombreI());
+        entity.setCantidad(vo.getCantidadI());
+        entity.setDescripcionI(vo.getDescripcionI());
+        entity.setEstadoI(vo.getEstadoI());
+        entity.setFechaRegIm(vo.getFechaRegI());
+        entity.setPrecioUnitarioI(vo.getPrecioUnitarioI());
+        entity.setActuImplList((List) vo.getActuImplList());
+        entity.setAsigImplList((List) vo.getAsigImplList());
 
-        DAOFactory.getInstance().getEmpleadosDAO().update(entity);
+        DAOFactory.getInstance().getImplSeguridadDAO().update(entity);
     }
 
     @Override
@@ -97,51 +91,42 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Long> {
     }
 
     @Override
-    public List<EmpleadosVO> getList() {
-        List<EmpleadosVO> list = new ArrayList<EmpleadosVO>();
-        for (Empleados empleado : DAOFactory.getInstance().getEmpleadosDAO().getList()) {
-            list.add((empleado).toVO());
+    public List<ImplSeguridadVO> getList() {
+        List<ImplSeguridadVO> list = new ArrayList<ImplSeguridadVO>();
+        for (ImplSeguridad implemento : DAOFactory.getInstance().getImplSeguridadDAO().getList()) {
+            list.add((implemento).toVO());
         }
         Collections.sort(list, new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
-                EmpleadosVO p1 = (EmpleadosVO) o1;
-                EmpleadosVO p2 = (EmpleadosVO) o2;
-                return p1.getCedulaE().compareTo(p2.getCedulaE());
+                ImplSeguridadVO p1 = (ImplSeguridadVO) o1;
+                ImplSeguridadVO p2 = (ImplSeguridadVO) o2;
+                return p1.getIdImplemento().compareTo(p2.getIdImplemento());
             }
         });
         return list;
     }
 
-    public EmpleadosVO login(EmpleadosVO vo) throws DataBaseException {
-        Empleados entity = new Empleados();
-        entity.setCedulae(vo.getCedulaE());
-        entity.setContrasenae(vo.getContrasenaE());
-
-        Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().login(entity);
-        return empleado != null ? empleado.toVO() : null;
-
-    }
-
     public boolean validarCampos(ImplSeguridadVO vo) throws RequiredAttributeException {
-        if (vo.getApellidoE() == null) {
-            throw new RequiredAttributeException("¡El atributo 'Apellido' es requerido!");
+        if (vo.getIdImplemento() == null) {
+            throw new RequiredAttributeException("¡El atributo 'id' es requerido!");
         }
-        if (vo.getCedulaE() == null) {
-            throw new RequiredAttributeException("¡El atributo 'Cédula' es requerido!");
-        }
-        if (vo.getNombreE() == null) {
+        if (vo.getNombreI() == null) {
             throw new RequiredAttributeException("¡El atributo 'Nombre' es requerido!");
         }
-        if (vo.getContrasenaE() == null) {
-            throw new RequiredAttributeException("¡El atributo 'Contraseña' es requerido!");
+        if (vo.getDescripcionI() == null) {
+            throw new RequiredAttributeException("¡El atributo 'Descripción' es requerido!");
         }
-        if (vo.getCodDocumE() == null) {
-            throw new RequiredAttributeException("¡El atributo 'Código' es requerido!");
+        if (vo.getEstadoI() == null) {
+            throw new RequiredAttributeException("¡El atributo 'Estado' es requerido!");
         }
-        if (vo.getTelsEmpList()== null) {
-            throw new RequiredAttributeException("¡El atributo 'Teléfono' es requerido!");
+        if (vo.getFechaRegI() == null) {
+            throw new RequiredAttributeException("¡El atributo 'Fecha de registro' es requerido!");
         }
+        if (vo.getPrecioUnitarioI() == null) {
+            throw new RequiredAttributeException("¡El atributo 'Precio unitario' es requerido!");
+        }
+        
         return true;
     }
     

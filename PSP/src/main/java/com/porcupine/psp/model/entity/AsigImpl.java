@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AsigImpl implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue
     @Basic(optional = false)
     @Column(name = "ID_ASIGNACION_I")
     private Short idAsignacionI;

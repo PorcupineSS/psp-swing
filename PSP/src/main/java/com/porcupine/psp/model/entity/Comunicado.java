@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Comunicado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue
     @Basic(optional = false)
     @Column(name = "ID_COMUNICADO")
     private Short idComunicado;

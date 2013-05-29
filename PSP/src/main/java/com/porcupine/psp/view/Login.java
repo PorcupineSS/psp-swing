@@ -45,8 +45,6 @@ public class Login extends javax.swing.JPanel {
         jPasswordFieldPassword = new javax.swing.JPasswordField();
         jButtonLogin = new javax.swing.JButton();
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/LogoPSP.png"))); // NOI18N
-
         jLabel2.setText("Usuario:");
 
         jTextFieldUser.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +64,6 @@ public class Login extends javax.swing.JPanel {
         jButtonLogin.setBackground(new java.awt.Color(255, 255, 255));
         jButtonLogin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonLogin.setForeground(new java.awt.Color(0, 51, 0));
-        jButtonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/LoginIcon.png"))); // NOI18N
         jButtonLogin.setText("Iniciar Sesión");
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +115,7 @@ public class Login extends javax.swing.JPanel {
                     .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonLogin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

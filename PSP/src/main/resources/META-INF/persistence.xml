@@ -1,126 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-  <persistence-unit name="com.porcupine.psp.pu.sybase" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.porcupine.psp.model.entity.BitacoraSeg</class>
-    <class>com.porcupine.psp.model.entity.Actualizacion</class>
-    <class>com.porcupine.psp.model.entity.EmTemp</class>
-    <class>com.porcupine.psp.model.entity.DirComercial</class>
-    <class>com.porcupine.psp.model.entity.AsignacionC</class>
-    <class>com.porcupine.psp.model.entity.AsigImpl</class>
-    <class>com.porcupine.psp.model.entity.TelsProv</class>
-    <class>com.porcupine.psp.model.entity.CoordTYY</class>
-    <class>com.porcupine.psp.model.entity.ActuImpl</class>
-    <class>com.porcupine.psp.model.entity.Subgerente</class>
-    <class>com.porcupine.psp.model.entity.Proveedor</class>
-    <class>com.porcupine.psp.model.entity.DirGestionHum</class>
-    <class>com.porcupine.psp.model.entity.CoordContrato</class>
-    <class>com.porcupine.psp.model.entity.Cliente</class>
-    <class>com.porcupine.psp.model.entity.Comunicado</class>
-    <class>com.porcupine.psp.model.entity.DirOperaciones</class>
-    <class>com.porcupine.psp.model.entity.Empleados</class>
-    <class>com.porcupine.psp.model.entity.TelsEmp</class>
-    <class>com.porcupine.psp.model.entity.TelsCli</class>
-    <class>com.porcupine.psp.model.entity.Contrato</class>
-    <class>com.porcupine.psp.model.entity.EmpPlanta</class>
-    <class>com.porcupine.psp.model.entity.ImplSeguridad</class>
-    <class>com.porcupine.psp.model.entity.view.VCliente</class>
-    <class>com.porcupine.psp.model.entity.view.VEmpl</class>
-    <class>com.porcupine.psp.model.entity.view.VComun</class>
-    <class>com.porcupine.psp.model.entity.view.VProv</class>
-    <class>com.porcupine.psp.model.entity.view.VAsigc</class>
-    <class>com.porcupine.psp.model.entity.view.VCont</class>
-    <class>com.porcupine.psp.model.entity.view.VBitacora</class>
-    <class>com.porcupine.psp.model.entity.view.VAimpl</class>
-    <class>com.porcupine.psp.model.entity.view.VImseg</class>
-    <class>com.porcupine.psp.model.entity.view.VAcimpl</class>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sybase://168.176.36.25:8101/dbd_2"/>
-      <property name="javax.persistence.jdbc.password" value="s02258021"/>
-      <property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.user" value="cdlancherosp"/>
-    </properties>
-  </persistence-unit>
-  <persistence-unit name="com.porcupine.psp.pu.oracle" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.porcupine.psp.model.entity.ActuImpl</class>
-    <class>com.porcupine.psp.model.entity.Actualizacion</class>
-    <class>com.porcupine.psp.model.entity.AsigImpl</class>
-    <class>com.porcupine.psp.model.entity.AsignacionC</class>
-    <class>com.porcupine.psp.model.entity.BitacoraSeg</class>
-    <class>com.porcupine.psp.model.entity.Cliente</class>
-    <class>com.porcupine.psp.model.entity.Comunicado</class>
-    <class>com.porcupine.psp.model.entity.Contrato</class>
-    <class>com.porcupine.psp.model.entity.CoordContrato</class>
-    <class>com.porcupine.psp.model.entity.CoordTYY</class>
-    <class>com.porcupine.psp.model.entity.DirComercial</class>
-    <class>com.porcupine.psp.model.entity.DirGestionHum</class>
-    <class>com.porcupine.psp.model.entity.DirOperaciones</class>
-    <class>com.porcupine.psp.model.entity.EmTemp</class>
-    <class>com.porcupine.psp.model.entity.EmpPlanta</class>
-    <class>com.porcupine.psp.model.entity.Empleados</class>
-    <class>com.porcupine.psp.model.entity.ImplSeguridad</class>
-    <class>com.porcupine.psp.model.entity.Proveedor</class>
-    <class>com.porcupine.psp.model.entity.Subgerente</class>
-    <class>com.porcupine.psp.model.entity.TelsCli</class>
-    <class>com.porcupine.psp.model.entity.TelsEmp</class>
-    <class>com.porcupine.psp.model.entity.TelsProv</class>
-    <class>com.porcupine.psp.model.entity.view.VAcimpl</class>
-    <class>com.porcupine.psp.model.entity.view.VAimpl</class>
-    <class>com.porcupine.psp.model.entity.view.VAsigc</class>
-    <class>com.porcupine.psp.model.entity.view.VBitacora</class>
-    <class>com.porcupine.psp.model.entity.view.VCliente</class>
-    <class>com.porcupine.psp.model.entity.view.VComun</class>
-    <class>com.porcupine.psp.model.entity.view.VCont</class>
-    <class>com.porcupine.psp.model.entity.view.VEmpl</class>
-    <class>com.porcupine.psp.model.entity.view.VImseg</class>
-    <class>com.porcupine.psp.model.entity.view.VProv</class>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@168.176.36.14:1521:UNBDS7"/>
-      <property name="javax.persistence.jdbc.password" value="s02258145"/>
-      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
-      <property name="javax.persistence.jdbc.user" value="jodrodriguezpo"/>
-    </properties>
-  </persistence-unit>
-  <persistence-unit name="com.porcupine.psp.pu.sqlserver" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.porcupine.psp.model.entity.ActuImpl</class>
-    <class>com.porcupine.psp.model.entity.Actualizacion</class>
-    <class>com.porcupine.psp.model.entity.AsigImpl</class>
-    <class>com.porcupine.psp.model.entity.AsignacionC</class>
-    <class>com.porcupine.psp.model.entity.BitacoraSeg</class>
-    <class>com.porcupine.psp.model.entity.Cliente</class>
-    <class>com.porcupine.psp.model.entity.Comunicado</class>
-    <class>com.porcupine.psp.model.entity.Contrato</class>
-    <class>com.porcupine.psp.model.entity.CoordContrato</class>
-    <class>com.porcupine.psp.model.entity.CoordTYY</class>
-    <class>com.porcupine.psp.model.entity.DirComercial</class>
-    <class>com.porcupine.psp.model.entity.DirGestionHum</class>
-    <class>com.porcupine.psp.model.entity.DirOperaciones</class>
-    <class>com.porcupine.psp.model.entity.EmTemp</class>
-    <class>com.porcupine.psp.model.entity.EmpPlanta</class>
-    <class>com.porcupine.psp.model.entity.Empleados</class>
-    <class>com.porcupine.psp.model.entity.ImplSeguridad</class>
-    <class>com.porcupine.psp.model.entity.Proveedor</class>
-    <class>com.porcupine.psp.model.entity.Subgerente</class>
-    <class>com.porcupine.psp.model.entity.TelsCli</class>
-    <class>com.porcupine.psp.model.entity.TelsEmp</class>
-    <class>com.porcupine.psp.model.entity.TelsProv</class>
-    <class>com.porcupine.psp.model.entity.view.VAcimpl</class>
-    <class>com.porcupine.psp.model.entity.view.VAimpl</class>
-    <class>com.porcupine.psp.model.entity.view.VAsigc</class>
-    <class>com.porcupine.psp.model.entity.view.VBitacora</class>
-    <class>com.porcupine.psp.model.entity.view.VCliente</class>
-    <class>com.porcupine.psp.model.entity.view.VComun</class>
-    <class>com.porcupine.psp.model.entity.view.VCont</class>
-    <class>com.porcupine.psp.model.entity.view.VEmpl</class>
-    <class>com.porcupine.psp.model.entity.view.VImseg</class>
-    <class>com.porcupine.psp.model.entity.view.VProv</class>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://168.176.36.26:1433;databaseName=dbd_2"/>
-      <property name="javax.persistence.jdbc.password" value="s02258006"/>
-      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-      <property name="javax.persistence.jdbc.user" value="sacortesh"/>
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="com.porcupine.psp.pu.sybase" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>com.porcupine.psp.model.entity.BitacoraSeg</class>
+        <class>com.porcupine.psp.model.entity.Actualizacion</class>
+        <class>com.porcupine.psp.model.entity.EmTemp</class>
+        <class>com.porcupine.psp.model.entity.DirComercial</class>
+        <class>com.porcupine.psp.model.entity.AsignacionC</class>
+        <class>com.porcupine.psp.model.entity.AsigImpl</class>
+        <class>com.porcupine.psp.model.entity.TelsProv</class>
+        <class>com.porcupine.psp.model.entity.CoordTYY</class>
+        <class>com.porcupine.psp.model.entity.ActuImpl</class>
+        <class>com.porcupine.psp.model.entity.Subgerente</class>
+        <class>com.porcupine.psp.model.entity.Proveedor</class>
+        <class>com.porcupine.psp.model.entity.DirGestionHum</class>
+        <class>com.porcupine.psp.model.entity.CoordContrato</class>
+        <class>com.porcupine.psp.model.entity.Cliente</class>
+        <class>com.porcupine.psp.model.entity.Comunicado</class>
+        <class>com.porcupine.psp.model.entity.DirOperaciones</class>
+        <class>com.porcupine.psp.model.entity.Empleados</class>
+        <class>com.porcupine.psp.model.entity.TelsEmp</class>
+        <class>com.porcupine.psp.model.entity.TelsCli</class>
+        <class>com.porcupine.psp.model.entity.Contrato</class>
+        <class>com.porcupine.psp.model.entity.EmpPlanta</class>
+        <class>com.porcupine.psp.model.entity.ImplSeguridad</class>
+        <class>com.porcupine.psp.model.entity.view.VCliente</class>
+        <class>com.porcupine.psp.model.entity.view.VEmpl</class>
+        <class>com.porcupine.psp.model.entity.view.VComun</class>
+        <class>com.porcupine.psp.model.entity.view.VProv</class>
+        <class>com.porcupine.psp.model.entity.view.VAsigc</class>
+        <class>com.porcupine.psp.model.entity.view.VCont</class>
+        <class>com.porcupine.psp.model.entity.view.VBitacora</class>
+        <class>com.porcupine.psp.model.entity.view.VAimpl</class>
+        <class>com.porcupine.psp.model.entity.view.VImseg</class>
+        <class>com.porcupine.psp.model.entity.view.VAcimpl</class>
+        <properties>
+            <property name="eclipselink.canonicalmodel.subpackage" value="one"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sybase://168.176.36.25:8101/dbd_2"/>
+            <property name="javax.persistence.jdbc.password" value="s02258021"/>
+            <property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="cdlancherosp"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="com.porcupine.psp.pu.oracle" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>com.porcupine.psp.model.entity.ActuImpl</class>
+        <class>com.porcupine.psp.model.entity.Actualizacion</class>
+        <class>com.porcupine.psp.model.entity.AsigImpl</class>
+        <class>com.porcupine.psp.model.entity.AsignacionC</class>
+        <class>com.porcupine.psp.model.entity.BitacoraSeg</class>
+        <class>com.porcupine.psp.model.entity.Cliente</class>
+        <class>com.porcupine.psp.model.entity.Comunicado</class>
+        <class>com.porcupine.psp.model.entity.Contrato</class>
+        <class>com.porcupine.psp.model.entity.CoordContrato</class>
+        <class>com.porcupine.psp.model.entity.CoordTYY</class>
+        <class>com.porcupine.psp.model.entity.DirComercial</class>
+        <class>com.porcupine.psp.model.entity.DirGestionHum</class>
+        <class>com.porcupine.psp.model.entity.DirOperaciones</class>
+        <class>com.porcupine.psp.model.entity.EmTemp</class>
+        <class>com.porcupine.psp.model.entity.EmpPlanta</class>
+        <class>com.porcupine.psp.model.entity.Empleados</class>
+        <class>com.porcupine.psp.model.entity.ImplSeguridad</class>
+        <class>com.porcupine.psp.model.entity.Proveedor</class>
+        <class>com.porcupine.psp.model.entity.Subgerente</class>
+        <class>com.porcupine.psp.model.entity.TelsCli</class>
+        <class>com.porcupine.psp.model.entity.TelsEmp</class>
+        <class>com.porcupine.psp.model.entity.TelsProv</class>
+        <class>com.porcupine.psp.model.entity.view.VAcimpl</class>
+        <class>com.porcupine.psp.model.entity.view.VAimpl</class>
+        <class>com.porcupine.psp.model.entity.view.VAsigc</class>
+        <class>com.porcupine.psp.model.entity.view.VBitacora</class>
+        <class>com.porcupine.psp.model.entity.view.VCliente</class>
+        <class>com.porcupine.psp.model.entity.view.VComun</class>
+        <class>com.porcupine.psp.model.entity.view.VCont</class>
+        <class>com.porcupine.psp.model.entity.view.VEmpl</class>
+        <class>com.porcupine.psp.model.entity.view.VImseg</class>
+        <class>com.porcupine.psp.model.entity.view.VProv</class>
+        <properties>
+            <property name="eclipselink.canonicalmodel.subpackage" value="two"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@168.176.36.14:1521:UNBDS7"/>
+            <property name="javax.persistence.jdbc.password" value="s02258145"/>
+            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+            <property name="javax.persistence.jdbc.user" value="jodrodriguezpo"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="com.porcupine.psp.pu.sqlserver" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>com.porcupine.psp.model.entity.ActuImpl</class>
+        <class>com.porcupine.psp.model.entity.Actualizacion</class>
+        <class>com.porcupine.psp.model.entity.AsigImpl</class>
+        <class>com.porcupine.psp.model.entity.AsignacionC</class>
+        <class>com.porcupine.psp.model.entity.BitacoraSeg</class>
+        <class>com.porcupine.psp.model.entity.Cliente</class>
+        <class>com.porcupine.psp.model.entity.Comunicado</class>
+        <class>com.porcupine.psp.model.entity.Contrato</class>
+        <class>com.porcupine.psp.model.entity.CoordContrato</class>
+        <class>com.porcupine.psp.model.entity.CoordTYY</class>
+        <class>com.porcupine.psp.model.entity.DirComercial</class>
+        <class>com.porcupine.psp.model.entity.DirGestionHum</class>
+        <class>com.porcupine.psp.model.entity.DirOperaciones</class>
+        <class>com.porcupine.psp.model.entity.EmTemp</class>
+        <class>com.porcupine.psp.model.entity.EmpPlanta</class>
+        <class>com.porcupine.psp.model.entity.Empleados</class>
+        <class>com.porcupine.psp.model.entity.ImplSeguridad</class>
+        <class>com.porcupine.psp.model.entity.Proveedor</class>
+        <class>com.porcupine.psp.model.entity.Subgerente</class>
+        <class>com.porcupine.psp.model.entity.TelsCli</class>
+        <class>com.porcupine.psp.model.entity.TelsEmp</class>
+        <class>com.porcupine.psp.model.entity.TelsProv</class>
+        <class>com.porcupine.psp.model.entity.view.VAcimpl</class>
+        <class>com.porcupine.psp.model.entity.view.VAimpl</class>
+        <class>com.porcupine.psp.model.entity.view.VAsigc</class>
+        <class>com.porcupine.psp.model.entity.view.VBitacora</class>
+        <class>com.porcupine.psp.model.entity.view.VCliente</class>
+        <class>com.porcupine.psp.model.entity.view.VComun</class>
+        <class>com.porcupine.psp.model.entity.view.VCont</class>
+        <class>com.porcupine.psp.model.entity.view.VEmpl</class>
+        <class>com.porcupine.psp.model.entity.view.VImseg</class>
+        <class>com.porcupine.psp.model.entity.view.VProv</class>
+        <properties>
+            <property name="eclipselink.canonicalmodel.subpackage" value="three"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://168.176.36.26:1433;databaseName=dbd_2"/>
+            <property name="javax.persistence.jdbc.password" value="s02258006"/>
+            <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="javax.persistence.jdbc.user" value="sacortesh"/>
+        </properties>
+    </persistence-unit>
 </persistence>

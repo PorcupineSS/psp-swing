@@ -41,4 +41,22 @@
       <property name="javax.persistence.jdbc.user" value="cdlancherosp"/>
     </properties>
   </persistence-unit>
+  <persistence-unit name="com.mycompany_PSP_jar_1.0-SNAPSHOTPU2" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@168.176.36.14:1521:UNBDS7"/>
+      <property name="javax.persistence.jdbc.password" value="s02258145"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.user" value="jodrodriguezpo"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="com.mycompany_PSP_jar_1.0-SNAPSHOTPU3" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://168.176.36.26:1433;databaseName=dbd_2"/>
+      <property name="javax.persistence.jdbc.password" value="s02258006"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.user" value="sacortesh"/>
+    </properties>
+  </persistence-unit>
 </persistence>

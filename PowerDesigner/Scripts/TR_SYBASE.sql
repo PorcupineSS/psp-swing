@@ -1,4 +1,46 @@
 --TRIGGERS SYBASE
+if exists (select 1
+            from  sysobjects
+            where id = object_id('TR_DEL_EM_TEMP')
+            and   type = 'TR')
+   drop trigger TR_DEL_EM_TEMP
+go
+
+if exists (select 1
+            from  sysobjects
+            where id = object_id('TR_INS_EM_TEMP')
+            and   type = 'TR')
+   drop trigger TR_INS_EM_TEMP
+go
+
+if exists (select 1
+            from  sysobjects
+            where id = object_id('TR_UPD_EM_TEMP')
+            and   type = 'TR')
+   drop trigger TR_UPD_EM_TEMP
+go
+
+
+if exists (select 1
+            from  sysobjects
+            where id = object_id('TR_DEL_EMPLANTA')
+            and   type = 'TR')
+   drop trigger TR_DEL_EMPLANTA
+go
+
+if exists (select 1
+            from  sysobjects
+            where id = object_id('TR_INS_EMPLANTA')
+            and   type = 'TR')
+   drop trigger TR_INS_EMPLANTA
+go
+
+if exists (select 1
+            from  sysobjects
+            where id = object_id('TR_UPD_EMPLANTA')
+            and   type = 'TR')
+   drop trigger TR_UPD_EMPLANTA
+go
 
 if exists (select 1
             from  sysobjects
@@ -721,6 +763,96 @@ begin
             user_name(),
             host_name(),
             "PROVEEDOR",
+            "UPDATE")
+end
+go
+
+
+create trigger TR_DEL_EMPLANTA on EMP_PLANTA for delete as
+begin
+    declare @varid bigint
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
+    values (@varid,
+            getdate(),
+            user_name(),
+            host_name(),
+            "EMP PLANTA",
+            "DELETE")
+end
+go
+
+
+create trigger TR_INS_EMPLANTA on EMP_PLANTA for insert as
+begin
+    declare @varid bigint
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
+    values (@varid,
+            getdate(),
+            user_name(),
+            host_name(),
+            "EMP PLANTA",
+            "INSERT")
+end
+go
+
+
+create trigger TR_UPD_EMPLANTA on EMP_PLANTA for update as
+begin
+    declare @varid bigint
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
+    values (@varid,
+            getdate(),
+            user_name(),
+            host_name(),
+            "EMP PLANTA",
+            "UPDATE")
+end
+go
+
+
+create trigger TR_DEL_EM_TEMP on EM_TEMP for delete as
+begin
+    declare @varid bigint
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
+    values (@varid,
+            getdate(),
+            user_name(),
+            host_name(),
+            "EM TEMP",
+            "DELETE")
+end
+go
+
+
+create trigger TR_INS_EM_TEMP on EM_TEMP for insert as
+begin
+    declare @varid bigint
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
+    values (@varid,
+            getdate(),
+            user_name(),
+            host_name(),
+            "EM TEMP",
+            "INSERT")
+end
+go
+
+
+create trigger TR_UPD_EM_TEMP on EM_TEMP for update as
+begin
+    declare @varid bigint
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
+    values (@varid,
+            getdate(),
+            user_name(),
+            host_name(),
+            "EM TEMP",
             "UPDATE")
 end
 go

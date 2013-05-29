@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.LoginController;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -19,7 +20,7 @@ public class Login extends javax.swing.JPanel {
     public Login() {
         initComponents();
     }
-    
+
     public JPasswordField getContrasenaPF() {
         return jPasswordFieldPassword;
     }
@@ -27,7 +28,7 @@ public class Login extends javax.swing.JPanel {
     public JTextField getUsuarioTF() {
         return jTextFieldUser;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,13 +125,12 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldUserActionPerformed
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        // TODO add your handling code here:
+        LoginController.login();
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jPasswordFieldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordFieldPasswordActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JLabel jLabel1;

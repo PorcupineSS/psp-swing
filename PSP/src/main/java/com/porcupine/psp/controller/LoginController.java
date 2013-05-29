@@ -7,8 +7,10 @@ package com.porcupine.psp.controller;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.EmpleadosVO;
+import com.porcupine.psp.util.DrawingUtilities;
 import com.porcupine.psp.view.Login;
 import com.porcupine.psp.view.Psp;
+import com.porcupine.psp.view.SelectDataBaseConnection;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
@@ -18,44 +20,48 @@ import javax.swing.JViewport;
  * @author jaevergarav
  */
 public class LoginController {
-    
+
     static Login login;
+    static SelectDataBaseConnection sdb;
     static Psp psp;
     public static EmpleadosVO empleadoActivo;
+    public static String selectedDB;
 
+    public String getSelectedDB() {
+        return selectedDB;
+    }
+
+    public void setSelectedDB(String selectedDB) {
+        this.selectedDB = selectedDB;
+    }
+
+    
+    
     public static EmpleadosVO getEmpleadoLogin() {
         return empleadoActivo;
     }
 
     public static void setUsuarioLogin(EmpleadosVO empleadoLogin) {
         LoginController.empleadoActivo = empleadoLogin;
-    } 
-    
+    }
+
     public static void mostrarLogin() {
-        psp = new Psp();
         psp.setLocationRelativeTo(null);
         login = new Login();
         psp.setVisible(true);
-        cambiarPanel(psp.getViewport(), login);
+        DrawingUtilities.drawPanel(psp, psp.getViewport(), login);
+    }
+    
+    public static void mostrarSeleccionDB() {
+        psp = new Psp();
+        psp.setLocationRelativeTo(null);
+        sdb = new SelectDataBaseConnection();
+        psp.setVisible(true);
+        DrawingUtilities.drawPanel(psp, psp.getViewport(), sdb);
     }
 
     public static void cerrar() {
         System.exit(0);
-    }
-
-    public static void cambiarPanel(JViewport contenedor, JPanel panel) {
-        contenedor.getParent().setVisible(false);
-        contenedor.setVisible(false);
-        contenedor.removeAll();
-        contenedor.add(panel);
-        contenedor.setSize(panel.getPreferredSize().getSize());
-        contenedor.getParent().setSize(panel.getPreferredSize().getSize());
-        contenedor.getParent().revalidate();
-        contenedor.getParent().repaint();
-        contenedor.revalidate();
-        contenedor.repaint();
-        contenedor.getParent().setVisible(true);
-        contenedor.setVisible(true);
     }
 
     public static void login() {
@@ -87,5 +93,4 @@ public class LoginController {
             JOptionPane.showMessageDialog(login, "¡Usuario o contraseña incorrectos!", "Error", JOptionPane.ERROR_MESSAGE, null);
         }
     }
-    
 }

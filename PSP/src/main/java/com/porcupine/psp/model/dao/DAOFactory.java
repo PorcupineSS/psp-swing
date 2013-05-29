@@ -6,7 +6,8 @@ package com.porcupine.psp.model.dao;
  */
 public class DAOFactory {
     
-    private String PU = "PSPPU";
+    //temporalmente, solo un servidor
+    private String PU = "com.porcupine.psp.pu.sqlserver";
 
     private DAOFactory() {
     }

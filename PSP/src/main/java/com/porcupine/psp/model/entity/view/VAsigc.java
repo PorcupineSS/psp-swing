@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class VAsigc implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "ID_CONTRATO")
+    @Id
     private Short idContrato;
     @Column(name = "CEDULAE")
     private BigInteger cedulae;

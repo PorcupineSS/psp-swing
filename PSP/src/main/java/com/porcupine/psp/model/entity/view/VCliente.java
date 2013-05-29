@@ -26,6 +26,7 @@ public class VCliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "CEDULAE")
+    @Id
     private long cedulae;
     @Basic(optional = false)
     @Column(name = "NOMBRECL")

@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class VComun implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "CEDULAE")
+    @Id
     private BigInteger cedulae;
     @Column(name = "DIR_CEDULAE")
     private BigInteger dirCedulae;

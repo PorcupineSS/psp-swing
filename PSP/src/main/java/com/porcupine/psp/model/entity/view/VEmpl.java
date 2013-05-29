@@ -30,6 +30,7 @@ public class VEmpl implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "CEDULAE")
+    @Id
     private long cedulae;
     @Column(name = "DIR_CEDULAE")
     private BigInteger dirCedulae;

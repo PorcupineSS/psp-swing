@@ -36,6 +36,7 @@ public class VCont implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "IDCL")
+    @Id
     private short idcl;
     @Basic(optional = false)
     @Column(name = "CEDULAE")

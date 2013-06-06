@@ -18,6 +18,9 @@ alter table ACTU_IMPL
 
 alter table ASIGNACION_C
    drop constraint FK_ASIGNACI_REALIZA_A_COORD_CO;
+   
+alter table ASIGNACION_C
+   drop constraint FK_ASIGNACI_REALIZA_A_EMP_TEMP;
 
 alter table ASIGNACION_C
    drop constraint FK_ASIGNACI_SE_ASIGNA_CONTRATO;
@@ -29,7 +32,7 @@ alter table ASIG_IMPL
    drop constraint FK_ASIG_IMP_LO_ASIGNA_IMPL_SEG;
 
 alter table ASIG_IMPL
-   drop constraint FK_ASIG_IMP_RELATIONS_EM_TEMP;
+   drop constraint FK_ASIG_IMP_RELATIONS_EMP_TEMP;
 
 alter table BITACORA_SEG
    drop constraint FK_BITACORA_SIGUE_EMPLEADO;
@@ -44,7 +47,7 @@ alter table CL_TIENE_TELS
    drop constraint FK_CL_TIENE_CL_TIENE__CLIENTE;
 
 alter table COMUNICADO
-   drop constraint FK_COMUNICA_REDACTA_EM_TEMP;
+   drop constraint FK_COMUNICA_REDACTA_EMP_TEMP;
 
 alter table COMUNICADO
    drop constraint FK_COMUNICA_RESPONDE_DIR_OPER;
@@ -58,7 +61,7 @@ alter table CONTRATO
 alter table COORD_CONTRATO
    drop constraint FK_COORD_CO_SON3_EMP_PLAN;
 
-alter table COORD_T_Y_Y
+alter table COORD_T_Y_T
    drop constraint FK_COORD_T__SON_EMP_PLAN;
 
 alter table DIR_COMERCIAL
@@ -76,11 +79,11 @@ alter table EMPLEADOS
 alter table EMP_PLANTA
    drop constraint FK_EMP_PLAN_SON_E_EMPLEADO;
 
-alter table EM_TEMP
-   drop constraint FK_EM_TEMP_ASIGNAN_A_ASIGNACI;
+alter table EMP_TEMP
+   drop constraint FK_EMP_TEMP_ASIGNAN_A_ASIGNACI;
 
-alter table EM_TEMP
-   drop constraint FK_EM_TEMP_SON_E2_EMPLEADO;
+alter table EMP_TEMP
+   drop constraint FK_EMP_TEMP_SON_E2_EMPLEADO;
 
 alter table EM_TIENE_TELS
    drop constraint FK_EM_TIENE_EM_TIENE__TELS_EMP;
@@ -157,7 +160,7 @@ drop table CONTRATO cascade constraints;
 
 drop table COORD_CONTRATO cascade constraints;
 
-drop table COORD_T_Y_Y cascade constraints;
+drop table COORD_T_Y_T cascade constraints;
 
 drop table DIR_COMERCIAL cascade constraints;
 
@@ -173,7 +176,7 @@ drop table EMP_PLANTA cascade constraints;
 
 drop index ASIGNAN_A_E_FK;
 
-drop table EM_TEMP cascade constraints;
+drop table EMP_TEMP cascade constraints;
 
 drop index EM_TIENE_TELS_FK;
 
@@ -200,6 +203,10 @@ drop table TELS_EMP cascade constraints;
 drop index PR_TIENE_TELS_FK;
 
 drop table TELS_PROV cascade constraints;
+
+drop sequence SECUENCIA_IDS;
+
+drop trigger AUTOIDCLIENTE
 
 /*==============================================================*/
 /* Table: ACTUALIZACION                                         */
@@ -278,9 +285,9 @@ create index LO_ACTUALIZAN_FK on ACTU_IMPL (
 /*==============================================================*/
 create table ASIGNACION_C  (
    ID_ASIG              SMALLINT                        not null,
-   ID_CONTRATO          SMALLINT,
-   CEDULAE              INTEGER,
-   COO_CEDULAE          INTEGER,
+   ID_CONTRATO          SMALLINT                        not null,
+   COO_CEDULAE          INTEGER                         not null,
+   EMP_TEMP_CEDULAE     INTEGER                         not null,
    FECHA_ASIGNACION_C   DATE                            not null,
    HORARIO_ASIGNADO     VARCHAR2(20)                    not null,
    constraint PK_ASIGNACION_C primary key (ID_ASIG)
@@ -320,9 +327,9 @@ create index REALIZA_ASIGNACION_FK on ASIGNACION_C (
 /*==============================================================*/
 create table ASIG_IMPL  (
    ID_ASIGNACION_I      SMALLINT                        not null,
-   ID_IMPLEMENTO        SMALLINT,
-   CEDULAE              INTEGER,
-   COO_CEDULAE          INTEGER,
+   ID_IMPLEMENTO        SMALLINT                        not null,
+   CEDULAE              INTEGER                         not null,
+   COO_CEDULAE          INTEGER                         not null,
    CANTIDAD_ASIGNADA    SMALLINT                        not null,
    ESTADO_ASIGNACION    SMALLINT                        not null,
    FECHA_ASIGNACION_I   DATE                            not null,
@@ -513,11 +520,11 @@ create table CONTRATO  (
    TELEFONO_C           INTEGER                         not null,
    CELULAR_C            INTEGER                         not null,
    TIPO_C               VARCHAR2(50)                    not null
-      constraint CKC_TIPO_C_CONTRATO check (TIPO_C in ('<Val0>','<Val1>')),
+      constraint CKC_TIPO_C_CONTRATO check (TIPO_C in ('Definido','Indefinido')),
    FECHA_INICIO_C       DATE                            not null,
    TIPO_PERSONAL_C      VARCHAR2(20)                    not null,
    CANTIDAD_PERSONAL_C  SMALLINT                        not null,
-   COSTO_MENSUAL_C      NUMBER(8,2)                     not null,
+   COSTO_MENSUAL_C      NUMBER(10,2)                     not null,
    HORARIO_C            VARCHAR2(20)                    not null,
    TIEMPO_C             INTEGER,
    FECHA_REG_CON        DATE                            not null,
@@ -590,14 +597,14 @@ comment on table COORD_CONTRATO is
 'Posee los atributos de un un empleado normal, de un empleado planta y da claridad en las relaciones que tiene el empleado: COORDINADOR DE CONTRATO con los procesos de la empresa.';
 
 /*==============================================================*/
-/* Table: COORD_T_Y_Y                                           */
+/* Table: COORD_T_Y_T                                           */
 /*==============================================================*/
-create table COORD_T_Y_Y  (
+create table COORD_T_Y_T  (
    CEDULAE              INTEGER                         not null,
-   constraint PK_COORD_T_Y_Y primary key (CEDULAE)
+   constraint PK_COORD_T_Y_T primary key (CEDULAE)
 );
 
-comment on table COORD_T_Y_Y is
+comment on table COORD_T_Y_T is
 'Posee los atributos de un un empleado normal, de un empleado planta y da claridad en las relaciones que tiene el empleado: COORDINADOR TÉCNICO Y TECNOLÓGICO con los procesos de la empresa.';
 
 /*==============================================================*/
@@ -660,7 +667,7 @@ create index REGISTRA_FK on EMPLEADOS (
 /*==============================================================*/
 create table EMP_PLANTA  (
    CEDULAE              INTEGER                         not null,
-   SUELDOE              NUMBER(8,2)                     not null,
+   SUELDOE              NUMBER(10,2)                     not null,
    constraint PK_EMP_PLANTA primary key (CEDULAE)
 );
 
@@ -671,32 +678,32 @@ comment on column EMP_PLANTA.SUELDOE is
 'Sueldo del empleado de planta.';
 
 /*==============================================================*/
-/* Table: EM_TEMP                                               */
+/* Table: EMP_TEMP                                               */
 /*==============================================================*/
-create table EM_TEMP  (
+create table EMP_TEMP  (
    CEDULAE              INTEGER                         not null,
    ID_ASIG              SMALLINT,
    TIENE_CONTRATO       SMALLINT                        not null,
    TIPO_TEMP            VARCHAR2(20)                    not null,
-   constraint PK_EM_TEMP primary key (CEDULAE)
+   constraint PK_EMP_TEMP primary key (CEDULAE)
 );
 
-comment on table EM_TEMP is
+comment on table EMP_TEMP is
 'Posee los atributos de un empleado normal de la empresa, pero a la vez se le asignan los atributos propios de un empleado temporal.';
 
-comment on column EM_TEMP.ID_ASIG is
+comment on column EMP_TEMP.ID_ASIG is
 'Identificador de la asignación.';
 
-comment on column EM_TEMP.TIENE_CONTRATO is
+comment on column EMP_TEMP.TIENE_CONTRATO is
 'El empleado temporal tiene o no contrato asignado.';
 
-comment on column EM_TEMP.TIPO_TEMP is
+comment on column EMP_TEMP.TIPO_TEMP is
 'Tipo de empleado temporal (Vigilante o Escolta).';
 
 /*==============================================================*/
 /* Index: ASIGNAN_A_E_FK                                        */
 /*==============================================================*/
-create index ASIGNAN_A_E_FK on EM_TEMP (
+create index ASIGNAN_A_E_FK on EMP_TEMP (
    ID_ASIG ASC
 );
 
@@ -737,7 +744,7 @@ create table IMPL_SEGURIDAD  (
    ID_PRO               SMALLINT,
    CEDULAE              INTEGER                         not null,
    NOMBRE_I             VARCHAR2(20)                    not null,
-   PRECIO_UNITARIO_I    NUMBER(8,2)                     not null,
+   PRECIO_UNITARIO_I    NUMBER(10,2)                     not null,
    CANTIDAD             SMALLINT                        not null,
    DESCRIPCION_I        VARCHAR2(100)                   not null,
    ESTADO_I             VARCHAR2(20)                    not null,
@@ -833,7 +840,8 @@ comment on table SUBGERENTE is
 create table TELS_CLI  (
    ID_TC                SMALLINT                        not null,
    NUM_TELEFONO_C       INTEGER                         not null,
-   constraint PK_TELS_CLI primary key (ID_TC)
+   constraint PK_TELS_CLI primary key (ID_TC),
+   constraint AK_ID_NUM_TELEFONO_C unique (NUM_TELEFONO_C)
 );
 
 comment on table TELS_CLI is
@@ -851,7 +859,8 @@ comment on column TELS_CLI.NUM_TELEFONO_C is
 create table TELS_EMP  (
    ID_TE                SMALLINT                        not null,
    NUM_TELEFONO_E       INTEGER                         not null,
-   constraint PK_TELS_EMP primary key (ID_TE)
+   constraint PK_TELS_EMP primary key (ID_TE),
+   constraint AK_ID_NUM_TELEFONO_E unique (NUM_TELEFONO_E)
 );
 
 comment on table TELS_EMP is
@@ -870,7 +879,8 @@ create table TELS_PROV  (
    ID_TP                SMALLINT                        not null,
    ID_PRO               SMALLINT,
    NUM_TELEFONO_P       INTEGER                         not null,
-   constraint PK_TELS_PROV primary key (ID_TP)
+   constraint PK_TELS_PROV primary key (ID_TP),
+   constraint AK_ID_NUM_TELEFONO_P unique (NUM_TELEFONO_P)
 );
 
 comment on table TELS_PROV is
@@ -902,7 +912,7 @@ alter table ACTUALIZACION
 
 alter table ACTU_IMPL
    add constraint FK_ACTU_IMP_ACTUALIZA_COORD_T_ foreign key (CEDULAE)
-      references COORD_T_Y_Y (CEDULAE);
+      references COORD_T_Y_T (CEDULAE);
 
 alter table ACTU_IMPL
    add constraint FK_ACTU_IMP_LO_ACTUAL_IMPL_SEG foreign key (ID_IMPLEMENTO)
@@ -911,6 +921,10 @@ alter table ACTU_IMPL
 alter table ASIGNACION_C
    add constraint FK_ASIGNACI_REALIZA_A_COORD_CO foreign key (COO_CEDULAE)
       references COORD_CONTRATO (CEDULAE);
+      
+alter table ASIGNACION_C
+   add constraint FK_ASIGNACI_REALIZA_A_EMP_TEMP foreign key (EMP_TEMP_CEDULAE)
+      references EMP_TEMP (CEDULAE);
 
 alter table ASIGNACION_C
    add constraint FK_ASIGNACI_SE_ASIGNA_CONTRATO foreign key (ID_CONTRATO)
@@ -918,15 +932,15 @@ alter table ASIGNACION_C
 
 alter table ASIG_IMPL
    add constraint FK_ASIG_IMP_ASIGNA_I_COORD_T_ foreign key (COO_CEDULAE)
-      references COORD_T_Y_Y (CEDULAE);
+      references COORD_T_Y_T (CEDULAE);
 
 alter table ASIG_IMPL
    add constraint FK_ASIG_IMP_LO_ASIGNA_IMPL_SEG foreign key (ID_IMPLEMENTO)
       references IMPL_SEGURIDAD (ID_IMPLEMENTO);
 
 alter table ASIG_IMPL
-   add constraint FK_ASIG_IMP_RELATIONS_EM_TEMP foreign key (CEDULAE)
-      references EM_TEMP (CEDULAE);
+   add constraint FK_ASIG_IMP_RELATIONS_EMP_TEMP foreign key (CEDULAE)
+      references EMP_TEMP (CEDULAE);
 
 alter table BITACORA_SEG
    add constraint FK_BITACORA_SIGUE_EMPLEADO foreign key (CEDULAE)
@@ -945,8 +959,8 @@ alter table CL_TIENE_TELS
       references CLIENTE (IDCL);
 
 alter table COMUNICADO
-   add constraint FK_COMUNICA_REDACTA_EM_TEMP foreign key (CEDULAE)
-      references EM_TEMP (CEDULAE);
+   add constraint FK_COMUNICA_REDACTA_EMP_TEMP foreign key (CEDULAE)
+      references EMP_TEMP (CEDULAE);
 
 alter table COMUNICADO
    add constraint FK_COMUNICA_RESPONDE_DIR_OPER foreign key (DIR_CEDULAE)
@@ -964,7 +978,7 @@ alter table COORD_CONTRATO
    add constraint FK_COORD_CO_SON3_EMP_PLAN foreign key (CEDULAE)
       references EMP_PLANTA (CEDULAE);
 
-alter table COORD_T_Y_Y
+alter table COORD_T_Y_T
    add constraint FK_COORD_T__SON_EMP_PLAN foreign key (CEDULAE)
       references EMP_PLANTA (CEDULAE);
 
@@ -988,12 +1002,12 @@ alter table EMP_PLANTA
    add constraint FK_EMP_PLAN_SON_E_EMPLEADO foreign key (CEDULAE)
       references EMPLEADOS (CEDULAE);
 
-alter table EM_TEMP
-   add constraint FK_EM_TEMP_ASIGNAN_A_ASIGNACI foreign key (ID_ASIG)
+alter table EMP_TEMP
+   add constraint FK_EMP_TEMP_ASIGNAN_A_ASIGNACI foreign key (ID_ASIG)
       references ASIGNACION_C (ID_ASIG);
 
-alter table EM_TEMP
-   add constraint FK_EM_TEMP_SON_E2_EMPLEADO foreign key (CEDULAE)
+alter table EMP_TEMP
+   add constraint FK_EMP_TEMP_SON_E2_EMPLEADO foreign key (CEDULAE)
       references EMPLEADOS (CEDULAE);
 
 alter table EM_TIENE_TELS
@@ -1006,7 +1020,7 @@ alter table EM_TIENE_TELS
 
 alter table IMPL_SEGURIDAD
    add constraint FK_IMPL_SEG_REG_IMPL_COORD_T_ foreign key (CEDULAE)
-      references COORD_T_Y_Y (CEDULAE);
+      references COORD_T_Y_T (CEDULAE);
 
 alter table IMPL_SEGURIDAD
    add constraint FK_IMPL_SEG_SUMINISTR_PROVEEDO foreign key (ID_PRO)
@@ -1014,7 +1028,7 @@ alter table IMPL_SEGURIDAD
 
 alter table PROVEEDOR
    add constraint FK_PROVEEDO_REG_PROV_COORD_T_ foreign key (CEDULAE)
-      references COORD_T_Y_Y (CEDULAE);
+      references COORD_T_Y_T (CEDULAE);
 
 alter table SUBGERENTE
    add constraint FK_SUBGEREN_SON6_EMP_PLAN foreign key (CEDULAE)
@@ -1023,4 +1037,21 @@ alter table SUBGERENTE
 alter table TELS_PROV
    add constraint FK_TELS_PRO_PR_TIENE__PROVEEDO foreign key (ID_PRO)
       references PROVEEDOR (ID_PRO);
+      
+--Secuencia para valores autoincrementales
+
+create sequence SECUENCIA_IDS
+   start with 100000 
+   increment by 1 
+   nomaxvalue;
+   
+--Triggers para valores autoincrementales
+
+create or replace trigger AUTOIDCLIENTE 
+  before insert on CLIENTE for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.IDCL 
+    from dual;
+  end;
 

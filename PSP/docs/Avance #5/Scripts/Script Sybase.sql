@@ -150,9 +150,9 @@ go
 
 if exists (select 1 
             from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('COORD_T_Y_Y'))
+            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('COORD_T_Y_T'))
             where name = 'FK_COORD_T__SON_EMP_PLAN' and type = 'RI')
-   alter table COORD_T_Y_Y
+   alter table COORD_T_Y_T
       drop constraint FK_COORD_T__SON_EMP_PLAN
 go
 
@@ -493,9 +493,9 @@ go
 
 if exists (select 1
             from  sysobjects
-            where id = object_id('COORD_T_Y_Y')
+            where id = object_id('COORD_T_Y_T')
             and   type = 'U')
-   drop table COORD_T_Y_Y
+   drop table COORD_T_Y_T
 go
 
 if exists (select 1
@@ -904,7 +904,7 @@ create table CONTRATO (
    FECHA_INICIO_C       datetime                       not null,
    TIPO_PERSONAL_C      varchar(20)                    not null,
    CANTIDAD_PERSONAL_C  smallint                       not null,
-   COSTO_MENSUAL_C      NUMBER(10,2)                   not null,
+   COSTO_MENSUAL_C      NUMERIC(10,2)                   not null,
    HORARIO_C            varchar(20)                    not null,
    TIEMPO_C             int                            null,
    FECHA_REG_CON        datetime                       not null,
@@ -939,11 +939,11 @@ create table COORD_CONTRATO (
 go
 
 /*==============================================================*/
-/* Table: COORD_T_Y_Y                                           */
+/* Table: COORD_T_Y_T                                           */
 /*==============================================================*/
-create table COORD_T_Y_Y (
+create table COORD_T_Y_T (
    CEDULAE              INTEGER                         not null,
-   constraint PK_COORD_T_Y_Y primary key nonclustered (CEDULAE)
+   constraint PK_COORD_T_Y_T primary key nonclustered (CEDULAE)
 )
 go
 
@@ -1003,7 +1003,7 @@ go
 /*==============================================================*/
 create table EMP_PLANTA (
    CEDULAE              INTEGER                         not null,
-   SUELDOE              NUMBER(10,2)                   not null,
+   SUELDOE              NUMERIC(10,2)                   not null,
    constraint PK_EMP_PLANTA primary key nonclustered (CEDULAE)
 )
 go
@@ -1062,7 +1062,7 @@ create table IMPL_SEGURIDAD (
    ID_PRO               smallint                       null,
    CEDULAE              INTEGER                         not null,
    NOMBRE_I             varchar(20)                    not null,
-   PRECIO_UNITARIO_I    NUMBER(10,2)                   not null,
+   PRECIO_UNITARIO_I    NUMERIC(10,2)                   not null,
    CANTIDAD             smallint                       not null,
    DESCRIPCION_I        varchar(100)                   not null,
    ESTADO_I             varchar(20)                    not null,

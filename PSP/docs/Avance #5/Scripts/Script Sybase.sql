@@ -71,9 +71,9 @@ go
 if exists (select 1 
             from  sysobjects c 
             join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('ASIG_IMPL'))
-            where name = 'FK_ASIG_IMP_RELATIONS_EM_TEMP' and type = 'RI')
+            where name = 'FK_ASIG_IMP_RELATIONS_EMP_TEMP' and type = 'RI')
    alter table ASIG_IMPL
-      drop constraint FK_ASIG_IMP_RELATIONS_EM_TEMP
+      drop constraint FK_ASIG_IMP_RELATIONS_EMP_TEMP
 go
 
 if exists (select 1 
@@ -111,9 +111,9 @@ go
 if exists (select 1 
             from  sysobjects c 
             join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('COMUNICADO'))
-            where name = 'FK_COMUNICA_REDACTA_EM_TEMP' and type = 'RI')
+            where name = 'FK_COMUNICA_REDACTA_EMP_TEMP' and type = 'RI')
    alter table COMUNICADO
-      drop constraint FK_COMUNICA_REDACTA_EM_TEMP
+      drop constraint FK_COMUNICA_REDACTA_EMP_TEMP
 go
 
 if exists (select 1 
@@ -198,18 +198,18 @@ go
 
 if exists (select 1 
             from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('EM_TEMP'))
-            where name = 'FK_EM_TEMP_ASIGNAN_A_ASIGNACI' and type = 'RI')
-   alter table EM_TEMP
-      drop constraint FK_EM_TEMP_ASIGNAN_A_ASIGNACI
+            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('EMP_TEMP'))
+            where name = 'FK_EMP_TEMP_ASIGNAN_A_ASIGNACI' and type = 'RI')
+   alter table EMP_TEMP
+      drop constraint FK_EMP_TEMP_ASIGNAN_A_ASIGNACI
 go
 
 if exists (select 1 
             from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('EM_TEMP'))
-            where name = 'FK_EM_TEMP_SON_E2_EMPLEADO' and type = 'RI')
-   alter table EM_TEMP
-      drop constraint FK_EM_TEMP_SON_E2_EMPLEADO
+            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('EMP_TEMP'))
+            where name = 'FK_EMP_TEMP_SON_E2_EMPLEADO' and type = 'RI')
+   alter table EMP_TEMP
+      drop constraint FK_EMP_TEMP_SON_E2_EMPLEADO
 go
 
 if exists (select 1 
@@ -544,18 +544,18 @@ go
 
 if exists (select 1
             from  sysindexes
-           where  id    = object_id('EM_TEMP')
+           where  id    = object_id('EMP_TEMP')
             and   name  = 'ASIGNAN_A_E_FK'
             and   indid > 0
             and   indid < 255)
-   drop index EM_TEMP.ASIGNAN_A_E_FK
+   drop index EMP_TEMP.ASIGNAN_A_E_FK
 go
 
 if exists (select 1
             from  sysobjects
-            where id = object_id('EM_TEMP')
+            where id = object_id('EMP_TEMP')
             and   type = 'U')
-   drop table EM_TEMP
+   drop table EMP_TEMP
 go
 
 if exists (select 1
@@ -665,8 +665,8 @@ go
 /* Table: ACTUALIZACION                                         */
 /*==============================================================*/
 create table ACTUALIZACION (
-   SUB_CEDULAE          bigint                         not null,
-   CEDULAE              bigint                         not null,
+   SUB_CEDULAE          INTEGER                         not null,
+   CEDULAE              INTEGER                         not null,
    FECHA_ACTUAL_DGH     datetime                       not null,
    constraint PK_ACTUALIZACION primary key nonclustered (SUB_CEDULAE, CEDULAE)
 )
@@ -694,7 +694,7 @@ go
 create table ACTU_IMPL (
    ID_ACTUALIZACION_I   smallint                       not null,
    ID_IMPLEMENTO        smallint                       null,
-   CEDULAE              bigint                         null,
+   CEDULAE              INTEGER                         null,
    FECHA_ACTUALIZACION_I datetime                       not null,
    CANTIDAD_AGREGADA    smallint                       null,
    DESCRIPCION_ACTUALIZACION varchar(30)                    not null,
@@ -723,9 +723,9 @@ go
 /*==============================================================*/
 create table ASIGNACION_C (
    ID_ASIG              smallint                       not null,
-   ID_CONTRATO          smallint                       null,
-   CEDULAE              bigint                         null,
-   COO_CEDULAE          bigint                         null,
+   ID_CONTRATO          smallint                       not null,
+   COO_CEDULAE          INTEGER                        not null,
+   EMP_TEMP_CEDULAE     INTEGER                        not null,
    FECHA_ASIGNACION_C   datetime                       not null,
    HORARIO_ASIGNADO     varchar(20)                    not null,
    constraint PK_ASIGNACION_C primary key nonclustered (ID_ASIG)
@@ -753,9 +753,9 @@ go
 /*==============================================================*/
 create table ASIG_IMPL (
    ID_ASIGNACION_I      smallint                       not null,
-   ID_IMPLEMENTO        smallint                       null,
-   CEDULAE              bigint                         null,
-   COO_CEDULAE          bigint                         null,
+   ID_IMPLEMENTO        smallint                       not null,
+   CEDULAE              INTEGER                        not null,
+   COO_CEDULAE          INTEGER                        not null,
    CANTIDAD_ASIGNADA    smallint                       not null,
    ESTADO_ASIGNACION    bit                            not null,
    FECHA_ASIGNACION_I   datetime                       not null,
@@ -792,7 +792,7 @@ go
 /*==============================================================*/
 create table BITACORA_SEG (
    ID_OPER              int                            not null,
-   CEDULAE              bigint                         null,
+   CEDULAE              INTEGER                         null,
    FECHA_OPER           datetime                       not null,
    USU_OPER             varchar(20)                    null,
    MAQ_OPER             varchar(20)                    null,
@@ -815,7 +815,7 @@ go
 /*==============================================================*/
 create table CLIENTE (
    IDCL                 smallint                       not null,
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    NOMBRECL             varchar(20)                    not null,
    DIRECCIONCL          varchar(20)                    not null,
    FECHA_REG_CL         datetime                       not null,
@@ -862,8 +862,8 @@ go
 /*==============================================================*/
 create table COMUNICADO (
    ID_COMUNICADO        smallint                       not null,
-   CEDULAE              bigint                         null,
-   DIR_CEDULAE          bigint                         null,
+   CEDULAE              INTEGER                         null,
+   DIR_CEDULAE          INTEGER                         null,
    TIPO_CO              varchar(20)                    not null,
    FECHA_CO             datetime                       not null,
    CONTENIDO_CO         varchar(100)                   not null,
@@ -895,16 +895,16 @@ go
 create table CONTRATO (
    ID_CONTRATO          smallint                       not null,
    IDCL                 smallint                       not null,
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    UBICACION_C          varchar(20)                    not null,
    TELEFONO_C           int                            not null,
    CELULAR_C            int                            not null,
    TIPO_C               varchar(50)                    not null
-         constraint CKC_TIPO_C_CONTRATO check (TIPO_C in ('<Val0>','<Val1>')),
+         constraint CKC_TIPO_C_CONTRATO check (TIPO_C in ('Definido','Indefinido')),
    FECHA_INICIO_C       datetime                       not null,
    TIPO_PERSONAL_C      varchar(20)                    not null,
    CANTIDAD_PERSONAL_C  smallint                       not null,
-   COSTO_MENSUAL_C      money                          not null,
+   COSTO_MENSUAL_C      NUMBER(10,2)                   not null,
    HORARIO_C            varchar(20)                    not null,
    TIEMPO_C             int                            null,
    FECHA_REG_CON        datetime                       not null,
@@ -933,7 +933,7 @@ go
 /* Table: COORD_CONTRATO                                        */
 /*==============================================================*/
 create table COORD_CONTRATO (
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    constraint PK_COORD_CONTRATO primary key nonclustered (CEDULAE)
 )
 go
@@ -942,7 +942,7 @@ go
 /* Table: COORD_T_Y_Y                                           */
 /*==============================================================*/
 create table COORD_T_Y_Y (
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    constraint PK_COORD_T_Y_Y primary key nonclustered (CEDULAE)
 )
 go
@@ -951,7 +951,7 @@ go
 /* Table: DIR_COMERCIAL                                         */
 /*==============================================================*/
 create table DIR_COMERCIAL (
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    constraint PK_DIR_COMERCIAL primary key nonclustered (CEDULAE)
 )
 go
@@ -960,7 +960,7 @@ go
 /* Table: DIR_GESTION_HUM                                       */
 /*==============================================================*/
 create table DIR_GESTION_HUM (
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    constraint PK_DIR_GESTION_HUM primary key nonclustered (CEDULAE)
 )
 go
@@ -969,7 +969,7 @@ go
 /* Table: DIR_OPERACIONES                                       */
 /*==============================================================*/
 create table DIR_OPERACIONES (
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    constraint PK_DIR_OPERACIONES primary key nonclustered (CEDULAE)
 )
 go
@@ -978,8 +978,8 @@ go
 /* Table: EMPLEADOS                                             */
 /*==============================================================*/
 create table EMPLEADOS (
-   CEDULAE              bigint                         not null,
-   DIR_CEDULAE          bigint                         null,
+   CEDULAE              INTEGER                         not null,
+   DIR_CEDULAE          INTEGER                         null,
    NOMBREE              varchar(20)                    not null,
    APELLIDOE            varchar(20)                    not null,
    CONTRASENAE          char(10)                       not null,
@@ -1002,7 +1002,7 @@ go
 /* Table: EMP_PLANTA                                            */
 /*==============================================================*/
 create table EMP_PLANTA (
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    SUELDOE              NUMBER(10,2)                   not null,
    constraint PK_EMP_PLANTA primary key nonclustered (CEDULAE)
 )
@@ -1012,7 +1012,7 @@ go
 /* Table: EMP_TEMP                                               */
 /*==============================================================*/
 create table EMP_TEMP (
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    ID_ASIG              smallint                       null,
    TIENE_CONTRATO       bit                            not null,
    TIPO_TEMP            varchar(20)                    not null,
@@ -1033,7 +1033,7 @@ go
 /*==============================================================*/
 create table EM_TIENE_TELS (
    ID_TE                smallint                       not null,
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    constraint PK_EM_TIENE_TELS primary key nonclustered (ID_TE, CEDULAE)
 )
 go
@@ -1060,9 +1060,9 @@ go
 create table IMPL_SEGURIDAD (
    ID_IMPLEMENTO        smallint                       not null,
    ID_PRO               smallint                       null,
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    NOMBRE_I             varchar(20)                    not null,
-   PRECIO_UNITARIO_I    money                          not null,
+   PRECIO_UNITARIO_I    NUMBER(10,2)                   not null,
    CANTIDAD             smallint                       not null,
    DESCRIPCION_I        varchar(100)                   not null,
    ESTADO_I             varchar(20)                    not null,
@@ -1093,7 +1093,7 @@ go
 /*==============================================================*/
 create table PROVEEDOR (
    ID_PRO               smallint                       not null,
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    NOMBRE               varchar(20)                    not null,
    DIRECCION            varchar(20)                    not null,
    FECHA_REG_PROV       datetime                       not null,
@@ -1114,7 +1114,7 @@ go
 /* Table: SUBGERENTE                                            */
 /*==============================================================*/
 create table SUBGERENTE (
-   CEDULAE              bigint                         not null,
+   CEDULAE              INTEGER                         not null,
    constraint PK_SUBGERENTE primary key nonclustered (CEDULAE)
 )
 go
@@ -1125,7 +1125,8 @@ go
 create table TELS_CLI (
    ID_TC                smallint                       not null,
    NUM_TELEFONO_C       int                            not null,
-   constraint PK_TELS_CLI primary key nonclustered (ID_TC)
+   constraint PK_TELS_CLI primary key nonclustered (ID_TC),
+   constraint AK_ID_NUM_TELEFONO_C unique (NUM_TELEFONO_C)
 )
 go
 
@@ -1135,7 +1136,8 @@ go
 create table TELS_EMP (
    ID_TE                smallint                       not null,
    NUM_TELEFONO_E       int                            not null,
-   constraint PK_TELS_EMP primary key nonclustered (ID_TE)
+   constraint PK_TELS_EMP primary key nonclustered (ID_TE),
+   constraint AK_ID_NUM_TELEFONO_E unique (NUM_TELEFONO_E)
 )
 go
 
@@ -1146,7 +1148,8 @@ create table TELS_PROV (
    ID_TP                smallint                       not null,
    ID_PRO               smallint                       null,
    NUM_TELEFONO_P       int                            not null,
-   constraint PK_TELS_PROV primary key nonclustered (ID_TP)
+   constraint PK_TELS_PROV primary key nonclustered (ID_TP),
+   constraint AK_ID_NUM_TELEFONO_P unique (NUM_TELEFONO_P)
 )
 go
 

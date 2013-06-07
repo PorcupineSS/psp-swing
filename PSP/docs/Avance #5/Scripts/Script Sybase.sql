@@ -1003,27 +1003,27 @@ go
 /*==============================================================*/
 create table EMP_PLANTA (
    CEDULAE              bigint                         not null,
-   SUELDOE              money                          not null,
+   SUELDOE              NUMBER(10,2)                   not null,
    constraint PK_EMP_PLANTA primary key nonclustered (CEDULAE)
 )
 go
 
 /*==============================================================*/
-/* Table: EM_TEMP                                               */
+/* Table: EMP_TEMP                                               */
 /*==============================================================*/
-create table EM_TEMP (
+create table EMP_TEMP (
    CEDULAE              bigint                         not null,
    ID_ASIG              smallint                       null,
    TIENE_CONTRATO       bit                            not null,
    TIPO_TEMP            varchar(20)                    not null,
-   constraint PK_EM_TEMP primary key nonclustered (CEDULAE)
+   constraint PK_EMP_TEMP primary key nonclustered (CEDULAE)
 )
 go
 
 /*==============================================================*/
 /* Index: ASIGNAN_A_E_FK                                        */
 /*==============================================================*/
-create index ASIGNAN_A_E_FK on EM_TEMP (
+create index ASIGNAN_A_E_FK on EMP_TEMP (
 ID_ASIG ASC
 )
 go
@@ -1170,7 +1170,7 @@ go
 
 alter table ACTU_IMPL
    add constraint FK_ACTU_IMP_ACTUALIZA_COORD_T_ foreign key (CEDULAE)
-      references COORD_T_Y_Y (CEDULAE)
+      references COORD_T_Y_T (CEDULAE)
 go
 
 alter table ACTU_IMPL
@@ -1190,7 +1190,7 @@ go
 
 alter table ASIG_IMPL
    add constraint FK_ASIG_IMP_ASIGNA_I_COORD_T_ foreign key (COO_CEDULAE)
-      references COORD_T_Y_Y (CEDULAE)
+      references COORD_T_Y_T (CEDULAE)
 go
 
 alter table ASIG_IMPL
@@ -1199,8 +1199,8 @@ alter table ASIG_IMPL
 go
 
 alter table ASIG_IMPL
-   add constraint FK_ASIG_IMP_RELATIONS_EM_TEMP foreign key (CEDULAE)
-      references EM_TEMP (CEDULAE)
+   add constraint FK_ASIG_IMP_RELATIONS_EMP_TEMP foreign key (CEDULAE)
+      references EMP_TEMP (CEDULAE)
 go
 
 alter table BITACORA_SEG
@@ -1224,8 +1224,8 @@ alter table CL_TIENE_TELS
 go
 
 alter table COMUNICADO
-   add constraint FK_COMUNICA_REDACTA_EM_TEMP foreign key (CEDULAE)
-      references EM_TEMP (CEDULAE)
+   add constraint FK_COMUNICA_REDACTA_EMP_TEMP foreign key (CEDULAE)
+      references EMP_TEMP (CEDULAE)
 go
 
 alter table COMUNICADO
@@ -1248,7 +1248,7 @@ alter table COORD_CONTRATO
       references EMP_PLANTA (CEDULAE)
 go
 
-alter table COORD_T_Y_Y
+alter table COORD_T_Y_T
    add constraint FK_COORD_T__SON_EMP_PLAN foreign key (CEDULAE)
       references EMP_PLANTA (CEDULAE)
 go
@@ -1278,13 +1278,13 @@ alter table EMP_PLANTA
       references EMPLEADOS (CEDULAE)
 go
 
-alter table EM_TEMP
-   add constraint FK_EM_TEMP_ASIGNAN_A_ASIGNACI foreign key (ID_ASIG)
+alter table EMP_TEMP
+   add constraint FK_EMP_TEMP_ASIGNAN_A_ASIGNACI foreign key (ID_ASIG)
       references ASIGNACION_C (ID_ASIG)
 go
 
-alter table EM_TEMP
-   add constraint FK_EM_TEMP_SON_E2_EMPLEADO foreign key (CEDULAE)
+alter table EMP_TEMP
+   add constraint FK_EMP_TEMP_SON_E2_EMPLEADO foreign key (CEDULAE)
       references EMPLEADOS (CEDULAE)
 go
 
@@ -1300,7 +1300,7 @@ go
 
 alter table IMPL_SEGURIDAD
    add constraint FK_IMPL_SEG_REG_IMPL_COORD_T_ foreign key (CEDULAE)
-      references COORD_T_Y_Y (CEDULAE)
+      references COORD_T_Y_T (CEDULAE)
 go
 
 alter table IMPL_SEGURIDAD
@@ -1310,7 +1310,7 @@ go
 
 alter table PROVEEDOR
    add constraint FK_PROVEEDO_REG_PROV_COORD_T_ foreign key (CEDULAE)
-      references COORD_T_Y_Y (CEDULAE)
+      references COORD_T_Y_T (CEDULAE)
 go
 
 alter table SUBGERENTE

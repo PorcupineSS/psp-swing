@@ -791,7 +791,7 @@ go
 /* Table: BITACORA_SEG                                          */
 /*==============================================================*/
 create table BITACORA_SEG (
-   ID_OPER              int                            not null,
+   ID_OPER              int  identity                  not null,
    CEDULAE              INTEGER                         null,
    FECHA_OPER           datetime                       not null,
    USU_OPER             varchar(20)                    null,
@@ -814,7 +814,7 @@ go
 /* Table: CLIENTE                                               */
 /*==============================================================*/
 create table CLIENTE (
-   IDCL                 smallint                       not null,
+   IDCL                 smallint  identity            not null,
    CEDULAE              INTEGER                         not null,
    NOMBRECL             varchar(20)                    not null,
    DIRECCIONCL          varchar(20)                    not null,
@@ -897,8 +897,8 @@ create table CONTRATO (
    IDCL                 smallint                       not null,
    CEDULAE              INTEGER                         not null,
    UBICACION_C          varchar(20)                    not null,
-   TELEFONO_C           int                            not null,
-   CELULAR_C            int                            not null,
+   TELEFONO_C           bigint                            not null,
+   CELULAR_C            bigint                            not null,
    TIPO_C               varchar(50)                    not null
          constraint CKC_TIPO_C_CONTRATO check (TIPO_C in ('Definido','Indefinido')),
    FECHA_INICIO_C       datetime                       not null,
@@ -1124,7 +1124,7 @@ go
 /*==============================================================*/
 create table TELS_CLI (
    ID_TC                smallint                       not null,
-   NUM_TELEFONO_C       int                            not null,
+   NUM_TELEFONO_C       bigint                            not null,
    constraint PK_TELS_CLI primary key nonclustered (ID_TC),
    constraint AK_ID_NUM_TELEFONO_C unique (NUM_TELEFONO_C)
 )
@@ -1135,7 +1135,7 @@ go
 /*==============================================================*/
 create table TELS_EMP (
    ID_TE                smallint                       not null,
-   NUM_TELEFONO_E       int                            not null,
+   NUM_TELEFONO_E       bigint                            not null,
    constraint PK_TELS_EMP primary key nonclustered (ID_TE),
    constraint AK_ID_NUM_TELEFONO_E unique (NUM_TELEFONO_E)
 )
@@ -1147,7 +1147,7 @@ go
 create table TELS_PROV (
    ID_TP                smallint                       not null,
    ID_PRO               smallint                       null,
-   NUM_TELEFONO_P       int                            not null,
+   NUM_TELEFONO_P       bigint                            not null,
    constraint PK_TELS_PROV primary key nonclustered (ID_TP),
    constraint AK_ID_NUM_TELEFONO_P unique (NUM_TELEFONO_P)
 )

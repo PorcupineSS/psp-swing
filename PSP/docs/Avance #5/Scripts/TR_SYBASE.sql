@@ -276,7 +276,7 @@ go
 create trigger TR_DEL_ACTUAL on ACTUALIZACION for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULADIR from inserted)
+    select @varid = (select CEDULAE from inserted)
     insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
     values (@varid,
             getdate(),
@@ -291,7 +291,7 @@ go
 create trigger TR_INS_ACTUAL on ACTUALIZACION for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULADIR from inserted)
+    select @varid = (select CEDULAE from inserted)
     insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
     values (@varid,
             getdate(),
@@ -306,7 +306,7 @@ go
 create trigger TR_UPD_ACTUAL on ACTUALIZACION for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULADIR from inserted)
+    select @varid = (select CEDULAE from inserted)
     insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
     values (@varid,
             getdate(),

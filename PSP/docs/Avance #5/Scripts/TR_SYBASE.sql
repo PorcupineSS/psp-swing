@@ -318,10 +318,10 @@ end
 go
 
 
-create trigger TR_DEL_ACIMP on ACTUALIZACION_IMPLEMENTO for delete as
+create trigger TR_DEL_ACIMP on ACTU_IMPL for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
+    select @varid = (select CEDULAE from inserted)
     insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
     values (@varid,
             getdate(),
@@ -333,10 +333,10 @@ end
 go
 
 
-create trigger TR_INS_ACIMP on ACTUALIZACION_IMPLEMENTO for insert as
+create trigger TR_INS_ACIMP on ACTU_IMPL for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
+    select @varid = (select CEDULAE from inserted)
     insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
     values (@varid,
             getdate(),
@@ -351,7 +351,7 @@ go
 create trigger TR_UPD_ACIMP on ACTUALIZACION_IMPLEMENTO for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
+    select @varid = (select CEDULAE from inserted)
     insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
     values (@varid,
             getdate(),

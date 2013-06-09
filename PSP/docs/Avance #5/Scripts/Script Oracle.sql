@@ -899,7 +899,7 @@ comment on table SUBGERENTE is
 /*==============================================================*/
 create table TELS_CLI  (
    ID_TC                SMALLINT                        not null,
-   NUM_TELEFONO_C       INTEGER                         not null,
+   NUM_TELEFONO_C       VARCHAR(10)                     not null,
    constraint PK_TELS_CLI primary key (ID_TC),
    constraint AK_ID_NUM_TELEFONO_C unique (NUM_TELEFONO_C)
 );
@@ -913,12 +913,15 @@ comment on column TELS_CLI.ID_TC is
 comment on column TELS_CLI.NUM_TELEFONO_C is
 'Numero telefonico del cliente.';
 
+alter table TELS_CLI add (constraint CK1_TELS_CLI
+  check (NUM_TELEFONO_C like "[3][0][012]%" or NUM_TELEFONO_C		like "[3][1][012345678]%" or NUM_TELEFONO_C			like "[3][2][01]%") or NUM_TELEFONO_C like "[5][7]		[1245678]%");
+
 /*==============================================================*/
 /* Table: TELS_EMP                                              */
 /*==============================================================*/
 create table TELS_EMP  (
    ID_TE                SMALLINT                        not null,
-   NUM_TELEFONO_E       INTEGER                         not null,
+   NUM_TELEFONO_E       VARCHAR(10)                     not null,
    constraint PK_TELS_EMP primary key (ID_TE),
    constraint AK_ID_NUM_TELEFONO_E unique (NUM_TELEFONO_E)
 );
@@ -932,13 +935,16 @@ comment on column TELS_EMP.ID_TE is
 comment on column TELS_EMP.NUM_TELEFONO_E is
 'Numero telefonico del empleado.';
 
+alter table TELS_EMP add (constraint CK1_TELS_EMP
+  check (NUM_TELEFONO_E like "[3][0][012]%" or NUM_TELEFONO_E		like "[3][1][012345678]%" or NUM_TELEFONO_E			like "[3][2][01]%") or NUM_TELEFONO_E like "[5][7]		[1245678]%");
+
 /*==============================================================*/
 /* Table: TELS_PROV                                             */
 /*==============================================================*/
 create table TELS_PROV  (
    ID_TP                SMALLINT                        not null,
    ID_PRO               SMALLINT,
-   NUM_TELEFONO_P       INTEGER                         not null,
+   NUM_TELEFONO_P       VARCHAR(10)                     not null,
    constraint PK_TELS_PROV primary key (ID_TP),
    constraint AK_ID_NUM_TELEFONO_P unique (NUM_TELEFONO_P)
 );
@@ -954,6 +960,9 @@ comment on column TELS_PROV.ID_PRO is
 
 comment on column TELS_PROV.NUM_TELEFONO_P is
 'Numero telefonico del proveedor.';
+
+alter table TELS_PROV add (constraint CK1_TELS_PROV
+  check (NUM_TELEFONO_P like "[3][0][012]%" or NUM_TELEFONO_P		like "[3][1][012345678]%" or NUM_TELEFONO_P			like "[3][2][01]%") or NUM_TELEFONO_P like "[5][7]		[1245678]%");
 
 /*==============================================================*/
 /* Index: PR_TIENE_TELS_FK                                      */

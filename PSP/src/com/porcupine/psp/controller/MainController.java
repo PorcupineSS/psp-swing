@@ -31,6 +31,63 @@ public class MainController {
     public static EmpleadosVO empleadoActivo;
     public static String selectedDB;
     
+    //VOS Temporales para hacer operaciones
+    public static EmpleadosVO empleadoTemporal;
+    
+    
+    //Constructores y cosas similares
+    
+    //<editor-fold defaultstate="collapsed" desc="Constructores">
+    public static Login getLogin() {
+        return login;
+    }
+    
+    public static void setLogin(Login login) {
+        MainController.login = login;
+    }
+    
+    public static SelectDataBaseConnection getSdb() {
+        return sdb;
+    }
+    
+    public static void setSdb(SelectDataBaseConnection sdb) {
+        MainController.sdb = sdb;
+    }
+    
+    public static Psp getPsp() {
+        return psp;
+    }
+    
+    public static void setPsp(Psp psp) {
+        MainController.psp = psp;
+    }
+    
+    public static EmpleadosVO getEmpleadoActivo() {
+        return empleadoActivo;
+    }
+    
+    public static void setEmpleadoActivo(EmpleadosVO empleadoActivo) {
+        MainController.empleadoActivo = empleadoActivo;
+    }
+    
+    public static String getSelectedDB() {
+        return selectedDB;
+    }
+    
+    public static void setSelectedDB(String selectedDB) {
+        MainController.selectedDB = selectedDB;
+    }
+    
+    public static EmpleadosVO getEmpleadoTemporal() {
+        return empleadoTemporal;
+    }
+    
+    public static void setEmpleadoTemporal(EmpleadosVO empleadoTemporal) {
+        MainController.empleadoTemporal = empleadoTemporal;
+    }
+    
+    //</editor-fold>
+    
     //Clases de muestra
     
     public static void mostrarLogin() {
@@ -171,4 +228,7 @@ public class MainController {
     public static void consultarBitacora(){
         
     }
+    
+    //Validación de datos
+    
 }

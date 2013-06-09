@@ -80,8 +80,6 @@ public class CreateEmployee extends javax.swing.JPanel {
 
         jLabel6.setText("Tipo:");
 
-        jComboBoxTipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Guardia de Seguridad", "Escolta" }));
-
         jLabel7.setText("Dirección:");
 
         jLabel8.setText("Teléfono:");

@@ -788,6 +788,26 @@ ID_IMPLEMENTO ASC
 go
 
 /*==============================================================*/
+/* Constraint: DOM_ESTADO                                         */
+/*==============================================================*/
+alter table ASIG_IMPL add constraint DOM_ESTADO
+      CHECK (ESTADO_ASIGNACION IN (0 , 1))
+go
+
+/*==============================================================*/
+/* Constraint: CK1_ASIG_IMPL_CANT                          */
+/*==============================================================*/
+alter table ASIG_IMPL add constraint CK1_ASIG_IMPL_CANT
+      CHECK (CANTIDAD_ASIGNADA > 0)
+go
+
+/*==============================================================*/
+/* Constraint: CK2_ASIG_IMPL_FECHA                         */
+/*==============================================================*/
+alter table ASIG_IMPL add constraint CK2_ASIG_IMPL_FECHA
+      CHECK (FECHA_ASIGNACION_I <= GETDATE())
+
+/*==============================================================*/
 /* Table: BITACORA_SEG                                          */
 /*==============================================================*/
 create table BITACORA_SEG (
@@ -809,6 +829,13 @@ create index SIGUE_FK on BITACORA_SEG (
 CEDULAE ASC
 )
 go
+
+/*==============================================================*/
+/* Constraint: DOM_TIPO_OPER                                         */
+/*==============================================================*/
+alter table BITACORA_SEG add constraint DOM_TIPO_OPER
+      CHECK (TIPO_OPER IN ('INSERT' , 'DELETE' , 'UPDATE'))
+go	  
 
 /*==============================================================*/
 /* Table: CLIENTE                                               */
@@ -890,6 +917,27 @@ DIR_CEDULAE ASC
 go
 
 /*==============================================================*/
+/* Constraint: DOM_TIPO_CO                                         */
+/*==============================================================*/
+alter table COMUNICADO add constraint DOM_TIPO_CO
+      CHECK (TIPO_CO IN ('RECLAMO' , 'QUEJA' , 'SUGERENCIA'))
+go
+
+/*==============================================================*/
+/* Constraint: DOM_URGENTE                                    */
+/*==============================================================*/
+alter table COMUNICADO add constraint DOM_URGENTE
+      CHECK (URGENTE IN (0 , 1))
+go
+
+/*==============================================================*/
+/* Constraint: CK1_COMUNICADO_FECHA                               */
+/*==============================================================*/
+alter table COMUNICADO add constraint CK1_COMUNICADO_FECHA
+      CHECK (FECHA_CO <= GETDATE())
+go
+
+/*==============================================================*/
 /* Table: CONTRATO                                              */
 /*==============================================================*/
 create table CONTRATO (
@@ -897,8 +945,8 @@ create table CONTRATO (
    IDCL                 smallint                       not null,
    CEDULAE              INTEGER                         not null,
    UBICACION_C          varchar(20)                    not null,
-   TELEFONO_C           bigint                            not null,
-   CELULAR_C            bigint                            not null,
+   TELEFONO_C           varchar(10)                    not null,
+   CELULAR_C            varchar(10)                    not null,
    TIPO_C               varchar(50)                    not null
          constraint CKC_TIPO_C_CONTRATO check (TIPO_C in ('Definido','Indefinido')),
    FECHA_INICIO_C       datetime                       not null,
@@ -927,6 +975,50 @@ go
 create index SOLICITA_FK on CONTRATO (
 IDCL ASC
 )
+go
+
+/*==============================================================*/
+/* Constraint: DOM_TIPO_PERSONAL_C                            */
+/*==============================================================*/
+alter table CONTRATO add constraint DOM_TIPO_PERSONAL_C
+      CHECK (TIPO_PERSONAL_C IN ('VIGILANTE' , 'ESCOLTA'))
+go
+
+/*==============================================================*/
+/* Constraint: DOM_TIPO_C                                     */
+/*==============================================================*/
+alter table CONTRATO add constraint DOM_TIPO_C
+      CHECK (TIPO_C IN ('DEFINIDO' , 'INDEFINIDO'))
+go
+
+/*==============================================================*/
+/* Constraint: CK1_TELS_CONTRATO                                     */
+/*==============================================================*/
+
+alter table CONTRATO add constraint CK1_TELS_CONTRATO
+  check (TELEFONO_C like "[5][7][1245678]%")
+go
+
+/*==============================================================*/
+/* Constraint: CK2_CELS_CONTRATO                                     */
+/*==============================================================*/
+
+alter table CONTRATO add (constraint CK2_CELS_CONTRATO
+  check (CELULAR_C like "[3][0][012]%" or TELEFONO_C like "[3][1][012345678]%" or TELEFONO_C like "[3][2][01]%")
+go
+
+/*==============================================================*/
+/* Constraint: CK1_CONTR_CANT_PERS                               */
+/*==============================================================*/
+alter table CONTRATO add constraint CK1_CONTR_CANT_PERS
+      CHECK (CANTIDAD_PERSONAL_C > 0)
+go
+
+/*==============================================================*/
+/* Constraint: CK1_CONTR_COSTO                             */
+/*==============================================================*/
+alter table CONTRATO add constraint CK1_CONTR_COSTO
+      CHECK (COSTO_MENSUAL_C > 0)
 go
 
 /*==============================================================*/
@@ -1089,6 +1181,27 @@ ID_PRO ASC
 go
 
 /*==============================================================*/
+/* Constraint: DOM_ESTADO_I                                   */
+/*==============================================================*/
+alter table IMPL_SEGURIDAD add constraint DOM_ESTADO_I
+      CHECK (ESTADO_I IN ('OPTIMO' , 'MANTENIMIENTO'))
+go
+
+/*==============================================================*/
+/* Constraint: CK1_IMPL_PREC                               */
+/*==============================================================*/
+alter table IMPL_SEGURIDAD add constraint CK1_IMPL_PREC
+      CHECK (PRECIO_UNITARIO_I > 0)
+go
+
+/*==============================================================*/
+/* Constraint: CK1_IMPL_CANT                               */
+/*==============================================================*/
+alter table IMPL_SEGURIDAD add constraint CK1_IMPL_CANT
+      CHECK (CANTIDAD >= 0)
+go
+
+/*==============================================================*/
 /* Table: PROVEEDOR                                             */
 /*==============================================================*/
 create table PROVEEDOR (
@@ -1124,21 +1237,37 @@ go
 /*==============================================================*/
 create table TELS_CLI (
    ID_TC                smallint                       not null,
-   NUM_TELEFONO_C       bigint                            not null,
+   NUM_TELEFONO_C       varchar(10)                    not null,
    constraint PK_TELS_CLI primary key nonclustered (ID_TC),
    constraint AK_ID_NUM_TELEFONO_C unique (NUM_TELEFONO_C)
 )
 go
 
 /*==============================================================*/
+/* Constraint: CK1_TELS_CLI                                     */
+/*==============================================================*/
+
+alter table TELS_CLI add constraint CK1_TELS_CLI
+  check (NUM_TELEFONO_C like "[3][0][012]%" or NUM_TELEFONO_C like "[3][1][012345678]%" or NUM_TELEFONO_C like "[3][2][01]%" or NUM_TELEFONO_C like "[5][7][1245678]%")
+go 
+
+/*==============================================================*/
 /* Table: TELS_EMP                                              */
 /*==============================================================*/
 create table TELS_EMP (
    ID_TE                smallint                       not null,
-   NUM_TELEFONO_E       bigint                            not null,
+   NUM_TELEFONO_E       varchar(10)                    not null,
    constraint PK_TELS_EMP primary key nonclustered (ID_TE),
    constraint AK_ID_NUM_TELEFONO_E unique (NUM_TELEFONO_E)
 )
+go
+
+/*==============================================================*/
+/* Constraint: CK1_TELS_EMP                                     */
+/*==============================================================*/
+
+alter table TELS_EMP add (constraint CK1_TELS_EMP
+  check (NUM_TELEFONO_E like "[3][0][012]%" or NUM_TELEFONO_E like "[3][1][012345678]%" or NUM_TELEFONO_E like "[3][2][01]%" or NUM_TELEFONO_E like "[5][7][1245678]%")
 go
 
 /*==============================================================*/
@@ -1147,7 +1276,7 @@ go
 create table TELS_PROV (
    ID_TP                smallint                       not null,
    ID_PRO               smallint                       null,
-   NUM_TELEFONO_P       bigint                            not null,
+   NUM_TELEFONO_P       varchar(10)                    not null,
    constraint PK_TELS_PROV primary key nonclustered (ID_TP),
    constraint AK_ID_NUM_TELEFONO_P unique (NUM_TELEFONO_P)
 )
@@ -1159,6 +1288,14 @@ go
 create index PR_TIENE_TELS_FK on TELS_PROV (
 ID_PRO ASC
 )
+go
+
+/*==============================================================*/
+/* Constraint: CK1_TELS_PROV                                     */
+/*==============================================================*/
+
+alter table TELS_PROV add (constraint CK1_TELS_PROV
+  check (NUM_TELEFONO_P like "[3][0][012]%" or NUM_TELEFONO_P like "[3][1][012345678]%" or NUM_TELEFONO_P like "[3][2][01]%" or NUM_TELEFONO_P like "[5][7][1245678]%")
 go
 
 alter table ACTUALIZACION

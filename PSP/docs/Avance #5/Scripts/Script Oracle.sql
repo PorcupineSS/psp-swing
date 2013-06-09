@@ -281,6 +281,12 @@ create index LO_ACTUALIZAN_FK on ACTU_IMPL (
 );
 
 /*==============================================================*/
+/* Constraint: DOM_DESCRIPCION                                         */
+/*==============================================================*/
+alter table ACTU_IMPL add constraint DOM_DESCRIPCION
+      CHECK (DESCRIPCION_ACTUALIZACION IN ('Añadir','Borrar','Actualizar'));
+
+/*==============================================================*/
 /* Table: ASIGNACION_C                                          */
 /*==============================================================*/
 create table ASIGNACION_C  (
@@ -376,6 +382,12 @@ create index LO_ASIGNAN_FK on ASIG_IMPL (
 );
 
 /*==============================================================*/
+/* Constraint: DOM_ESTADO                                         */
+/*==============================================================*/
+alter table ASIG_IMPL add constraint DOM_ESTADO
+      CHECK (ESTADO_ASIGNACION IN (0 , 1));
+
+/*==============================================================*/
 /* Table: BITACORA_SEG                                          */
 /*==============================================================*/
 create table BITACORA_SEG  (
@@ -395,6 +407,12 @@ create table BITACORA_SEG  (
 create index SIGUE_FK on BITACORA_SEG (
    CEDULAE ASC
 );
+
+/*==============================================================*/
+/* Constraint: DOM_TIPO_OPER                                         */
+/*==============================================================*/
+alter table BITACORA_SEG add constraint DOM_TIPO_OPER
+      CHECK (TIPO_OPER IN ('INSERT' , 'DELETE' , 'UPDATE'));
 
 /*==============================================================*/
 /* Table: CLIENTE                                               */
@@ -510,6 +528,18 @@ create index RESPONDE_FK on COMUNICADO (
 );
 
 /*==============================================================*/
+/* Constraint: DOM_TIPO_CO                                         */
+/*==============================================================*/
+alter table COMUNICADO add constraint DOM_TIPO_CO
+      CHECK (TIPO_CO IN ('RECLAMO' , 'QUEJA' , 'SUGERENCIA'));
+
+/*==============================================================*/
+/* Constraint: DOM_URGENTE                                    */
+/*==============================================================*/
+alter table COMUNICADO add constraint DOM_URGENTE
+      CHECK (URGENTE IN (0 , 1));
+
+/*==============================================================*/
 /* Table: CONTRATO                                              */
 /*==============================================================*/
 create table CONTRATO  (
@@ -519,8 +549,8 @@ create table CONTRATO  (
    UBICACION_C          VARCHAR2(20)                    not null,
    TELEFONO_C           INTEGER                         not null,
    CELULAR_C            INTEGER                         not null,
-   TIPO_C               VARCHAR2(50)                    not null
-      constraint CKC_TIPO_C_CONTRATO check (TIPO_C in ('Definido','Indefinido')),
+   TIPO_C               VARCHAR2(50)                    not 
+null
    FECHA_INICIO_C       DATE                            not null,
    TIPO_PERSONAL_C      VARCHAR2(20)                    not null,
    CANTIDAD_PERSONAL_C  SMALLINT                        not null,
@@ -579,11 +609,23 @@ create index REG_CONT_FK on CONTRATO (
 );
 
 /*==============================================================*/
-/* Index: SOLICITA_FK                                           */
+/* Index: SOLICITA_FK                                         */
 /*==============================================================*/
 create index SOLICITA_FK on CONTRATO (
    IDCL ASC
 );
+
+/*==============================================================*/
+/* Constraint: DOM_TIPO_PERSONAL_C                            */
+/*==============================================================*/
+alter table CONTRATO add constraint DOM_TIPO_PERSONAL_C
+      CHECK (TIPO_PERSONAL_C IN ('VIGILANTE' , 'ESCOLTA'));
+
+/*==============================================================*/
+/* Constraint: DOM_TIPO_C                                     */
+/*==============================================================*/
+alter table CONTRATO add constraint DOM_TIPO_C
+      CHECK (TIPO_C IN ('DEFINIDO' , 'INDEFINIDO'));
 
 /*==============================================================*/
 /* Table: COORD_CONTRATO                                        */
@@ -708,6 +750,18 @@ create index ASIGNAN_A_E_FK on EMP_TEMP (
 );
 
 /*==============================================================*/
+/* Constraint: DOM_TIENE_CONTRATO                             */
+/*==============================================================*/
+alter table EMP_TEMP add constraint DOM_TIENE_CONTRATO
+      CHECK (TIENE_CONTRATO IN (0 , 1));
+
+/*==============================================================*/
+/* Constraint: DOM_TIPO_TEMP                                  */
+/*==============================================================*/
+alter table EMP_TEMP add constraint DOM_TIPO_TEMP
+      CHECK (TIPO_TEMP IN ('VIGILANTE' , 'ESCOLTA'));
+
+/*==============================================================*/
 /* Table: EM_TIENE_TELS                                         */
 /*==============================================================*/
 create table EM_TIENE_TELS  (
@@ -790,6 +844,12 @@ create index REG_IMPL_FK on IMPL_SEGURIDAD (
 create index SUMINISTRA_FK on IMPL_SEGURIDAD (
    ID_PRO ASC
 );
+
+/*==============================================================*/
+/* Constraint: DOM_ESTADO_I                                   */
+/*==============================================================*/
+alter table IMPL_SEGURIDAD add constraint DOM_ESTADO_I
+      CHECK (ESTADO_I IN ('OPTIMO' , 'MANTENIMIENTO'));
 
 /*==============================================================*/
 /* Table: PROVEEDOR                                             */
@@ -1038,20 +1098,216 @@ alter table TELS_PROV
    add constraint FK_TELS_PRO_PR_TIENE__PROVEEDO foreign key (ID_PRO)
       references PROVEEDOR (ID_PRO);
       
---Secuencia para valores autoincrementales
+/*============================================================*/
+/*                                                            */
+/*SECUENCIAS Y TRIGGERS PARA ATRIBUTOS AUTOINCREMENTALES      */
+/*                                                            */
+/*============================================================*/
 
-create sequence SECUENCIA_IDS
-   start with 100000 
+--Secuencia para primary key de la tabla TELS_EMP
+
+create sequence SEC_TELS_EMP
+   start with 100 
    increment by 1 
    nomaxvalue;
    
---Triggers para valores autoincrementales
+--Trigger primary key de la tabla TELS_EMP
 
-create or replace trigger AUTOIDCLIENTE 
+create or replace trigger AUTOID_TELS_EMP 
+  before insert on TELS_EMP for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.ID_TE
+    from dual;
+  end;
+
+--Secuencia para primary key de la tabla TELS_CLI
+
+create sequence SEC_TELS_CLI
+   start with 100 
+   increment by 1 
+   nomaxvalue;
+   
+--Trigger primary key de la tabla TELS_CLI
+
+create or replace trigger AUTOID_TELS_CLI 
+  before insert on TELS_CLI for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.ID_TC
+    from dual;
+  end;
+
+--Secuencia para primary key de la tabla TELS_PROV
+
+create sequence SEC_TELS_PROV
+   start with 100 
+   increment by 1 
+   nomaxvalue;
+   
+--Trigger primary key de la tabla TELS_PROV
+
+create or replace trigger AUTOID_TELS_PROV 
+  before insert on TELS_PROV for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.ID_TP
+    from dual;
+  end;
+
+--Secuencia para primary key de la tabla ASIGNACION_C
+
+create sequence SEC_ASIGNACION_C
+   start with 100 
+   increment by 1 
+   nomaxvalue;
+   
+--Trigger primary key de la tabla ASIGNACION_C
+
+create or replace trigger AUTOID_ASIGNACION_C 
+  before insert on ASIGNACION_C for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.ID_ASIG
+    from dual;
+  end;
+
+--Secuencia para primary key de la tabla CLIENTE
+
+create sequence SEC_CLIENTE
+   start with 10 
+   increment by 1 
+   nomaxvalue;
+   
+--Trigger primary key de la tabla CLIENTE
+
+create or replace trigger AUTOID_CLIENTE 
   before insert on CLIENTE for each row
   begin
     select SECUENCIA_IDS.nextval 
     into :new.IDCL 
     from dual;
   end;
+
+--Secuencia para primary key de la tabla CONTRATO
+
+create sequence SEC_CONTRATO
+   start with 10 
+   increment by 1 
+   nomaxvalue;
+   
+--Trigger primary key de la tabla CONTRATO
+
+create or replace trigger AUTOID_CONTRATO 
+  before insert on CONTRATO for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.ID_CONTRATO
+    from dual;
+  end;
+
+--Secuencia para primary key de la tabla IMPL_SEGURIDAD
+
+create sequence SEC_IMPL_SEGURIDAD
+   start with 10 
+   increment by 1 
+   nomaxvalue;
+   
+--Trigger primary key de la tabla IMPL_SEGURIDAD
+
+create or replace trigger AUTOID_IMPL_SEGURIDAD 
+  before insert on IMPL_SEGURIDAD for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.ID_IMPLEMENTO
+    from dual;
+  end;
+
+--Secuencia para primary key de la tabla PROVEEDOR
+
+create sequence SEC_PROVEEDOR
+   start with 10 
+   increment by 1 
+   nomaxvalue;
+   
+--Trigger primary key de la tabla PROVEEDOR
+
+create or replace trigger AUTOID_PROVEEDOR 
+  before insert on PROVEEDOR for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.ID_PRO
+    from dual;
+  end;
+
+--Secuencia para primary key de la tabla ACTU_IMPL
+
+create sequence SEC_ACTU_IMPL
+   start with 100 
+   increment by 1 
+   nomaxvalue;
+   
+--Trigger primary key de la tabla ACTU_IMPL
+
+create or replace trigger AUTOID_ACTU_IMPL 
+  before insert on ACTU_IMPL for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.ID_ACTUALIZACION_I
+    from dual;
+  end;
+
+--Secuencia para primary key de la tabla ASIG_IMPL
+
+create sequence SEC_ASIG_IMPL
+   start with 100 
+   increment by 1 
+   nomaxvalue;
+   
+--Trigger primary key de la tabla ASIG_IMPL
+
+create or replace trigger AUTOID_ASIG_IMPL 
+  before insert on ASIG_IMPL for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.ID_ASIGNACION_I
+    from dual;
+  end;
+
+--Secuencia para primary key de la tabla COMUNICADO
+
+create sequence SEC_COMUNICADO
+   start with 100 
+   increment by 1 
+   nomaxvalue;
+   
+--Trigger primary key de la tabla COMUNICADO
+
+create or replace trigger AUTOID_COMUNICADO 
+  before insert on COMUNICADO for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.ID_COMUNICADO
+    from dual;
+  end;
+
+--Secuencia para primary key de la tabla BITACORA_SEG
+
+create sequence SEC_BITACORA_SEG
+   start with 1000 
+   increment by 1 
+   nomaxvalue;
+   
+--Trigger primary key de la tabla BITACORA_SEG
+
+create or replace trigger AUTOID_BITACORA_SEG 
+  before insert on BITACORA_SEG for each row
+  begin
+    select SECUENCIA_IDS.nextval 
+    into :new.ID_OPER
+    from dual;
+  end;
+
+
+
 

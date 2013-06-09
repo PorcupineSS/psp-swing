@@ -8,9 +8,9 @@ drop view V_ASIGC;
 drop view V_CONT;
 drop view VIEW_7;
 
-/*==============================================================*/
-/* View: OPERACIONES CRUD EMPLEADOS                             */
-/*==============================================================*/
+/*==========================================================*/
+/* View: OPERACIONES CRUD BITACORA                         */
+/*==========================================================*/
 
 create or replace view V_BITACORA as
 select
@@ -90,7 +90,7 @@ comment on column V_CLIENTE is
 'Nombre del cliente.';
 
 comment on column V_CLIENTE.DIRECCIONCL is
-'Dirección del cliente.';
+'Direccion del cliente.';
 
 
 /*==============================================================*/
@@ -175,9 +175,9 @@ comment on column VIEW_6.TIEMPO_C is
 
 
 /*==============================================================*/
-/* View: OPERACIONES CRUD CONTRATO                              */
+/* View: OPERACIONES CRUD IMPLEMENTO DE SEGURIDAD          */
 /*==============================================================*/
-create or replace view V_CONT as
+create or replace view V_IMPL as
 select,
    IMPL_SEGURIDAD.ID_PRO,
    IMPL_SEGURIDAD.CEDULAE,

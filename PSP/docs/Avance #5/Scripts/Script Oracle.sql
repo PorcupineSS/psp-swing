@@ -388,6 +388,12 @@ alter table ASIG_IMPL add constraint DOM_ESTADO
       CHECK (ESTADO_ASIGNACION IN (0 , 1));
 
 /*==============================================================*/
+/* Constraint: CK1_ASIG_IMPL_CANT                               */
+/*==============================================================*/
+alter table ASIG_IMPL add constraint CK1_ASIG_IMPL_CANT
+      CHECK (CANTIDAD_ASIGNADA > 0));
+
+/*==============================================================*/
 /* Table: BITACORA_SEG                                          */
 /*==============================================================*/
 create table BITACORA_SEG  (
@@ -540,6 +546,12 @@ alter table COMUNICADO add constraint DOM_URGENTE
       CHECK (URGENTE IN (0 , 1));
 
 /*==============================================================*/
+/* Constraint: CK1_COMUNICADO_FECHA                               */
+/*==============================================================*/
+alter table CONTRATO add constraint CK1_COMUNICADO_FECHA
+      CHECK (FECHA_CO <= SELECT SYSDATE FROM DUAL));
+
+/*==============================================================*/
 /* Table: CONTRATO                                              */
 /*==============================================================*/
 create table CONTRATO  (
@@ -640,6 +652,18 @@ alter table CONTRATO add (constraint CK1_TELS_CONTRATO
 
 alter table CONTRATO add (constraint CK2_CELS_CONTRATO
   check (TELEFONO_C like "[3][0][012]%" or TELEFONO_C			like "[3][1][012345678]%" or TELEFONO_C like "[3][2]	[01]%");
+
+/*==============================================================*/
+/* Constraint: CK1_CONTR_CANT_PERS                               */
+/*==============================================================*/
+alter table CONTRATO add constraint CK1_CONTR_CANT_PERS
+      CHECK (CANTIDAD_PERSONAL_C > 0));
+
+/*==============================================================*/
+/* Constraint: CK1_CONTR_COSTO                             */
+/*==============================================================*/
+alter table CONTRATO add constraint CK1_CONTR_COSTO
+      CHECK (COSTO_MENSUAL_C > 0));
 
 /*==============================================================*/
 /* Table: COORD_CONTRATO                                        */
@@ -864,6 +888,19 @@ create index SUMINISTRA_FK on IMPL_SEGURIDAD (
 /*==============================================================*/
 alter table IMPL_SEGURIDAD add constraint DOM_ESTADO_I
       CHECK (ESTADO_I IN ('OPTIMO' , 'MANTENIMIENTO'));
+
+/*==============================================================*/
+/* Constraint: CK1_IMPL_PREC                               */
+/*==============================================================*/
+alter table IMPL_SEGURIDAD add constraint CK1_IMPL_PREC
+      CHECK (PRECIO_UNITARIO_I > 0));
+
+/*==============================================================*/
+/* Constraint: CK1_IMPL_CANT                               */
+/*==============================================================*/
+alter table IMPL_SEGURIDAD add constraint CK1_IMPL_CANT
+      CHECK (CANTIDAD >= 0));
+
 
 /*==============================================================*/
 /* Table: PROVEEDOR                                             */

@@ -328,6 +328,7 @@ create index REALIZA_ASIGNACION_FK on ASIGNACION_C (
    COO_CEDULAE ASC
 );
 
+
 /*==============================================================*/
 /* Table: ASIG_IMPL                                             */
 /*==============================================================*/
@@ -388,10 +389,16 @@ alter table ASIG_IMPL add constraint DOM_ESTADO
       CHECK (ESTADO_ASIGNACION IN (0 , 1));
 
 /*==============================================================*/
-/* Constraint: CK1_ASIG_IMPL_CANT                               */
+/* Constraint: CK1_ASIG_IMPL_CANT                          */
 /*==============================================================*/
 alter table ASIG_IMPL add constraint CK1_ASIG_IMPL_CANT
       CHECK (CANTIDAD_ASIGNADA > 0));
+
+/*==============================================================*/
+/* Constraint: CK2_ASIG_IMPL_FECHA                         */
+/*==============================================================*/
+alter table ASIG_IMPL add constraint CK2_ASIG_IMPL_FECHA
+      CHECK (FECHA_ASIGNACION_I <= SELECT SYSDATE FROM DUAL));
 
 /*==============================================================*/
 /* Table: BITACORA_SEG                                          */

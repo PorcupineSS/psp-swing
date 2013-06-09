@@ -547,8 +547,8 @@ create table CONTRATO  (
    IDCL                 SMALLINT                        not null,
    CEDULAE              INTEGER                         not null,
    UBICACION_C          VARCHAR2(20)                    not null,
-   TELEFONO_C           INTEGER                         not null,
-   CELULAR_C            INTEGER                         not null,
+   TELEFONO_C           VARCHAR(10)                     not null,
+   CELULAR_C            VARCHAR(10)                     not null,
    TIPO_C               VARCHAR2(50)                    not 
 null
    FECHA_INICIO_C       DATE                            not null,
@@ -626,6 +626,20 @@ alter table CONTRATO add constraint DOM_TIPO_PERSONAL_C
 /*==============================================================*/
 alter table CONTRATO add constraint DOM_TIPO_C
       CHECK (TIPO_C IN ('DEFINIDO' , 'INDEFINIDO'));
+
+/*==============================================================*/
+/* Constraint: CK1_TELS_CONTRATO                                     */
+/*==============================================================*/
+
+alter table CONTRATO add (constraint CK1_TELS_CONTRATO
+  check (TELEFONO_C like "[5][7]	[1245678]%");
+
+/*==============================================================*/
+/* Constraint: CK2_CELS_CONTRATO                                     */
+/*==============================================================*/
+
+alter table CONTRATO add (constraint CK2_CELS_CONTRATO
+  check (TELEFONO_C like "[3][0][012]%" or TELEFONO_C			like "[3][1][012345678]%" or TELEFONO_C like "[3][2]	[01]%");
 
 /*==============================================================*/
 /* Table: COORD_CONTRATO                                        */
@@ -913,6 +927,10 @@ comment on column TELS_CLI.ID_TC is
 comment on column TELS_CLI.NUM_TELEFONO_C is
 'Numero telefonico del cliente.';
 
+/*==============================================================*/
+/* Constraint: CK1_TELS_CLI                                     */
+/*==============================================================*/
+
 alter table TELS_CLI add (constraint CK1_TELS_CLI
   check (NUM_TELEFONO_C like "[3][0][012]%" or NUM_TELEFONO_C		like "[3][1][012345678]%" or NUM_TELEFONO_C			like "[3][2][01]%") or NUM_TELEFONO_C like "[5][7]		[1245678]%");
 
@@ -934,6 +952,10 @@ comment on column TELS_EMP.ID_TE is
 
 comment on column TELS_EMP.NUM_TELEFONO_E is
 'Numero telefonico del empleado.';
+
+/*==============================================================*/
+/* Constraint: CK1_TELS_EMP                                     */
+/*==============================================================*/
 
 alter table TELS_EMP add (constraint CK1_TELS_EMP
   check (NUM_TELEFONO_E like "[3][0][012]%" or NUM_TELEFONO_E		like "[3][1][012345678]%" or NUM_TELEFONO_E			like "[3][2][01]%") or NUM_TELEFONO_E like "[5][7]		[1245678]%");
@@ -961,15 +983,20 @@ comment on column TELS_PROV.ID_PRO is
 comment on column TELS_PROV.NUM_TELEFONO_P is
 'Numero telefonico del proveedor.';
 
-alter table TELS_PROV add (constraint CK1_TELS_PROV
-  check (NUM_TELEFONO_P like "[3][0][012]%" or NUM_TELEFONO_P		like "[3][1][012345678]%" or NUM_TELEFONO_P			like "[3][2][01]%") or NUM_TELEFONO_P like "[5][7]		[1245678]%");
-
 /*==============================================================*/
 /* Index: PR_TIENE_TELS_FK                                      */
 /*==============================================================*/
 create index PR_TIENE_TELS_FK on TELS_PROV (
    ID_PRO ASC
 );
+
+/*==============================================================*/
+/* Constraint: CK1_TELS_PROV                                     */
+/*==============================================================*/
+
+alter table TELS_PROV add (constraint CK1_TELS_PROV
+  check (NUM_TELEFONO_P like "[3][0][012]%" or NUM_TELEFONO_P		like "[3][1][012345678]%" or NUM_TELEFONO_P			like "[3][2][01]%") or NUM_TELEFONO_P like "[5][7]		[1245678]%");
+
 
 alter table ACTUALIZACION
    add constraint FK_ACTUALIZ_ACTUALIZA_DIR_GEST foreign key (CEDULAE)

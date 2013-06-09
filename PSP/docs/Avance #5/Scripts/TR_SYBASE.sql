@@ -277,7 +277,7 @@ create trigger TR_DEL_ACTUAL on ACTUALIZACION for delete as
 begin
     declare @varid INTEGER
     select @varid = (select CEDULAE from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -292,7 +292,7 @@ create trigger TR_INS_ACTUAL on ACTUALIZACION for insert as
 begin
     declare @varid INTEGER
     select @varid = (select CEDULAE from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -307,7 +307,7 @@ create trigger TR_UPD_ACTUAL on ACTUALIZACION for update as
 begin
     declare @varid INTEGER
     select @varid = (select CEDULAE from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -322,12 +322,12 @@ create trigger TR_DEL_ACIMP on ACTU_IMPL for delete as
 begin
     declare @varid INTEGER
     select @varid = (select CEDULAE from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "ACTUALIZACION_IMPLEMENTO",
+            "ACTU_IMPL",
             "DELETE")
 end
 go
@@ -337,117 +337,117 @@ create trigger TR_INS_ACIMP on ACTU_IMPL for insert as
 begin
     declare @varid INTEGER
     select @varid = (select CEDULAE from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "ACTUALIZACION_IMPLEMENTO",
+            "ACTU_IMPL",
             "INSERT")
 end
 go
 
 
-create trigger TR_UPD_ACIMP on ACTUALIZACION_IMPLEMENTO for update as
+create trigger TR_UPD_ACIMP on ACTU_IMPL for update as
 begin
     declare @varid INTEGER
     select @varid = (select CEDULAE from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "ACTUALIZACION_IMPLEMENTO",
+            "ACTU_IMPL",
             "UPDATE")
 end
 go
 
 
-create trigger TR_DEL_ASIGC on ASIGNACION_CONTRATO for delete as
+create trigger TR_DEL_ASIGC on ASIGNACION_C for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select EMP_TEMP_CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "ASIGNACION_CONTRATO",
+            "ASIGNACION_C",
             "DELETE")
 end
 go
 
 
-create trigger TR_INS_ASIGC on ASIGNACION_CONTRATO for insert as
+create trigger TR_INS_ASIGC on ASIGNACION_C for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select EMP_TEMP_CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "ASIGNACION_CONTRATO",
+            "ASIGNACION_C",
             "INSERT")
 end
 go
 
 
-create trigger TR_UPD_ASIGC on ASIGNACION_CONTRATO for update as
+create trigger TR_UPD_ASIGC on ASIGNACION_C for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select EMP_TEMP_CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "ASIGNACION_CONTRATO",
+            "ASIGNACION_C",
             "UPDATE")
 end
 go
 
 
-create trigger TR_DEL_ASMP on ASIGNACION_IMPLEMENTO for delete as
+create trigger TR_DEL_ASMP on ASIG_IMPL for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAET from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "ASIGNACION_IMPLEMENTO",
+            "ASIG_IMPL",
             "DELETE")
 end
 go
 
 
-create trigger TR_INS_ASMP on ASIGNACION_IMPLEMENTO for insert as
+create trigger TR_INS_ASMP on ASIG_IMPL for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAET from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "ASIGNACION_IMPLEMENTO",
+            "ASIG_IMPL",
             "INSERT")
 end
 go
 
 
-create trigger TR_UPD_ASMP on ASIGNACION_IMPLEMENTO for update as
+create trigger TR_UPD_ASMP on ASIG_IMPL for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAET from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "ASIGNACION_IMPLEMENTO",
+            "ASIG_IMPL",
             "UPDATE")
 end
 go
@@ -456,8 +456,8 @@ go
 create trigger TR_DEL_CLIEN on CLIENTE for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -471,8 +471,8 @@ go
 create trigger TR_INS_CLIEN on CLIENTE for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -486,8 +486,8 @@ go
 create trigger TR_UPD_CLIEN on CLIENTE for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -501,8 +501,8 @@ go
 create trigger TR_DEL_COMUN on COMUNICADO for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAET from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -516,8 +516,8 @@ go
 create trigger TR_INS_COMUN on COMUNICADO for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAET from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -531,8 +531,8 @@ go
 create trigger TR_UPD_COMUN on COMUNICADO for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAET from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -546,8 +546,8 @@ go
 create trigger TR_DEL_CONT on CONTRATO for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -561,8 +561,8 @@ go
 create trigger TR_INS_CONT on CONTRATO for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -576,8 +576,8 @@ go
 create trigger TR_UPD_CONT on CONTRATO for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -588,136 +588,136 @@ end
 go
 
 
-create trigger TR_DEL_EMPLEADO on EMPLEADO for delete as
+create trigger TR_DEL_EMPLEADO on EMPLEADOS for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO",
+            "EMPLEADOS",
             "DELETE")
 end
 go
 
 
-create trigger TR_INS_EMPLEADO on EMPLEADO for insert as
+create trigger TR_INS_EMPLEADO on EMPLEADOS for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO",
+            "EMPLEADOS",
             "INSERT")
 end
 go
 
 
-create trigger TR_UPD_EMPLEADO on EMPLEADO for update as
+create trigger TR_UPD_EMPLEADO on EMPLEADOS for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO",
+            "EMPLEADOS",
             "UPDATE")
 end
 go
 
-
-create trigger TR_DEL_EMTELS on EMPLEADO_TELEFONO for delete as
+/*
+create trigger TR_DEL_EMTELS on TELS_EMP for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select ID_TE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO_TELEFONO",
+            "TELS_EMP",
             "DELETE")
 end
 go
 
 
-create trigger TR_INS_EMTELS on EMPLEADO_TELEFONO for insert as
+create trigger TR_INS_EMTELS on TELS_EMP for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select ID_TE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO_TELEFONO",
+            "TELS_EMP",
             "INSERT")
 end
 go
 
 
-create trigger TR_UPD_EMTELS on EMPLEADO_TELEFONO for update as
+create trigger TR_UPD_EMTELS on TELS_EMP for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select ID_TE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO_TELEFONO",
+            "TELS_EMP",
             "UPDATE")
 end
 go
+*/
 
-
-create trigger TR_DEL_IMSEG on IMPLEMENTO_SEGURIDAD for delete as
+create trigger TR_DEL_IMSEG on IMPL_SEGURIDAD for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "IMPLEMENTO_SEGURIDAD",
+            "IMPL_SEGURIDAD",
             "DELETE")
 end
 go
 
 
-create trigger TR_INS_IMSEG on IMPLEMENTO_SEGURIDAD for insert as
+create trigger TR_INS_IMSEG on IMPL_SEGURIDAD for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "IMPLEMENTO_SEGURIDAD",
+            "IMPL_SEGURIDAD",
             "INSERT")
 end
 go
 
 
-create trigger TR_UPD_IMSEG on IMPLEMENTO_SEGURIDAD for update as
+create trigger TR_UPD_IMSEG on IMPL_SEGURIDAD for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "IMPLEMENTO_SEGURIDAD",
+            "IIMPL_SEGURIDAD",
             "UPDATE")
 end
 go
@@ -726,8 +726,8 @@ go
 create trigger TR_DEL_PROV on PROVEEDOR for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -741,8 +741,8 @@ go
 create trigger TR_INS_PROV on PROVEEDOR for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -756,8 +756,8 @@ go
 create trigger TR_UPD_PROV on PROVEEDOR for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
@@ -768,91 +768,91 @@ end
 go
 
 
-create trigger TR_DEL_EMPLANTA on EMPLEADO_PLANTA for delete as
+create trigger TR_DEL_EMPLANTA on EMP_PLANTA for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO_PLANTA",
+            "EMP_PLANTA",
             "DELETE")
 end
 go
 
 
-create trigger TR_INS_EMPLANTA on EMPLEADO_PLANTA for insert as
+create trigger TR_INS_EMPLANTA on EMP_PLANTA for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO_PLANTA",
+            "EMP_PLANTA",
             "INSERT")
 end
 go
 
 
-create trigger TR_UPD_EMPLANTA on EMPLEADO_PLANTA for update as
+create trigger TR_UPD_EMPLANTA on EMP_PLANTA for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO_PLANTA",
+            "EMP_PLANTA",
             "UPDATE")
 end
 go
 
 
-create trigger TR_DEL_EMPLEADO_TEMPORAL on EMPLEADO_TEMPORAL for delete as
+create trigger TR_DEL_EMPLEADO_TEMPORAL on EMP_TEMP for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO_TEMPORAL",
+            "EMP_TEMP",
             "DELETE")
 end
 go
 
 
-create trigger TR_INS_EMPLEADO_TEMPORAL on EMPLEADO_TEMPORAL for insert as
+create trigger TR_INS_EMPLEADO_TEMPORAL on EMP_TEMP for insert as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO_TEMPORAL",
+            "EMP_TEMP",
             "INSERT")
 end
 go
 
 
-create trigger TR_UPD_EMPLEADO_TEMPORAL on EMPLEADO_TEMPORAL for update as
+create trigger TR_UPD_EMPLEADO_TEMPORAL on EMP_TEMP for update as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULA from inserted)
-    insert into BITACORA (CEDULA, FECHA_OPERACION, USUARIO_OPERACION, MAQUINA_OPERACION, TABLA_MODIFICADA, TIPO_OPERACION)
+    select @varid = (select CEDULAE from inserted)
+    insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
             user_name(),
             host_name(),
-            "EMPLEADO_TEMPORAL",
+            "EMP_TEMP",
             "UPDATE")
 end
 go

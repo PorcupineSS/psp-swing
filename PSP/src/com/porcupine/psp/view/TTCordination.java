@@ -76,7 +76,7 @@ public class TTCordination extends javax.swing.JPanel {
         jButtonAssignImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonAssignImplement.setForeground(new java.awt.Color(0, 51, 0));
         jButtonAssignImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Assign.png"))); // NOI18N
-        jButtonAssignImplement.setText("Asignar Implementos");
+        jButtonAssignImplement.setText("Asignación de Implementos");
         jButtonAssignImplement.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAssignImplementActionPerformed(evt);

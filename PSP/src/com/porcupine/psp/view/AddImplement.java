@@ -80,7 +80,7 @@ public class AddImplement extends javax.swing.JPanel {
         jLabel6.setText("Descripción:");
 
         jButtonGuardar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonGuardar.setForeground(new java.awt.Color(0, 51, 0));
+        jButtonGuardar.setForeground(new java.awt.Color(0, 102, 0));
         jButtonGuardar.setText("Guardar");
 
         jButtonCancelar.setText("Cancelar");
@@ -94,22 +94,21 @@ public class AddImplement extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextFieldValorUnitario)
-                                .addComponent(jTextFieldEstado)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                                .addComponent(jTextFieldCantidad)
-                                .addComponent(jTextFieldNombre)))
-                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldValorUnitario)
+                            .addComponent(jTextFieldEstado)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                            .addComponent(jTextFieldCantidad)
+                            .addComponent(jTextFieldNombre)))
+                    .addComponent(jLabel1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar)

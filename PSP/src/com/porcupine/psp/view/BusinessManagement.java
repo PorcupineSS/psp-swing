@@ -8,12 +8,12 @@ package com.porcupine.psp.view;
  *
  * @author Jeisson Andrés Vergara
  */
-public class BisinessManagement extends javax.swing.JPanel {
+public class BusinessManagement extends javax.swing.JPanel {
 
     /**
      * Creates new form BisinessManagement
      */
-    public BisinessManagement() {
+    public BusinessManagement() {
         initComponents();
     }
 
@@ -34,6 +34,7 @@ public class BisinessManagement extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButtonAddClient = new javax.swing.JButton();
+        jButtonAddContract = new javax.swing.JButton();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/LogoPSPMin.png"))); // NOI18N
 
@@ -66,13 +67,25 @@ public class BisinessManagement extends javax.swing.JPanel {
             }
         });
 
+        jButtonAddContract.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonAddContract.setForeground(new java.awt.Color(0, 51, 0));
+        jButtonAddContract.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/AddContract.png"))); // NOI18N
+        jButtonAddContract.setText("Registrar Contrato");
+        jButtonAddContract.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddContractActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonAddClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonAddContract, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAddClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(147, 147, 147))
         );
         jPanel1Layout.setVerticalGroup(
@@ -80,6 +93,8 @@ public class BisinessManagement extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonAddClient)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAddContract)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -137,8 +152,13 @@ public class BisinessManagement extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAddClientActionPerformed
 
+    private void jButtonAddContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddContractActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAddContractActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddClient;
+    private javax.swing.JButton jButtonAddContract;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

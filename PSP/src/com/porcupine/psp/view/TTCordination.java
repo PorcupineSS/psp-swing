@@ -36,6 +36,7 @@ public class TTCordination extends javax.swing.JPanel {
         jButtonAddImplement = new javax.swing.JButton();
         jButtonManageImplement = new javax.swing.JButton();
         jButtonAssignImplement = new javax.swing.JButton();
+        jButtonAddProvider = new javax.swing.JButton();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/LogoPSPMin.png"))); // NOI18N
 
@@ -83,16 +84,28 @@ public class TTCordination extends javax.swing.JPanel {
             }
         });
 
+        jButtonAddProvider.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonAddProvider.setForeground(new java.awt.Color(0, 51, 0));
+        jButtonAddProvider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/AddProvider.png"))); // NOI18N
+        jButtonAddProvider.setText("Agregar Proveedor");
+        jButtonAddProvider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddProviderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonAddImplement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonManageImplement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonAssignImplement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButtonAddProvider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButtonAddImplement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonManageImplement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAssignImplement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,6 +117,8 @@ public class TTCordination extends javax.swing.JPanel {
                 .addComponent(jButtonManageImplement)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAssignImplement)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAddProvider)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -148,8 +163,8 @@ public class TTCordination extends javax.swing.JPanel {
                             .addComponent(jButtonLogout)))
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -165,8 +180,13 @@ public class TTCordination extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAssignImplementActionPerformed
 
+    private void jButtonAddProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddProviderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAddProviderActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddImplement;
+    private javax.swing.JButton jButtonAddProvider;
     private javax.swing.JButton jButtonAssignImplement;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonManageImplement;

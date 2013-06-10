@@ -56,7 +56,8 @@ public class AssignImplements extends javax.swing.JPanel {
 
         jButtonAsignar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonAsignar.setForeground(new java.awt.Color(0, 102, 0));
-        jButtonAsignar.setText("Aceptar");
+        jButtonAsignar.setText("Asignar");
+        jButtonAsignar.setToolTipText("");
 
         jButtonCancelar.setText("Cancelar");
 

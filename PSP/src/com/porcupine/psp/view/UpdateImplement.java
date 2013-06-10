@@ -81,7 +81,7 @@ public class UpdateImplement extends javax.swing.JPanel {
         jLabel6.setText("Descripción:");
 
         jButtonActualizar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonActualizar.setForeground(new java.awt.Color(0, 51, 0));
+        jButtonActualizar.setForeground(new java.awt.Color(0, 102, 0));
         jButtonActualizar.setText("Actualizar");
 
         jButtonCancelar.setText("Cancelar");

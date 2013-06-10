@@ -20,7 +20,7 @@ public final class ServidoresDisponibles {
     public ServidoresDisponibles() {
     }
 
-    List<String> obtenerListaServidores() {
+    public static List<String> obtenerListaServidores() {
         ArrayList<String> lista = new ArrayList<String>();
 
 

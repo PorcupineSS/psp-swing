@@ -954,8 +954,7 @@ create table CONTRATO (
    UBICACION_C          varchar(20)                    not null,
    TELEFONO_C           varchar(10)                    not null,
    CELULAR_C            varchar(10)                    not null,
-   TIPO_C               varchar(50)                    not null
-         constraint CKC_TIPO_C_CONTRATO check (TIPO_C in ('Definido','Indefinido')),
+   TIPO_C               varchar(50)                    not null,
    FECHA_INICIO_C       datetime                       not null,
    TIPO_PERSONAL_C      varchar(20)                    not null,
    CANTIDAD_PERSONAL_C  smallint                       not null,
@@ -1010,7 +1009,7 @@ go
 /* Constraint: CK2_CELS_CONTRATO                                     */
 /*==============================================================*/
 
-alter table CONTRATO add (constraint CK2_CELS_CONTRATO
+alter table CONTRATO add constraint CK2_CELS_CONTRATO
   check (CELULAR_C like "[3][0][012]%" or CELULAR_C like "[3][1][012345678]%" or CELULAR_C like "[3][2][01]%")
 go
 
@@ -1145,7 +1144,7 @@ go
 /* Table: EM_TIENE_TELS                                         */
 /*==============================================================*/
 create table EM_TIENE_TELS (
-   ID_TE                smallint                       not null,
+   ID_TE                smallint                        not null,
    CEDULAE              INTEGER                         not null,
    constraint PK_EM_TIENE_TELS primary key nonclustered (ID_TE, CEDULAE)
 )
@@ -1287,7 +1286,7 @@ go
 /* Constraint: CK1_TELS_EMP                                     */
 /*==============================================================*/
 
-alter table TELS_EMP add (constraint CK1_TELS_EMP
+alter table TELS_EMP add constraint CK1_TELS_EMP
   check (NUM_TELEFONO_E like "[3][0][012]%" or NUM_TELEFONO_E like "[3][1][012345678]%" or NUM_TELEFONO_E like "[3][2][01]%" or NUM_TELEFONO_E like "[5][7][1245678]%")
 go
 
@@ -1295,7 +1294,7 @@ go
 /* Table: TELS_PROV                                             */
 /*==============================================================*/
 create table TELS_PROV (
-   ID_TP                smallint identity              not null,
+   ID_TP                smallint                       not null,
    ID_PRO               smallint                       null,
    NUM_TELEFONO_P       varchar(10)                    not null,
    constraint PK_TELS_PROV primary key nonclustered (ID_TP),
@@ -1315,7 +1314,7 @@ go
 /* Constraint: CK1_TELS_PROV                                     */
 /*==============================================================*/
 
-alter table TELS_PROV add (constraint CK1_TELS_PROV
+alter table TELS_PROV add constraint CK1_TELS_PROV
   check (NUM_TELEFONO_P like "[3][0][012]%" or NUM_TELEFONO_P like "[3][1][012345678]%" or NUM_TELEFONO_P like "[3][2][01]%" or NUM_TELEFONO_P like "[5][7][1245678]%")
 go
 

@@ -473,7 +473,7 @@ go
 create trigger TR_DEL_EMPLANTA on EMP_PLANTA for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -517,7 +517,7 @@ go
 create trigger TR_DEL_EM_TEMP on EMP_TEMP for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -561,7 +561,7 @@ go
 create trigger TR_DEL_CCONTRATO on COORD_CONTRATO for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -605,7 +605,7 @@ go
 create trigger TR_DEL_DIRCMCIAL on DIR_COMERCIAL for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -649,7 +649,7 @@ go
 create trigger TR_DEL_DIRGESHUM on DIR_GESTION_HUM for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -693,7 +693,7 @@ go
 create trigger TR_DEL_SUBGERENT on SUBGERENTE for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -737,7 +737,7 @@ go
 create trigger TR_DEL_COORDTYY on COORD_T_Y_T for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -781,7 +781,7 @@ go
 create trigger TR_DEL_DOPERAC on DIR_OPERACIONES for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -810,7 +810,7 @@ go
 create trigger TR_DEL_ACTUAL on ACTUALIZACION for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -855,7 +855,7 @@ go
 create trigger TR_DEL_ACIMP on ACTU_IMPL for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -900,7 +900,7 @@ go
 create trigger TR_DEL_ASIGC on ASIGNACION_C for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select EMP_TEMP_CEDULAE from inserted)
+    select @varid = (select EMP_TEMP_CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -945,7 +945,7 @@ go
 create trigger TR_DEL_ASMP on ASIG_IMPL for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -990,7 +990,7 @@ go
 create trigger TR_DEL_CLIEN on CLIENTE for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -1035,7 +1035,7 @@ go
 create trigger TR_DEL_COMUN on COMUNICADO for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -1080,7 +1080,7 @@ go
 create trigger TR_DEL_CONT on CONTRATO for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -1125,7 +1125,7 @@ go
 create trigger TR_DEL_EMPLEADO on EMPLEADOS for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -1170,7 +1170,7 @@ go
 create trigger TR_DEL_EMTELS on TELS_EMP for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select ID_TE from inserted)
+    select @varid = (select ID_TE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -1215,7 +1215,7 @@ go
 create trigger TR_DEL_IMSEG on IMPL_SEGURIDAD for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -1260,7 +1260,7 @@ go
 create trigger TR_DEL_PROV on PROVEEDOR for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -1305,7 +1305,7 @@ go
 create trigger TR_DEL_EMPLANTA on EMP_PLANTA for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),
@@ -1350,7 +1350,7 @@ go
 create trigger TR_DEL_EMPLEADO_TEMPORAL on EMP_TEMP for delete as
 begin
     declare @varid INTEGER
-    select @varid = (select CEDULAE from inserted)
+    select @varid = (select CEDULAE from deleted)
     insert into BITACORA_SEG (CEDULAE, FECHA_OPER, USU_OPER, MAQ_OPER, TABLA_MOD, TIPO_OPER)
     values (@varid,
             getdate(),

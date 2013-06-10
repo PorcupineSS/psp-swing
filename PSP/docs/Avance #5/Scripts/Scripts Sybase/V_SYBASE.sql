@@ -86,7 +86,7 @@ from
 go
 
 /*==============================================================*/
-/* View: V_EMPL                                                 */
+/* View: V_EMPL     EMPLEADOS                                   */
 /*==============================================================*/
 create view V_EMPL as
 select
@@ -102,7 +102,7 @@ from
 go
 
 /*==============================================================*/
-/* View: V_COMUN                                                 */
+/* View: V_COMUN         COMUNICADO                             */
 /*==============================================================*/
 create view V_COMUN as
 select
@@ -118,13 +118,13 @@ from
 go
 
 /*==============================================================*/
-/* View: V_ASIGC                                                */
+/* View: V_ASIGC     ASIGNACION DE CONTRATO                     */
 /*==============================================================*/
 create view V_ASIGC as
 select
    ASIGNACION_C.ID_CONTRATO,
-   ASIGNACION_C.CEDULAE,
    ASIGNACION_C.COO_CEDULAE,
+   ASIGNACION_C.EMP_TEMP_CEDULAE,
    ASIGNACION_C.FECHA_ASIGNACION_C,
    ASIGNACION_C.HORARIO_ASIGNADO
 from
@@ -145,7 +145,7 @@ from
 go
 
 /*==============================================================*/
-/* View: V_CONT                                                 */
+/* View: V_CONT      CONTRATO                                   */
 /*==============================================================*/
 create view V_CONT as
 select
@@ -167,7 +167,7 @@ from
 go
 
 /*==============================================================*/
-/* View: V_IMSEG                                                */
+/* View: V_IMSEG          IMPLEMENTO DE SEGURIDAD               */
 /*==============================================================*/
 create view V_IMSEG as
 select
@@ -183,7 +183,7 @@ from
 go
 
 /*==============================================================*/
-/* View: V_PROV                                                 */
+/* View: V_PROV            PROVEEDOR                            */
 /*==============================================================*/
 create view V_PROV as
 select
@@ -196,7 +196,7 @@ from
 go
 
 /*==============================================================*/
-/* View: V_AIMPL                                                */
+/* View: V_AIMPL         ASGINACION IMPLEMENTO                  */
 /*==============================================================*/
 create view V_AIMPL as
 select
@@ -211,7 +211,7 @@ from
 go
 
 /*==============================================================*/
-/* View: V_ACIMPL                                               */
+/* View: V_ACIMPL       ACTUALIZACION IMPLEMENTO                */
 /*==============================================================*/
 create view V_ACIMPL as
 select

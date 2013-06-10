@@ -1,13 +1,15 @@
 package com.porcupine.psp.model.dao;
 
+import com.porcupine.psp.controller.MainController;
+
 /**
  *
  * @author javergarav
  */
 public class DAOFactory {
     
-    //temporalmente, solo un servidor
-    private String PU = "com.porcupine.psp.pu.sqlserver";
+    
+    private String PU = MainController.getSelectedDB();
 
     private DAOFactory() {
     }

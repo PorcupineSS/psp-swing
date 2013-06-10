@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.view;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,10 +13,17 @@ import javax.swing.JOptionPane;
  */
 public class CreateEmployee extends javax.swing.JPanel {
 
+    ArrayList<String> rolesDisponibles = new ArrayList<String>();
+    
     /**
      * Creates new form CreateEmployee
      */
     public CreateEmployee() {
+        initComponents();
+    }
+
+    public CreateEmployee(ArrayList<String> empleadosDisponibles) {
+        rolesDisponibles = empleadosDisponibles;
         initComponents();
     }
 
@@ -40,7 +48,7 @@ public class CreateEmployee extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jTextFieldDireccion = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBoxTipoEmpleado = new javax.swing.JComboBox();
+        jComboBoxTipoEmpleado = new javax.swing.JComboBox(rolesDisponibles.toArray());
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -80,7 +88,11 @@ public class CreateEmployee extends javax.swing.JPanel {
 
         jLabel6.setText("Tipo:");
 
-        jComboBoxTipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Guardia de Seguridad", "Escolta" }));
+        jComboBoxTipoEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoEmpleadoActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Dirección:");
 
@@ -250,6 +262,10 @@ public class CreateEmployee extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBoxTipoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoEmpleadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoEmpleadoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

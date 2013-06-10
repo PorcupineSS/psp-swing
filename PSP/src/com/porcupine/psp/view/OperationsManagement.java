@@ -33,7 +33,7 @@ public class OperationsManagement extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jButtonLogout = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButtonAddImplement = new javax.swing.JButton();
+        jButtonReplyNotice = new javax.swing.JButton();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/LogoPSPMin.png"))); // NOI18N
 
@@ -56,13 +56,13 @@ public class OperationsManagement extends javax.swing.JPanel {
             }
         });
 
-        jButtonAddImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonAddImplement.setForeground(new java.awt.Color(0, 51, 0));
-        jButtonAddImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Reply.png"))); // NOI18N
-        jButtonAddImplement.setText("Responder Comunicados");
-        jButtonAddImplement.addActionListener(new java.awt.event.ActionListener() {
+        jButtonReplyNotice.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonReplyNotice.setForeground(new java.awt.Color(0, 51, 0));
+        jButtonReplyNotice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Reply.png"))); // NOI18N
+        jButtonReplyNotice.setText("Responder Comunicado");
+        jButtonReplyNotice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddImplementActionPerformed(evt);
+                jButtonReplyNoticeActionPerformed(evt);
             }
         });
 
@@ -72,14 +72,14 @@ public class OperationsManagement extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonAddImplement, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addComponent(jButtonReplyNotice, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                 .addGap(147, 147, 147))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonAddImplement)
+                .addComponent(jButtonReplyNotice)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -133,13 +133,13 @@ public class OperationsManagement extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
-    private void jButtonAddImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddImplementActionPerformed
+    private void jButtonReplyNoticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReplyNoticeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAddImplementActionPerformed
+    }//GEN-LAST:event_jButtonReplyNoticeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAddImplement;
     private javax.swing.JButton jButtonLogout;
+    private javax.swing.JButton jButtonReplyNotice;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

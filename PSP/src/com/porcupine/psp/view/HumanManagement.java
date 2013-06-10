@@ -66,6 +66,11 @@ public class HumanManagement extends javax.swing.JPanel {
         jButtonCreateEmployee.setForeground(new java.awt.Color(0, 51, 0));
         jButtonCreateEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/AddUser.png"))); // NOI18N
         jButtonCreateEmployee.setText("Crear Empleado");
+        jButtonCreateEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreateEmployeeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelHumanManagementLayout = new javax.swing.GroupLayout(jPanelHumanManagement);
         jPanelHumanManagement.setLayout(jPanelHumanManagementLayout);
@@ -141,6 +146,10 @@ public class HumanManagement extends javax.swing.JPanel {
     private void jButtonFindPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindPersonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonFindPersonActionPerformed
+
+    private void jButtonCreateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateEmployeeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCreateEmployeeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCreateEmployee;

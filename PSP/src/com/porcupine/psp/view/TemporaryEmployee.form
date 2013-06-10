@@ -125,8 +125,8 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButtonManageImplement" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonAddImplement" alignment="0" min="-2" pref="209" max="-2" attributes="0"/>
+                      <Component id="jButtonWriteNotice" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonCheckMyContract" alignment="0" min="-2" pref="209" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -136,16 +136,16 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButtonManageImplement" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonWriteNotice" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButtonAddImplement" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonCheckMyContract" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButtonManageImplement">
+        <Component class="javax.swing.JButton" name="jButtonWriteNotice">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="11" style="1"/>
@@ -159,7 +159,7 @@
             <Property name="text" type="java.lang.String" value="Redactar Comunicado"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonAddImplement">
+        <Component class="javax.swing.JButton" name="jButtonCheckMyContract">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="11" style="1"/>
@@ -173,7 +173,7 @@
             <Property name="text" type="java.lang.String" value="Consultar Mi Contrato"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddImplementActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCheckMyContractActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

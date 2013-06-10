@@ -33,8 +33,8 @@ public class TemporaryEmployee extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jButtonLogout = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButtonManageImplement = new javax.swing.JButton();
-        jButtonAddImplement = new javax.swing.JButton();
+        jButtonWriteNotice = new javax.swing.JButton();
+        jButtonCheckMyContract = new javax.swing.JButton();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/LogoPSPMin.png"))); // NOI18N
 
@@ -57,18 +57,18 @@ public class TemporaryEmployee extends javax.swing.JPanel {
             }
         });
 
-        jButtonManageImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonManageImplement.setForeground(new java.awt.Color(0, 51, 0));
-        jButtonManageImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Notice.png"))); // NOI18N
-        jButtonManageImplement.setText("Redactar Comunicado");
+        jButtonWriteNotice.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonWriteNotice.setForeground(new java.awt.Color(0, 51, 0));
+        jButtonWriteNotice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Notice.png"))); // NOI18N
+        jButtonWriteNotice.setText("Redactar Comunicado");
 
-        jButtonAddImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonAddImplement.setForeground(new java.awt.Color(0, 51, 0));
-        jButtonAddImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Contract.png"))); // NOI18N
-        jButtonAddImplement.setText("Consultar Mi Contrato");
-        jButtonAddImplement.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCheckMyContract.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonCheckMyContract.setForeground(new java.awt.Color(0, 51, 0));
+        jButtonCheckMyContract.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Contract.png"))); // NOI18N
+        jButtonCheckMyContract.setText("Consultar Mi Contrato");
+        jButtonCheckMyContract.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddImplementActionPerformed(evt);
+                jButtonCheckMyContractActionPerformed(evt);
             }
         });
 
@@ -79,17 +79,17 @@ public class TemporaryEmployee extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonManageImplement)
-                    .addComponent(jButtonAddImplement, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonWriteNotice)
+                    .addComponent(jButtonCheckMyContract, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonManageImplement)
+                .addComponent(jButtonWriteNotice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAddImplement)
+                .addComponent(jButtonCheckMyContract)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -141,14 +141,14 @@ public class TemporaryEmployee extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
-    private void jButtonAddImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddImplementActionPerformed
+    private void jButtonCheckMyContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckMyContractActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAddImplementActionPerformed
+    }//GEN-LAST:event_jButtonCheckMyContractActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAddImplement;
+    private javax.swing.JButton jButtonCheckMyContract;
     private javax.swing.JButton jButtonLogout;
-    private javax.swing.JButton jButtonManageImplement;
+    private javax.swing.JButton jButtonWriteNotice;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

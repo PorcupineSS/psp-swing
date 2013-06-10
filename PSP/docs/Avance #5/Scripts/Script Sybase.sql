@@ -692,7 +692,7 @@ go
 /* Table: ACTU_IMPL                                             */
 /*==============================================================*/
 create table ACTU_IMPL (
-   ID_ACTUALIZACION_I   smallint                       not null,
+   ID_ACTUALIZACION_I   smallint  identity             not null,
    ID_IMPLEMENTO        smallint                       null,
    CEDULAE              INTEGER                         null,
    FECHA_ACTUALIZACION_I datetime                       not null,
@@ -719,10 +719,17 @@ ID_IMPLEMENTO ASC
 go
 
 /*==============================================================*/
+/* Constraint: DOM_DESCRIPCION                                         */
+/*==============================================================*/
+alter table ACTU_IMPL add constraint DOM_DESCRIPCION
+      CHECK (DESCRIPCION_ACTUALIZACION IN ('Añadir','Borrar','Actualizar'))
+go
+
+/*==============================================================*/
 /* Table: ASIGNACION_C                                          */
 /*==============================================================*/
 create table ASIGNACION_C (
-   ID_ASIG              smallint                       not null,
+   ID_ASIG              smallint   identity            not null,
    ID_CONTRATO          smallint                       not null,
    COO_CEDULAE          INTEGER                        not null,
    EMP_TEMP_CEDULAE     INTEGER                        not null,
@@ -752,7 +759,7 @@ go
 /* Table: ASIG_IMPL                                             */
 /*==============================================================*/
 create table ASIG_IMPL (
-   ID_ASIGNACION_I      smallint                       not null,
+   ID_ASIGNACION_I      smallint  identity            not null,
    ID_IMPLEMENTO        smallint                       not null,
    CEDULAE              INTEGER                        not null,
    COO_CEDULAE          INTEGER                        not null,
@@ -888,7 +895,7 @@ go
 /* Table: COMUNICADO                                            */
 /*==============================================================*/
 create table COMUNICADO (
-   ID_COMUNICADO        smallint                       not null,
+   ID_COMUNICADO        smallint  identity             not null,
    CEDULAE              INTEGER                         null,
    DIR_CEDULAE          INTEGER                         null,
    TIPO_CO              varchar(20)                    not null,
@@ -941,7 +948,7 @@ go
 /* Table: CONTRATO                                              */
 /*==============================================================*/
 create table CONTRATO (
-   ID_CONTRATO          smallint                       not null,
+   ID_CONTRATO          smallint    identity           not null,
    IDCL                 smallint                       not null,
    CEDULAE              INTEGER                         not null,
    UBICACION_C          varchar(20)                    not null,
@@ -1004,7 +1011,7 @@ go
 /*==============================================================*/
 
 alter table CONTRATO add (constraint CK2_CELS_CONTRATO
-  check (CELULAR_C like "[3][0][012]%" or TELEFONO_C like "[3][1][012345678]%" or TELEFONO_C like "[3][2][01]%")
+  check (CELULAR_C like "[3][0][012]%" or CELULAR_C like "[3][1][012345678]%" or CELULAR_C like "[3][2][01]%")
 go
 
 /*==============================================================*/
@@ -1121,6 +1128,20 @@ ID_ASIG ASC
 go
 
 /*==============================================================*/
+/* Constraint: DOM_TIENE_CONTRATO                             */
+/*==============================================================*/
+alter table EMP_TEMP add constraint DOM_TIENE_CONTRATO
+      CHECK (TIENE_CONTRATO IN (0 , 1))
+go
+	  
+/*==============================================================*/
+/* Constraint: DOM_TIPO_TEMP                                  */
+/*==============================================================*/
+alter table EMP_TEMP add constraint DOM_TIPO_TEMP
+      CHECK (TIPO_TEMP IN ('VIGILANTE' , 'ESCOLTA'))
+go
+
+/*==============================================================*/
 /* Table: EM_TIENE_TELS                                         */
 /*==============================================================*/
 create table EM_TIENE_TELS (
@@ -1150,7 +1171,7 @@ go
 /* Table: IMPL_SEGURIDAD                                        */
 /*==============================================================*/
 create table IMPL_SEGURIDAD (
-   ID_IMPLEMENTO        smallint                       not null,
+   ID_IMPLEMENTO        smallint   identity            not null,
    ID_PRO               smallint                       null,
    CEDULAE              INTEGER                         not null,
    NOMBRE_I             varchar(20)                    not null,
@@ -1205,7 +1226,7 @@ go
 /* Table: PROVEEDOR                                             */
 /*==============================================================*/
 create table PROVEEDOR (
-   ID_PRO               smallint                       not null,
+   ID_PRO               smallint   identity            not null,
    CEDULAE              INTEGER                         not null,
    NOMBRE               varchar(20)                    not null,
    DIRECCION            varchar(20)                    not null,
@@ -1236,7 +1257,7 @@ go
 /* Table: TELS_CLI                                              */
 /*==============================================================*/
 create table TELS_CLI (
-   ID_TC                smallint                       not null,
+   ID_TC                smallint  identity             not null,
    NUM_TELEFONO_C       varchar(10)                    not null,
    constraint PK_TELS_CLI primary key nonclustered (ID_TC),
    constraint AK_ID_NUM_TELEFONO_C unique (NUM_TELEFONO_C)
@@ -1255,7 +1276,7 @@ go
 /* Table: TELS_EMP                                              */
 /*==============================================================*/
 create table TELS_EMP (
-   ID_TE                smallint                       not null,
+   ID_TE                smallint  identity             not null,
    NUM_TELEFONO_E       varchar(10)                    not null,
    constraint PK_TELS_EMP primary key nonclustered (ID_TE),
    constraint AK_ID_NUM_TELEFONO_E unique (NUM_TELEFONO_E)
@@ -1274,7 +1295,7 @@ go
 /* Table: TELS_PROV                                             */
 /*==============================================================*/
 create table TELS_PROV (
-   ID_TP                smallint                       not null,
+   ID_TP                smallint identity              not null,
    ID_PRO               smallint                       null,
    NUM_TELEFONO_P       varchar(10)                    not null,
    constraint PK_TELS_PROV primary key nonclustered (ID_TP),

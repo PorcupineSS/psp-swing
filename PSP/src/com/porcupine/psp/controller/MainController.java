@@ -8,10 +8,7 @@ import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.util.DrawingUtilities;
-import com.porcupine.psp.view.CreateEmployee;
-import com.porcupine.psp.view.Login;
-import com.porcupine.psp.view.Psp;
-import com.porcupine.psp.view.SelectDataBaseConnection;
+import com.porcupine.psp.view.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -31,6 +28,7 @@ public class MainController {
     static SelectDataBaseConnection sdb;
     static CreateEmployee crearEmpleado;
     static Psp psp;
+    static Helper helper;
     public static EmpleadosVO empleadoActivo;
     public static String selectedDB;
     //VOS Temporales para hacer operaciones
@@ -89,6 +87,7 @@ public class MainController {
     //</editor-fold>
     //Clases de muestra
     public static void mostrarLogin() {
+        psp = new Psp();
         psp.setLocationRelativeTo(null);
         login = new Login();
         psp.setVisible(true);
@@ -104,11 +103,11 @@ public class MainController {
     }
 
     public static void mostrarFormularioCrearEmpleado(ArrayList<String> empleadosDisponibles) {
-        psp = new Psp();
-        psp.setLocationRelativeTo(null);
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
         crearEmpleado = new CreateEmployee(empleadosDisponibles);
-        psp.setVisible(true);
-        DrawingUtilities.drawPanel(psp, psp.getViewport(), crearEmpleado);
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), crearEmpleado);
     }
 
     //utilidades

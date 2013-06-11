@@ -142,7 +142,7 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
 
     private void jButtonNewDirGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewDirGHActionPerformed
         ArrayList<String> empleado = new ArrayList<String>();
-        empleado.add(TipoEmpleado.DIRECTOR_GESTION_HUMANA.toString());
+        empleado.add(TipoEmpleado.DIRECTOR_GESTION_HUMANA);
         MainController.mostrarFormularioCrearEmpleado(empleado);
     }//GEN-LAST:event_jButtonNewDirGHActionPerformed
 

@@ -5,12 +5,20 @@
 package com.porcupine.psp.util;
 
 /**
- *Enumeracion de los tipos de empleado que pueden existir segun un rol. Uso en el vo de Empleados recomendado.
+ * Enumeracion de los tipos de empleado que pueden existir segun un rol. Uso en
+ * el vo de Empleados recomendado.
+ *
  * @author sparrow
  */
-public enum TipoEmpleado {
-    
-    GENERICO, COORDINADOR_CONTRATO, COORDINADOR_TECNICO_TECNOLOGICO, DIRECTOR_COMERCIAL, DIRECTOR_GESTION_HUMANA, DIRECTOR_OPERACIONES, PLANTA, TEMPORAL, SUBGERENTE
-    
-    
+public final class TipoEmpleado {
+
+    public static final String GENERICO = "%Empleado";
+    public static final String COORDINADOR_CONTRATO = "Coordinador de contrato";
+    public static final String COORDINADOR_TECNICO_TECNOLOGICO = "Coordinador técnico y tecnológico";
+    public static final String DIRECTOR_COMERCIAL = "Director comercial";
+    public static final String DIRECTOR_GESTION_HUMANA = "Director de gestión humana";
+    public static final String DIRECTOR_OPERACIONES = "Director de operaciones";
+    public static final String PLANTA = "%Planta";
+    public static final String TEMPORAL = "%Temporal";
+    public static final String SUBGERENTE = "Subgerente";
 }

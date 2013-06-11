@@ -974,7 +974,7 @@ go
 /*==============================================================*/
 
 alter table CONTRATO add constraint CK1_TELS_CONTRATO
-  check (TELEFONO_C like "[5][7][1245678]%")
+  check (TELEFONO_C like '[5][7][1245678]%')
 go
 
 /*==============================================================*/
@@ -982,7 +982,7 @@ go
 /*==============================================================*/
 
 alter table CONTRATO add constraint CK2_CELS_CONTRATO
-  check (CELULAR_C like "[3][0][012]%" or CELULAR_C like "[3][1][012345678]%" or CELULAR_C like "[3][2][01]%")
+  check (CELULAR_C like '[3][0][012]%' or CELULAR_C like '[3][1][012345678]%' or CELULAR_C like '[3][2][01]%')
 go
 
 /*==============================================================*/
@@ -1246,7 +1246,7 @@ go
 /*==============================================================*/
 
 alter table TELS_CLI add constraint CK1_TELS_CLI
-  check (NUM_TELEFONO_C like "[3][0][012]%" or NUM_TELEFONO_C like "[3][1][012345678]%" or NUM_TELEFONO_C like "[3][2][01]%" or NUM_TELEFONO_C like "[5][7][1245678]%")
+  check (NUM_TELEFONO_C like '[3][0][012]%' or NUM_TELEFONO_C like '[3][1][012345678]%' or NUM_TELEFONO_C like '[3][2][01]%' or NUM_TELEFONO_C like '[5][7][1245678]%')
 go 
 
 
@@ -1266,7 +1266,7 @@ go
 /*==============================================================*/
 
 alter table TELS_EMP add constraint CK1_TELS_EMP
-  check (NUM_TELEFONO_E like "[3][0][012]%" or NUM_TELEFONO_E like "[3][1][012345678]%" or NUM_TELEFONO_E like "[3][2][01]%" or NUM_TELEFONO_E like "[5][7][1245678]%")
+  check (NUM_TELEFONO_E like '[3][0][012]%' or NUM_TELEFONO_E like '[3][1][012345678]%' or NUM_TELEFONO_E like '[3][2][01]%' or NUM_TELEFONO_E like '[5][7][1245678]%')
 go
 
 /*==============================================================*/
@@ -1293,7 +1293,7 @@ go
 /*==============================================================*/
 
 alter table TELS_PROV add constraint CK1_TELS_PROV
-  check (NUM_TELEFONO_P like "[3][0][012]%" or NUM_TELEFONO_P like "[3][1][012345678]%" or NUM_TELEFONO_P like "[3][2][01]%" or NUM_TELEFONO_P like "[5][7][1245678]%")
+  check (NUM_TELEFONO_P like '[3][0][012]%' or NUM_TELEFONO_P like '[3][1][012345678]%' or NUM_TELEFONO_P like '[3][2][01]%' or NUM_TELEFONO_P like '[5][7][1245678]%')
 go
 
 alter table ACTUALIZACION

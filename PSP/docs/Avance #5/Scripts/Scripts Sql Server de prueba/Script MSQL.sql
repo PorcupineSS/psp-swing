@@ -641,13 +641,6 @@ create table ACTUALIZACION (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Asociación que permite que el SUBGERENTE actualice la información de un DIRECTOR DE GESTIÓN HUMANA.',
-   'user', @CurrentUser, 'table', 'ACTUALIZACION'
-go
-
 /*==============================================================*/
 /* Index: ACTUALIZACION2_FK                                     */
 /*==============================================================*/
@@ -676,48 +669,6 @@ create table ACTU_IMPL (
    DESCRIPCION_ACTUALIZACION varchar(30)          not null,
    constraint PK_ACTU_IMPL primary key nonclustered (ID_ACTUALIZACION_I)
 )
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los datos pertenecientes a la actualizacion de un implemento, por parte de un empleado: COORDINADOR TECNICO Y TECNOLOGICO.',
-   'user', @CurrentUser, 'table', 'ACTU_IMPL'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador de la actualización.',
-   'user', @CurrentUser, 'table', 'ACTU_IMPL', 'column', 'ID_ACTUALIZACION_I'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del implemento.',
-   'user', @CurrentUser, 'table', 'ACTU_IMPL', 'column', 'ID_IMPLEMENTO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Fecha en que se realiza la actualización.',
-   'user', @CurrentUser, 'table', 'ACTU_IMPL', 'column', 'FECHA_ACTUALIZACION_I'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Cantidad de implementos agregados al inventario.',
-   'user', @CurrentUser, 'table', 'ACTU_IMPL', 'column', 'CANTIDAD_AGREGADA'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Descripción de la actualizacion (Agregar, borrar o actualizar datos).',
-   'user', @CurrentUser, 'table', 'ACTU_IMPL', 'column', 'DESCRIPCION_ACTUALIZACION'
 go
 
 /*==============================================================*/
@@ -757,41 +708,6 @@ create table ASIGNACION_C (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Asignacion de un CONTRATO por parte de un empleado: COORDINADOR DE CONTRATO a un EMPLEADO TEMPORAL.',
-   'user', @CurrentUser, 'table', 'ASIGNACION_C'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador de la asignación.',
-   'user', @CurrentUser, 'table', 'ASIGNACION_C', 'column', 'ID_ASIG'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del contrato.',
-   'user', @CurrentUser, 'table', 'ASIGNACION_C', 'column', 'ID_CONTRATO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Fecha de la asignación del contrato.',
-   'user', @CurrentUser, 'table', 'ASIGNACION_C', 'column', 'FECHA_ASIGNACION_C'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Horario asignado en el contrato.',
-   'user', @CurrentUser, 'table', 'ASIGNACION_C', 'column', 'HORARIO_ASIGNADO'
-go
-
 /*==============================================================*/
 /* Index: SE_ASIGNA_C_FK                                        */
 /*==============================================================*/
@@ -821,48 +737,6 @@ create table ASIG_IMPL (
    FECHA_ASIGNACION_I   datetime             not null,
    constraint PK_ASIG_IMPL primary key nonclustered (ID_ASIGNACION_I)
 )
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los datos de una asignacion de un implemento por parte de un empleado: COORDINADOR TECNICO Y TECNOLOGICO a un EMPLEADO TEMPORAL.',
-   'user', @CurrentUser, 'table', 'ASIG_IMPL'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador de la asignación.',
-   'user', @CurrentUser, 'table', 'ASIG_IMPL', 'column', 'ID_ASIGNACION_I'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del implemento.',
-   'user', @CurrentUser, 'table', 'ASIG_IMPL', 'column', 'ID_IMPLEMENTO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Cantidad de implementos asignados.',
-   'user', @CurrentUser, 'table', 'ASIG_IMPL', 'column', 'CANTIDAD_ASIGNADA'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Estado de la asignacion del implemento (activa o desactiva).',
-   'user', @CurrentUser, 'table', 'ASIG_IMPL', 'column', 'ESTADO_ASIGNACION'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Fecha en que se realiza la asignación del implemento.',
-   'user', @CurrentUser, 'table', 'ASIG_IMPL', 'column', 'FECHA_ASIGNACION_I'
 go
 
 /*==============================================================*/
@@ -952,33 +826,6 @@ create table CLIENTE (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee todos los atributos que se requieren acerca de un cliente de la empresa.',
-   'user', @CurrentUser, 'table', 'CLIENTE'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del cliente.',
-   'user', @CurrentUser, 'table', 'CLIENTE', 'column', 'IDCL'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Nombre del cliente.',
-   'user', @CurrentUser, 'table', 'CLIENTE', 'column', 'NOMBRECL'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Dirección del cliente.',
-   'user', @CurrentUser, 'table', 'CLIENTE', 'column', 'DIRECCIONCL'
-go
 
 /*==============================================================*/
 /* Index: REG_CLI_FK                                            */
@@ -996,27 +843,6 @@ create table CL_TIENE_TELS (
    IDCL                 smallint             not null,
    constraint PK_CL_TIENE_TELS primary key nonclustered (ID_TC, IDCL)
 )
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Relación que indica que un CLIENTE puede tener varios TELÉFONOS CL.',
-   'user', @CurrentUser, 'table', 'CL_TIENE_TELS'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del teléfono.',
-   'user', @CurrentUser, 'table', 'CL_TIENE_TELS', 'column', 'ID_TC'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del cliente.',
-   'user', @CurrentUser, 'table', 'CL_TIENE_TELS', 'column', 'IDCL'
 go
 
 /*==============================================================*/
@@ -1051,54 +877,6 @@ create table COMUNICADO (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos de un comunicado realizado por parte de un EMPLEADO TEMPORAL.',
-   'user', @CurrentUser, 'table', 'COMUNICADO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del comunicado.',
-   'user', @CurrentUser, 'table', 'COMUNICADO', 'column', 'ID_COMUNICADO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Tipo de comunicado (Reclamo, Queja o Sugerencia).',
-   'user', @CurrentUser, 'table', 'COMUNICADO', 'column', 'TIPO_CO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Fecha en que se realiza el comunicado.',
-   'user', @CurrentUser, 'table', 'COMUNICADO', 'column', 'FECHA_CO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Contenido del comunicado.',
-   'user', @CurrentUser, 'table', 'COMUNICADO', 'column', 'CONTENIDO_CO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Es urgente o no el comunicado.',
-   'user', @CurrentUser, 'table', 'COMUNICADO', 'column', 'URGENTE'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Respuesta al comunicado.',
-   'user', @CurrentUser, 'table', 'COMUNICADO', 'column', 'RESPUESTA_CO'
-go
 
 /*==============================================================*/
 /* Index: REDACTA_FK                                            */
@@ -1147,7 +925,7 @@ create table CONTRATO (
    UBICACION_C          varchar(20)          not null,
    TELEFONO_C           varchar(10)          not null,
    CELULAR_C            varchar(10)          not null,
-   TIPO_C               varchar(50)          not null
+   TIPO_C               varchar(50)          not null,
    FECHA_INICIO_C       datetime             not null,
    TIPO_PERSONAL_C      varchar(20)          not null,
    CANTIDAD_PERSONAL_C  smallint             not null,
@@ -1160,96 +938,6 @@ create table CONTRATO (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos requeridos en el registro de un contrato.',
-   'user', @CurrentUser, 'table', 'CONTRATO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del contrato.',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'ID_CONTRATO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del cliente.',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'IDCL'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Ubicacion donde se cumplira el contrato.',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'UBICACION_C'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Telefono del lugar donde se cumplira el contrato.',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'TELEFONO_C'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Celular del lugar donde se cumplira el contrato.',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'CELULAR_C'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Tipo de contrato (Definido o Indefinido).',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'TIPO_C'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Fecha de inicio del contrato.',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'FECHA_INICIO_C'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Tipo de personal solicitado en el contrato (Vigilantes y/o Escoltas).',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'TIPO_PERSONAL_C'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Cantidad de personal solicitado en el contrato.',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'CANTIDAD_PERSONAL_C'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Costo mensual total del contrato.',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'COSTO_MENSUAL_C'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Horarios de personal solicitados en el contrato.',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'HORARIO_C'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Si en contrato es de tipo definido este campo tendra el tiempo total del contrato, si no lo es podra ser null.',
-   'user', @CurrentUser, 'table', 'CONTRATO', 'column', 'TIEMPO_C'
-go
 
 /*==============================================================*/
 /* Index: REG_CONT_FK                                           */
@@ -1320,12 +1008,6 @@ create table COORD_CONTRATO (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos de un un empleado normal, de un empleado planta y da claridad en las relaciones que tiene el empleado: COORDINADOR DE CONTRATO con los procesos de la empresa.',
-   'user', @CurrentUser, 'table', 'COORD_CONTRATO'
-go
 
 /*==============================================================*/
 /* Table: COORD_T_Y_T                                           */
@@ -1334,13 +1016,6 @@ create table COORD_T_Y_T (
    CEDULAE              bigint               not null,
    constraint PK_COORD_T_Y_T primary key nonclustered (CEDULAE)
 )
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos de un un empleado normal, de un empleado planta y da claridad en las relaciones que tiene el empleado: COORDINADOR TÉCNICO Y TECNOLÓGICO con los procesos de la empresa.',
-   'user', @CurrentUser, 'table', 'COORD_T_Y_T'
 go
 
 /*==============================================================*/
@@ -1352,12 +1027,6 @@ create table DIR_COMERCIAL (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos de un un empleado normal, de un empleado planta y da claridad en las relaciones que tiene el empleado: DIRECTOR COMERCIAL con los procesos de la empresa.',
-   'user', @CurrentUser, 'table', 'DIR_COMERCIAL'
-go
 
 /*==============================================================*/
 /* Table: DIR_GESTION_HUM                                       */
@@ -1368,12 +1037,6 @@ create table DIR_GESTION_HUM (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos de un un empleado normal, de un empleado planta y da claridad en las relaciones que tiene el empleado: DIRECTOR DE GESTION HUMANA con los procesos de la empresa.',
-   'user', @CurrentUser, 'table', 'DIR_GESTION_HUM'
-go
 
 /*==============================================================*/
 /* Table: DIR_OPERACIONES                                       */
@@ -1382,13 +1045,6 @@ create table DIR_OPERACIONES (
    CEDULAE              bigint               not null,
    constraint PK_DIR_OPERACIONES primary key nonclustered (CEDULAE)
 )
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos de un empleado normal, de un empleado planta y da claridad en las relaciones que tiene el empleado: DIRECTOR DE OPERACIONES con los procesos de la empresa.',
-   'user', @CurrentUser, 'table', 'DIR_OPERACIONES'
 go
 
 /*==============================================================*/
@@ -1425,20 +1081,6 @@ create table EMP_PLANTA (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos de un empleado normal de la empresa, pero a la vez se le asignan los atributos propios de un empleado de planta.',
-   'user', @CurrentUser, 'table', 'EMP_PLANTA'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Sueldo del empleado de planta.',
-   'user', @CurrentUser, 'table', 'EMP_PLANTA', 'column', 'SUELDOE'
-go
-
 /*==============================================================*/
 /* Table: EMP_TEMP                                               */
 /*==============================================================*/
@@ -1449,34 +1091,6 @@ create table EMP_TEMP (
    TIPO_TEMP            varchar(20)          not null,
    constraint PK_EMP_TEMP primary key nonclustered (CEDULAE)
 )
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos de un empleado normal de la empresa, pero a la vez se le asignan los atributos propios de un empleado temporal.',
-   'user', @CurrentUser, 'table', 'EMP_TEMP'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador de la asignación.',
-   'user', @CurrentUser, 'table', 'EMP_TEMP', 'column', 'ID_ASIG'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'El empleado temporal tiene o no contrato asignado.',
-   'user', @CurrentUser, 'table', 'EMP_TEMP', 'column', 'TIENE_CONTRATO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Tipo de empleado temporal (Vigilante o Escolta).',
-   'user', @CurrentUser, 'table', 'EMP_TEMP', 'column', 'TIPO_TEMP'
 go
 
 /*==============================================================*/
@@ -1510,20 +1124,6 @@ create table EM_TIENE_TELS (
    CEDULAE              bigint               not null,
    constraint PK_EM_TIENE_TELS primary key nonclustered (ID_TE, CEDULAE)
 )
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Esta relación permite que un empleado de la empresa pueda poseer mas de un numero telefonico registrado en la empresa.',
-   'user', @CurrentUser, 'table', 'EM_TIENE_TELS'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del teléfono.',
-   'user', @CurrentUser, 'table', 'EM_TIENE_TELS', 'column', 'ID_TE'
 go
 
 /*==============================================================*/
@@ -1560,61 +1160,6 @@ create table IMPL_SEGURIDAD (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos que requiere el registro de un IMPLEMENTO DE SEGURIDAD por parte de un empleado: COORDINADOR TECNICO Y TECNOLOGICO.',
-   'user', @CurrentUser, 'table', 'IMPL_SEGURIDAD'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del implemento.',
-   'user', @CurrentUser, 'table', 'IMPL_SEGURIDAD', 'column', 'ID_IMPLEMENTO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del proveedor.',
-   'user', @CurrentUser, 'table', 'IMPL_SEGURIDAD', 'column', 'ID_PRO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Nombre del implemento.',
-   'user', @CurrentUser, 'table', 'IMPL_SEGURIDAD', 'column', 'NOMBRE_I'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Precio unitario del implemento de seguridad.',
-   'user', @CurrentUser, 'table', 'IMPL_SEGURIDAD', 'column', 'PRECIO_UNITARIO_I'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Catidad actual total del implemento.',
-   'user', @CurrentUser, 'table', 'IMPL_SEGURIDAD', 'column', 'CANTIDAD'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Descripcion general del implemento.',
-   'user', @CurrentUser, 'table', 'IMPL_SEGURIDAD', 'column', 'DESCRIPCION_I'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Estado actual del implemento (Optimo o en mantenimiento).',
-   'user', @CurrentUser, 'table', 'IMPL_SEGURIDAD', 'column', 'ESTADO_I'
-go
 
 /*==============================================================*/
 /* Index: REG_IMPL_FK                                           */
@@ -1667,33 +1212,6 @@ create table PROVEEDOR (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos que se requieren en el registro de un PROVEEDOR por parte de un empleado: COORDINADOR TECNICO Y TECNOLOGICO.',
-   'user', @CurrentUser, 'table', 'PROVEEDOR'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del proveedor.',
-   'user', @CurrentUser, 'table', 'PROVEEDOR', 'column', 'ID_PRO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Nombre del proveedor.',
-   'user', @CurrentUser, 'table', 'PROVEEDOR', 'column', 'NOMBRE'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Dirección del proveedor.',
-   'user', @CurrentUser, 'table', 'PROVEEDOR', 'column', 'DIRECCION'
-go
 
 /*==============================================================*/
 /* Index: REG_PROV_FK                                           */
@@ -1712,12 +1230,6 @@ create table SUBGERENTE (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Posee los atributos de un un empleado normal, de un empleado planta y da claridad en las relaciones que tiene el empleado: SUBGERENTE con los procesos de la empresa.',
-   'user', @CurrentUser, 'table', 'SUBGERENTE'
-go
 
 /*==============================================================*/
 /* Table: TELS_CLI                                              */
@@ -1727,27 +1239,6 @@ create table TELS_CLI (
    NUM_TELEFONO_C       int                  not null,
    constraint PK_TELS_CLI primary key nonclustered (ID_TC)
 )
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Contiene el directorio telefonico de todos los clientes de la empresa.',
-   'user', @CurrentUser, 'table', 'TELS_CLI'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del teléfono.',
-   'user', @CurrentUser, 'table', 'TELS_CLI', 'column', 'ID_TC'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Numero telefonico del cliente.',
-   'user', @CurrentUser, 'table', 'TELS_CLI', 'column', 'NUM_TELEFONO_C'
 go
 
 /*==============================================================*/
@@ -1769,26 +1260,6 @@ create table TELS_EMP (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Contiene el directorio telefonico de todos los empleados de la empresa.',
-   'user', @CurrentUser, 'table', 'TELS_EMP'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del teléfono.',
-   'user', @CurrentUser, 'table', 'TELS_EMP', 'column', 'ID_TE'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Numero telefonico del empleado.',
-   'user', @CurrentUser, 'table', 'TELS_EMP', 'column', 'NUM_TELEFONO_E'
-go
 
 /*==============================================================*/
 /* Constraint: CK1_TELS_EMP                                     */
@@ -1807,34 +1278,6 @@ create table TELS_PROV (
    NUM_TELEFONO_P       int                  not null,
    constraint PK_TELS_PROV primary key nonclustered (ID_TP)
 )
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sys.sp_addextendedproperty 'MS_Description', 
-   'Contiene el directorio telefonico de todos los proveedores de la empresa.',
-   'user', @CurrentUser, 'table', 'TELS_PROV'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del teléfono.',
-   'user', @CurrentUser, 'table', 'TELS_PROV', 'column', 'ID_TP'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Identificador del proveedor.',
-   'user', @CurrentUser, 'table', 'TELS_PROV', 'column', 'ID_PRO'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   'Numero telefonico del proveedor.',
-   'user', @CurrentUser, 'table', 'TELS_PROV', 'column', 'NUM_TELEFONO_P'
 go
 
 /*==============================================================*/

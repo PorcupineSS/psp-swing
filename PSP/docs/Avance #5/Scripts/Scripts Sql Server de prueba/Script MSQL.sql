@@ -188,7 +188,7 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('EM_TIENE_TELS') and o.name = 'FK_EM_TIENE_EM_TIENE__TELS_EMP')4
+   where r.fkeyid = object_id('EM_TIENE_TELS') and o.name = 'FK_EM_TIENE_EM_TIENE__TELS_EMP')
 alter table EM_TIENE_TELS
    drop constraint FK_EM_TIENE_EM_TIENE__TELS_EMP
 go

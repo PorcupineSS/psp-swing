@@ -32,7 +32,7 @@ public class MainController {
     public static EmpleadosVO empleadoActivo;
     public static String selectedDB;
     //VOS Temporales para hacer operaciones
-    public static EmpleadosVO empleadoTemporal;
+    public EmpleadosVO empleadoTemporal;
 
     //Constructores y cosas similares
     //<editor-fold defaultstate="collapsed" desc="Constructores">
@@ -76,12 +76,12 @@ public class MainController {
         MainController.selectedDB = selectedDB;
     }
 
-    public static EmpleadosVO getEmpleadoTemporal() {
+    public EmpleadosVO getEmpleadoTemporal() {
         return empleadoTemporal;
     }
 
-    public static void setEmpleadoTemporal(EmpleadosVO empleadoTemporal) {
-        MainController.empleadoTemporal = empleadoTemporal;
+    public void setEmpleadoTemporal(EmpleadosVO empleadoTemporal) {
+        this.empleadoTemporal = empleadoTemporal;
     }
 
     //</editor-fold>

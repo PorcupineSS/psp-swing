@@ -1,4 +1,4 @@
---TRIGGERS SYBASE
+--TRIGGERS Sql server
 
 ---------------------------------------------------------------------------------------------
 if exists (select 1
@@ -463,8 +463,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMP PLANTA",
-            "INSERT")
+            'EMP PLANTA',
+            'INSERT')
 end
 go
 
@@ -477,8 +477,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMP PLANTA",
-            "DELETE")
+            'EMP PLANTA',
+            'DELETE')
 end
 go
 
@@ -491,8 +491,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMP PLANTA",
-            "UPDATE")
+            'EMP PLANTA',
+            'UPDATE')
 end
 go
 
@@ -507,8 +507,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EM TEMP",
-            "INSERT")
+            'EM TEMP',
+            'INSERT')
 end
 go
 
@@ -521,8 +521,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EM TEMP",
-            "DELETE")
+            'EM TEMP',
+            'DELETE')
 end
 go
 
@@ -535,8 +535,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EM TEMP",
-            "UPDATE")
+            'EM TEMP',
+            'UPDATE')
 end
 go
 
@@ -551,8 +551,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "COORD CONTRATO",
-            "INSERT")
+            'COORD CONTRATO',
+            'INSERT')
 end
 go
 
@@ -565,8 +565,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "COORD CONTRATO",
-            "DELETE")
+            'COORD CONTRATO',
+            'DELETE')
 end
 go
 
@@ -579,8 +579,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "COORD CONTRATO",
-            "UPDATE")
+            'COORD CONTRATO',
+            'UPDATE')
 end
 go
 
@@ -595,8 +595,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "DIR COMERCIAL",
-            "INSERT")
+            'DIR COMERCIAL',
+            'INSERT')
 end
 go
 
@@ -609,8 +609,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "DIR COMERCIAL",
-            "DELETE")
+            'DIR COMERCIAL',
+            'DELETE')
 end
 go
 
@@ -623,8 +623,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "DIR COMERCIAL",
-            "UPDATE")
+            'DIR COMERCIAL',
+            'UPDATE')
 end
 go
 
@@ -639,8 +639,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "DIR GESTION HUM",
-            "INSERT")
+            'DIR GESTION HUM',
+            'INSERT')
 end
 go
 
@@ -653,8 +653,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "DIR GESTION HUM",
-            "DELETE")
+            'DIR GESTION HUM',
+            'DELETE')
 end
 go
 
@@ -667,8 +667,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "DIR GESTION HUM",
-            "UPDATE")
+            'DIR GESTION HUM',
+            'UPDATE')
 end
 go
 
@@ -683,8 +683,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "SUBGERENTE",
-            "INSERT")
+            'SUBGERENTE',
+            'INSERT')
 end
 go
 
@@ -697,8 +697,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "SUBGERENTE",
-            "DELETE")
+            'SUBGERENTE',
+            'DELETE')
 end
 go
 
@@ -711,8 +711,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "SUBGERENTE",
-            "UPDATE")
+            'SUBGERENTE',
+            'UPDATE')
 end
 go
 
@@ -727,8 +727,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "COORD T Y T",
-            "INSERT")
+            'COORD T Y T',
+            'INSERT')
 end
 go
 
@@ -741,8 +741,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "COORD T Y T",
-            "DELETE")
+            'COORD T Y T',
+            'DELETE')
 end
 go
 
@@ -755,8 +755,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "COORD T Y T",
-            "UPDATE")
+            'COORD T Y T',
+            'UPDATE')
 end
 go
 
@@ -771,8 +771,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "DIR OPERACIONES",
-            "INSERT")
+            'DIR OPERACIONES',
+            'INSERT')
 end
 go
 
@@ -785,8 +785,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "DIR OPERACIONES",
-            "DELETE")
+            'DIR OPERACIONES',
+            'DELETE')
 end
 go
 
@@ -799,8 +799,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "DIR OPERACIONES",
-            "UPDATE")
+            'DIR OPERACIONES',
+            'UPDATE')
 end
 go
 
@@ -814,8 +814,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ACTUALIZACION",
-            "DELETE")
+            'ACTUALIZACION',
+            'DELETE')
 end
 go
 
@@ -829,8 +829,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ACTUALIZACION",
-            "INSERT")
+            'ACTUALIZACION',
+            'INSERT')
 end
 go
 
@@ -844,8 +844,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ACTUALIZACION",
-            "UPDATE")
+            'ACTUALIZACION',
+            'UPDATE')
 end
 go
 
@@ -859,8 +859,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ACTU_IMPL",
-            "DELETE")
+            'ACTU_IMPL',
+            'DELETE')
 end
 go
 
@@ -874,8 +874,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ACTU_IMPL",
-            "INSERT")
+            'ACTU_IMPL',
+            'INSERT')
 end
 go
 
@@ -889,8 +889,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ACTU_IMPL",
-            "UPDATE")
+            'ACTU_IMPL',
+            'UPDATE')
 end
 go
 
@@ -904,8 +904,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ASIGNACION_C",
-            "DELETE")
+            'ASIGNACION_C',
+            'DELETE')
 end
 go
 
@@ -919,8 +919,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ASIGNACION_C",
-            "INSERT")
+            'ASIGNACION_C',
+            'INSERT')
 end
 go
 
@@ -934,8 +934,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ASIGNACION_C",
-            "UPDATE")
+            'ASIGNACION_C',
+            'UPDATE')
 end
 go
 
@@ -949,8 +949,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ASIG_IMPL",
-            "DELETE")
+            'ASIG_IMPL',
+            'DELETE')
 end
 go
 
@@ -964,8 +964,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ASIG_IMPL",
-            "INSERT")
+            'ASIG_IMPL',
+            'INSERT')
 end
 go
 
@@ -979,8 +979,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "ASIG_IMPL",
-            "UPDATE")
+            'ASIG_IMPL',
+            'UPDATE')
 end
 go
 
@@ -994,8 +994,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "CLIENTE",
-            "DELETE")
+            'CLIENTE',
+            'DELETE')
 end
 go
 
@@ -1009,8 +1009,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "CLIENTE",
-            "INSERT")
+            'CLIENTE',
+            'INSERT')
 end
 go
 
@@ -1024,8 +1024,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "CLIENTE",
-            "UPDATE")
+            'CLIENTE',
+            'UPDATE')
 end
 go
 
@@ -1039,8 +1039,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "COMUNICADO",
-            "DELETE")
+            'COMUNICADO',
+            'DELETE')
 end
 go
 
@@ -1054,8 +1054,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "COMUNICADO",
-            "INSERT")
+            'COMUNICADO',
+            'INSERT')
 end
 go
 
@@ -1069,8 +1069,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "COMUNICADO",
-            "UPDATE")
+            'COMUNICADO',
+            'UPDATE')
 end
 go
 
@@ -1084,8 +1084,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "CONTRATO",
-            "DELETE")
+            'CONTRATO',
+            'DELETE')
 end
 go
 
@@ -1099,8 +1099,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "CONTRATO",
-            "INSERT")
+            'CONTRATO',
+            'INSERT')
 end
 go
 
@@ -1114,8 +1114,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "CONTRATO",
-            "UPDATE")
+            'CONTRATO',
+            'UPDATE')
 end
 go
 
@@ -1129,8 +1129,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMPLEADOS",
-            "DELETE")
+            'EMPLEADOS',
+            'DELETE')
 end
 go
 
@@ -1144,8 +1144,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMPLEADOS",
-            "INSERT")
+            'EMPLEADOS',
+            'INSERT')
 end
 go
 
@@ -1159,8 +1159,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMPLEADOS",
-            "UPDATE")
+            'EMPLEADOS',
+            'UPDATE')
 end
 go
 
@@ -1174,8 +1174,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "TELS_EMP",
-            "DELETE")
+            'TELS_EMP',
+            'DELETE')
 end
 go
 
@@ -1189,8 +1189,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "TELS_EMP",
-            "INSERT")
+            'TELS_EMP',
+            'INSERT')
 end
 go
 
@@ -1204,8 +1204,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "TELS_EMP",
-            "UPDATE")
+            'TELS_EMP',
+            'UPDATE')
 end
 go
 */
@@ -1219,8 +1219,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "IMPL_SEGURIDAD",
-            "DELETE")
+            'IMPL_SEGURIDAD',
+            'DELETE')
 end
 go
 
@@ -1234,8 +1234,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "IMPL_SEGURIDAD",
-            "INSERT")
+            'IMPL_SEGURIDAD',
+            'INSERT')
 end
 go
 
@@ -1249,8 +1249,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "IIMPL_SEGURIDAD",
-            "UPDATE")
+            'IIMPL_SEGURIDAD',
+            'UPDATE')
 end
 go
 
@@ -1264,8 +1264,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "PROVEEDOR",
-            "DELETE")
+            'PROVEEDOR',
+            'DELETE')
 end
 go
 
@@ -1279,8 +1279,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "PROVEEDOR",
-            "INSERT")
+            'PROVEEDOR',
+            'INSERT')
 end
 go
 
@@ -1294,8 +1294,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "PROVEEDOR",
-            "UPDATE")
+            'PROVEEDOR',
+            'UPDATE')
 end
 go
 
@@ -1309,8 +1309,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMP_PLANTA",
-            "DELETE")
+            'EMP_PLANTA',
+            'DELETE')
 end
 go
 
@@ -1324,8 +1324,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMP_PLANTA",
-            "INSERT")
+            'EMP_PLANTA',
+            'INSERT')
 end
 go
 
@@ -1339,8 +1339,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMP_PLANTA",
-            "UPDATE")
+            'EMP_PLANTA',
+            'UPDATE')
 end
 go
 
@@ -1354,8 +1354,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMP_TEMP",
-            "DELETE")
+            'EMP_TEMP',
+            'DELETE')
 end
 go
 
@@ -1369,8 +1369,8 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMP_TEMP",
-            "INSERT")
+            'EMP_TEMP',
+            'INSERT')
 end
 go
 
@@ -1384,7 +1384,7 @@ begin
             getdate(),
             suser_name(),
             host_name(),
-            "EMP_TEMP",
-            "UPDATE")
+            'EMP_TEMP',
+            'UPDATE')
 end
 go

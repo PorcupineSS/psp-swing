@@ -1255,7 +1255,7 @@ go
 /*==============================================================*/
 create table TELS_EMP (
    ID_TE                smallint identity    not null,
-   NUM_TELEFONO_E       int                  not null,
+   NUM_TELEFONO_E       varchar(10)                  not null,
    constraint PK_TELS_EMP primary key nonclustered (ID_TE)
 )
 go

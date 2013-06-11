@@ -32,7 +32,7 @@ public class MainController {
     public static EmpleadosVO empleadoActivo;
     public static String selectedDB;
     //VOS Temporales para hacer operaciones
-    public EmpleadosVO empleadoTemporal;
+    public static EmpleadosVO empleadoTemporal;
 
     //Constructores y cosas similares
     //<editor-fold defaultstate="collapsed" desc="Constructores">
@@ -76,12 +76,12 @@ public class MainController {
         MainController.selectedDB = selectedDB;
     }
 
-    public EmpleadosVO getEmpleadoTemporal() {
+    public static EmpleadosVO getEmpleadoTemporal() {
         return empleadoTemporal;
     }
 
-    public void setEmpleadoTemporal(EmpleadosVO empleadoTemporal) {
-        this.empleadoTemporal = empleadoTemporal;
+    public static void setEmpleadoTemporal(EmpleadosVO empleadoTemporal) {
+        MainController.empleadoTemporal = empleadoTemporal;
     }
 
     //</editor-fold>
@@ -140,7 +140,7 @@ public class MainController {
         }
 
         if (empleadoLogin != null) {
-            //TODO
+            //TODO Logica de redireccion segun rol
         } else {
             JOptionPane.showMessageDialog(login, "¡Usuario o contraseña incorrectos!", "Error", JOptionPane.ERROR_MESSAGE, null);
         }
@@ -153,6 +153,21 @@ public class MainController {
      *
      */
     public static void registrarEmpleado() {
+        
+        try {
+            ServiceFactory.getInstance().getEmpleadosService().create(empleadoTemporal);
+        } catch (Exception ex) {
+            int opcion = JOptionPane.showOptionDialog(crearEmpleado, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
+            switch (opcion) {
+                case JOptionPane.OK_OPTION:
+                    //TODO Reportar Error
+                    break;
+                case JOptionPane.CANCEL_OPTION:
+                    break;
+            }
+            return;
+        }
+        
     }
 
     /**

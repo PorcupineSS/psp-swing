@@ -14,8 +14,8 @@ public class DAOFactory {
     private DAOFactory() {
     }
 
-    public EmpleadosDAO getEmpleadosDAO() {
-        return new EmpleadosDAO(PU);
+    public VEmpleadoDAO getEmpleadosDAO() {
+        return new VEmpleadoDAO(PU);
     }
     
     public ImplSeguridadDAO getImplSeguridadDAO() {

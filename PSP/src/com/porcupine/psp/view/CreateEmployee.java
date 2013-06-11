@@ -9,6 +9,7 @@ import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.model.vo.TelsEmpVO;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.lang.String;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -273,12 +274,22 @@ public class CreateEmployee extends javax.swing.JPanel {
         empleado.setRol(jComboBoxTipoEmpleado.getSelectedItem().toString());
 
         //No hay problema en bd si es nulo
-        empleado.setDirCedulaE(MainController.getEmpleadoActivo().getCedulaE());
-
+        if (MainController.getEmpleadoActivo() != null) {
+            empleado.setDirCedulaE(MainController.getEmpleadoActivo().getCedulaE());
+        } else {
+            empleado.setDirCedulaE(null);
+        }
         //Vos Externos
 
         DefaultListModel model = (DefaultListModel) jListTelefono.getModel();
-        ArrayList<String> tels = new ArrayList<String>(Arrays.asList((String[]) model.toArray()));
+
+        ArrayList<String> tels = new ArrayList<String>();
+        for (int x = 0; x < model.size(); x++) {
+            String tel = (String) model.elementAt(x);
+            tels.add(tel);
+        }
+
+        
 
         //Se agrega cada telefono
 
@@ -290,8 +301,11 @@ public class CreateEmployee extends javax.swing.JPanel {
             telefonos.setEmpleadosList(empTels);
             telefonos.setNumTelefonoE(Integer.parseInt(each));
             List<TelsEmpVO> newTels = empleado.getTelsEmpList();
+            if (newTels == null){
+                newTels=new ArrayList<TelsEmpVO>();
+            }
             newTels.add(telefonos);
-            empleado.setTelsEmpList(newTels);          
+            empleado.setTelsEmpList(newTels);
         }
 
 

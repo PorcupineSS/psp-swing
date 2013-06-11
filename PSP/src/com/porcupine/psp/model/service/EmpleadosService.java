@@ -10,7 +10,10 @@ import com.porcupine.psp.model.dao.exceptions.InsufficientPermissionsException;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import com.porcupine.psp.model.dao.exceptions.PreexistingEntityException;
 import com.porcupine.psp.model.dao.exceptions.RequiredAttributeException;
+import com.porcupine.psp.model.entity.VEmpleado;
 import com.porcupine.psp.util.BCrypt;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  *
@@ -34,19 +37,25 @@ public class EmpleadosService implements IService<EmpleadosVO, Long> {
     public void create(EmpleadosVO vo) throws PreexistingEntityException, NonexistentEntityException, RequiredAttributeException, InsufficientPermissionsException {
         if (validarCampos(vo)) {
             if (havePermissions(vo)) {
-                Empleados entity = new Empleados();
-                entity.setApellidoe(vo.getApellidoE());
-                entity.setBitacoraSegList((List) vo.getBitacoraSegList());
-                entity.setCedulae(vo.getCedulaE());
-                entity.setCoddocume(vo.getCodDocumE());
-                entity.setContrasenae(BCrypt.hashpw(vo.getContrasenaE(), BCrypt.gensalt()));
-                //entity.setDirCedulae(vo.getDirCedulaE());
-                //entity.setEmTemp(vo.getEmpPlanta());
-                //entity.setEmpPlanta(vo.getEmpPlanta());
-                entity.setFechareg(vo.getFechareg());
-                entity.setNombree(vo.getNombreE());
-                entity.setTelsEmpList((List) vo.getTelsEmpList());
+                VEmpleado entity = new VEmpleado();
+                entity.setApellidoEmpleado(vo.getApellidoE());
+                entity.setNombreEmpleado(vo.getNombreE());
+                entity.setCedula(BigDecimal.valueOf(vo.getCedulaE()));
+                
+                entity.setContraseniaEmpleado(BCrypt.hashpw(vo.getContrasenaE(), BCrypt.gensalt()));
+                entity.setCeduladir(BigInteger.valueOf(vo.getDirCedulaE()));
+                //TODO deberia ser autogenerado
+                //entity.setFechaRegistro(vo.getFechareg());
+                
+                //entity.setTELSEMP((List) vo.getTelsEmpList());
 
+                //entity.setCoddocume(vo.getCodDocumE());
+                //entity.setBitacoraSegList((List) vo.getBitacoraSegList());
+                
+                //TODO setear cosas hace falta hacer ese codigo
+                //entity.set(vo.getEmpPlanta());
+                //entity.setEmpPlanta(vo.getEmpPlanta());
+                
                 DAOFactory.getInstance().getEmpleadosDAO().create(entity);
             } else {
                 throw new InsufficientPermissionsException("¡El usuario no posee los permisos suficientes para realizar esta operación!");

@@ -25,6 +25,16 @@ public class EmpleadosVO implements IValueObject {
     private Long empTemp;
     private Long empPlanta;
     private Long dirCedulaE;
+    private String rol;
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+    
 
     /**
      * @return the cedulaE

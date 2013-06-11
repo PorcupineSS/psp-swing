@@ -4,7 +4,12 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
+import com.porcupine.psp.model.vo.EmpleadosVO;
+import com.porcupine.psp.model.vo.TelsEmpVO;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -244,7 +249,7 @@ public class CreateEmployee extends javax.swing.JPanel {
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
         String numero = JOptionPane.showInputDialog("Ingrese el número de teléfono");
-                
+
         DefaultListModel model;
 
         if (jListTelefono.getModel().getSize() != 0) {
@@ -257,7 +262,43 @@ public class CreateEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        // TODO add your handling code here:
+        //TODO Checkear campos vacios
+
+        //Armar VOS
+        EmpleadosVO empleado = new EmpleadosVO();
+        empleado.setNombreE(jTextFieldNombres.getText());
+        empleado.setApellidoE(jTextFieldApellidos.getText());
+        empleado.setCedulaE(new Long(jTextFieldCC.getText()));
+        empleado.setContrasenaE(jTextFieldContraseña.getText());
+        empleado.setRol(jComboBoxTipoEmpleado.getSelectedItem().toString());
+
+        //No hay problema en bd si es nulo
+        empleado.setDirCedulaE(MainController.getEmpleadoActivo().getCedulaE());
+
+        //Vos Externos
+
+        DefaultListModel model = (DefaultListModel) jListTelefono.getModel();
+        ArrayList<String> tels = new ArrayList<String>(Arrays.asList((String[]) model.toArray()));
+
+        //Se agrega cada telefono
+
+        for (String each : tels) {
+            //TODO Obtener los empleados por este telefono y agrega el nuevo
+            ArrayList empTels = new ArrayList<EmpleadosVO>();
+            empTels.add(empleado);
+            TelsEmpVO telefonos = new TelsEmpVO();
+            telefonos.setEmpleadosList(empTels);
+            telefonos.setNumTelefonoE(Integer.parseInt(each));
+            List<TelsEmpVO> newTels = empleado.getTelsEmpList();
+            newTels.add(telefonos);
+            empleado.setTelsEmpList(newTels);          
+        }
+
+
+
+        //Pasar al controlador
+        MainController.setEmpleadoTemporal(empleado);
+        MainController.registrarEmpleado();
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -273,7 +314,7 @@ public class CreateEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldDireccionActionPerformed
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
-        
+
         DefaultListModel model;
 
         if (jListTelefono.getModel().getSize() != 0 && jListTelefono.getSelectedValue() != null) {
@@ -281,7 +322,7 @@ public class CreateEmployee extends javax.swing.JPanel {
             model.removeElement(jListTelefono.getSelectedValue());
             jListTelefono.setModel(model);
         }
-        
+
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     private void jComboBoxTipoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoEmpleadoActionPerformed

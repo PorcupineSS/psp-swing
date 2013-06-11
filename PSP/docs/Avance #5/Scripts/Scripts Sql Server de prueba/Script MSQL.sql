@@ -1236,7 +1236,7 @@ go
 /*==============================================================*/
 create table TELS_CLI (
    ID_TC                smallint identity    not null,
-   NUM_TELEFONO_C       int                  not null,
+   NUM_TELEFONO_C       varchar(10)          not null,
    constraint PK_TELS_CLI primary key nonclustered (ID_TC)
 )
 go
@@ -1275,7 +1275,7 @@ go
 create table TELS_PROV (
    ID_TP                smallint             not null,
    ID_PRO               smallint             null,
-   NUM_TELEFONO_P       int                  not null,
+   NUM_TELEFONO_P       varchar(10)                 not null,
    constraint PK_TELS_PROV primary key nonclustered (ID_TP)
 )
 go

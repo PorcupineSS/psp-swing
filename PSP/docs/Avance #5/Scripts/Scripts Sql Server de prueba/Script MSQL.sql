@@ -1,271 +1,238 @@
 /*==============================================================*/
-/* DBMS name:      Sybase AS Enterprise 15.0                    */
-/* Created on:     27/05/2013 09:40:56 a.m.                     */
+/* DBMS name:      Microsoft SQL Server 2008                    */
+/* Created on:     27/05/2013 09:42:47 a.m.                     */
 /*==============================================================*/
 
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('ACTUALIZACION'))
-            where name = 'FK_ACTUALIZ_ACTUALIZA_DIR_GEST' and type = 'RI')
-   alter table ACTUALIZACION
-      drop constraint FK_ACTUALIZ_ACTUALIZA_DIR_GEST
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('ACTUALIZACION') and o.name = 'FK_ACTUALIZ_ACTUALIZA_DIR_GEST')
+alter table ACTUALIZACION
+   drop constraint FK_ACTUALIZ_ACTUALIZA_DIR_GEST
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('ACTUALIZACION'))
-            where name = 'FK_ACTUALIZ_ACTUALIZA_SUBGEREN' and type = 'RI')
-   alter table ACTUALIZACION
-      drop constraint FK_ACTUALIZ_ACTUALIZA_SUBGEREN
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('ACTUALIZACION') and o.name = 'FK_ACTUALIZ_ACTUALIZA_SUBGEREN')
+alter table ACTUALIZACION
+   drop constraint FK_ACTUALIZ_ACTUALIZA_SUBGEREN
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('ACTU_IMPL'))
-            where name = 'FK_ACTU_IMP_ACTUALIZA_COORD_T_' and type = 'RI')
-   alter table ACTU_IMPL
-      drop constraint FK_ACTU_IMP_ACTUALIZA_COORD_T_
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('ACTU_IMPL') and o.name = 'FK_ACTU_IMP_ACTUALIZA_COORD_T_')
+alter table ACTU_IMPL
+   drop constraint FK_ACTU_IMP_ACTUALIZA_COORD_T_
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('ACTU_IMPL'))
-            where name = 'FK_ACTU_IMP_LO_ACTUAL_IMPL_SEG' and type = 'RI')
-   alter table ACTU_IMPL
-      drop constraint FK_ACTU_IMP_LO_ACTUAL_IMPL_SEG
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('ACTU_IMPL') and o.name = 'FK_ACTU_IMP_LO_ACTUAL_IMPL_SEG')
+alter table ACTU_IMPL
+   drop constraint FK_ACTU_IMP_LO_ACTUAL_IMPL_SEG
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('ASIGNACION_C'))
-            where name = 'FK_ASIGNACI_REALIZA_A_COORD_CO' and type = 'RI')
-   alter table ASIGNACION_C
-      drop constraint FK_ASIGNACI_REALIZA_A_COORD_CO
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('ASIGNACION_C') and o.name = 'FK_ASIGNACI_REALIZA_A_COORD_CO')
+alter table ASIGNACION_C
+   drop constraint FK_ASIGNACI_REALIZA_A_COORD_CO
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('ASIGNACION_C'))
-            where name = 'FK_ASIGNACI_SE_ASIGNA_CONTRATO' and type = 'RI')
-   alter table ASIGNACION_C
-      drop constraint FK_ASIGNACI_SE_ASIGNA_CONTRATO
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('ASIGNACION_C') and o.name = 'FK_ASIGNACI_SE_ASIGNA_CONTRATO')
+alter table ASIGNACION_C
+   drop constraint FK_ASIGNACI_SE_ASIGNA_CONTRATO
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('ASIG_IMPL'))
-            where name = 'FK_ASIG_IMP_ASIGNA_I_COORD_T_' and type = 'RI')
-   alter table ASIG_IMPL
-      drop constraint FK_ASIG_IMP_ASIGNA_I_COORD_T_
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('ASIG_IMPL') and o.name = 'FK_ASIG_IMP_ASIGNA_I_COORD_T_')
+alter table ASIG_IMPL
+   drop constraint FK_ASIG_IMP_ASIGNA_I_COORD_T_
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('ASIG_IMPL'))
-            where name = 'FK_ASIG_IMP_LO_ASIGNA_IMPL_SEG' and type = 'RI')
-   alter table ASIG_IMPL
-      drop constraint FK_ASIG_IMP_LO_ASIGNA_IMPL_SEG
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('ASIG_IMPL') and o.name = 'FK_ASIG_IMP_LO_ASIGNA_IMPL_SEG')
+alter table ASIG_IMPL
+   drop constraint FK_ASIG_IMP_LO_ASIGNA_IMPL_SEG
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('ASIG_IMPL'))
-            where name = 'FK_ASIG_IMP_RELATIONS_EMP_TEMP' and type = 'RI')
-   alter table ASIG_IMPL
-      drop constraint FK_ASIG_IMP_RELATIONS_EMP_TEMP
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('ASIG_IMPL') and o.name = 'FK_ASIG_IMP_RELATIONS_EMP_TEMP')
+alter table ASIG_IMPL
+   drop constraint FK_ASIG_IMP_RELATIONS_EMP_TEMP
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('BITACORA_SEG'))
-            where name = 'FK_BITACORA_SIGUE_EMPLEADO' and type = 'RI')
-   alter table BITACORA_SEG
-      drop constraint FK_BITACORA_SIGUE_EMPLEADO
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('BITACORA_SEG') and o.name = 'FK_BITACORA_SIGUE_EMPLEADO')
+alter table BITACORA_SEG
+   drop constraint FK_BITACORA_SIGUE_EMPLEADO
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('CLIENTE'))
-            where name = 'FK_CLIENTE_REG_CLI_DIR_COME' and type = 'RI')
-   alter table CLIENTE
-      drop constraint FK_CLIENTE_REG_CLI_DIR_COME
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('CLIENTE') and o.name = 'FK_CLIENTE_REG_CLI_DIR_COME')
+alter table CLIENTE
+   drop constraint FK_CLIENTE_REG_CLI_DIR_COME
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('CL_TIENE_TELS'))
-            where name = 'FK_CL_TIENE_CL_TIENE__TELS_CLI' and type = 'RI')
-   alter table CL_TIENE_TELS
-      drop constraint FK_CL_TIENE_CL_TIENE__TELS_CLI
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('CL_TIENE_TELS') and o.name = 'FK_CL_TIENE_CL_TIENE__TELS_CLI')
+alter table CL_TIENE_TELS
+   drop constraint FK_CL_TIENE_CL_TIENE__TELS_CLI
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('CL_TIENE_TELS'))
-            where name = 'FK_CL_TIENE_CL_TIENE__CLIENTE' and type = 'RI')
-   alter table CL_TIENE_TELS
-      drop constraint FK_CL_TIENE_CL_TIENE__CLIENTE
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('CL_TIENE_TELS') and o.name = 'FK_CL_TIENE_CL_TIENE__CLIENTE')
+alter table CL_TIENE_TELS
+   drop constraint FK_CL_TIENE_CL_TIENE__CLIENTE
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('COMUNICADO'))
-            where name = 'FK_COMUNICA_REDACTA_EMP_TEMP' and type = 'RI')
-   alter table COMUNICADO
-      drop constraint FK_COMUNICA_REDACTA_EMP_TEMP
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('COMUNICADO') and o.name = 'FK_COMUNICA_REDACTA_EMP_TEMP')
+alter table COMUNICADO
+   drop constraint FK_COMUNICA_REDACTA_EMP_TEMP
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('COMUNICADO'))
-            where name = 'FK_COMUNICA_RESPONDE_DIR_OPER' and type = 'RI')
-   alter table COMUNICADO
-      drop constraint FK_COMUNICA_RESPONDE_DIR_OPER
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('COMUNICADO') and o.name = 'FK_COMUNICA_RESPONDE_DIR_OPER')
+alter table COMUNICADO
+   drop constraint FK_COMUNICA_RESPONDE_DIR_OPER
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('CONTRATO'))
-            where name = 'FK_CONTRATO_REG_CONT_DIR_COME' and type = 'RI')
-   alter table CONTRATO
-      drop constraint FK_CONTRATO_REG_CONT_DIR_COME
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('CONTRATO') and o.name = 'FK_CONTRATO_REG_CONT_DIR_COME')
+alter table CONTRATO
+   drop constraint FK_CONTRATO_REG_CONT_DIR_COME
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('CONTRATO'))
-            where name = 'FK_CONTRATO_SOLICITA_CLIENTE' and type = 'RI')
-   alter table CONTRATO
-      drop constraint FK_CONTRATO_SOLICITA_CLIENTE
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('CONTRATO') and o.name = 'FK_CONTRATO_SOLICITA_CLIENTE')
+alter table CONTRATO
+   drop constraint FK_CONTRATO_SOLICITA_CLIENTE
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('COORD_CONTRATO'))
-            where name = 'FK_COORD_CO_SON3_EMP_PLAN' and type = 'RI')
-   alter table COORD_CONTRATO
-      drop constraint FK_COORD_CO_SON3_EMP_PLAN
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('COORD_CONTRATO') and o.name = 'FK_COORD_CO_SON3_EMP_PLAN')
+alter table COORD_CONTRATO
+   drop constraint FK_COORD_CO_SON3_EMP_PLAN
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('COORD_T_Y_T'))
-            where name = 'FK_COORD_T__SON_EMP_PLAN' and type = 'RI')
-   alter table COORD_T_Y_T
-      drop constraint FK_COORD_T__SON_EMP_PLAN
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('COORD_T_Y_T') and o.name = 'FK_COORD_T__SON_EMP_PLAN')
+alter table COORD_T_Y_T
+   drop constraint FK_COORD_T__SON_EMP_PLAN
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('DIR_COMERCIAL'))
-            where name = 'FK_DIR_COME_SON2_EMP_PLAN' and type = 'RI')
-   alter table DIR_COMERCIAL
-      drop constraint FK_DIR_COME_SON2_EMP_PLAN
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('DIR_COMERCIAL') and o.name = 'FK_DIR_COME_SON2_EMP_PLAN')
+alter table DIR_COMERCIAL
+   drop constraint FK_DIR_COME_SON2_EMP_PLAN
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('DIR_GESTION_HUM'))
-            where name = 'FK_DIR_GEST_SON5_EMP_PLAN' and type = 'RI')
-   alter table DIR_GESTION_HUM
-      drop constraint FK_DIR_GEST_SON5_EMP_PLAN
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('DIR_GESTION_HUM') and o.name = 'FK_DIR_GEST_SON5_EMP_PLAN')
+alter table DIR_GESTION_HUM
+   drop constraint FK_DIR_GEST_SON5_EMP_PLAN
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('DIR_OPERACIONES'))
-            where name = 'FK_DIR_OPER_SON4_EMP_PLAN' and type = 'RI')
-   alter table DIR_OPERACIONES
-      drop constraint FK_DIR_OPER_SON4_EMP_PLAN
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('DIR_OPERACIONES') and o.name = 'FK_DIR_OPER_SON4_EMP_PLAN')
+alter table DIR_OPERACIONES
+   drop constraint FK_DIR_OPER_SON4_EMP_PLAN
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('EMPLEADOS'))
-            where name = 'FK_EMPLEADO_REGISTRA_DIR_GEST' and type = 'RI')
-   alter table EMPLEADOS
-      drop constraint FK_EMPLEADO_REGISTRA_DIR_GEST
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('EMPLEADOS') and o.name = 'FK_EMPLEADO_REGISTRA_DIR_GEST')
+alter table EMPLEADOS
+   drop constraint FK_EMPLEADO_REGISTRA_DIR_GEST
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('EMP_PLANTA'))
-            where name = 'FK_EMP_PLAN_SON_E_EMPLEADO' and type = 'RI')
-   alter table EMP_PLANTA
-      drop constraint FK_EMP_PLAN_SON_E_EMPLEADO
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('EMP_PLANTA') and o.name = 'FK_EMP_PLAN_SON_E_EMPLEADO')
+alter table EMP_PLANTA
+   drop constraint FK_EMP_PLAN_SON_E_EMPLEADO
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('EMP_TEMP'))
-            where name = 'FK_EMP_TEMP_ASIGNAN_A_ASIGNACI' and type = 'RI')
-   alter table EMP_TEMP
-      drop constraint FK_EMP_TEMP_ASIGNAN_A_ASIGNACI
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('EMP_TEMP') and o.name = 'FK_EMP_TEMP_ASIGNAN_A_ASIGNACI')
+alter table EMP_TEMP
+   drop constraint FK_EMP_TEMP_ASIGNAN_A_ASIGNACI
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('EMP_TEMP'))
-            where name = 'FK_EMP_TEMP_SON_E2_EMPLEADO' and type = 'RI')
-   alter table EMP_TEMP
-      drop constraint FK_EMP_TEMP_SON_E2_EMPLEADO
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('EMP_TEMP') and o.name = 'FK_EMP_TEMP_SON_E2_EMPLEADO')
+alter table EMP_TEMP
+   drop constraint FK_EMP_TEMP_SON_E2_EMPLEADO
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('EM_TIENE_TELS'))
-            where name = 'FK_EM_TIENE_EM_TIENE__TELS_EMP' and type = 'RI')
-   alter table EM_TIENE_TELS
-      drop constraint FK_EM_TIENE_EM_TIENE__TELS_EMP
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('EM_TIENE_TELS') and o.name = 'FK_EM_TIENE_EM_TIENE__TELS_EMP')
+alter table EM_TIENE_TELS
+   drop constraint FK_EM_TIENE_EM_TIENE__TELS_EMP
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('EM_TIENE_TELS'))
-            where name = 'FK_EM_TIENE_EM_TIENE__EMPLEADO' and type = 'RI')
-   alter table EM_TIENE_TELS
-      drop constraint FK_EM_TIENE_EM_TIENE__EMPLEADO
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('EM_TIENE_TELS') and o.name = 'FK_EM_TIENE_EM_TIENE__EMPLEADO')
+alter table EM_TIENE_TELS
+   drop constraint FK_EM_TIENE_EM_TIENE__EMPLEADO
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('IMPL_SEGURIDAD'))
-            where name = 'FK_IMPL_SEG_REG_IMPL_COORD_T_' and type = 'RI')
-   alter table IMPL_SEGURIDAD
-      drop constraint FK_IMPL_SEG_REG_IMPL_COORD_T_
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('IMPL_SEGURIDAD') and o.name = 'FK_IMPL_SEG_REG_IMPL_COORD_T_')
+alter table IMPL_SEGURIDAD
+   drop constraint FK_IMPL_SEG_REG_IMPL_COORD_T_
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('IMPL_SEGURIDAD'))
-            where name = 'FK_IMPL_SEG_SUMINISTR_PROVEEDO' and type = 'RI')
-   alter table IMPL_SEGURIDAD
-      drop constraint FK_IMPL_SEG_SUMINISTR_PROVEEDO
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('IMPL_SEGURIDAD') and o.name = 'FK_IMPL_SEG_SUMINISTR_PROVEEDO')
+alter table IMPL_SEGURIDAD
+   drop constraint FK_IMPL_SEG_SUMINISTR_PROVEEDO
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('PROVEEDOR'))
-            where name = 'FK_PROVEEDO_REG_PROV_COORD_T_' and type = 'RI')
-   alter table PROVEEDOR
-      drop constraint FK_PROVEEDO_REG_PROV_COORD_T_
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('PROVEEDOR') and o.name = 'FK_PROVEEDO_REG_PROV_COORD_T_')
+alter table PROVEEDOR
+   drop constraint FK_PROVEEDO_REG_PROV_COORD_T_
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('SUBGERENTE'))
-            where name = 'FK_SUBGEREN_SON6_EMP_PLAN' and type = 'RI')
-   alter table SUBGERENTE
-      drop constraint FK_SUBGEREN_SON6_EMP_PLAN
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('SUBGERENTE') and o.name = 'FK_SUBGEREN_SON6_EMP_PLAN')
+alter table SUBGERENTE
+   drop constraint FK_SUBGEREN_SON6_EMP_PLAN
 go
 
-if exists (select 1 
-            from  sysobjects c 
-            join  sysconstraints s on (s.constrid = c.id and s.tableid = object_id('TELS_PROV'))
-            where name = 'FK_TELS_PRO_PR_TIENE__PROVEEDO' and type = 'RI')
-   alter table TELS_PROV
-      drop constraint FK_TELS_PRO_PR_TIENE__PROVEEDO
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('TELS_PROV') and o.name = 'FK_TELS_PRO_PR_TIENE__PROVEEDO')
+alter table TELS_PROV
+   drop constraint FK_TELS_PRO_PR_TIENE__PROVEEDO
 go
 
 if exists (select 1
@@ -661,13 +628,15 @@ if exists (select 1
    drop table TELS_PROV
 go
 
+
+
 /*==============================================================*/
 /* Table: ACTUALIZACION                                         */
 /*==============================================================*/
 create table ACTUALIZACION (
-   SUB_CEDULAE          INTEGER                         not null,
-   CEDULAE              INTEGER                         not null,
-   FECHA_ACTUAL_DGH     datetime                       not null,
+   SUB_CEDULAE          bigint               not null,
+   CEDULAE              bigint               not null,
+   FECHA_ACTUAL_DGH     datetime             not null,
    constraint PK_ACTUALIZACION primary key nonclustered (SUB_CEDULAE, CEDULAE)
 )
 go
@@ -692,12 +661,12 @@ go
 /* Table: ACTU_IMPL                                             */
 /*==============================================================*/
 create table ACTU_IMPL (
-   ID_ACTUALIZACION_I   smallint  identity             not null,
-   ID_IMPLEMENTO        smallint                       null,
-   CEDULAE              INTEGER                         null,
-   FECHA_ACTUALIZACION_I datetime                       not null,
-   CANTIDAD_AGREGADA    smallint                       null,
-   DESCRIPCION_ACTUALIZACION varchar(30)                    not null,
+   ID_ACTUALIZACION_I   smallint identity    not null,
+   ID_IMPLEMENTO        smallint             null,
+   CEDULAE              bigint               null,
+   FECHA_ACTUALIZACION_I datetime             not null,
+   CANTIDAD_AGREGADA    smallint             null,
+   DESCRIPCION_ACTUALIZACION varchar(30)          not null,
    constraint PK_ACTU_IMPL primary key nonclustered (ID_ACTUALIZACION_I)
 )
 go
@@ -722,19 +691,19 @@ go
 /* Constraint: DOM_DESCRIPCION                                         */
 /*==============================================================*/
 alter table ACTU_IMPL add constraint DOM_DESCRIPCION
-      CHECK (DESCRIPCION_ACTUALIZACION IN ('AÃ±adir','Borrar','Actualizar'))
+      CHECK (DESCRIPCION_ACTUALIZACION IN ('Añadir','Borrar','Actualizar'))
 go
 
 /*==============================================================*/
 /* Table: ASIGNACION_C                                          */
 /*==============================================================*/
 create table ASIGNACION_C (
-   ID_ASIG              smallint   identity            not null,
-   ID_CONTRATO          smallint                       not null,
-   COO_CEDULAE          INTEGER                        not null,
-   EMP_TEMP_CEDULAE     INTEGER                        not null,
-   FECHA_ASIGNACION_C   datetime                       not null,
-   HORARIO_ASIGNADO     varchar(20)                    not null,
+   ID_ASIG              smallint identity    not null,
+   ID_CONTRATO          smallint             not null,
+   COO_CEDULAE          bigint               not null,
+   EMP_TEMP_CEDULAE     bigint               not null,  
+   FECHA_ASIGNACION_C   datetime             not null,
+   HORARIO_ASIGNADO     varchar(20)          not null,
    constraint PK_ASIGNACION_C primary key nonclustered (ID_ASIG)
 )
 go
@@ -759,13 +728,13 @@ go
 /* Table: ASIG_IMPL                                             */
 /*==============================================================*/
 create table ASIG_IMPL (
-   ID_ASIGNACION_I      smallint  identity            not null,
-   ID_IMPLEMENTO        smallint                       not null,
-   CEDULAE              INTEGER                        not null,
-   COO_CEDULAE          INTEGER                        not null,
-   CANTIDAD_ASIGNADA    smallint                       not null,
-   ESTADO_ASIGNACION    bit                            not null,
-   FECHA_ASIGNACION_I   datetime                       not null,
+   ID_ASIGNACION_I      smallint identity    not null,
+   ID_IMPLEMENTO        smallint             not null,
+   CEDULAE              bigint               not null,
+   COO_CEDULAE          bigint               not null,
+   CANTIDAD_ASIGNADA    smallint             not null,
+   ESTADO_ASIGNACION    bit                  not null,
+   FECHA_ASIGNACION_I   datetime             not null,
    constraint PK_ASIG_IMPL primary key nonclustered (ID_ASIGNACION_I)
 )
 go
@@ -818,13 +787,13 @@ alter table ASIG_IMPL add constraint CK2_ASIG_IMPL_FECHA
 /* Table: BITACORA_SEG                                          */
 /*==============================================================*/
 create table BITACORA_SEG (
-   ID_OPER              int  identity                  not null,
-   CEDULAE              INTEGER                         null,
-   FECHA_OPER           datetime                       not null,
-   USU_OPER             varchar(20)                    null,
-   MAQ_OPER             varchar(20)                    null,
-   TABLA_MOD            varchar(20)                    not null,
-   TIPO_OPER            varchar(6)                     not null,
+   ID_OPER              int  identity        not null,
+   CEDULAE              bigint               null,
+   FECHA_OPER           datetime             not null,
+   USU_OPER             varchar(20)          null,
+   MAQ_OPER             varchar(20)          null,
+   TABLA_MOD            varchar(20)          not null,
+   TIPO_OPER            varchar(6)           not null,
    constraint PK_BITACORA_SEG primary key nonclustered (ID_OPER)
 )
 go
@@ -842,20 +811,21 @@ go
 /*==============================================================*/
 alter table BITACORA_SEG add constraint DOM_TIPO_OPER
       CHECK (TIPO_OPER IN ('INSERT' , 'DELETE' , 'UPDATE'))
-go	  
+go	
 
 /*==============================================================*/
 /* Table: CLIENTE                                               */
 /*==============================================================*/
 create table CLIENTE (
-   IDCL                 smallint  identity            not null,
-   CEDULAE              INTEGER                         not null,
-   NOMBRECL             varchar(20)                    not null,
-   DIRECCIONCL          varchar(20)                    not null,
-   FECHA_REG_CL         datetime                       not null,
+   IDCL                 smallint identity    not null,
+   CEDULAE              bigint               not null,
+   NOMBRECL             varchar(20)          not null,
+   DIRECCIONCL          varchar(20)          not null,
+   FECHA_REG_CL         datetime             not null,
    constraint PK_CLIENTE primary key nonclustered (IDCL)
 )
 go
+
 
 /*==============================================================*/
 /* Index: REG_CLI_FK                                            */
@@ -869,8 +839,8 @@ go
 /* Table: CL_TIENE_TELS                                         */
 /*==============================================================*/
 create table CL_TIENE_TELS (
-   ID_TC                smallint                       not null,
-   IDCL                 smallint                       not null,
+   ID_TC                smallint             not null,
+   IDCL                 smallint             not null,
    constraint PK_CL_TIENE_TELS primary key nonclustered (ID_TC, IDCL)
 )
 go
@@ -895,17 +865,18 @@ go
 /* Table: COMUNICADO                                            */
 /*==============================================================*/
 create table COMUNICADO (
-   ID_COMUNICADO        smallint  identity             not null,
-   CEDULAE              INTEGER                         null,
-   DIR_CEDULAE          INTEGER                         null,
-   TIPO_CO              varchar(20)                    not null,
-   FECHA_CO             datetime                       not null,
-   CONTENIDO_CO         varchar(100)                   not null,
-   URGENTE              bit                            not null,
-   RESPUESTA_CO         varchar(100)                   null,
+   ID_COMUNICADO        smallint identity    not null,
+   CEDULAE              bigint               null,
+   DIR_CEDULAE          bigint               null,
+   TIPO_CO              varchar(20)          not null,
+   FECHA_CO             datetime             not null,
+   CONTENIDO_CO         varchar(100)         not null,
+   URGENTE              bit                  not null,
+   RESPUESTA_CO         varchar(100)         null,
    constraint PK_COMUNICADO primary key nonclustered (ID_COMUNICADO)
 )
 go
+
 
 /*==============================================================*/
 /* Index: REDACTA_FK                                            */
@@ -948,25 +919,25 @@ go
 /* Table: CONTRATO                                              */
 /*==============================================================*/
 create table CONTRATO (
-   ID_CONTRATO          smallint    identity           not null,
-   IDCL                 smallint                       not null,
-   CEDULAE              INTEGER                         not null,
-   UBICACION_C          varchar(20)                    not null,
-   TELEFONO_C           varchar(10)                    not null,
-   CELULAR_C            varchar(10)                    not null,
-   TIPO_C               varchar(50)                    not null
-         constraint CKC_TIPO_C_CONTRATO check (TIPO_C in ('Definido','Indefinido')),
-   FECHA_INICIO_C       datetime                       not null,
-   TIPO_PERSONAL_C      varchar(20)                    not null,
-   CANTIDAD_PERSONAL_C  smallint                       not null,
-   COSTO_MENSUAL_C      NUMERIC(10,2)                   not null,
-   HORARIO_C            varchar(20)                    not null,
-   TIEMPO_C             int                            null,
-   FECHA_REG_CON        datetime                       not null,
+   ID_CONTRATO          smallint identity    not null,
+   IDCL                 smallint             not null,
+   CEDULAE              bigint               not null,
+   UBICACION_C          varchar(20)          not null,
+   TELEFONO_C           varchar(10)          not null,
+   CELULAR_C            varchar(10)          not null,
+   TIPO_C               varchar(50)          not null,
+   FECHA_INICIO_C       datetime             not null,
+   TIPO_PERSONAL_C      varchar(20)          not null,
+   CANTIDAD_PERSONAL_C  smallint             not null,
+   COSTO_MENSUAL_C      money                not null,
+   HORARIO_C            varchar(20)          not null,
+   TIEMPO_C             int                  null,
+   FECHA_REG_CON        datetime             not null,
    constraint PK_CONTRATO primary key nonclustered (ID_CONTRATO),
    constraint AK_ID_UBI_CONTRATO_CONTRATO unique (UBICACION_C)
 )
 go
+
 
 /*==============================================================*/
 /* Index: REG_CONT_FK                                           */
@@ -1003,15 +974,15 @@ go
 /*==============================================================*/
 
 alter table CONTRATO add constraint CK1_TELS_CONTRATO
-  check (TELEFONO_C like "[5][7][1245678]%")
+  check (TELEFONO_C like '[5][7][1245678]%')
 go
 
 /*==============================================================*/
 /* Constraint: CK2_CELS_CONTRATO                                     */
 /*==============================================================*/
 
-alter table CONTRATO add (constraint CK2_CELS_CONTRATO
-  check (CELULAR_C like "[3][0][012]%" or CELULAR_C like "[3][1][012345678]%" or CELULAR_C like "[3][2][01]%")
+alter table CONTRATO add constraint CK2_CELS_CONTRATO
+  check (CELULAR_C like '[3][0][012]%' or CELULAR_C like '[3][1][012345678]%' or CELULAR_C like '[3][2][01]%')
 go
 
 /*==============================================================*/
@@ -1026,22 +997,23 @@ go
 /*==============================================================*/
 alter table CONTRATO add constraint CK1_CONTR_COSTO
       CHECK (COSTO_MENSUAL_C > 0)
-go
+go 
 
 /*==============================================================*/
 /* Table: COORD_CONTRATO                                        */
 /*==============================================================*/
 create table COORD_CONTRATO (
-   CEDULAE              INTEGER                         not null,
+   CEDULAE              bigint               not null,
    constraint PK_COORD_CONTRATO primary key nonclustered (CEDULAE)
 )
 go
+
 
 /*==============================================================*/
 /* Table: COORD_T_Y_T                                           */
 /*==============================================================*/
 create table COORD_T_Y_T (
-   CEDULAE              INTEGER                         not null,
+   CEDULAE              bigint               not null,
    constraint PK_COORD_T_Y_T primary key nonclustered (CEDULAE)
 )
 go
@@ -1050,25 +1022,27 @@ go
 /* Table: DIR_COMERCIAL                                         */
 /*==============================================================*/
 create table DIR_COMERCIAL (
-   CEDULAE              INTEGER                         not null,
+   CEDULAE              bigint               not null,
    constraint PK_DIR_COMERCIAL primary key nonclustered (CEDULAE)
 )
 go
+
 
 /*==============================================================*/
 /* Table: DIR_GESTION_HUM                                       */
 /*==============================================================*/
 create table DIR_GESTION_HUM (
-   CEDULAE              INTEGER                         not null,
+   CEDULAE              bigint               not null,
    constraint PK_DIR_GESTION_HUM primary key nonclustered (CEDULAE)
 )
 go
+
 
 /*==============================================================*/
 /* Table: DIR_OPERACIONES                                       */
 /*==============================================================*/
 create table DIR_OPERACIONES (
-   CEDULAE              INTEGER                         not null,
+   CEDULAE              bigint               not null,
    constraint PK_DIR_OPERACIONES primary key nonclustered (CEDULAE)
 )
 go
@@ -1077,13 +1051,13 @@ go
 /* Table: EMPLEADOS                                             */
 /*==============================================================*/
 create table EMPLEADOS (
-   CEDULAE              INTEGER                         not null,
-   DIR_CEDULAE          INTEGER                         null,
-   NOMBREE              varchar(20)                    not null,
-   APELLIDOE            varchar(20)                    not null,
-   CONTRASENAE          char(10)                       not null,
-   CODDOCUME            varchar(20)                    not null,
-   FECHAREG             datetime                       not null,
+   CEDULAE              bigint               not null,
+   DIR_CEDULAE          bigint               null,
+   NOMBREE              varchar(20)          not null,
+   APELLIDOE            varchar(20)          not null,
+   CONTRASENAE          char(10)             not null,
+   CODDOCUME            varchar(20)          not null,
+   FECHAREG             datetime             not null,
    constraint PK_EMPLEADOS primary key nonclustered (CEDULAE),
    constraint AK_ID_COD_EMP_EMPLEADO unique (CODDOCUME)
 )
@@ -1101,8 +1075,8 @@ go
 /* Table: EMP_PLANTA                                            */
 /*==============================================================*/
 create table EMP_PLANTA (
-   CEDULAE              INTEGER                         not null,
-   SUELDOE              NUMERIC(10,2)                   not null,
+   CEDULAE              bigint               not null,
+   SUELDOE              money                not null,
    constraint PK_EMP_PLANTA primary key nonclustered (CEDULAE)
 )
 go
@@ -1111,10 +1085,10 @@ go
 /* Table: EMP_TEMP                                               */
 /*==============================================================*/
 create table EMP_TEMP (
-   CEDULAE              INTEGER                         not null,
-   ID_ASIG              smallint                       null,
-   TIENE_CONTRATO       bit                            not null,
-   TIPO_TEMP            varchar(20)                    not null,
+   CEDULAE              bigint               not null,
+   ID_ASIG              smallint             null,
+   TIENE_CONTRATO       bit                  not null,
+   TIPO_TEMP            varchar(20)          not null,
    constraint PK_EMP_TEMP primary key nonclustered (CEDULAE)
 )
 go
@@ -1126,6 +1100,7 @@ create index ASIGNAN_A_E_FK on EMP_TEMP (
 ID_ASIG ASC
 )
 go
+
 
 /*==============================================================*/
 /* Constraint: DOM_TIENE_CONTRATO                             */
@@ -1145,8 +1120,8 @@ go
 /* Table: EM_TIENE_TELS                                         */
 /*==============================================================*/
 create table EM_TIENE_TELS (
-   ID_TE                smallint                       not null,
-   CEDULAE              INTEGER                         not null,
+   ID_TE                smallint             not null,
+   CEDULAE              bigint               not null,
    constraint PK_EM_TIENE_TELS primary key nonclustered (ID_TE, CEDULAE)
 )
 go
@@ -1171,19 +1146,20 @@ go
 /* Table: IMPL_SEGURIDAD                                        */
 /*==============================================================*/
 create table IMPL_SEGURIDAD (
-   ID_IMPLEMENTO        smallint   identity            not null,
-   ID_PRO               smallint                       null,
-   CEDULAE              INTEGER                         not null,
-   NOMBRE_I             varchar(20)                    not null,
-   PRECIO_UNITARIO_I    NUMERIC(10,2)                   not null,
-   CANTIDAD             smallint                       not null,
-   DESCRIPCION_I        varchar(100)                   not null,
-   ESTADO_I             varchar(20)                    not null,
-   FECHA_REG_IM         datetime                       not null,
+   ID_IMPLEMENTO        smallint identity    not null,
+   ID_PRO               smallint             null,
+   CEDULAE              bigint               not null,
+   NOMBRE_I             varchar(20)          not null,
+   PRECIO_UNITARIO_I    money                not null,
+   CANTIDAD             smallint             not null,
+   DESCRIPCION_I        varchar(100)         not null,
+   ESTADO_I             varchar(20)          not null,
+   FECHA_REG_IM         datetime             not null,
    constraint PK_IMPL_SEGURIDAD primary key nonclustered (ID_IMPLEMENTO),
    constraint AK_ID_NOM_IMPLEMENT_IMPL_SEG unique (NOMBRE_I)
 )
 go
+
 
 /*==============================================================*/
 /* Index: REG_IMPL_FK                                           */
@@ -1226,15 +1202,16 @@ go
 /* Table: PROVEEDOR                                             */
 /*==============================================================*/
 create table PROVEEDOR (
-   ID_PRO               smallint   identity            not null,
-   CEDULAE              INTEGER                         not null,
-   NOMBRE               varchar(20)                    not null,
-   DIRECCION            varchar(20)                    not null,
-   FECHA_REG_PROV       datetime                       not null,
+   ID_PRO               smallint identity   not null,
+   CEDULAE              bigint               not null,
+   NOMBRE               varchar(20)          not null,
+   DIRECCION            varchar(20)          not null,
+   FECHA_REG_PROV       datetime             not null,
    constraint PK_PROVEEDOR primary key nonclustered (ID_PRO),
    constraint AK_ID_NOM_PROV_PROVEEDO unique (NOMBRE)
 )
 go
+
 
 /*==============================================================*/
 /* Index: REG_PROV_FK                                           */
@@ -1248,19 +1225,19 @@ go
 /* Table: SUBGERENTE                                            */
 /*==============================================================*/
 create table SUBGERENTE (
-   CEDULAE              INTEGER                         not null,
+   CEDULAE              bigint               not null,
    constraint PK_SUBGERENTE primary key nonclustered (CEDULAE)
 )
 go
+
 
 /*==============================================================*/
 /* Table: TELS_CLI                                              */
 /*==============================================================*/
 create table TELS_CLI (
-   ID_TC                smallint  identity             not null,
-   NUM_TELEFONO_C       varchar(10)                    not null,
-   constraint PK_TELS_CLI primary key nonclustered (ID_TC),
-   constraint AK_ID_NUM_TELEFONO_C unique (NUM_TELEFONO_C)
+   ID_TC                smallint identity    not null,
+   NUM_TELEFONO_C       varchar(10)          not null,
+   constraint PK_TELS_CLI primary key nonclustered (ID_TC)
 )
 go
 
@@ -1269,37 +1246,37 @@ go
 /*==============================================================*/
 
 alter table TELS_CLI add constraint CK1_TELS_CLI
-  check (NUM_TELEFONO_C like "[3][0][012]%" or NUM_TELEFONO_C like "[3][1][012345678]%" or NUM_TELEFONO_C like "[3][2][01]%" or NUM_TELEFONO_C like "[5][7][1245678]%")
+  check (NUM_TELEFONO_C like '[3][0][012]%' or NUM_TELEFONO_C like '[3][1][012345678]%' or NUM_TELEFONO_C like '[3][2][01]%' or NUM_TELEFONO_C like '[5][7][1245678]%')
 go 
+
 
 /*==============================================================*/
 /* Table: TELS_EMP                                              */
 /*==============================================================*/
 create table TELS_EMP (
-   ID_TE                smallint  identity             not null,
-   NUM_TELEFONO_E       varchar(10)                    not null,
-   constraint PK_TELS_EMP primary key nonclustered (ID_TE),
-   constraint AK_ID_NUM_TELEFONO_E unique (NUM_TELEFONO_E)
+   ID_TE                smallint identity    not null,
+   NUM_TELEFONO_E       varchar(10)                  not null,
+   constraint PK_TELS_EMP primary key nonclustered (ID_TE)
 )
 go
+
 
 /*==============================================================*/
 /* Constraint: CK1_TELS_EMP                                     */
 /*==============================================================*/
 
-alter table TELS_EMP add (constraint CK1_TELS_EMP
-  check (NUM_TELEFONO_E like "[3][0][012]%" or NUM_TELEFONO_E like "[3][1][012345678]%" or NUM_TELEFONO_E like "[3][2][01]%" or NUM_TELEFONO_E like "[5][7][1245678]%")
+alter table TELS_EMP add constraint CK1_TELS_EMP
+  check (NUM_TELEFONO_E like '[3][0][012]%' or NUM_TELEFONO_E like '[3][1][012345678]%' or NUM_TELEFONO_E like '[3][2][01]%' or NUM_TELEFONO_E like '[5][7][1245678]%')
 go
 
 /*==============================================================*/
 /* Table: TELS_PROV                                             */
 /*==============================================================*/
 create table TELS_PROV (
-   ID_TP                smallint identity              not null,
-   ID_PRO               smallint                       null,
-   NUM_TELEFONO_P       varchar(10)                    not null,
-   constraint PK_TELS_PROV primary key nonclustered (ID_TP),
-   constraint AK_ID_NUM_TELEFONO_P unique (NUM_TELEFONO_P)
+   ID_TP                smallint             not null,
+   ID_PRO               smallint             null,
+   NUM_TELEFONO_P       varchar(10)                 not null,
+   constraint PK_TELS_PROV primary key nonclustered (ID_TP)
 )
 go
 
@@ -1315,8 +1292,8 @@ go
 /* Constraint: CK1_TELS_PROV                                     */
 /*==============================================================*/
 
-alter table TELS_PROV add (constraint CK1_TELS_PROV
-  check (NUM_TELEFONO_P like "[3][0][012]%" or NUM_TELEFONO_P like "[3][1][012345678]%" or NUM_TELEFONO_P like "[3][2][01]%" or NUM_TELEFONO_P like "[5][7][1245678]%")
+alter table TELS_PROV add constraint CK1_TELS_PROV
+  check (NUM_TELEFONO_P like '[3][0][012]%' or NUM_TELEFONO_P like '[3][1][012345678]%' or NUM_TELEFONO_P like '[3][2][01]%' or NUM_TELEFONO_P like '[5][7][1245678]%')
 go
 
 alter table ACTUALIZACION

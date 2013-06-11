@@ -661,7 +661,7 @@ go
 /* Table: ACTU_IMPL                                             */
 /*==============================================================*/
 create table ACTU_IMPL (
-   ID_ACTUALIZACION_I   smallint             not null,
+   ID_ACTUALIZACION_I   smallint identity    not null,
    ID_IMPLEMENTO        smallint             null,
    CEDULAE              bigint               null,
    FECHA_ACTUALIZACION_I datetime             not null,
@@ -698,7 +698,7 @@ go
 /* Table: ASIGNACION_C                                          */
 /*==============================================================*/
 create table ASIGNACION_C (
-   ID_ASIG              smallint             not null,
+   ID_ASIG              smallint identity    not null,
    ID_CONTRATO          smallint             not null,
    COO_CEDULAE          bigint               not null,
    EMP_TEMP_CEDULAE     bigint               not null,  
@@ -728,7 +728,7 @@ go
 /* Table: ASIG_IMPL                                             */
 /*==============================================================*/
 create table ASIG_IMPL (
-   ID_ASIGNACION_I      smallint             not null,
+   ID_ASIGNACION_I      smallint identity    not null,
    ID_IMPLEMENTO        smallint             not null,
    CEDULAE              bigint               not null,
    COO_CEDULAE          bigint               not null,
@@ -787,7 +787,7 @@ alter table ASIG_IMPL add constraint CK2_ASIG_IMPL_FECHA
 /* Table: BITACORA_SEG                                          */
 /*==============================================================*/
 create table BITACORA_SEG (
-   ID_OPER              int                  not null,
+   ID_OPER              int  identity        not null,
    CEDULAE              bigint               null,
    FECHA_OPER           datetime             not null,
    USU_OPER             varchar(20)          null,
@@ -817,7 +817,7 @@ go
 /* Table: CLIENTE                                               */
 /*==============================================================*/
 create table CLIENTE (
-   IDCL                 smallint             not null,
+   IDCL                 smallint identity    not null,
    CEDULAE              bigint               not null,
    NOMBRECL             varchar(20)          not null,
    DIRECCIONCL          varchar(20)          not null,
@@ -865,7 +865,7 @@ go
 /* Table: COMUNICADO                                            */
 /*==============================================================*/
 create table COMUNICADO (
-   ID_COMUNICADO        smallint             not null,
+   ID_COMUNICADO        smallint identity    not null,
    CEDULAE              bigint               null,
    DIR_CEDULAE          bigint               null,
    TIPO_CO              varchar(20)          not null,
@@ -919,7 +919,7 @@ go
 /* Table: CONTRATO                                              */
 /*==============================================================*/
 create table CONTRATO (
-   ID_CONTRATO          smallint             not null,
+   ID_CONTRATO          smallint identity    not null,
    IDCL                 smallint             not null,
    CEDULAE              bigint               not null,
    UBICACION_C          varchar(20)          not null,
@@ -1146,7 +1146,7 @@ go
 /* Table: IMPL_SEGURIDAD                                        */
 /*==============================================================*/
 create table IMPL_SEGURIDAD (
-   ID_IMPLEMENTO        smallint             not null,
+   ID_IMPLEMENTO        smallint identity    not null,
    ID_PRO               smallint             null,
    CEDULAE              bigint               not null,
    NOMBRE_I             varchar(20)          not null,
@@ -1202,7 +1202,7 @@ go
 /* Table: PROVEEDOR                                             */
 /*==============================================================*/
 create table PROVEEDOR (
-   ID_PRO               smallint             not null,
+   ID_PRO               smallint identity   not null,
    CEDULAE              bigint               not null,
    NOMBRE               varchar(20)          not null,
    DIRECCION            varchar(20)          not null,
@@ -1235,7 +1235,7 @@ go
 /* Table: TELS_CLI                                              */
 /*==============================================================*/
 create table TELS_CLI (
-   ID_TC                smallint             not null,
+   ID_TC                smallint identity    not null,
    NUM_TELEFONO_C       int                  not null,
    constraint PK_TELS_CLI primary key nonclustered (ID_TC)
 )
@@ -1254,7 +1254,7 @@ go
 /* Table: TELS_EMP                                              */
 /*==============================================================*/
 create table TELS_EMP (
-   ID_TE                smallint             not null,
+   ID_TE                smallint identity    not null,
    NUM_TELEFONO_E       int                  not null,
    constraint PK_TELS_EMP primary key nonclustered (ID_TE)
 )

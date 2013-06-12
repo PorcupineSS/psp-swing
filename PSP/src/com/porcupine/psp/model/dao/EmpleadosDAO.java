@@ -4,7 +4,7 @@
  */
 package com.porcupine.psp.model.dao;
 
-import com.porcupine.psp.model.entity.DirGestionHum;
+
 import com.porcupine.psp.model.entity.Empleados;
 import java.util.List;
 import javax.persistence.*;

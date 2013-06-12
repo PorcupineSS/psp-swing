@@ -1,5 +1,7 @@
 package com.porcupine.psp.model.dao;
 
+import com.porcupine.psp.controller.MainController;
+
 /**
  *
  * @author Alexander
@@ -7,7 +9,7 @@ package com.porcupine.psp.model.dao;
 public class DAOFactory {
     
     //Debe ser inicializado
-    private String PU;
+    private String PU = MainController.getSelectedDB();
 
     private DAOFactory() {
     }

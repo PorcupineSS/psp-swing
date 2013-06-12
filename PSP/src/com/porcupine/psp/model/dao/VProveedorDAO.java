@@ -23,6 +23,8 @@ import javax.persistence.criteria.CriteriaQuery;
  *
  * @author Johan
  */
+
+
 public class VProveedorDAO implements ICrudDAO<VProv, BigDecimal> {
 
     private EntityManagerFactory entityManagerFactory;
@@ -35,6 +37,7 @@ public class VProveedorDAO implements ICrudDAO<VProv, BigDecimal> {
         return entityManagerFactory.createEntityManager();
     }
 
+    /*
     //Este create funciona usando el nombre del proveedor
     @Override
     public void create(VProv entity) throws PreexistingEntityException, NonexistentEntityException {
@@ -60,7 +63,7 @@ public class VProveedorDAO implements ICrudDAO<VProv, BigDecimal> {
                 entityManager.close();
             }
         }
-    }
+    }*/
 
     //Encontrar  proveedor por nombre 
     public VProv findByName(String name) throws EntityNotFoundException {
@@ -117,7 +120,8 @@ public class VProveedorDAO implements ICrudDAO<VProv, BigDecimal> {
             }
         }
     }
-
+    
+    /*
     //update por Proveedor
     @Override
     public void update(VProv entity) throws NonexistentEntityException {
@@ -141,8 +145,9 @@ public class VProveedorDAO implements ICrudDAO<VProv, BigDecimal> {
                 entityManager.close();
             }
         }
-    }
-
+    }*/
+    
+    /*
     //Delete por id de proveedor
     @Override
     public void delete(BigDecimal id) throws NonexistentEntityException {
@@ -169,7 +174,7 @@ public class VProveedorDAO implements ICrudDAO<VProv, BigDecimal> {
                 entityManager.close();
             }
         }
-    }
+    }*/
 
     public void deleteByNombre(String name) throws NonexistentEntityException {
         EntityManager entityManager = null;
@@ -212,5 +217,20 @@ public class VProveedorDAO implements ICrudDAO<VProv, BigDecimal> {
                 entityManager.close();
             }
         }
+    }
+
+    @Override
+    public void create(VProv entity) throws model.dao.exceptions.PreexistingEntityException, com.porcupine.psp.model.dao.exceptions.NonexistentEntityException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(VProv entity) throws com.porcupine.psp.model.dao.exceptions.NonexistentEntityException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(BigDecimal id) throws com.porcupine.psp.model.dao.exceptions.NonexistentEntityException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

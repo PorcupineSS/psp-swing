@@ -267,17 +267,17 @@ public class CreateEmployee extends javax.swing.JPanel {
 
         //Armar VOS
         EmpleadosVO empleado = new EmpleadosVO();
-        empleado.setNombreE(jTextFieldNombres.getText());
-        empleado.setApellidoE(jTextFieldApellidos.getText());
-        empleado.setCedulaE(new Long(jTextFieldCC.getText()));
-        empleado.setContrasenaE(jTextFieldContraseña.getText());
+        empleado.setNombreEmpleado(jTextFieldNombres.getText());
+        empleado.setApellidoEmpleado(jTextFieldApellidos.getText());
+        empleado.setCedulaEmpleado(Integer.parseInt(jTextFieldCC.getText()));
+        empleado.setContraseniaEmpleado(jTextFieldContraseña.getText());
         empleado.setRol(jComboBoxTipoEmpleado.getSelectedItem().toString());
 
         //No hay problema en bd si es nulo
         if (MainController.getEmpleadoActivo() != null) {
-            empleado.setDirCedulaE(MainController.getEmpleadoActivo().getCedulaE());
+            empleado.setCedulaDirector(MainController.getEmpleadoActivo().getCedulaEmpleado());
         } else {
-            empleado.setDirCedulaE(null);
+            
         }
         //Vos Externos
 
@@ -299,7 +299,7 @@ public class CreateEmployee extends javax.swing.JPanel {
             empTels.add(empleado);
             TelefonosVO telefonos = new TelefonosVO();
             telefonos.setEmpleadosList(empTels);
-            telefonos.setNumTelefonoE(Integer.parseInt(each));
+            telefonos.setNumeroTelefonoEmpleado((each));
             List<TelefonosVO> newTels = empleado.getTelsEmpList();
             if (newTels == null){
                 newTels=new ArrayList<TelefonosVO>();

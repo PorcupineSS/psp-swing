@@ -17,7 +17,8 @@ public class ServiceFactory {
         return instance;
     }
 
-    public EmpleadosService getEmpresaService() {
+  
+    public EmpleadosService getEmpleadosService() {
         return EmpleadosService.getInstance();
     }
 

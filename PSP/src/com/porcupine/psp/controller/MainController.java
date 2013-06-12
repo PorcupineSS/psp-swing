@@ -121,8 +121,8 @@ public class MainController {
         String cedulaEmpleado = login.getUsuarioTF().getText();
         String password = new String(login.getContrasenaPF().getPassword());
 
-        empleado.setCedulaE(Long.parseLong(cedulaEmpleado.toString()));
-        empleado.setContrasenaE(password);
+        empleado.setCedulaEmpleado(Integer.parseInt(cedulaEmpleado));
+        empleado.setContraseniaEmpleado(password);
 
         EmpleadosVO empleadoLogin;
         try {

@@ -9,7 +9,7 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import model.dao.exceptions.InsufficientPermissionsException;
 import model.dao.exceptions.InvalidAttributeException;
-import model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import model.dao.exceptions.PreexistingEntityException;
 import model.dao.exceptions.RequiredAttributeException;
 

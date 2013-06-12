@@ -6,10 +6,6 @@ package com.porcupine.psp.model.dao;
 
 import com.porcupine.psp.controller.exceptions.NonexistentEntityException;
 import com.porcupine.psp.controller.exceptions.PreexistingEntityException;
-import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
-import com.porcupine.psp.model.dao.exceptions.PreexistingEntityException;
-import com.porcupine.psp.model.entity.VProv;
-import com.porcupine.psp.model.entity.VProv;
 import com.porcupine.psp.model.entity.view.VProv;
 import java.math.BigDecimal;
 import java.math.BigInteger;

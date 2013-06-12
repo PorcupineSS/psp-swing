@@ -9,8 +9,8 @@ import com.porcupine.psp.model.entity.Empleados;
 import java.util.List;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaQuery;
-import model.dao.exceptions.DataBaseException;
-import model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.dao.exceptions.DataBaseException;
+import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import model.dao.exceptions.PreexistingEntityException;
 
 /**

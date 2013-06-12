@@ -40,7 +40,7 @@ public class VBitacoraJpaController implements Serializable {
             em.persist(VBitacora);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findVBitacora(VBitacora.getCedulae()) != null) {
+            if (findVBitacora((BigInteger)VBitacora.getCedulae()) != null) {
                 throw new PreexistingEntityException("VBitacora " + VBitacora + " already exists.", ex);
             }
             throw ex;

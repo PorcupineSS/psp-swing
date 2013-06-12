@@ -4,6 +4,8 @@
  */
 package com.porcupine.psp.model.service;
 
+import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.entity.Empleados;
 import com.porcupine.psp.model.vo.EmpleadosVO;

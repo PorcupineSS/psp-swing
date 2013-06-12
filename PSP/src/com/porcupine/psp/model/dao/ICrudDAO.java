@@ -3,7 +3,7 @@ package com.porcupine.psp.model.dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
-import model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import model.dao.exceptions.PreexistingEntityException;
 
 /**

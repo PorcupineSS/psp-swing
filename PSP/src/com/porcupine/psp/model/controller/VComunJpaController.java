@@ -40,7 +40,7 @@ public class VComunJpaController implements Serializable {
             em.persist(VComun);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findVComun(VComun.getCedulae()) != null) {
+            if (findVComun((BigInteger)VComun.getCedulae()) != null) {
                 throw new PreexistingEntityException("VComun " + VComun + " already exists.", ex);
             }
             throw ex;

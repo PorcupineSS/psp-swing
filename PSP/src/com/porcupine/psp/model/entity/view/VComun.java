@@ -5,6 +5,7 @@
 package com.porcupine.psp.model.entity.view;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class VComun implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "CEDULAE")
-    private Integer cedulae;
+    @Id
+    private BigInteger cedulae;
     @Column(name = "DIR_CEDULAE")
     private Integer dirCedulae;
     @Basic(optional = false)
@@ -50,11 +52,11 @@ public class VComun implements Serializable {
     public VComun() {
     }
 
-    public Integer getCedulae() {
+    public BigInteger getCedulae() {
         return cedulae;
     }
 
-    public void setCedulae(Integer cedulae) {
+    public void setCedulae(BigInteger cedulae) {
         this.cedulae = cedulae;
     }
 

@@ -26,6 +26,7 @@ public class VProv implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "CEDULAE")
+    @Id
     private int cedulae;
     @Basic(optional = false)
     @Column(name = "NOMBRE")

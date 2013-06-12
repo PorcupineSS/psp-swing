@@ -28,8 +28,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBoxTipoContrato" alignment="0" min="-2" pref="221" max="-2" attributes="0"/>
-                          <Component id="jDateChooserFechaInicio" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Component id="jComboBoxTipoContrato" min="-2" pref="221" max="-2" attributes="0"/>
+                          <Component id="jDateChooserFechaInicio" min="-2" pref="137" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -84,8 +84,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jDateChooserFechaInicio" min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jDateChooserFechaInicio" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -195,8 +195,6 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserFechaInicio">
-    </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCancelar">
@@ -214,6 +212,8 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserFechaInicio">
     </Component>
   </SubComponents>
 </Form>

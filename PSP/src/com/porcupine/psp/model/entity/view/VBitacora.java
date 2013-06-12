@@ -5,6 +5,7 @@
 package com.porcupine.psp.model.entity.view;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class VBitacora implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "CEDULAE")
-    private Integer cedulae;
+    private BigInteger cedulae;
     @Basic(optional = false)
     @Column(name = "FECHA_OPER")
     @Temporal(TemporalType.TIMESTAMP)
@@ -42,15 +43,17 @@ public class VBitacora implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIPO_OPER")
     private String tipoOper;
+    @Id
+    private VBitacora id;
 
     public VBitacora() {
     }
 
-    public Integer getCedulae() {
+    public BigInteger getCedulae() {
         return cedulae;
     }
 
-    public void setCedulae(Integer cedulae) {
+    public void setCedulae(BigInteger cedulae) {
         this.cedulae = cedulae;
     }
 
@@ -92,6 +95,14 @@ public class VBitacora implements Serializable {
 
     public void setTipoOper(String tipoOper) {
         this.tipoOper = tipoOper;
+    }
+
+    public VBitacora getId() {
+        return id;
+    }
+
+    public void setId(VBitacora id) {
+        this.id = id;
     }
     
 }

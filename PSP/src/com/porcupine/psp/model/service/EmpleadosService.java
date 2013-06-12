@@ -37,7 +37,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         entity.setCoddocume(vo.getCodigoDocumento());
 
         entity.setFechareg(new Date());
-        entity.setContrasenae(Hash.hashMD5(vo.getContraseniaEmpleado()));
+        entity.setContrasenae((vo.getContraseniaEmpleado()));
 
         //entity.setDirCedulae(vo.getCedulaDirector());
 
@@ -78,7 +78,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
     public EmpleadosVO login(EmpleadosVO vo) throws DataBaseException {
         Empleados entity = new Empleados();
         entity.setCoddocume(vo.getCodigoDocumento());
-        entity.setContrasenae(Hash.hashMD5((vo.getContraseniaEmpleado())));
+        entity.setContrasenae(((vo.getContraseniaEmpleado())));
         
         Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().login(entity);
         return empleado != null ? empleado.toVO() : null;

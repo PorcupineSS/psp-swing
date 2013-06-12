@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.EmpleadosVO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -192,6 +193,23 @@ public class Empleados implements Serializable {
     @Override
     public String toString() {
         return "com.porcupine.psp.model.entity.Empleados[ cedulae=" + cedulae + " ]";
+    }
+
+    public EmpleadosVO toVO() {
+        EmpleadosVO empleado = new EmpleadosVO();
+        empleado.setCedulaDirector(cedulae);
+        empleado.setCedulaEmpleado(dirCedulae.getCedulae());
+        empleado.setApellidoEmpleado(apellidoe);
+        empleado.setCodigoDocumento(coddocume);
+        empleado.setContraseniaEmpleado(contrasenae);
+        empleado.setFechaRegistro(fechareg);
+        empleado.setNombreEmpleado(nombree);
+        empleado.setRol("Rol");
+        
+        //TODO for each
+        //empleado.setTelsEmpList(telsEmpList);
+        
+        return empleado;
     }
     
 }

@@ -4,7 +4,11 @@
  */
 package com.porcupine.psp.model.service;
 
+import com.porcupine.psp.model.dao.DAOFactory;
+import com.porcupine.psp.model.entity.Empleados;
 import com.porcupine.psp.model.vo.EmpleadosVO;
+import com.porcupine.psp.util.Hash;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import model.dao.exceptions.*;
@@ -13,11 +17,10 @@ import model.dao.exceptions.*;
  *
  * @author Zergio
  */
-public class EmpleadosService implements IService<EmpleadosVO, Integer>{
-    
+public class EmpleadosService implements IService<EmpleadosVO, Integer> {
+
     private static EmpleadosService instance;
-    
-    
+
     public static synchronized EmpleadosService getInstance() {
         if (instance == null) {
             instance = new EmpleadosService();
@@ -27,12 +30,29 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer>{
 
     @Override
     public void create(EmpleadosVO vo) throws PreexistingEntityException, NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Empleados entity = new Empleados();
+        entity.setCedulae(vo.getCedulaEmpleado());
+        entity.setNombree(vo.getNombreEmpleado());
+        entity.setApellidoe(vo.getApellidoEmpleado());
+        entity.setCoddocume(vo.getCodigoDocumento());
+
+        entity.setFechareg(new Date());
+        entity.setContrasenae(Hash.hashMD5(vo.getContraseniaEmpleado()));
+
+        //entity.setDirCedulae(vo.getCedulaDirector());
+
+        DAOFactory.getInstance().getEmpleadosDAO().create(entity);
     }
 
     @Override
     public EmpleadosVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().find(id);
+        if (empleado != null) {
+            return empleado.toVO();
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -54,5 +74,14 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer>{
     public void removeAll() throws NonexistentEntityException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
+    public EmpleadosVO login(EmpleadosVO vo) throws DataBaseException {
+        Empleados entity = new Empleados();
+        entity.setCoddocume(vo.getCodigoDocumento());
+        entity.setContrasenae(Hash.hashMD5((vo.getContraseniaEmpleado())));
+        
+        Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().login(entity);
+        return empleado != null ? empleado.toVO() : null;
+        
+    }
 }

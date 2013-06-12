@@ -4,7 +4,7 @@
  */
 package com.porcupine.psp.view;
 
-import com.porcupine.psp.controller.LoginController;
+import com.porcupine.psp.controller.MainController;
 import javax.swing.JViewport;
 
 /**
@@ -82,7 +82,7 @@ public class Psp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                LoginController.mostrarSeleccionDB();
+                MainController.mostrarSeleccionDB();
             }
         });
     }

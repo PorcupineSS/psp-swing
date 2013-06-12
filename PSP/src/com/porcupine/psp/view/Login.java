@@ -4,7 +4,7 @@
  */
 package com.porcupine.psp.view;
 
-import com.porcupine.psp.controller.LoginController;
+import com.porcupine.psp.controller.MainController;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -134,7 +134,7 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldUserActionPerformed
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        LoginController.login();
+        MainController.login();
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jPasswordFieldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordActionPerformed

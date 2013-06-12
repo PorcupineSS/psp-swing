@@ -4,7 +4,6 @@
  */
 package com.porcupine.psp.view;
 
-import com.porcupine.psp.controller.LoginController;
 import com.porcupine.psp.controller.MainController;
 import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;

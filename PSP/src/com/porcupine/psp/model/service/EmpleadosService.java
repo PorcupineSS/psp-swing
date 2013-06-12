@@ -44,12 +44,14 @@ public class EmpleadosService implements IService<EmpleadosVO, Long> {
                 
                 entity.setContraseniaEmpleado(BCrypt.hashpw(vo.getContrasenaE(), BCrypt.gensalt()));
                 entity.setCeduladir(BigInteger.valueOf(vo.getDirCedulaE()));
+                entity.setCodigoEmpleado(vo.getCodDocumE());
+                
                 //TODO deberia ser autogenerado
-                //entity.setFechaRegistro(vo.getFechareg());
+                entity.setFechaRegistro(vo.getFechareg());
                 
                 //entity.setTELSEMP((List) vo.getTelsEmpList());
 
-                //entity.setCoddocume(vo.getCodDocumE());
+                
                 //entity.setBitacoraSegList((List) vo.getBitacoraSegList());
                 
                 //TODO setear cosas hace falta hacer ese codigo

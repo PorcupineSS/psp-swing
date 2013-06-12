@@ -157,6 +157,7 @@ public class MainController {
         try {
             ServiceFactory.getInstance().getEmpleadosService().create(empleadoTemporal);
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             int opcion = JOptionPane.showOptionDialog(crearEmpleado, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
             switch (opcion) {
                 case JOptionPane.OK_OPTION:

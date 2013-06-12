@@ -79,7 +79,7 @@
     <properties>
       <property name="eclipselink.canonicalmodel.subpackage" value="two"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@168.176.36.14:1521:UNBDS7"/>
-      <property name="javax.persistence.jdbc.password" value="s02258064"/>
+      <property name="javax.persistence.jdbc.password" value="S02258064"/>
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
       <property name="javax.persistence.jdbc.user" value="javergarav"/>
     </properties>

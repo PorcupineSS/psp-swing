@@ -5,7 +5,7 @@
 package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -27,9 +27,9 @@ public class DirComercial implements Serializable {
     @Column(name = "CEDULAE")
     private Integer cedulae;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cedulae")
-    private Collection<Cliente> clienteCollection;
+    private List<Cliente> clienteList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cedulae")
-    private Collection<Contrato> contratoCollection;
+    private List<Contrato> contratoList;
     @JoinColumn(name = "CEDULAE", referencedColumnName = "CEDULAE", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private EmpPlanta empPlanta;
@@ -50,21 +50,21 @@ public class DirComercial implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Cliente> getClienteCollection() {
-        return clienteCollection;
+    public List<Cliente> getClienteList() {
+        return clienteList;
     }
 
-    public void setClienteCollection(Collection<Cliente> clienteCollection) {
-        this.clienteCollection = clienteCollection;
+    public void setClienteList(List<Cliente> clienteList) {
+        this.clienteList = clienteList;
     }
 
     @XmlTransient
-    public Collection<Contrato> getContratoCollection() {
-        return contratoCollection;
+    public List<Contrato> getContratoList() {
+        return contratoList;
     }
 
-    public void setContratoCollection(Collection<Contrato> contratoCollection) {
-        this.contratoCollection = contratoCollection;
+    public void setContratoList(List<Contrato> contratoList) {
+        this.contratoList = contratoList;
     }
 
     public EmpPlanta getEmpPlanta() {

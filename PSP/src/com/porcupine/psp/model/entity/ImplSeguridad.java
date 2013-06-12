@@ -6,8 +6,8 @@ package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -62,9 +62,9 @@ public class ImplSeguridad implements Serializable {
     @ManyToOne(optional = false)
     private CoordTYT cedulae;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idImplemento")
-    private Collection<AsigImpl> asigImplCollection;
+    private List<AsigImpl> asigImplList;
     @OneToMany(mappedBy = "idImplemento")
-    private Collection<ActuImpl> actuImplCollection;
+    private List<ActuImpl> actuImplList;
 
     public ImplSeguridad() {
     }
@@ -156,21 +156,21 @@ public class ImplSeguridad implements Serializable {
     }
 
     @XmlTransient
-    public Collection<AsigImpl> getAsigImplCollection() {
-        return asigImplCollection;
+    public List<AsigImpl> getAsigImplList() {
+        return asigImplList;
     }
 
-    public void setAsigImplCollection(Collection<AsigImpl> asigImplCollection) {
-        this.asigImplCollection = asigImplCollection;
+    public void setAsigImplList(List<AsigImpl> asigImplList) {
+        this.asigImplList = asigImplList;
     }
 
     @XmlTransient
-    public Collection<ActuImpl> getActuImplCollection() {
-        return actuImplCollection;
+    public List<ActuImpl> getActuImplList() {
+        return actuImplList;
     }
 
-    public void setActuImplCollection(Collection<ActuImpl> actuImplCollection) {
-        this.actuImplCollection = actuImplCollection;
+    public void setActuImplList(List<ActuImpl> actuImplList) {
+        this.actuImplList = actuImplList;
     }
 
     @Override

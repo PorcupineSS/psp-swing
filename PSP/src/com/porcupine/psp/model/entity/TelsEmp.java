@@ -5,7 +5,7 @@
 package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -31,8 +31,8 @@ public class TelsEmp implements Serializable {
     @Basic(optional = false)
     @Column(name = "NUM_TELEFONO_E")
     private String numTelefonoE;
-    @ManyToMany(mappedBy = "telsEmpCollection")
-    private Collection<Empleados> empleadosCollection;
+    @ManyToMany(mappedBy = "telsEmpList")
+    private List<Empleados> empleadosList;
 
     public TelsEmp() {
     }
@@ -63,12 +63,12 @@ public class TelsEmp implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Empleados> getEmpleadosCollection() {
-        return empleadosCollection;
+    public List<Empleados> getEmpleadosList() {
+        return empleadosList;
     }
 
-    public void setEmpleadosCollection(Collection<Empleados> empleadosCollection) {
-        this.empleadosCollection = empleadosCollection;
+    public void setEmpleadosList(List<Empleados> empleadosList) {
+        this.empleadosList = empleadosList;
     }
 
     @Override

@@ -5,7 +5,7 @@
 package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -30,7 +30,7 @@ public class Subgerente implements Serializable {
     @OneToOne(optional = false)
     private EmpPlanta empPlanta;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subgerente")
-    private Collection<Actualizacion> actualizacionCollection;
+    private List<Actualizacion> actualizacionList;
 
     public Subgerente() {
     }
@@ -56,12 +56,12 @@ public class Subgerente implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Actualizacion> getActualizacionCollection() {
-        return actualizacionCollection;
+    public List<Actualizacion> getActualizacionList() {
+        return actualizacionList;
     }
 
-    public void setActualizacionCollection(Collection<Actualizacion> actualizacionCollection) {
-        this.actualizacionCollection = actualizacionCollection;
+    public void setActualizacionList(List<Actualizacion> actualizacionList) {
+        this.actualizacionList = actualizacionList;
     }
 
     @Override

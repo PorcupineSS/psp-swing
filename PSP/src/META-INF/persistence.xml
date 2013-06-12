@@ -9,7 +9,6 @@
     <class>com.porcupine.psp.model.entity.AsignacionC</class>
     <class>com.porcupine.psp.model.entity.AsigImpl</class>
     <class>com.porcupine.psp.model.entity.TelsProv</class>
-    <class>com.porcupine.psp.model.entity.CoordTYY</class>
     <class>com.porcupine.psp.model.entity.ActuImpl</class>
     <class>com.porcupine.psp.model.entity.Subgerente</class>
     <class>com.porcupine.psp.model.entity.Proveedor</class>
@@ -53,7 +52,6 @@
     <class>com.porcupine.psp.model.entity.Comunicado</class>
     <class>com.porcupine.psp.model.entity.Contrato</class>
     <class>com.porcupine.psp.model.entity.CoordContrato</class>
-    <class>com.porcupine.psp.model.entity.CoordTYY</class>
     <class>com.porcupine.psp.model.entity.DirComercial</class>
     <class>com.porcupine.psp.model.entity.DirGestionHum</class>
     <class>com.porcupine.psp.model.entity.DirOperaciones</class>
@@ -95,7 +93,6 @@
     <class>com.porcupine.psp.model.entity.Comunicado</class>
     <class>com.porcupine.psp.model.entity.Contrato</class>
     <class>com.porcupine.psp.model.entity.CoordContrato</class>
-    <class>com.porcupine.psp.model.entity.CoordTYY</class>
     <class>com.porcupine.psp.model.entity.DirComercial</class>
     <class>com.porcupine.psp.model.entity.DirGestionHum</class>
     <class>com.porcupine.psp.model.entity.DirOperaciones</class>

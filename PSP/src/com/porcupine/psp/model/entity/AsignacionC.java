@@ -5,8 +5,8 @@
 package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -42,7 +42,7 @@ public class AsignacionC implements Serializable {
     @Column(name = "HORARIO_ASIGNADO")
     private String horarioAsignado;
     @OneToMany(mappedBy = "idAsig")
-    private Collection<EmpTemp> empTempCollection;
+    private List<EmpTemp> empTempList;
     @JoinColumn(name = "COO_CEDULAE", referencedColumnName = "CEDULAE")
     @ManyToOne(optional = false)
     private CoordContrato cooCedulae;
@@ -97,12 +97,12 @@ public class AsignacionC implements Serializable {
     }
 
     @XmlTransient
-    public Collection<EmpTemp> getEmpTempCollection() {
-        return empTempCollection;
+    public List<EmpTemp> getEmpTempList() {
+        return empTempList;
     }
 
-    public void setEmpTempCollection(Collection<EmpTemp> empTempCollection) {
-        this.empTempCollection = empTempCollection;
+    public void setEmpTempList(List<EmpTemp> empTempList) {
+        this.empTempList = empTempList;
     }
 
     public CoordContrato getCooCedulae() {

@@ -5,7 +5,7 @@
 package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -30,9 +30,9 @@ public class DirGestionHum implements Serializable {
     @OneToOne(optional = false)
     private EmpPlanta empPlanta;
     @OneToMany(mappedBy = "dirCedulae")
-    private Collection<Empleados> empleadosCollection;
+    private List<Empleados> empleadosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dirGestionHum")
-    private Collection<Actualizacion> actualizacionCollection;
+    private List<Actualizacion> actualizacionList;
 
     public DirGestionHum() {
     }
@@ -58,21 +58,21 @@ public class DirGestionHum implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Empleados> getEmpleadosCollection() {
-        return empleadosCollection;
+    public List<Empleados> getEmpleadosList() {
+        return empleadosList;
     }
 
-    public void setEmpleadosCollection(Collection<Empleados> empleadosCollection) {
-        this.empleadosCollection = empleadosCollection;
+    public void setEmpleadosList(List<Empleados> empleadosList) {
+        this.empleadosList = empleadosList;
     }
 
     @XmlTransient
-    public Collection<Actualizacion> getActualizacionCollection() {
-        return actualizacionCollection;
+    public List<Actualizacion> getActualizacionList() {
+        return actualizacionList;
     }
 
-    public void setActualizacionCollection(Collection<Actualizacion> actualizacionCollection) {
-        this.actualizacionCollection = actualizacionCollection;
+    public void setActualizacionList(List<Actualizacion> actualizacionList) {
+        this.actualizacionList = actualizacionList;
     }
 
     @Override

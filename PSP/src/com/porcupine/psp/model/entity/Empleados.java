@@ -5,8 +5,8 @@
 package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -52,11 +52,11 @@ public class Empleados implements Serializable {
         @JoinColumn(name = "CEDULAE", referencedColumnName = "CEDULAE")}, inverseJoinColumns = {
         @JoinColumn(name = "ID_TE", referencedColumnName = "ID_TE")})
     @ManyToMany
-    private Collection<TelsEmp> telsEmpCollection;
+    private List<TelsEmp> telsEmpList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "empleados")
     private EmpTemp empTemp;
     @OneToMany(mappedBy = "cedulae")
-    private Collection<BitacoraSeg> bitacoraSegCollection;
+    private List<BitacoraSeg> bitacoraSegList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "empleados")
     private EmpPlanta empPlanta;
     @JoinColumn(name = "DIR_CEDULAE", referencedColumnName = "CEDULAE")
@@ -128,12 +128,12 @@ public class Empleados implements Serializable {
     }
 
     @XmlTransient
-    public Collection<TelsEmp> getTelsEmpCollection() {
-        return telsEmpCollection;
+    public List<TelsEmp> getTelsEmpList() {
+        return telsEmpList;
     }
 
-    public void setTelsEmpCollection(Collection<TelsEmp> telsEmpCollection) {
-        this.telsEmpCollection = telsEmpCollection;
+    public void setTelsEmpList(List<TelsEmp> telsEmpList) {
+        this.telsEmpList = telsEmpList;
     }
 
     public EmpTemp getEmpTemp() {
@@ -145,12 +145,12 @@ public class Empleados implements Serializable {
     }
 
     @XmlTransient
-    public Collection<BitacoraSeg> getBitacoraSegCollection() {
-        return bitacoraSegCollection;
+    public List<BitacoraSeg> getBitacoraSegList() {
+        return bitacoraSegList;
     }
 
-    public void setBitacoraSegCollection(Collection<BitacoraSeg> bitacoraSegCollection) {
-        this.bitacoraSegCollection = bitacoraSegCollection;
+    public void setBitacoraSegList(List<BitacoraSeg> bitacoraSegList) {
+        this.bitacoraSegList = bitacoraSegList;
     }
 
     public EmpPlanta getEmpPlanta() {

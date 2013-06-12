@@ -5,7 +5,7 @@
 package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -30,7 +30,7 @@ public class DirOperaciones implements Serializable {
     @OneToOne(optional = false)
     private EmpPlanta empPlanta;
     @OneToMany(mappedBy = "dirCedulae")
-    private Collection<Comunicado> comunicadoCollection;
+    private List<Comunicado> comunicadoList;
 
     public DirOperaciones() {
     }
@@ -56,12 +56,12 @@ public class DirOperaciones implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Comunicado> getComunicadoCollection() {
-        return comunicadoCollection;
+    public List<Comunicado> getComunicadoList() {
+        return comunicadoList;
     }
 
-    public void setComunicadoCollection(Collection<Comunicado> comunicadoCollection) {
-        this.comunicadoCollection = comunicadoCollection;
+    public void setComunicadoList(List<Comunicado> comunicadoList) {
+        this.comunicadoList = comunicadoList;
     }
 
     @Override

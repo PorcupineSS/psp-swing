@@ -5,7 +5,7 @@
 package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -30,7 +30,7 @@ public class CoordContrato implements Serializable {
     @OneToOne(optional = false)
     private EmpPlanta empPlanta;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cooCedulae")
-    private Collection<AsignacionC> asignacionCCollection;
+    private List<AsignacionC> asignacionCList;
 
     public CoordContrato() {
     }
@@ -56,12 +56,12 @@ public class CoordContrato implements Serializable {
     }
 
     @XmlTransient
-    public Collection<AsignacionC> getAsignacionCCollection() {
-        return asignacionCCollection;
+    public List<AsignacionC> getAsignacionCList() {
+        return asignacionCList;
     }
 
-    public void setAsignacionCCollection(Collection<AsignacionC> asignacionCCollection) {
-        this.asignacionCCollection = asignacionCCollection;
+    public void setAsignacionCList(List<AsignacionC> asignacionCList) {
+        this.asignacionCList = asignacionCList;
     }
 
     @Override

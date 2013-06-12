@@ -6,8 +6,8 @@ package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -82,7 +82,7 @@ public class Contrato implements Serializable {
     @ManyToOne(optional = false)
     private Cliente idcl;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idContrato")
-    private Collection<AsignacionC> asignacionCCollection;
+    private List<AsignacionC> asignacionCList;
 
     public Contrato() {
     }
@@ -218,12 +218,12 @@ public class Contrato implements Serializable {
     }
 
     @XmlTransient
-    public Collection<AsignacionC> getAsignacionCCollection() {
-        return asignacionCCollection;
+    public List<AsignacionC> getAsignacionCList() {
+        return asignacionCList;
     }
 
-    public void setAsignacionCCollection(Collection<AsignacionC> asignacionCCollection) {
-        this.asignacionCCollection = asignacionCCollection;
+    public void setAsignacionCList(List<AsignacionC> asignacionCList) {
+        this.asignacionCList = asignacionCList;
     }
 
     @Override

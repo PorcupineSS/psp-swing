@@ -5,8 +5,8 @@
 package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -42,12 +42,12 @@ public class Proveedor implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaRegProv;
     @OneToMany(mappedBy = "idPro")
-    private Collection<ImplSeguridad> implSeguridadCollection;
+    private List<ImplSeguridad> implSeguridadList;
     @JoinColumn(name = "CEDULAE", referencedColumnName = "CEDULAE")
     @ManyToOne(optional = false)
     private CoordTYT cedulae;
     @OneToMany(mappedBy = "idPro")
-    private Collection<TelsProv> telsProvCollection;
+    private List<TelsProv> telsProvList;
 
     public Proveedor() {
     }
@@ -96,12 +96,12 @@ public class Proveedor implements Serializable {
     }
 
     @XmlTransient
-    public Collection<ImplSeguridad> getImplSeguridadCollection() {
-        return implSeguridadCollection;
+    public List<ImplSeguridad> getImplSeguridadList() {
+        return implSeguridadList;
     }
 
-    public void setImplSeguridadCollection(Collection<ImplSeguridad> implSeguridadCollection) {
-        this.implSeguridadCollection = implSeguridadCollection;
+    public void setImplSeguridadList(List<ImplSeguridad> implSeguridadList) {
+        this.implSeguridadList = implSeguridadList;
     }
 
     public CoordTYT getCedulae() {
@@ -113,12 +113,12 @@ public class Proveedor implements Serializable {
     }
 
     @XmlTransient
-    public Collection<TelsProv> getTelsProvCollection() {
-        return telsProvCollection;
+    public List<TelsProv> getTelsProvList() {
+        return telsProvList;
     }
 
-    public void setTelsProvCollection(Collection<TelsProv> telsProvCollection) {
-        this.telsProvCollection = telsProvCollection;
+    public void setTelsProvList(List<TelsProv> telsProvList) {
+        this.telsProvList = telsProvList;
     }
 
     @Override

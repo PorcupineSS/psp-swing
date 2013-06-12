@@ -35,9 +35,9 @@ public class EmpPlanta implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "empPlanta")
     private CoordContrato coordContrato;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "empPlanta")
-    private DirOperaciones dirOperaciones;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "empPlanta")
     private Subgerente subgerente;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "empPlanta")
+    private DirOperaciones dirOperaciones;
     @JoinColumn(name = "CEDULAE", referencedColumnName = "CEDULAE", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Empleados empleados;
@@ -90,20 +90,20 @@ public class EmpPlanta implements Serializable {
         this.coordContrato = coordContrato;
     }
 
-    public DirOperaciones getDirOperaciones() {
-        return dirOperaciones;
-    }
-
-    public void setDirOperaciones(DirOperaciones dirOperaciones) {
-        this.dirOperaciones = dirOperaciones;
-    }
-
     public Subgerente getSubgerente() {
         return subgerente;
     }
 
     public void setSubgerente(Subgerente subgerente) {
         this.subgerente = subgerente;
+    }
+
+    public DirOperaciones getDirOperaciones() {
+        return dirOperaciones;
+    }
+
+    public void setDirOperaciones(DirOperaciones dirOperaciones) {
+        this.dirOperaciones = dirOperaciones;
     }
 
     public Empleados getEmpleados() {

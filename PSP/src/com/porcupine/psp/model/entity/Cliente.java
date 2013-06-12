@@ -5,8 +5,8 @@
 package com.porcupine.psp.model.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -45,12 +45,12 @@ public class Cliente implements Serializable {
         @JoinColumn(name = "IDCL", referencedColumnName = "IDCL")}, inverseJoinColumns = {
         @JoinColumn(name = "ID_TC", referencedColumnName = "ID_TC")})
     @ManyToMany
-    private Collection<TelsCli> telsCliCollection;
+    private List<TelsCli> telsCliList;
     @JoinColumn(name = "CEDULAE", referencedColumnName = "CEDULAE")
     @ManyToOne(optional = false)
     private DirComercial cedulae;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcl")
-    private Collection<Contrato> contratoCollection;
+    private List<Contrato> contratoList;
 
     public Cliente() {
     }
@@ -99,12 +99,12 @@ public class Cliente implements Serializable {
     }
 
     @XmlTransient
-    public Collection<TelsCli> getTelsCliCollection() {
-        return telsCliCollection;
+    public List<TelsCli> getTelsCliList() {
+        return telsCliList;
     }
 
-    public void setTelsCliCollection(Collection<TelsCli> telsCliCollection) {
-        this.telsCliCollection = telsCliCollection;
+    public void setTelsCliList(List<TelsCli> telsCliList) {
+        this.telsCliList = telsCliList;
     }
 
     public DirComercial getCedulae() {
@@ -116,12 +116,12 @@ public class Cliente implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Contrato> getContratoCollection() {
-        return contratoCollection;
+    public List<Contrato> getContratoList() {
+        return contratoList;
     }
 
-    public void setContratoCollection(Collection<Contrato> contratoCollection) {
-        this.contratoCollection = contratoCollection;
+    public void setContratoList(List<Contrato> contratoList) {
+        this.contratoList = contratoList;
     }
 
     @Override

@@ -6,7 +6,7 @@ package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
 import com.porcupine.psp.model.vo.EmpleadosVO;
-import com.porcupine.psp.model.vo.TelsEmpVO;
+import com.porcupine.psp.model.vo.TelefonosVO;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.String;
@@ -297,12 +297,12 @@ public class CreateEmployee extends javax.swing.JPanel {
             //TODO Obtener los empleados por este telefono y agrega el nuevo
             ArrayList empTels = new ArrayList<EmpleadosVO>();
             empTels.add(empleado);
-            TelsEmpVO telefonos = new TelsEmpVO();
+            TelefonosVO telefonos = new TelefonosVO();
             telefonos.setEmpleadosList(empTels);
             telefonos.setNumTelefonoE(Integer.parseInt(each));
-            List<TelsEmpVO> newTels = empleado.getTelsEmpList();
+            List<TelefonosVO> newTels = empleado.getTelsEmpList();
             if (newTels == null){
-                newTels=new ArrayList<TelsEmpVO>();
+                newTels=new ArrayList<TelefonosVO>();
             }
             newTels.add(telefonos);
             empleado.setTelsEmpList(newTels);

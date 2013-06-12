@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Zergio
  */
-public class TelsEmpVO implements IValueObject, Serializable{
+public class TelefonosVO implements IValueObject, Serializable{
     
     private static final long serialVersionUID = 1L;
     
@@ -19,6 +19,9 @@ public class TelsEmpVO implements IValueObject, Serializable{
     private String numeroTelefonoEmpleado;
     
     private List<EmpleadosVO> empleadosList;
+    
+    //Tipo de telefono
+    private int tipoTelefono;
 
     public List<EmpleadosVO> getEmpleadosList() {
         return empleadosList;
@@ -43,6 +46,16 @@ public class TelsEmpVO implements IValueObject, Serializable{
     public void setNumeroTelefonoEmpleado(String numeroTelefonoEmpleado) {
         this.numeroTelefonoEmpleado = numeroTelefonoEmpleado;
     }
+
+    public int getTipoTelefono() {
+        return tipoTelefono;
+    }
+
+    public void setTipoTelefono(int tipoTelefono) {
+        this.tipoTelefono = tipoTelefono;
+    }
+    
+    
     
     
     

@@ -27,7 +27,7 @@ public class EmpleadosVO implements IValueObject, Serializable{
     //Inexistente en modelo, pero averiguable
     String rol;
     
-    private List<TelsEmpVO> telsEmpList;
+    private List<TelefonosVO> telsEmpList;
 
     public String getApellidoEmpleado() {
         return apellidoEmpleado;
@@ -93,11 +93,11 @@ public class EmpleadosVO implements IValueObject, Serializable{
         this.rol = rol;
     }
 
-    public List<TelsEmpVO> getTelsEmpList() {
+    public List<TelefonosVO> getTelsEmpList() {
         return telsEmpList;
     }
 
-    public void setTelsEmpList(List<TelsEmpVO> telsEmpList) {
+    public void setTelsEmpList(List<TelefonosVO> telsEmpList) {
         this.telsEmpList = telsEmpList;
     }
     

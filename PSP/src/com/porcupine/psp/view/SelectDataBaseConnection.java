@@ -136,11 +136,13 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_closeActionPerformed
 
     private void jButton_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OKActionPerformed
-        MainController.selectedDB = jComboBox1.getModel().toString();
+        MainController.selectedDB = jComboBox1.getModel().getSelectedItem().toString();
         MainController.mostrarLogin();
     }//GEN-LAST:event_jButton_OKActionPerformed
 
     private void jButtonNewDirGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewDirGHActionPerformed
+        
+        MainController.selectedDB = jComboBox1.getModel().getSelectedItem().toString();
         ArrayList<String> empleado = new ArrayList<String>();
         empleado.add(TipoEmpleado.DIRECTOR_GESTION_HUMANA);
         MainController.mostrarFormularioCrearEmpleado(empleado);

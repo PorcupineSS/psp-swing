@@ -35,10 +35,6 @@
     <class>com.porcupine.psp.model.entity.view.VAcimpl</class>
     <properties>
       <property name="eclipselink.canonicalmodel.subpackage" value="one"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sybase://168.176.36.25:8101/dbd_2"/>
-      <property name="javax.persistence.jdbc.password" value="s02258021"/>
-      <property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.user" value="cdlancherosp"/>
     </properties>
   </persistence-unit>
   <persistence-unit name="com.porcupine.psp.pu.oracle" transaction-type="RESOURCE_LOCAL">
@@ -76,10 +72,6 @@
     <class>com.porcupine.psp.model.entity.view.VProv</class>
     <properties>
       <property name="eclipselink.canonicalmodel.subpackage" value="two"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@168.176.36.14:1521:UNBDS7"/>
-      <property name="javax.persistence.jdbc.password" value="S02258064"/>
-      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
-      <property name="javax.persistence.jdbc.user" value="javergarav"/>
     </properties>
   </persistence-unit>
   <persistence-unit name="com.porcupine.psp.pu.sqlserver" transaction-type="RESOURCE_LOCAL">
@@ -117,10 +109,6 @@
     <class>com.porcupine.psp.model.entity.view.VProv</class>
     <properties>
       <property name="eclipselink.canonicalmodel.subpackage" value="three"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://168.176.36.26:1433;databaseName=dbd_2"/>
-      <property name="javax.persistence.jdbc.password" value="s02258006"/>
-      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-      <property name="javax.persistence.jdbc.user" value="sacortesh"/>
     </properties>
   </persistence-unit>
 </persistence>

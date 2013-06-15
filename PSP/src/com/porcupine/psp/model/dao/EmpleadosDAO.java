@@ -4,13 +4,14 @@
  */
 package com.porcupine.psp.model.dao;
 
-
+import com.porcupine.psp.controller.MainController;
 import com.porcupine.psp.model.entity.Empleados;
 import java.util.List;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaQuery;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
+import java.util.Map;
 import model.dao.exceptions.PreexistingEntityException;
 
 /**
@@ -21,8 +22,8 @@ public class EmpleadosDAO implements ICrudDAO<Empleados, Integer> {
 
     private EntityManagerFactory entityManagerFactory;
 
-    EmpleadosDAO(String PU) {
-        entityManagerFactory = Persistence.createEntityManagerFactory(PU);
+    EmpleadosDAO(String PU, Map propierties) {
+        entityManagerFactory = Persistence.createEntityManagerFactory(PU, propierties);
     }
 
     public EntityManager getEntityManager() {
@@ -130,7 +131,7 @@ public class EmpleadosDAO implements ICrudDAO<Empleados, Integer> {
             }
         }
     }
-    
+
     public Empleados login(Empleados entity) throws DataBaseException {
         EntityManager entityManager = null;
         try {
@@ -156,5 +157,4 @@ public class EmpleadosDAO implements ICrudDAO<Empleados, Integer> {
             }
         }
     }
-    
 }

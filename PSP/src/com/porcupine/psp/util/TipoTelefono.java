@@ -11,6 +11,6 @@ package com.porcupine.psp.util;
 public enum TipoTelefono {
     
     CLIENTE, EMPLEADO, PROVEEDOR
-    
+  
     
 }

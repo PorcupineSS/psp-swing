@@ -214,11 +214,11 @@ public class ImplSeguridad implements Serializable {
         
         ArrayList<AsigImplVO> listAsigImplVO = new ArrayList<AsigImplVO>();
         for(AsigImpl entity : getAsigImplList()) {
-            listAsigImplVO.add(entity.toVO);
+            listAsigImplVO.add(entity.toVO());
         }
         ArrayList<ActuImplVO> listActuImplVO = new ArrayList<ActuImplVO>();
         for(ActuImpl entity : getActuImplList()) {
-            listActuImplVO.add(entity.toVO);
+            listActuImplVO.add(entity.toVO());
         }
         
         return vo;   

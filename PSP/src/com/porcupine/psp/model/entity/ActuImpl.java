@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.ActuImplVO;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -131,4 +132,14 @@ public class ActuImpl implements Serializable {
         return "com.porcupine.psp.model.entity.ActuImpl[ idActualizacionI=" + idActualizacionI + " ]";
     }
     
+    public ActuImplVO toVO() {
+        ActuImplVO vo = new ActuImplVO();
+        vo.setIdActualizacionI(idActualizacionI);
+        vo.setFechaActualizacionI(fechaActualizacionI);
+        vo.setCantidadAgregada(cantidadAgregada);
+        vo.setDescripcionActualizacion(descripcionActualizacion);
+        vo.setIdImplemento(getIdImplemento().getIdImplemento());
+        vo.setCedulaCoordTyT(getCedulae().getCedulae());
+        return vo;
+    }
 }

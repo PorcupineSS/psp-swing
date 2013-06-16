@@ -145,4 +145,15 @@ public class AsigImpl implements Serializable {
         return "com.porcupine.psp.model.entity.AsigImpl[ idAsignacionI=" + idAsignacionI + " ]";
     }
     
+    public AsigImplVO toVO() {
+        AsigImplVO vo = new AsigImplVO();
+        vo.setIdAsignacionI(idAsignacionI);
+        vo.setCantidadAsignada(cantidadAsignada);
+        vo.setEstadoAsignacion(estadoAsignacion);
+        vo.setFechaAsignacionI(fechaAsignacionI);
+        vo.setIdImplemento(getIdImplemento().getIdImplemento());
+        vo.setCedulaEmpTemp(getCedulae().getCedulae());
+        vo.setCedulaCoordTyT(getCooCedulae().getCedulae());   
+        return vo;     
+    }
 }

@@ -4,7 +4,10 @@
  */
 package com.porcupine.psp.model.service;
 
+import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.entity.ImplSeguridad;
+import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
@@ -30,7 +33,32 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
 
     @Override
     public void create(ImplSeguridadVO vo) throws PreexistingEntityException, NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Empleados entity = new Empleados();
+        entity.setCedulae(vo.getCedulaEmpleado());
+        entity.setNombree(vo.getNombreEmpleado());
+        entity.setApellidoe(vo.getApellidoEmpleado());
+        entity.setCoddocume(vo.getCodigoDocumento());
+
+        entity.setFechareg(new Date());
+        entity.setContrasenae((vo.getContraseniaEmpleado()));
+
+        DAOFactory.getInstance().getEmpleadosDAO().create(entity);
+        
+        ImplSeguridad entity = new ImplSeguridad();
+        entity.setIdImplemento(vo.getIdImplemento());
+        entity.setNombreI(vo.getNombreI());
+        entity.setPrecioUnitarioI(vo.getPrecioUnitarioI());
+        entity.setCantidad(vo.getCantidad());
+        entity.setDescripcionI(vo.getDescripcionI());
+        entity.setEstadoI(vo.getEstadoI());
+        entity.setFechaRegIm(vo.getFechaRegIm());
+        //entity.setIdPro(vo.getIdPro());
+        //entity.setCedulae(vo.getCedulaCoordTyT());
+        if (vo.getIdPro() != 0) {
+            Proveedor proveedor = DAOFactory.getInstance().get
+        }
+        
     }
 
     @Override

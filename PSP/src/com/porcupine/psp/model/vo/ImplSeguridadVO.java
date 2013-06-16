@@ -4,8 +4,6 @@
  */
 package com.porcupine.psp.model.vo;
 
-import com.porcupine.psp.model.entity.CoordTYT;
-import com.porcupine.psp.model.entity.Proveedor;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;

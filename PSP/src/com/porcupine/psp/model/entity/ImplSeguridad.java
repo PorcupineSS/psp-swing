@@ -4,8 +4,10 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -196,6 +198,30 @@ public class ImplSeguridad implements Serializable {
     @Override
     public String toString() {
         return "com.porcupine.psp.model.entity.ImplSeguridad[ idImplemento=" + idImplemento + " ]";
+    }
+    
+    public ImplSeguridadVO toVO() {     
+        ImplSeguridadVO vo = new ImplSeguridadVO();
+        vo.setIdImplemento(idImplemento);
+        vo.setNombreI(nombreI);
+        vo.setPrecioUnitarioI(precioUnitarioI);
+        vo.setCantidad(cantidad);
+        vo.setPrecioUnitarioI(precioUnitarioI);
+        vo.setEstadoI(estadoI);
+        vo.setFechaRegIm(fechaRegIm);
+        vo.setIdPro(getIdPro().getIdPro());
+        vo.setCedulaCoordTyT(getCedulae().getCedulae());
+        
+        ArrayList<AsigImplVO> listAsigImplVO = new ArrayList<AsigImplVO>();
+        for(AsigImpl entity : getAsigImplList()) {
+            listAsigImplVO.add(entity.toVO);
+        }
+        ArrayList<ActuImplVO> listActuImplVO = new ArrayList<ActuImplVO>();
+        for(ActuImpl entity : getActuImplList()) {
+            listActuImplVO.add(entity.toVO);
+        }
+        
+        return vo;   
     }
     
 }

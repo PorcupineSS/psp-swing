@@ -4,10 +4,12 @@
  */
 package com.porcupine.psp.model.vo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jeisson Andrés Vergara
  */
-class AsigImplVO {
+public class AsigImplVO implements IValueObject, Serializable {
     
 }

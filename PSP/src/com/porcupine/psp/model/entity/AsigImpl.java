@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.AsigImplVO;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;

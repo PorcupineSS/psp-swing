@@ -6,7 +6,7 @@ package com.porcupine.psp.model.vo;
 
 /**
  *
- * @author andres
+ * @author Jeisson Andrés Vergara
  */
 class ActuImplVO {
     

@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Zergio
  */
-public class EmpleadosVO implements IValueObject, Serializable{
+public class EmpleadosVO implements IValueObject, Serializable {
     
     private static final long serialVersionUID = 1L;
     

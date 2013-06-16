@@ -17,9 +17,20 @@ public class DAOFactory {
     }
 
     public EmpleadosDAO getEmpleadosDAO() {
-        return new EmpleadosDAO(PU,propierties);
+        return new EmpleadosDAO(PU, propierties);
     }
-
+    
+    public ImplSeguridadDAO getImplSeguridadDAO() {
+        return new ImplSeguridadDAO(PU, propierties);
+    }
+    
+    public ProveedorDAO getProveedorDAO() {
+        return new ProveedorDAO(PU, propierties);
+    }
+    
+    public CoordTYTDAO getCoordTYTDAO() {
+        return new CoordTYTDAO(PU, propierties);
+    }
     
     private static DAOFactory instance;
 

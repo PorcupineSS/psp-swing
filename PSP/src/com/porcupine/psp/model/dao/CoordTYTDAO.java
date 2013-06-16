@@ -5,7 +5,7 @@
 package com.porcupine.psp.model.dao;
 
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
-import com.porcupine.psp.model.entity.Proveedor;
+import com.porcupine.psp.model.entity.CoordTYT;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -18,30 +18,30 @@ import model.dao.exceptions.PreexistingEntityException;
  *
  * @author Jeisson Andrés Vergara
  */
-public class ProveedorDAO implements ICrudDAO<Proveedor, Integer> {
+public class CoordTYTDAO implements ICrudDAO<CoordTYT, Integer> {
     
     private EntityManagerFactory entityManagerFactory;
 
-    ProveedorDAO(String PU, Map propierties) {
+    CoordTYTDAO(String PU, Map propierties) {
         entityManagerFactory = Persistence.createEntityManagerFactory(PU, propierties);
     }
 
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }
-    
+
     @Override
-    public void create(Proveedor entity) throws PreexistingEntityException, NonexistentEntityException {
+    public void create(CoordTYT entity) throws PreexistingEntityException, NonexistentEntityException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Proveedor find(Integer id) throws EntityNotFoundException {
+    public CoordTYT find(Integer id) throws EntityNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Proveedor entity) throws NonexistentEntityException {
+    public void update(CoordTYT entity) throws NonexistentEntityException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -51,7 +51,7 @@ public class ProveedorDAO implements ICrudDAO<Proveedor, Integer> {
     }
 
     @Override
-    public List<Proveedor> getList() {
+    public List<CoordTYT> getList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

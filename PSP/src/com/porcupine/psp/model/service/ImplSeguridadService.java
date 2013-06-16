@@ -6,6 +6,7 @@ package com.porcupine.psp.model.service;
 
 import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.entity.CoordTYT;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
@@ -32,19 +33,7 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
     }
 
     @Override
-    public void create(ImplSeguridadVO vo) throws PreexistingEntityException, NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
-        
-        Empleados entity = new Empleados();
-        entity.setCedulae(vo.getCedulaEmpleado());
-        entity.setNombree(vo.getNombreEmpleado());
-        entity.setApellidoe(vo.getApellidoEmpleado());
-        entity.setCoddocume(vo.getCodigoDocumento());
-
-        entity.setFechareg(new Date());
-        entity.setContrasenae((vo.getContraseniaEmpleado()));
-
-        DAOFactory.getInstance().getEmpleadosDAO().create(entity);
-        
+    public void create(ImplSeguridadVO vo) throws PreexistingEntityException, NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {            
         ImplSeguridad entity = new ImplSeguridad();
         entity.setIdImplemento(vo.getIdImplemento());
         entity.setNombreI(vo.getNombreI());
@@ -53,17 +42,29 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
         entity.setDescripcionI(vo.getDescripcionI());
         entity.setEstadoI(vo.getEstadoI());
         entity.setFechaRegIm(vo.getFechaRegIm());
-        //entity.setIdPro(vo.getIdPro());
-        //entity.setCedulae(vo.getCedulaCoordTyT());
-        if (vo.getIdPro() != 0) {
-            Proveedor proveedor = DAOFactory.getInstance().get
-        }
         
+        if (vo.getIdPro() != 0) {
+            Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find((int) vo.getIdPro());
+            entity.setIdPro(proveedor);
+            proveedor.getImplSeguridadList().add(entity);
+        }
+        if (vo.getCedulaCoordTyT() != 0) {
+            CoordTYT coordTyT = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
+            entity.setCedulae(coordTyT);
+            coordTyT.getImplSeguridadList().add(entity);
+        } 
+        
+        DAOFactory.getInstance().getImplSeguridadDAO().create(entity);   
     }
 
     @Override
-    public ImplSeguridadVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ImplSeguridadVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {     
+        ImplSeguridad implSeguridad = DAOFactory.getInstance().getImplSeguridadDAO().find(id);
+        if (implSeguridad != null) {
+            return implSeguridad.toVO();
+        } else {
+            return null;
+        }
     }
 
     @Override

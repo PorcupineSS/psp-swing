@@ -14,20 +14,50 @@ import java.util.List;
  */
 public class EmpleadosVO implements IValueObject, Serializable {
     
-    private static final long serialVersionUID = 1L;
     
-    Integer cedulaEmpleado;
-    Integer cedulaDirector;
-    String nombreEmpleado;
-    String apellidoEmpleado;
-    String contraseniaEmpleado;
-    String codigoDocumento;
-    Date fechaRegistro;
+    //Variables no opcionales
+    private Integer cedulaEmpleado;
+    private String nombreEmpleado;
+    private String apellidoEmpleado;
+    private String contraseniaEmpleado;
+    private String codigoDocumento;
+    private Date fechaRegistro;
     
-    //Inexistente en modelo, pero averiguable
-    String rol;
+    //variables opcionales
+    private Integer cedulaDirector;
     
+    
+    //Colecciones
     private List<TelefonosVO> telsEmpList;
+    private List<BitacoraSegVO> bitacoraSegList;
+    //Inexistente en modelo, pero asignable a traves de pruebas y errores
+    private String rol;
+
+    public Integer getCedulaEmpleado() {
+        return cedulaEmpleado;
+    }
+
+    public void setCedulaEmpleado(Integer cedulaEmpleado) {
+        this.cedulaEmpleado = cedulaEmpleado;
+    }
+
+    public Integer getCedulaDirector() {
+        return cedulaDirector;
+    }
+
+    public void setCedulaDirector(Integer cedulaDirector) {
+        this.cedulaDirector = cedulaDirector;
+    }
+
+    public List<BitacoraSegVO> getBitacoraSegList() {
+        return bitacoraSegList;
+    }
+
+    public void setBitacoraSegList(List<BitacoraSegVO> bitacoraSegList) {
+        this.bitacoraSegList = bitacoraSegList;
+    }
+    
+    
 
     public String getApellidoEmpleado() {
         return apellidoEmpleado;
@@ -37,17 +67,12 @@ public class EmpleadosVO implements IValueObject, Serializable {
         this.apellidoEmpleado = apellidoEmpleado;
     }
 
-    public int getCedulaDirector() {
-        return cedulaDirector;
-    }
+   
 
     public void setCedulaDirector(int cedulaDirector) {
         this.cedulaDirector = cedulaDirector;
     }
 
-    public int getCedulaEmpleado() {
-        return cedulaEmpleado;
-    }
 
     public void setCedulaEmpleado(int cedulaEmpleado) {
         this.cedulaEmpleado = cedulaEmpleado;

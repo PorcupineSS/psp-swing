@@ -4,8 +4,12 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.BitacoraSegVO;
 import com.porcupine.psp.model.vo.EmpleadosVO;
+import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.util.TipoEmpleado;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -28,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Empleados.findByCoddocume", query = "SELECT e FROM Empleados e WHERE e.coddocume = :coddocume"),
     @NamedQuery(name = "Empleados.findByFechareg", query = "SELECT e FROM Empleados e WHERE e.fechareg = :fechareg")})
 public class Empleados implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -198,18 +203,42 @@ public class Empleados implements Serializable {
     public EmpleadosVO toVO() {
         EmpleadosVO empleado = new EmpleadosVO();
         empleado.setCedulaDirector(cedulae);
-        empleado.setCedulaEmpleado(dirCedulae.getCedulae());
-        empleado.setApellidoEmpleado(apellidoe);
-        empleado.setCodigoDocumento(coddocume);
-        empleado.setContraseniaEmpleado(contrasenae);
-        empleado.setFechaRegistro(fechareg);
         empleado.setNombreEmpleado(nombree);
-        empleado.setRol("Rol");
-        
-        //TODO for each
-        //empleado.setTelsEmpList(telsEmpList);
-        
+        empleado.setApellidoEmpleado(apellidoe);
+        empleado.setContraseniaEmpleado(contrasenae);
+        empleado.setCodigoDocumento(coddocume);
+        empleado.setFechaRegistro(fechareg);
+
+
+
+        if (this.getDirCedulae() != null) {
+            empleado.setCedulaEmpleado(dirCedulae.getCedulae());
+        }
+
+        List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+        for (TelsEmp each : getTelsEmpList()) {
+            telefonos.add((each.toVO()));
+        }
+        empleado.setTelsEmpList(telefonos);
+
+        List<BitacoraSegVO> bitacoras = new ArrayList<BitacoraSegVO>();
+        for (BitacoraSeg each : getBitacoraSegList()) {
+            bitacoras.add((each.toVO()));
+        }
+        empleado.setBitacoraSegList(bitacoras);
+
+        empleado.setRol(discoverRole());
+
         return empleado;
     }
-    
+
+    private String discoverRole() {
+        //Se ofrecen dos enfoques... Utilizar el cogigo de la empresa o averiguarlo en la base de datos. Por ahora es mas facil averiguarlo en el string pero puede discutirse
+        if (this.getEmpTemp() != null) {
+            return TipoEmpleado.TEMPORAL;
+        }else{
+            //Desde esta capa no se puede saber que tipo de  Empleado es, solo que es de planta o no.
+            return TipoEmpleado.PLANTA;
+        }
+    }
 }

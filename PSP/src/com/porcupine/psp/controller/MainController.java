@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.controller;
 
+import com.porcupine.psp.controller.exceptions.InternalErrorException;
 import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.util.DrawingUtilities;
@@ -12,8 +13,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.util.ServidoresDisponibles;
+import com.porcupine.psp.util.TipoEmpleado;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JPanel;
 
 /**
  * El proposito de esta clase es tener un lugar integrado con todos los metodos
@@ -132,7 +135,37 @@ public class MainController {
         try {
             empleadoLogin = ServiceFactory.getInstance().getEmpleadosService().login(empleado);
         } catch (DataBaseException ex) {
-            int opcion = JOptionPane.showOptionDialog(login, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
+            reportarError(ex, login);
+            return;
+        }
+
+        if (empleadoLogin != null) {
+            switch (empleadoLogin.getRol()) {
+                case TipoEmpleado.COORDINADOR_CONTRATO:
+                    break;
+                case TipoEmpleado.COORDINADOR_TECNICO_TECNOLOGICO:
+                    break;
+                case TipoEmpleado.DIRECTOR_COMERCIAL:
+                    break;
+                case TipoEmpleado.DIRECTOR_GESTION_HUMANA:
+                    break;
+                case TipoEmpleado.DIRECTOR_OPERACIONES:
+                    break;
+                case TipoEmpleado.SUBGERENTE:
+                    break;
+                case TipoEmpleado.TEMPORAL:
+                    break;
+                default:
+                    reportarError(new InternalErrorException("Rol erroneo"), login);
+                    break;
+            }
+        } else {
+            JOptionPane.showMessageDialog(login, "¡Usuario o contraseña incorrectos!", "Error", JOptionPane.ERROR_MESSAGE, null);
+        }
+    }
+
+    public static void reportarError(Exception ex, JPanel parent){
+        int opcion = JOptionPane.showOptionDialog(parent, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
             switch (opcion) {
                 case JOptionPane.OK_OPTION:
                     //TODO Reportar Error
@@ -140,16 +173,8 @@ public class MainController {
                 case JOptionPane.CANCEL_OPTION:
                     break;
             }
-            return;
-        }
-
-        if (empleadoLogin != null) {
-            //TODO Logica de redireccion segun rol
-        } else {
-            JOptionPane.showMessageDialog(login, "¡Usuario o contraseña incorrectos!", "Error", JOptionPane.ERROR_MESSAGE, null);
-        }
     }
-
+    
     /**
      * Disponible para: Director de Gestion Humana Guardias y escoltas,
      * coordinador de contrato, tecnico y operaciones Modelo gestionado por
@@ -180,7 +205,7 @@ public class MainController {
 
         MainController.selectedDB = sdb.getjComboBox1().getModel().getSelectedItem().toString();
         String username = sdb.getjTextFieldUserName().getText();
-        String password = sdb.getjPasswordField().getPassword().toString();
+        String password = new String(sdb.getjPasswordField().getPassword());
         Map propsSQL = new HashMap();
 
         propsSQL.put("javax.persistence.jdbc.user", username);

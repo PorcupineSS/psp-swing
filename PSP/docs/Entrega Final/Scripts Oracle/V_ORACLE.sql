@@ -1,13 +1,5 @@
 --Vistas Oracle
 
-drop view V_BITACORA;
-drop view V_EMPL;
-drop view V_COMUN;
-drop view V_CLIENTE;
-drop view V_ASIGC;
-drop view V_CONT;
-drop view V_IMPL;
-
 /*==========================================================*/
 /* View: OPERACIONES CRUD BITACORA                         */
 /*==========================================================*/

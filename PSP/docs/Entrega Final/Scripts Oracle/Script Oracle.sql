@@ -3,6 +3,68 @@
 /* Created on:     27/05/2013 09:41:54 a.m.                     */
 /*==============================================================*/
 
+--Borrado de triggers sobre Bitacora
+
+drop trigger TR_DEL_ACIMP;
+drop trigger TR_DEL_ACTUAL;
+drop trigger TR_DEL_ASIGC;
+drop trigger TR_DEL_ASMP;
+drop trigger TR_DEL_CCONTRATO;
+drop trigger TR_DEL_CLIEN;
+drop trigger TR_DEL_COMUN;
+drop trigger TR_DEL_CONT;
+drop trigger TR_DEL_COORDTYY;
+drop trigger TR_DEL_DIRCMCIAL;
+drop trigger TR_DEL_DIRGESHUM;
+drop trigger TR_DEL_DOPERAC;
+drop trigger TR_DEL_EMPLANTA;
+drop trigger TR_DEL_EMPLEADO;
+drop trigger TR_DEL_EMPLEADO_TEMPORAL;
+drop trigger TR_DEL_EMTELS;
+drop trigger TR_DEL_IMSEG;
+drop trigger TR_DEL_PROV;
+drop trigger TR_DEL_SUBGERENT;
+drop trigger TR_INS_ACIMP;
+drop trigger TR_INS_ACTUAL;
+drop trigger TR_INS_ASIGC;
+drop trigger TR_INS_ASMP;
+drop trigger TR_INS_CCONTRATO;
+drop trigger TR_INS_CLIEN;
+drop trigger TR_INS_COMUN;
+drop trigger TR_INS_CONT;
+drop trigger TR_INS_COORDTYY;
+drop trigger TR_INS_DIRCMCIAL;
+drop trigger TR_INS_DIRGESHUM;
+drop trigger TR_INS_DOPERAC;
+drop trigger TR_INS_EMPLANTA;
+drop trigger TR_INS_EMPLEADO;
+drop trigger TR_INS_EMPLEADO_TEMPORAL;
+drop trigger TR_INS_EMTELS;
+drop trigger TR_INS_IMSEG;
+drop trigger TR_INS_PROV;
+drop trigger TR_INS_SUBGERENT;
+drop trigger TR_UPD_ACIMP;
+drop trigger TR_UPD_ACTUAL;
+drop trigger TR_UPD_ASIGC;
+drop trigger TR_UPD_ASMP;
+drop trigger TR_UPD_CCONTRATO;
+drop trigger TR_UPD_CLIEN;
+drop trigger TR_UPD_COMUN;
+drop trigger TR_UPD_CONT;
+drop trigger TR_UPD_COORDTYY;
+drop trigger TR_UPD_DIRCMCIAL;
+drop trigger TR_UPD_DIRGESHUM;
+drop trigger TR_UPD_DOPERAC;
+drop trigger TR_UPD_EMPLANTA;
+drop trigger TR_UPD_EMPLEADO;
+drop trigger TR_UPD_EMPLEADO_TEMPORAL;
+drop trigger TR_UPD_EMTELS;
+drop trigger TR_UPD_IMSEG;
+drop trigger TR_UPD_PROV;
+drop trigger TR_UPD_SUBGERENT;
+
+--Borrado de triggers autoincrementales
+
 drop trigger AUTOID_TELS_EMP;
 drop trigger AUTOID_TELS_CLI;
 drop trigger AUTOID_TELS_PROV;
@@ -15,6 +77,16 @@ drop trigger AUTOID_ACTU_IMPL;
 drop trigger AUTOID_ASIG_IMPL;
 drop trigger AUTOID_COMUNICADO;
 drop trigger AUTOID_BITACORA_SEG;
+
+--Borrado de vistas
+
+drop view V_BITACORA;
+drop view V_EMPL;
+drop view V_COMUN;
+drop view V_CLIENTE;
+drop view V_ASIGC;
+drop view V_CONT;
+drop view V_IMPL;
 
 alter table ACTUALIZACION
    drop constraint FK_ACTUALIZ_ACTUALIZA_DIR_GEST;
@@ -659,15 +731,16 @@ alter table CONTRATO add constraint DOM_TIPO_C
 /*==============================================================*/
 
 alter table CONTRATO add constraint CK1_TELS_CONTRATO
-  check (TELEFONO_C like '[5][7][1245678]%');
+  check (regexp_like (TELEFONO_C, '^[5]{1}[7]{1}[123456789]{1}[[:digit:]]{7}$'));
 
 /*==============================================================*/
 /* Constraint: CK2_CELS_CONTRATO                                     */
 /*==============================================================*/
 
 alter table CONTRATO add constraint CK2_CELS_CONTRATO
-  check (TELEFONO_C like '[3][0][012]%' or TELEFONO_C	like '[3][1][012345678]%' or TELEFONO_C like '[3][2][01]%');
-
+               check (regexp_like (CELULAR_C, '^(([3]{1}[1]{1}[012345678]{1})|([3]{1}[2]{1}[01]{1})|([3]{1}[0]{1}[012]{1}))[[:digit:]]{7}$')
+                      );
+                      
 /*==============================================================*/
 /* Constraint: CK1_CONTR_CANT_PERS                               */
 /*==============================================================*/
@@ -984,8 +1057,9 @@ comment on column TELS_CLI.NUM_TELEFONO_C is
 /*==============================================================*/
 
 alter table TELS_CLI add constraint CK1_TELS_CLI
-  check (NUM_TELEFONO_C like '[3][0][012]%' or NUM_TELEFONO_C	like '[3][1][012345678]%' or NUM_TELEFONO_C	like '[3][2][01]%' or NUM_TELEFONO_C like '[5][7][1245678]%');
-
+               check (regexp_like (NUM_TELEFONO_C, '^(([3]{1}[1]{1}[012345678]{1})|([3]{1}[2]{1}[01]{1})|([3]{1}[0]{1}[012]{1})|([5]{1}[7]{1}[123456789]{1}))[[:digit:]]{7}$')
+                      );
+                      
 /*==============================================================*/
 /* Table: TELS_EMP                                              */
 /*==============================================================*/
@@ -1010,8 +1084,9 @@ comment on column TELS_EMP.NUM_TELEFONO_E is
 /*==============================================================*/
 
 alter table TELS_EMP add constraint CK1_TELS_EMP
-  check (NUM_TELEFONO_E like '[3][0][012]%' or NUM_TELEFONO_E		like '[3][1][012345678]%' or NUM_TELEFONO_E	like '[3][2][01]%' or NUM_TELEFONO_E like '[5][7][1245678]%');
-
+               check (regexp_like (NUM_TELEFONO_E, '^(([3]{1}[1]{1}[012345678]{1})|([3]{1}[2]{1}[01]{1})|([3]{1}[0]{1}[012]{1})|([5]{1}[7]{1}[123456789]{1}))[[:digit:]]{7}$')
+                      );
+                      
 /*==============================================================*/
 /* Table: TELS_PROV                                             */
 /*==============================================================*/
@@ -1047,8 +1122,8 @@ create index PR_TIENE_TELS_FK on TELS_PROV (
 /*==============================================================*/
 
 alter table TELS_PROV add constraint CK1_TELS_PROV
-  check (NUM_TELEFONO_P like '[3][0][012]%' or NUM_TELEFONO_P		like '[3][1][012345678]%' or NUM_TELEFONO_P	like '[3][2][01]%' or NUM_TELEFONO_P like '[5][7][1245678]%');
-
+               check (regexp_like (NUM_TELEFONO_P, '^(([3]{1}[1]{1}[012345678]{1})|([3]{1}[2]{1}[01]{1})|([3]{1}[0]{1}[012]{1})|([5]{1}[7]{1}[123456789]{1}))[[:digit:]]{7}$')
+                      );
 
 alter table ACTUALIZACION
    add constraint FK_ACTUALIZ_ACTUALIZA_DIR_GEST foreign key (CEDULAE)

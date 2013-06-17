@@ -142,18 +142,31 @@ public class MainController {
         if (empleadoLogin != null) {
             switch (empleadoLogin.getRol()) {
                 case TipoEmpleado.COORDINADOR_CONTRATO:
+                    ContractCordination cCordination = new ContractCordination();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), cCordination);
                     break;
                 case TipoEmpleado.COORDINADOR_TECNICO_TECNOLOGICO:
+                    TTCordination ttcordination = new TTCordination();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), ttcordination);
                     break;
                 case TipoEmpleado.DIRECTOR_COMERCIAL:
+                    //TODO
                     break;
                 case TipoEmpleado.DIRECTOR_GESTION_HUMANA:
+                    HumanManagement hmanagement = new HumanManagement();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), hmanagement);
                     break;
                 case TipoEmpleado.DIRECTOR_OPERACIONES:
+                    OperationsManagement omanagement = new OperationsManagement();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), omanagement);
                     break;
                 case TipoEmpleado.SUBGERENTE:
+                    BusinessManagement bmanagement = new BusinessManagement();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), bmanagement);
                     break;
                 case TipoEmpleado.TEMPORAL:
+                    TemporaryEmployee temployee = new TemporaryEmployee();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), temployee);
                     break;
                 default:
                     reportarError(new InternalErrorException("Rol erroneo"), login);

@@ -4,7 +4,11 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.ClienteVO;
+import com.porcupine.psp.model.vo.ContratoVO;
+import com.porcupine.psp.model.vo.TelefonosVO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -147,6 +151,30 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "com.porcupine.psp.model.entity.Cliente[ idcl=" + idcl + " ]";
+    }
+    
+    public ClienteVO toVO(){
+        ClienteVO cliente = new ClienteVO();
+        cliente.setCedulaDirector(this.getCedulae().getCedulae());
+        cliente.setDireccionCliente(this.getDireccioncl());
+        cliente.setFechaRegCliente(this.getFechaRegCl());
+        cliente.setIdCliente(this.getIdcl());
+        cliente.setNombreCliente(this.getNombrecl());
+        
+
+        List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+        for(TelsCli each : this.getTelsCliList()){
+            telefonos.add(each.toVO());
+        }
+        cliente.setTelsCliList(telefonos);
+        
+        List<ContratoVO> contratos = new ArrayList<ContratoVO>();
+        for(Contrato each : this.getContratoList()){
+            contratos.add(each.toVO());
+        }
+        cliente.setContratoList(contratos);
+        
+        return cliente;
     }
     
 }

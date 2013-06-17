@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.ContratoVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -249,6 +250,10 @@ public class Contrato implements Serializable {
     @Override
     public String toString() {
         return "com.porcupine.psp.model.entity.Contrato[ idContrato=" + idContrato + " ]";
+    }
+
+    ContratoVO toVO() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

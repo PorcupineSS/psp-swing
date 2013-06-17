@@ -16,8 +16,8 @@ public class EmpleadosVO implements IValueObject, Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    int cedulaEmpleado;
-    int cedulaDirector;
+    Integer cedulaEmpleado;
+    Integer cedulaDirector;
     String nombreEmpleado;
     String apellidoEmpleado;
     String contraseniaEmpleado;

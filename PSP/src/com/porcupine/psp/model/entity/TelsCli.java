@@ -4,6 +4,8 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.ContratoVO;
+import com.porcupine.psp.model.vo.TelefonosVO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -94,6 +96,10 @@ public class TelsCli implements Serializable {
     @Override
     public String toString() {
         return "com.porcupine.psp.model.entity.TelsCli[ idTc=" + idTc + " ]";
+    }
+
+    public TelefonosVO toVO() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

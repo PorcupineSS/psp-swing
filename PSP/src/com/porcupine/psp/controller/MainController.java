@@ -175,27 +175,30 @@ public class MainController {
 
     }
 
-    public void saveConnectionValues() {
+    public static void saveConnectionValues() {
         //TODO edit with values obtained from the view
 
+        MainController.selectedDB = sdb.getjComboBox1().getModel().getSelectedItem().toString();
+        String username = sdb.getjTextFieldUserName().getText();
+        String password = sdb.getjPasswordField().getPassword().toString();
         Map propsSQL = new HashMap();
 
-        propsSQL.put("javax.persistence.jdbc.user", "sacortesh");
-        propsSQL.put("javax.persistence.jdbc.password", "s02258006");
+        propsSQL.put("javax.persistence.jdbc.user", username);
+        propsSQL.put("javax.persistence.jdbc.password", password);
         propsSQL.put("javax.persistence.jdbc.driver", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         propsSQL.put("javax.persistence.jdbc.url", "jdbc:sqlserver://168.176.36.26:1433;databaseName=dbd_2");
 
         Map propsSYB = new HashMap();
 
-        propsSYB.put("javax.persistence.jdbc.user", "cdlancherosp");
-        propsSYB.put("javax.persistence.jdbc.password", "s02258021");
+        propsSYB.put("javax.persistence.jdbc.user", username);
+        propsSYB.put("javax.persistence.jdbc.password", password);
         propsSYB.put("javax.persistence.jdbc.driver", "net.sourceforge.jtds.jdbc.Driver");
         propsSYB.put("javax.persistence.jdbc.url", "jdbc:jtds:sybase://168.176.36.25:8101/dbd_2");
 
         Map propsORA = new HashMap();
 
-        propsSYB.put("javax.persistence.jdbc.user", "javergarav");
-        propsSYB.put("javax.persistence.jdbc.password", "S02258064");
+        propsSYB.put("javax.persistence.jdbc.user", username);
+        propsSYB.put("javax.persistence.jdbc.password", password);
         propsSYB.put("javax.persistence.jdbc.driver", "oracle.jdbc.OracleDriver");
         propsSYB.put("javax.persistence.jdbc.url", "jdbc:oracle:thin:@168.176.36.14:1521:UNBDS7");
 

@@ -9,6 +9,8 @@ import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -23,6 +25,32 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
         initComponents();
 
     }
+
+    public JComboBox getjComboBox1() {
+        return jComboBox1;
+    }
+
+    public void setjComboBox1(JComboBox jComboBox1) {
+        this.jComboBox1 = jComboBox1;
+    }
+
+    public JPasswordField getjPasswordField() {
+        return jPasswordField;
+    }
+
+    public void setjPasswordField(JPasswordField jPasswordField) {
+        this.jPasswordField = jPasswordField;
+    }
+
+    public JTextField getjTextFieldUserName() {
+        return jTextFieldUserName;
+    }
+
+    public void setjTextFieldUserName(JTextField jTextFieldUserName) {
+        this.jTextFieldUserName = jTextFieldUserName;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -153,13 +181,13 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_closeActionPerformed
 
     private void jButton_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OKActionPerformed
-        MainController.selectedDB = jComboBox1.getModel().getSelectedItem().toString();
+        MainController.saveConnectionValues();
         MainController.mostrarLogin();
     }//GEN-LAST:event_jButton_OKActionPerformed
 
     private void jButtonNewDirGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewDirGHActionPerformed
-        
-        MainController.selectedDB = jComboBox1.getModel().getSelectedItem().toString();
+              
+        MainController.saveConnectionValues();
         ArrayList<String> empleado = new ArrayList<String>();
         empleado.add(TipoEmpleado.DIRECTOR_GESTION_HUMANA);
         MainController.mostrarFormularioCrearEmpleado(empleado);

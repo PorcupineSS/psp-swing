@@ -21,7 +21,7 @@ public class ComunicadoVO implements IValueObject, Serializable{
     private String tipoCom;
     private Date fechaCom;
     private String contenidoCom;
-    private Short urgente;
+    private boolean urgente;
     private String respuestaCom;
 
     public Short getIdComunicado() {
@@ -72,11 +72,11 @@ public class ComunicadoVO implements IValueObject, Serializable{
         this.contenidoCom = contenidoCom;
     }
 
-    public Short getUrgente() {
+    public boolean getUrgente() {
         return urgente;
     }
 
-    public void setUrgente(Short urgente) {
+    public void setUrgente(boolean urgente) {
         this.urgente = urgente;
     }
 

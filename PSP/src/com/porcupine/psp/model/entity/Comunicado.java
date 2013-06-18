@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.*;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -155,6 +156,23 @@ public class Comunicado implements Serializable {
     @Override
     public String toString() {
         return "com.porcupine.psp.model.entity.Comunicado[ idComunicado=" + idComunicado + " ]";
+    }
+    
+    public ComunicadoVO toVO(){
+        
+        ComunicadoVO comunicado = new ComunicadoVO(); 
+        
+        comunicado.setCedulaDirOper(this.getDirCedulae().getCedulae());//Dudo de este
+        comunicado.setCedulaEmpTemp(this.getCedulae().getCedulae());//Dudo de este
+        
+        comunicado.setContenidoCom(contenidoCo);
+        comunicado.setFechaCom(fechaCo);
+        comunicado.setIdComunicado(idComunicado);
+        comunicado.setRespuestaCom(respuestaCo);
+        comunicado.setTipoCom(tipoCo);
+        comunicado.setUrgente(urgente);
+        
+        return comunicado;
     }
     
 }

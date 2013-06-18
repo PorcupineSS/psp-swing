@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.*;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -139,6 +140,10 @@ public class EmpTemp implements Serializable {
     @Override
     public String toString() {
         return "com.porcupine.psp.model.entity.EmpTemp[ cedulae=" + cedulae + " ]";
+    }
+
+    EmpTempVO toVO() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -10,6 +10,7 @@ import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.entity.Empleados;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.util.Hash;
+import com.porcupine.psp.util.TipoEmpleado;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
@@ -84,6 +85,15 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         
         Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().login(entity);
         return empleado != null ? empleado.toVO() : null;
+        
+    }
+    
+    public void discoverType(EmpleadosVO vo){
+        if(vo.getRol()==TipoEmpleado.PLANTA){
+            EmpPlantaVO emp = DAOFactory.getInstance().getEmpPlantaDAO().find(vo.getCedulaEmpleado());
+        }
+        
+        
         
     }
 }

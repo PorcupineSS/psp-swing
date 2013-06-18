@@ -40,4 +40,8 @@ public class DAOFactory {
         }
         return instance;
     }
+
+    public Object getEmpPlantaDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

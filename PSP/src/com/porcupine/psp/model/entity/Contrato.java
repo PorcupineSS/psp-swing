@@ -4,9 +4,10 @@
  */
 package com.porcupine.psp.model.entity;
 
-import com.porcupine.psp.model.vo.ContratoVO;
+import com.porcupine.psp.model.vo.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -252,8 +253,31 @@ public class Contrato implements Serializable {
         return "com.porcupine.psp.model.entity.Contrato[ idContrato=" + idContrato + " ]";
     }
 
-    ContratoVO toVO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ContratoVO toVO() {
+        
+        ContratoVO contrato = new ContratoVO();
+        
+        contrato.setCantPersonalCont(cantidadPersonalC);
+        contrato.setCedulaDirComer(this.getCedulae().getCedulae());//Tengo duda con este
+        contrato.setCelularCont(celularC);
+        contrato.setCostoMensual(costoMensualC);
+        contrato.setFechaInicioCont(fechaInicioC);
+        contrato.setFechaRegCont(fechaRegCon);
+        contrato.setHorarioCont(horarioC);
+        contrato.setIdCliente(this.getIdcl().getIdcl());//Dudo de este
+        contrato.setIdContrato(idContrato);
+        contrato.setTelefonoCont(telefonoC);
+        contrato.setTiempoCont(tiempoC);
+        contrato.setTipoCont(tipoC);
+        contrato.setTipoPersonalCont(tipoPersonalC);
+        contrato.setUbicacionCont(ubicacionC);
+        
+        ArrayList<AsignacionCVO> listAsigContratoVO = new ArrayList<AsignacionCVO>();
+        for(AsignacionC entity : getAsignacionCList()){
+           listAsigContratoVO.add(entity.toVO());            
+        }
+        
+        return contrato;
     }
     
 }

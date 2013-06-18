@@ -4,7 +4,9 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -144,6 +146,26 @@ public class AsignacionC implements Serializable {
     @Override
     public String toString() {
         return "com.porcupine.psp.model.entity.AsignacionC[ idAsig=" + idAsig + " ]";
+    }
+
+    public AsignacionCVO toVO() {
+        
+        AsignacionCVO asignacionC = new AsignacionCVO();
+        
+        asignacionC.setCedulaCoordCont(this.getCooCedulae().getCedulae());
+        asignacionC.setCedulaEmpTemp(empTempCedulae);
+        asignacionC.setFechaAsignacionC(fechaAsignacionC);
+        asignacionC.setHorarioAsignado(horarioAsignado);
+        asignacionC.setIdAsig(idAsig);
+        asignacionC.setIdContrato(this.getIdContrato().getIdContrato());
+        
+        ArrayList<EmpTempVO> listAsigEmpTempVO = new ArrayList<EmpTempVO>();
+        for(EmpTemp entity : getEmpTempList()){
+           listAsigEmpTempVO.add(entity.toVO());            
+        }
+        
+        return asignacionC;
+        
     }
     
 }

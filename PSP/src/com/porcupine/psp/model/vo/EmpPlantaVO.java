@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.porcupine.psp.model.service;
+package com.porcupine.psp.model.vo;
 
 /**
  *
  * @author sparrow
  */
-class EmpPlantaVO {
+public class EmpPlantaVO {
     
 }

@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.model.service;
 
+import com.porcupine.psp.model.vo.EmpPlantaVO;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.DAOFactory;
@@ -90,7 +91,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
     
     public void discoverType(EmpleadosVO vo){
         if(vo.getRol()==TipoEmpleado.PLANTA){
-            EmpPlantaVO emp = DAOFactory.getInstance().getEmpPlantaDAO().find(vo.getCedulaEmpleado());
+            //EmpPlantaVO emp = DAOFactory.getInstance().getEmpPlantaDAO().find(vo.getCedulaEmpleado());
         }
         
         

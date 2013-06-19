@@ -4,7 +4,11 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.ImplSeguridadVO;
+import com.porcupine.psp.model.vo.ProveedorVO;
+import com.porcupine.psp.model.vo.TelefonosVO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -146,4 +150,32 @@ public class Proveedor implements Serializable {
         return "com.porcupine.psp.model.entity.Proveedor[ idPro=" + idPro + " ]";
     }
     
+    public ProveedorVO toVO(){
+        ProveedorVO proveedorVO = new ProveedorVO();
+
+        proveedorVO.setDireccion(direccion);
+        proveedorVO.setFechaRegProv(fechaRegProv);
+        proveedorVO.setNombre(nombre);
+
+        
+        if (this.getCedulae() != null) {
+            proveedorVO.setCedulae(cedulae.getCedulae());
+        }
+        
+        List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+        for (TelsProv each : getTelsProvList()) {
+            telefonos.add((each.toVO()));
+        }
+        
+        List<ImplSeguridadVO> implSeg = new ArrayList<ImplSeguridadVO>();
+        for (ImplSeguridad each : getImplSeguridadList()) {
+            implSeg.add((each.toVO()));
+        }
+        
+        proveedorVO.setImplSeguridadList(implSeg);
+        proveedorVO.setTelsProvList(telefonos);
+        
+        return proveedorVO;     
+    }
+         
 }

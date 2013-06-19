@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.TelefonosVO;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -91,6 +92,10 @@ public class TelsProv implements Serializable {
     @Override
     public String toString() {
         return "com.porcupine.psp.model.entity.TelsProv[ idTp=" + idTp + " ]";
+    }
+
+    TelefonosVO toVO() {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
     
 }

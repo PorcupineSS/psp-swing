@@ -11,7 +11,7 @@ import java.util.Map;
 public class DAOFactory {
     
     //Debe ser inicializado
-    private String PU = MainController.getSelectedDB();
+    private static String PU = "com.porcupine.psp.pu.database";
     private Map propierties = MainController.getConnectionPropierties();
 
     private DAOFactory() {

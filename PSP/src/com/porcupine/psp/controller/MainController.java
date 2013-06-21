@@ -244,37 +244,29 @@ public class MainController {
         MainController.selectedDB = sdb.getjComboBox1().getModel().getSelectedItem().toString();
         String username = sdb.getjTextFieldUserName().getText();
         String password = new String(sdb.getjPasswordField().getPassword());
-        Map propsSQL = new HashMap();
-        
+        Map dbprops = new HashMap();
+
         //http://java-persistence.blogspot.com/2008/02/testing-eclipselink-jpa-in-javase.html
 
-        propsSQL.put("javax.persistence.jdbc.user", username);
-        propsSQL.put("javax.persistence.jdbc.password", password);
-        propsSQL.put("javax.persistence.jdbc.driver", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        propsSQL.put("javax.persistence.jdbc.url", "jdbc:sqlserver://168.176.36.26:1433;databaseName=dbd_2");
+        dbprops.put("javax.persistence.jdbc.user", username);
+        dbprops.put("javax.persistence.jdbc.password", password);
 
-        Map propsSYB = new HashMap();
+        if (selectedDB == ServidoresDisponibles.SQL) {
 
-        propsSYB.put("javax.persistence.jdbc.user", username);
-        propsSYB.put("javax.persistence.jdbc.password", password);
-        propsSYB.put("javax.persistence.jdbc.driver", "net.sourceforge.jtds.jdbc.Driver");
-        propsSYB.put("javax.persistence.jdbc.url", "jdbc:jtds:sybase://168.176.36.25:8101/dbd_2");
+            dbprops.put("javax.persistence.jdbc.driver", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            dbprops.put("javax.persistence.jdbc.url", "jdbc:sqlserver://168.176.36.26:1433;databaseName=dbd_2");
+        } else if (selectedDB == ServidoresDisponibles.SYB) {
 
-        Map propsORA = new HashMap();
+            dbprops.put("javax.persistence.jdbc.driver", "net.sourceforge.jtds.jdbc.Driver");
+            dbprops.put("javax.persistence.jdbc.url", "jdbc:jtds:sybase://168.176.36.25:8101/dbd_2");
+        } else {
 
-        propsSYB.put("javax.persistence.jdbc.user", username);
-        propsSYB.put("javax.persistence.jdbc.password", password);
-        propsSYB.put("javax.persistence.jdbc.driver", "oracle.jdbc.OracleDriver");
-        propsSYB.put("javax.persistence.jdbc.url", "jdbc:oracle:thin:@168.176.36.14:1521:UNBDS7");
+            dbprops.put("javax.persistence.jdbc.driver", "oracle.jdbc.OracleDriver");
+            dbprops.put("javax.persistence.jdbc.url", "jdbc:oracle:thin:@168.176.36.14:1521:UNBDS7");
+        }
+    
 
-        Map members = new HashMap();
-        members.put(ServidoresDisponibles.ORA, propsORA);
-        members.put(ServidoresDisponibles.SYB, propsSYB);
-        members.put(ServidoresDisponibles.SQL, propsSQL);
-
-        Map propierties = new HashMap();
-
-        connectionPropierties = members;
+        connectionPropierties = dbprops;
     }
 
     /**

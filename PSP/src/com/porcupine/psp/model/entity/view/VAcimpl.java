@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VAcimpl.findByDescripcionActualizacion", query = "SELECT v FROM VAcimpl v WHERE v.descripcionActualizacion = :descripcionActualizacion")})
 public class VAcimpl implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
     @Column(name = "ID_IMPLEMENTO")
     private Short idImplemento;
     @Column(name = "CEDULAE")

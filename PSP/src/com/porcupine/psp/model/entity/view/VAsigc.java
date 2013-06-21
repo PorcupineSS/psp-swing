@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VAsigc.findByHorarioAsignado", query = "SELECT v FROM VAsigc v WHERE v.horarioAsignado = :horarioAsignado")})
 public class VAsigc implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
     @Basic(optional = false)
     @Column(name = "ID_CONTRATO")
     private short idContrato;

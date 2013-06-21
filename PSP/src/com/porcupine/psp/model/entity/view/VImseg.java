@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VImseg.findByFechaRegIm", query = "SELECT v FROM VImseg v WHERE v.fechaRegIm = :fechaRegIm")})
 public class VImseg implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
     @Basic(optional = false)
     @Column(name = "CEDULAE")
     private int cedulae;

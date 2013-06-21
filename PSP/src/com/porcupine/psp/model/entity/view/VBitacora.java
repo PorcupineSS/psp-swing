@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VBitacora.findByTablaMod", query = "SELECT v FROM VBitacora v WHERE v.tablaMod = :tablaMod"),
     @NamedQuery(name = "VBitacora.findByTipoOper", query = "SELECT v FROM VBitacora v WHERE v.tipoOper = :tipoOper")})
 public class VBitacora implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Column(name = "CEDULAE")
     private BigInteger cedulae;
@@ -104,5 +105,4 @@ public class VBitacora implements Serializable {
     public void setId(VBitacora id) {
         this.id = id;
     }
-    
 }

@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VAimpl.findByFechaAsignacionI", query = "SELECT v FROM VAimpl v WHERE v.fechaAsignacionI = :fechaAsignacionI")})
 public class VAimpl implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
     @Basic(optional = false)
     @Column(name = "ID_IMPLEMENTO")
     private short idImplemento;

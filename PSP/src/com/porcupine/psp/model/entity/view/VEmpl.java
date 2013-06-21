@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VEmpl.findByFechareg", query = "SELECT v FROM VEmpl v WHERE v.fechareg = :fechareg")})
 public class VEmpl implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
     @Basic(optional = false)
     @Column(name = "CEDULAE")
     private int cedulae;

@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VCont.findByFechaRegCon", query = "SELECT v FROM VCont v WHERE v.fechaRegCon = :fechaRegCon")})
 public class VCont implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
     @Basic(optional = false)
     @Column(name = "IDCL")
     private short idcl;

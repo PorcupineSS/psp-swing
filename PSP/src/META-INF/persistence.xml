@@ -33,6 +33,8 @@
     <class>com.porcupine.psp.model.entity.view.VAimpl</class>
     <class>com.porcupine.psp.model.entity.view.VImseg</class>
     <class>com.porcupine.psp.model.entity.view.VAcimpl</class>
+    <class>com.porcupine.psp.model.entity.CoordTYT</class>
+    <class>com.porcupine.psp.model.entity.EmpTemp</class>
     <properties>
       <property name="eclipselink.canonicalmodel.subpackage" value="one"/>
     </properties>
@@ -70,6 +72,8 @@
     <class>com.porcupine.psp.model.entity.view.VEmpl</class>
     <class>com.porcupine.psp.model.entity.view.VImseg</class>
     <class>com.porcupine.psp.model.entity.view.VProv</class>
+    <class>com.porcupine.psp.model.entity.CoordTYT</class>
+    <class>com.porcupine.psp.model.entity.EmpTemp</class>
     <properties>
       <property name="eclipselink.canonicalmodel.subpackage" value="two"/>
     </properties>
@@ -107,6 +111,8 @@
     <class>com.porcupine.psp.model.entity.view.VEmpl</class>
     <class>com.porcupine.psp.model.entity.view.VImseg</class>
     <class>com.porcupine.psp.model.entity.view.VProv</class>
+    <class>com.porcupine.psp.model.entity.CoordTYT</class>
+    <class>com.porcupine.psp.model.entity.EmpTemp</class>
     <properties>
       <property name="eclipselink.canonicalmodel.subpackage" value="three"/>
     </properties>

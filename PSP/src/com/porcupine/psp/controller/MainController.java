@@ -172,22 +172,23 @@ public class MainController {
                     reportarError(new InternalErrorException("Rol erroneo"), login);
                     break;
             }
+            empleadoActivo = empleadoLogin;
         } else {
             JOptionPane.showMessageDialog(login, "¡Usuario o contraseña incorrectos!", "Error", JOptionPane.ERROR_MESSAGE, null);
         }
     }
 
-    public static void reportarError(Exception ex, JPanel parent){
+    public static void reportarError(Exception ex, JPanel parent) {
         int opcion = JOptionPane.showOptionDialog(parent, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
-            switch (opcion) {
-                case JOptionPane.OK_OPTION:
-                    //TODO Reportar Error
-                    break;
-                case JOptionPane.CANCEL_OPTION:
-                    break;
-            }
+        switch (opcion) {
+            case JOptionPane.OK_OPTION:
+                //TODO Reportar Error
+                break;
+            case JOptionPane.CANCEL_OPTION:
+                break;
+        }
     }
-    
+
     /**
      * Disponible para: Director de Gestion Humana Guardias y escoltas,
      * coordinador de contrato, tecnico y operaciones Modelo gestionado por

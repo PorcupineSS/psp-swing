@@ -81,7 +81,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
     public EmpleadosVO login(EmpleadosVO vo) throws DataBaseException {
         Empleados entity = new Empleados();
-        entity.setCoddocume(vo.getCodigoDocumento());
+        entity.setCedulae(vo.getCedulaEmpleado());
         entity.setContrasenae(((vo.getContraseniaEmpleado())));
         
         Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().login(entity);

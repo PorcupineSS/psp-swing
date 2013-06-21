@@ -12,7 +12,7 @@ public class DAOFactory {
     
     //Debe ser inicializado
     private String PU = MainController.getSelectedDB();
-    private Map propierties = MainController.connectionPropierties;
+    private Map propierties = MainController.getConnectionPropierties();
 
     private DAOFactory() {
     }

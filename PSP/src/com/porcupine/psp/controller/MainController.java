@@ -41,6 +41,30 @@ public class MainController {
     //VOS Temporales para hacer operaciones
     public static EmpleadosVO empleadoTemporal;
 
+    public static Map getConnectionPropierties() {
+        return connectionPropierties;
+    }
+
+    public static void setConnectionPropierties(Map connectionPropierties) {
+        MainController.connectionPropierties = connectionPropierties;
+    }
+
+    public static CreateEmployee getCrearEmpleado() {
+        return crearEmpleado;
+    }
+
+    public static void setCrearEmpleado(CreateEmployee crearEmpleado) {
+        MainController.crearEmpleado = crearEmpleado;
+    }
+
+    public static Helper getHelper() {
+        return helper;
+    }
+
+    public static void setHelper(Helper helper) {
+        MainController.helper = helper;
+    }
+
     //Constructores y cosas similares
     //<editor-fold defaultstate="collapsed" desc="Constructores">
     public static Login getLogin() {
@@ -221,6 +245,8 @@ public class MainController {
         String username = sdb.getjTextFieldUserName().getText();
         String password = new String(sdb.getjPasswordField().getPassword());
         Map propsSQL = new HashMap();
+        
+        //http://java-persistence.blogspot.com/2008/02/testing-eclipselink-jpa-in-javase.html
 
         propsSQL.put("javax.persistence.jdbc.user", username);
         propsSQL.put("javax.persistence.jdbc.password", password);
@@ -247,10 +273,8 @@ public class MainController {
         members.put(ServidoresDisponibles.SQL, propsSQL);
 
         Map propierties = new HashMap();
-        propierties.put("eclipselink.logging.level", "FINEST");
-        propierties.put("eclipselink.composite-unit.properties", members);
 
-        connectionPropierties = propierties;
+        connectionPropierties = members;
     }
 
     /**

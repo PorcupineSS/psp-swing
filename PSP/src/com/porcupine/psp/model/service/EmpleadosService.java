@@ -8,6 +8,7 @@ import com.porcupine.psp.model.vo.EmpPlantaVO;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.DAOFactory;
+import com.porcupine.psp.model.entity.DirGestionHum;
 import com.porcupine.psp.model.entity.EmpPlanta;
 import com.porcupine.psp.model.entity.Empleados;
 import com.porcupine.psp.model.vo.EmpleadosVO;
@@ -39,12 +40,19 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         entity.setCedulae(vo.getCedulaEmpleado());
         entity.setNombree(vo.getNombreEmpleado());
         entity.setApellidoe(vo.getApellidoEmpleado());
-        entity.setCoddocume(vo.getCodigoDocumento());
-
-        entity.setFechareg(new Date());
         entity.setContrasenae((vo.getContraseniaEmpleado()));
+        entity.setFechareg(new Date());
+        
+        
+        entity.setCoddocume(getPrefix(vo.getRol()) + vo.getCodigoDocumento());
+        
+        
+        //TODO find
+        entity.setBitacoraSegList(null);
+        entity.setTelsEmpList(null);
 
-        //entity.setDirCedulae(vo.getCedulaDirector());
+        DirGestionHum temp = (DirGestionHum) DAOFactory.getInstance().getEmpleadosDAO().findSpecific(vo.getCedulaDirector(),TipoEmpleado.DIRECTOR_GESTION_HUMANA);
+        entity.setDirCedulae(temp);
 
         DAOFactory.getInstance().getEmpleadosDAO().create(entity);
     }
@@ -94,6 +102,10 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
                 
         return empleado != null ? temp : null;
         
+    }
+
+    private String getPrefix(String rol) {
+        return "A";
     }
     
    }

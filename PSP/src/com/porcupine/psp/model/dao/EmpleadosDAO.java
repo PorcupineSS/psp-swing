@@ -11,6 +11,8 @@ import javax.persistence.*;
 import javax.persistence.criteria.CriteriaQuery;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.entity.*;
+import com.porcupine.psp.util.TipoEmpleado;
 import java.util.Map;
 import model.dao.exceptions.PreexistingEntityException;
 
@@ -63,6 +65,45 @@ public class EmpleadosDAO implements ICrudDAO<Empleados, Integer> {
         }
     }
 
+    public Object findSpecific(Integer id, String rol) throws EntityNotFoundException {
+        EntityManager entityManager = null;
+        try {
+            if (rol == TipoEmpleado.COORDINADOR_CONTRATO) {
+                entityManager = getEntityManager();
+                return entityManager.find(CoordContrato.class, id);
+            } else if (rol == TipoEmpleado.COORDINADOR_TECNICO_TECNOLOGICO) {
+                entityManager = getEntityManager();
+                return entityManager.find(CoordTYT.class, id);
+            } else if (rol == TipoEmpleado.DIRECTOR_COMERCIAL) {
+                entityManager = getEntityManager();
+                return entityManager.find(DirComercial.class, id);
+            } else if (rol == TipoEmpleado.DIRECTOR_GESTION_HUMANA) {
+                entityManager = getEntityManager();
+                return entityManager.find(DirGestionHum.class, id);
+            } else if (rol == TipoEmpleado.DIRECTOR_OPERACIONES) {
+                entityManager = getEntityManager();
+                return entityManager.find(DirOperaciones.class, id);
+            } else if (rol == TipoEmpleado.SUBGERENTE) {
+                entityManager = getEntityManager();
+                return entityManager.find(Subgerente.class, id);
+            } else if (rol == TipoEmpleado.TEMPORAL) {
+                entityManager = getEntityManager();
+                return entityManager.find(EmpTemp.class, id);
+            }
+
+            return null;
+
+
+        } catch (EntityNotFoundException ex) {
+            throw new EntityNotFoundException("El empleado con id " + id + " no existe.");
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
+    }
+
     @Override
     public void update(Empleados entity) throws NonexistentEntityException {
         EntityManager entityManager = null;
@@ -95,6 +136,10 @@ public class EmpleadosDAO implements ICrudDAO<Empleados, Integer> {
             entityManager = getEntityManager();
             entityManager.getTransaction().begin();
             Empleados empleado = null;
+
+
+
+
             try {
                 empleado = entityManager.getReference(Empleados.class, id);
             } catch (EntityNotFoundException e) {
@@ -123,6 +168,7 @@ public class EmpleadosDAO implements ICrudDAO<Empleados, Integer> {
             CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Empleados.class));
             Query q = entityManager.createQuery(cq);
+
             return q.getResultList();
         } finally {
             if (entityManager != null) {
@@ -139,9 +185,7 @@ public class EmpleadosDAO implements ICrudDAO<Empleados, Integer> {
             Empleados empleado;
             Query q = entityManager.createQuery("SELECT u FROM Empleados u "
                     + "WHERE u.cedulae LIKE :username "
-                    + "AND u.contrasenae LIKE :password")
-                    .setParameter("username", entity.getCedulae().toString())
-                    .setParameter("password", entity.getContrasenae());
+                    + "AND u.contrasenae LIKE :password").setParameter("username", entity.getCedulae().toString()).setParameter("password", entity.getContrasenae());
             try {
                 empleado = (Empleados) q.getSingleResult();
             } catch (NoResultException e) {

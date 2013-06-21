@@ -1,4 +1,4 @@
-package com.porcupine.psp.controller.exceptions;
+
 
 public class InternalErrorException extends Exception {
     public InternalErrorException(String message, Throwable cause) {

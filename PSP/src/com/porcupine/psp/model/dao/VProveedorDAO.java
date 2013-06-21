@@ -4,8 +4,7 @@
  */
 package com.porcupine.psp.model.dao;
 
-import com.porcupine.psp.controller.exceptions.NonexistentEntityException;
-import com.porcupine.psp.controller.exceptions.PreexistingEntityException;
+import com.porcupine.psp.model.dao.exceptions.*;
 import com.porcupine.psp.model.entity.view.VProv;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -220,7 +219,7 @@ public class VProveedorDAO implements ICrudDAO<VProv, BigDecimal> {
     }
 
     @Override
-    public void create(VProv entity) throws model.dao.exceptions.PreexistingEntityException, com.porcupine.psp.model.dao.exceptions.NonexistentEntityException {
+    public void create(VProv entity) throws PreexistingEntityException, com.porcupine.psp.model.dao.exceptions.NonexistentEntityException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

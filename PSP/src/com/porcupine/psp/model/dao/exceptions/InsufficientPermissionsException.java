@@ -1,4 +1,4 @@
-package model.dao.exceptions;
+package com.porcupine.psp.model.dao.exceptions;
 
 /**
  *

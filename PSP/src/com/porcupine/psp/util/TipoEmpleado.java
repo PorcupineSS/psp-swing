@@ -20,5 +20,7 @@ public final class TipoEmpleado {
     public static final String DIRECTOR_OPERACIONES = "Director de operaciones";
     public static final String PLANTA = "%Planta";
     public static final String TEMPORAL = "%Temporal";
+    public static final String TEMPORAL_GUARDA = "Guarda";
+    public static final String TEMPORAL_ESCOLTA = "Escolta";
     public static final String SUBGERENTE = "Subgerente";
 }

@@ -5,17 +5,14 @@
 package com.porcupine.psp.model.service;
 
 import com.porcupine.psp.model.dao.DAOFactory;
-import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.dao.exceptions.*;
 import com.porcupine.psp.model.entity.CoordTYT;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
-import model.dao.exceptions.InsufficientPermissionsException;
-import model.dao.exceptions.InvalidAttributeException;
-import model.dao.exceptions.PreexistingEntityException;
-import model.dao.exceptions.RequiredAttributeException;
+
 
 /**
  *

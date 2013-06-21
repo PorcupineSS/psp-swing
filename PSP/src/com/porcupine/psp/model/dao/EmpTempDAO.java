@@ -5,26 +5,31 @@
 package com.porcupine.psp.model.dao;
 
 import com.porcupine.psp.model.dao.exceptions.*;
-import com.porcupine.psp.model.entity.ImplSeguridad;
+import com.porcupine.psp.model.entity.EmpTemp;
 import java.util.List;
 import java.util.Map;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
- * @author Jeisson Andrés Vergara
+ * @author Zergio
  */
-public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
+public class EmpTempDAO implements ICrudDAO<EmpTemp, Integer> {
 
     private EntityManagerFactory entityManagerFactory;
 
-    ImplSeguridadDAO(String PU, Map propierties) {
+    EmpTempDAO(String PU, Map propierties) {
         entityManagerFactory = Persistence.createEntityManagerFactory(PU, propierties);
+    }
+
+    public EntityManagerFactory getEntityManagerFactory() {
+        return entityManagerFactory;
+    }
+
+    public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     public EntityManager getEntityManager() {
@@ -32,7 +37,7 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
     }
 
     @Override
-    public void create(ImplSeguridad entity) throws PreexistingEntityException, NonexistentEntityException {
+    public void create(EmpTemp entity) throws PreexistingEntityException, NonexistentEntityException {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
@@ -49,13 +54,13 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
     }
 
     @Override
-    public ImplSeguridad find(Integer id) throws EntityNotFoundException {
+    public EmpTemp find(Integer id) throws EntityNotFoundException {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
-            return entityManager.find(ImplSeguridad.class, id);
+            return entityManager.find(EmpTemp.class, id);
         } catch (EntityNotFoundException ex) {
-            throw new EntityNotFoundException("¡El implemento con id: " + id + ", no existe!");
+            throw new EntityNotFoundException("El empleado con id " + id + " no existe.");
         } finally {
             if (entityManager != null) {
                 entityManager.clear();
@@ -65,17 +70,20 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
     }
 
     @Override
-    public void update(ImplSeguridad entity) throws NonexistentEntityException {
+    public void update(EmpTemp entity) throws NonexistentEntityException {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
             entityManager.getTransaction().begin();
+
             entity = entityManager.merge(entity);
+
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager != null && entityManager.getTransaction() != null) {
                 entityManager.getTransaction().rollback();
             }
+
         } finally {
             if (entityManager != null) {
                 entityManager.clear();
@@ -90,14 +98,14 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
         try {
             entityManager = getEntityManager();
             entityManager.getTransaction().begin();
-            ImplSeguridad implementoSeg = null;
+            EmpTemp empleado = null;
             try {
-                implementoSeg = entityManager.getReference(ImplSeguridad.class, id);
+                empleado = entityManager.getReference(EmpTemp.class, id);
             } catch (EntityNotFoundException e) {
-                throw new NonexistentEntityException("¡El implemento con id: " + id + ", no existe!", e);
+                throw new NonexistentEntityException("El usuario con id " + id + " no existe.", e);
             }
 
-            entityManager.remove(implementoSeg);
+            entityManager.remove(empleado);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager != null && entityManager.getTransaction() != null) {
@@ -112,12 +120,12 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
     }
 
     @Override
-    public List<ImplSeguridad> getList() {
+    public List<EmpTemp> getList() {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
             CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(ImplSeguridad.class));
+            cq.select(cq.from(EmpTemp.class));
             Query q = entityManager.createQuery(cq);
             return q.getResultList();
         } finally {

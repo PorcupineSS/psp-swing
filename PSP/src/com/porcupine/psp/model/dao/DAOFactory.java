@@ -45,4 +45,8 @@ public class DAOFactory {
     public EmpPlantaDAO getEmpPlantaDAO() {
         return new EmpPlantaDAO(PU, propierties);
     }
+
+    public EmpTempDAO getEmpTempDAO() {
+        return new EmpTempDAO(PU, propierties);
+    }
 }

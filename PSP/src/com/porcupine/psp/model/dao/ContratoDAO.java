@@ -4,7 +4,7 @@
  */
 package com.porcupine.psp.model.dao;
 
-import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.dao.exceptions.*;
 import com.porcupine.psp.model.entity.Contrato;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +14,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
-import model.dao.exceptions.PreexistingEntityException;
 
 
 /**

@@ -4,7 +4,7 @@
  */
 package com.porcupine.psp.controller;
 
-import com.porcupine.psp.controller.exceptions.InternalErrorException;
+import com.porcupine.psp.model.dao.exceptions.InternalErrorException;
 import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.util.DrawingUtilities;

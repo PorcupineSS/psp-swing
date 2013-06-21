@@ -4,7 +4,7 @@
  */
 package com.porcupine.psp.model.dao;
 
-import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.dao.exceptions.*;
 import com.porcupine.psp.model.entity.EmpPlanta;
 import com.porcupine.psp.model.entity.Empleados;
 import java.io.Serializable;
@@ -12,18 +12,18 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaQuery;
-import model.dao.exceptions.PreexistingEntityException;
+
 
 /**
  *
  * @author Zergio
  */
-public class EmpPlantaDAO implements ICrudDAO<EmpPlanta, Integer>{
-    
+public class EmpPlantaDAO implements ICrudDAO<EmpPlanta, Integer> {
+
     private EntityManagerFactory entityManagerFactory;
-    
+
     EmpPlantaDAO(String PU, Map propierties) {
-    entityManagerFactory = Persistence.createEntityManagerFactory(PU, propierties);
+        entityManagerFactory = Persistence.createEntityManagerFactory(PU, propierties);
     }
 
     public EntityManagerFactory getEntityManagerFactory() {
@@ -33,11 +33,10 @@ public class EmpPlantaDAO implements ICrudDAO<EmpPlanta, Integer>{
     public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
-    
-      public EntityManager getEntityManager() {
+
+    public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
-    }   
-    
+    }
 
     @Override
     public void create(EmpPlanta entity) throws PreexistingEntityException, NonexistentEntityException {
@@ -138,5 +137,4 @@ public class EmpPlantaDAO implements ICrudDAO<EmpPlanta, Integer>{
             }
         }
     }
-    
 }

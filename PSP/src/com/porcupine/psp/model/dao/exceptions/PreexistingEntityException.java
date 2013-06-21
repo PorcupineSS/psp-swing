@@ -1,4 +1,4 @@
-package model.dao.exceptions;
+package com.porcupine.psp.model.dao.exceptions;
 
 public class PreexistingEntityException extends Exception {
     public PreexistingEntityException(String message, Throwable cause) {

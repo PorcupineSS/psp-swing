@@ -1,4 +1,4 @@
-package model.dao.exceptions;
+package com.porcupine.psp.model.dao.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

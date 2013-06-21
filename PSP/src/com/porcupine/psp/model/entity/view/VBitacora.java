@@ -30,6 +30,7 @@ public class VBitacora implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "CEDULAE")
     private BigInteger cedulae;
+    @Id
     @Basic(optional = false)
     @Column(name = "FECHA_OPER")
     @Temporal(TemporalType.TIMESTAMP)
@@ -44,8 +45,7 @@ public class VBitacora implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIPO_OPER")
     private String tipoOper;
-    @Id
-    private VBitacora id;
+    
 
     public VBitacora() {
     }
@@ -98,11 +98,5 @@ public class VBitacora implements Serializable {
         this.tipoOper = tipoOper;
     }
 
-    public VBitacora getId() {
-        return id;
-    }
-
-    public void setId(VBitacora id) {
-        this.id = id;
-    }
+   
 }

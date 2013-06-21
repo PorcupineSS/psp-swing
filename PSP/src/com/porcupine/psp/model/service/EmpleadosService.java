@@ -8,6 +8,7 @@ import com.porcupine.psp.model.vo.EmpPlantaVO;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.DAOFactory;
+import com.porcupine.psp.model.entity.EmpPlanta;
 import com.porcupine.psp.model.entity.Empleados;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.util.Hash;
@@ -85,16 +86,14 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         entity.setContrasenae(((vo.getContraseniaEmpleado())));
         
         Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().login(entity);
-        return empleado != null ? empleado.toVO() : null;
+        EmpleadosVO temp = empleado.toVO();
+        if (temp.getRol() != TipoEmpleado.TEMPORAL){
+            EmpPlantaVO empPlanta = DAOFactory.getInstance().getEmpPlantaDAO().find(temp.getCedulaEmpleado()).toVO();
+            temp.setRol(empPlanta.getRol());            
+        }
+                
+        return empleado != null ? temp : null;
         
     }
     
-    public void discoverType(EmpleadosVO vo){
-        if(vo.getRol()==TipoEmpleado.PLANTA){
-            //EmpPlantaVO emp = DAOFactory.getInstance().getEmpPlantaDAO().find(vo.getCedulaEmpleado());
-        }
-        
-        
-        
-    }
-}
+   }

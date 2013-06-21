@@ -4,6 +4,8 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.EmpPlantaVO;
+import com.porcupine.psp.util.TipoEmpleado;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.*;
@@ -21,6 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "EmpPlanta.findByCedulae", query = "SELECT e FROM EmpPlanta e WHERE e.cedulae = :cedulae"),
     @NamedQuery(name = "EmpPlanta.findBySueldoe", query = "SELECT e FROM EmpPlanta e WHERE e.sueldoe = :sueldoe")})
 public class EmpPlanta implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -154,5 +157,38 @@ public class EmpPlanta implements Serializable {
     public String toString() {
         return "com.porcupine.psp.model.entity.EmpPlanta[ cedulae=" + cedulae + " ]";
     }
-    
+
+    public EmpPlantaVO toVO() {
+        EmpPlantaVO empleado = new EmpPlantaVO();
+        empleado.setCedulae(this.getCedulae());
+        empleado.setSueldoe(this.getSueldoe());
+        empleado.setEmpleados(this.getEmpleados().getCedulae());
+
+        if (this.getCoordContrato() != null) {
+            empleado.setCoordContrato(this.getCoordContrato().getCedulae());
+            empleado.setRol(TipoEmpleado.COORDINADOR_CONTRATO);
+        }
+        if (this.getCoordTYT() != null) {
+            empleado.setCoordTYT(this.getCoordTYT().getCedulae());
+            empleado.setRol(TipoEmpleado.COORDINADOR_TECNICO_TECNOLOGICO);
+        }
+        if (this.getDirComercial() != null) {
+            empleado.setDirComercial(this.getDirComercial().getCedulae());
+            empleado.setRol(TipoEmpleado.DIRECTOR_COMERCIAL);
+        }
+        if (this.getDirGestionHum() != null) {
+            empleado.setDirGestionHum(this.getDirGestionHum().getCedulae());
+            empleado.setRol(TipoEmpleado.DIRECTOR_GESTION_HUMANA);
+        }
+        if (this.getDirOperaciones() != null) {
+            empleado.setDirOperaciones(this.getDirOperaciones().getCedulae());
+            empleado.setRol(TipoEmpleado.DIRECTOR_OPERACIONES);
+        }
+        if (this.getSubgerente() != null) {
+            empleado.setSubgerente(this.getSubgerente().getCedulae());
+            empleado.setRol(TipoEmpleado.SUBGERENTE);
+        }
+        return empleado;
+
+    }
 }

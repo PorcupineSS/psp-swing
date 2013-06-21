@@ -1,6 +1,7 @@
 package com.porcupine.psp.model.dao;
 
 import com.porcupine.psp.controller.MainController;
+import com.porcupine.psp.model.entity.EmpPlanta;
 import java.util.Map;
 
 /**
@@ -41,7 +42,7 @@ public class DAOFactory {
         return instance;
     }
 
-    public Object getEmpPlantaDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public EmpPlantaDAO getEmpPlantaDAO() {
+        return new EmpPlantaDAO(PU, propierties);
     }
 }

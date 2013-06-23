@@ -43,14 +43,13 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         entity.setContrasenae((vo.getContraseniaEmpleado()));
         entity.setFechareg(new Date());
 
+        entity.setCoddocume(getPrefix(vo.getRol()) + vo.getCedulaEmpleado().toString());
 
 
-
-        entity.setCoddocume(getPrefix(vo.getRol()) + vo.getCodigoDocumento());
-
-
-        //TODO find
+        //En teoria se esta creando entonces no es necesario
         entity.setBitacoraSegList(null);
+        
+        
         entity.setTelsEmpList(null);
 
         if (vo.getCedulaDirector() != null) {
@@ -62,6 +61,8 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         } catch (PreexistingEntityException ex) {
             Logger.getLogger(EmpleadosService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        //Commit de los telefonos
 
         if (vo.getRol().equals(TipoEmpleado.TEMPORAL_ESCOLTA) || vo.getRol().equals(TipoEmpleado.TEMPORAL_GUARDA)) {
             EmpTemp tempEntity = new EmpTemp();
@@ -138,6 +139,6 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
     }
 
     private String getPrefix(String rol) {
-        return "A";
+        return "T";
     }
 }

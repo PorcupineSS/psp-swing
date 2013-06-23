@@ -12,15 +12,15 @@ package com.porcupine.psp.util;
  */
 public final class TipoEmpleado {
 
-    public static final String GENERICO = "%Empleado";
-    public static final String COORDINADOR_CONTRATO = "Coordinador de contrato";
-    public static final String COORDINADOR_TECNICO_TECNOLOGICO = "Coordinador técnico y tecnológico";
-    public static final String DIRECTOR_COMERCIAL = "Director comercial";
-    public static final String DIRECTOR_GESTION_HUMANA = "Director de gestión humana";
-    public static final String DIRECTOR_OPERACIONES = "Director de operaciones";
-    public static final String PLANTA = "%Planta";
-    public static final String TEMPORAL = "%Temporal";
-    public static final String TEMPORAL_GUARDA = "Vigilante";
-    public static final String TEMPORAL_ESCOLTA = "Escolta";
-    public static final String SUBGERENTE = "Subgerente";
+    public static final String GENERICO = "%EMPLEADO";
+    public static final String COORDINADOR_CONTRATO = "COORDINADOR DE CONTRATO";
+    public static final String COORDINADOR_TECNICO_TECNOLOGICO = "COORDINADOR TECNICO Y TECNOLOGICO";
+    public static final String DIRECTOR_COMERCIAL = "DIRECTOR COMERCIAL";
+    public static final String DIRECTOR_GESTION_HUMANA = "DIRECTOR DE GESTION HUMANA";
+    public static final String DIRECTOR_OPERACIONES = "DIRECTOR DE OPERACIONES";
+    public static final String PLANTA = "%PLANTA";
+    public static final String TEMPORAL = "%TEMPORAL";
+    public static final String TEMPORAL_GUARDA = "VIGILANTE";
+    public static final String TEMPORAL_ESCOLTA = "ESCOLTA";
+    public static final String SUBGERENTE = "SUBGERENTE";
 }

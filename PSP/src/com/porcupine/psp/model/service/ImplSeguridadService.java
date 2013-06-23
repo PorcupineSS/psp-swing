@@ -10,16 +10,16 @@ import com.porcupine.psp.model.entity.CoordTYT;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
-
 
 /**
  *
  * @author Jeisson Andrés Vergara
  */
 public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> {
-    
+
     private static ImplSeguridadService instance;
 
     public static synchronized ImplSeguridadService getInstance() {
@@ -30,7 +30,7 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
     }
 
     @Override
-    public void create(ImplSeguridadVO vo) throws PreexistingEntityException, NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {            
+    public void create(ImplSeguridadVO vo) throws PreexistingEntityException, NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
         ImplSeguridad entity = new ImplSeguridad();
         entity.setIdImplemento(vo.getIdImplemento());
         entity.setNombreI(vo.getNombreI());
@@ -39,7 +39,7 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
         entity.setDescripcionI(vo.getDescripcionI());
         entity.setEstadoI(vo.getEstadoI());
         entity.setFechaRegIm(vo.getFechaRegIm());
-        
+
         if (vo.getIdPro() != 0) {
             Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find((int) vo.getIdPro());
             entity.setIdPro(proveedor);
@@ -49,13 +49,13 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
             CoordTYT coordTyT = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
             entity.setCedulae(coordTyT);
             coordTyT.getImplSeguridadList().add(entity);
-        } 
-        
-        DAOFactory.getInstance().getImplSeguridadDAO().create(entity);   
+        }
+
+        DAOFactory.getInstance().getImplSeguridadDAO().create(entity);
     }
 
     @Override
-    public ImplSeguridadVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {     
+    public ImplSeguridadVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {
         ImplSeguridad implSeguridad = DAOFactory.getInstance().getImplSeguridadDAO().find(id);
         if (implSeguridad != null) {
             return implSeguridad.toVO();
@@ -64,7 +64,6 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
         }
     }
 
-    
     @Override
     public void update(ImplSeguridadVO vo) throws NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
         ImplSeguridad entity = new ImplSeguridad();
@@ -75,8 +74,8 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
         entity.setDescripcionI(vo.getDescripcionI());
         entity.setEstadoI(vo.getEstadoI());
         entity.setFechaRegIm(vo.getFechaRegIm());
-    
-         if (vo.getIdPro() != 0) {
+
+        if (vo.getIdPro() != 0) {
             Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find((int) vo.getIdPro());
             entity.setIdPro(proveedor);
             proveedor.getImplSeguridadList().set(proveedor.getImplSeguridadList().get(entity.getIdImplemento()).getIdImplemento(), entity);
@@ -85,24 +84,33 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
             CoordTYT coordTyT = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
             entity.setCedulae(coordTyT);
             coordTyT.getImplSeguridadList().set(coordTyT.getImplSeguridadList().get(entity.getIdImplemento()).getIdImplemento(), entity);
-        } 
-        
-        DAOFactory.getInstance().getImplSeguridadDAO().update(entity);       
+        }
+
+        DAOFactory.getInstance().getImplSeguridadDAO().update(entity);
     }
 
     @Override
     public void delete(Integer id) throws NonexistentEntityException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ImplSeguridad implSeguridad = DAOFactory.getInstance().getImplSeguridadDAO().find(id);
+        if (implSeguridad != null) {
+            DAOFactory.getInstance().getImplSeguridadDAO().delete(id);
+        } else 
+        
     }
 
     @Override
     public List<ImplSeguridadVO> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<ImplSeguridadVO> listaVO = new ArrayList<ImplSeguridadVO>();
+        List<ImplSeguridad> lista = DAOFactory.getInstance().getImplSeguridadDAO().getList();;
+        for (ImplSeguridad implemento : lista) {
+            ImplSeguridadVO impl = implemento.toVO();
+            listaVO.add(impl);
+        }
+        return listaVO;
     }
 
     @Override
     public void removeAll() throws NonexistentEntityException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

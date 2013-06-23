@@ -6,7 +6,9 @@ package com.porcupine.psp.model.entity;
 
 import com.porcupine.psp.model.vo.ContratoVO;
 import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.util.TipoTelefono;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -99,7 +101,19 @@ public class TelsCli implements Serializable {
     }
 
     public TelefonosVO toVO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TelefonosVO telefono = new TelefonosVO();
+
+        telefono.setIdTelefono(this.getIdTc());
+        telefono.setNumeroTelefonoEmpleado(this.getNumTelefonoC());
+        telefono.setTipoTelefono(TipoTelefono.CLIENTE.toString());
+
+        List clientes = new ArrayList<Integer>();
+        for(Cliente each : this.getClienteList()){
+            clientes.add(each.getCedulae());
+        }
+        telefono.setUsersList(clientes);
+
+        return telefono;
     }
     
 }

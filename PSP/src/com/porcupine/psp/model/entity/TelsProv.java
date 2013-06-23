@@ -5,7 +5,10 @@
 package com.porcupine.psp.model.entity;
 
 import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.util.TipoTelefono;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -21,6 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "TelsProv.findByIdTp", query = "SELECT t FROM TelsProv t WHERE t.idTp = :idTp"),
     @NamedQuery(name = "TelsProv.findByNumTelefonoP", query = "SELECT t FROM TelsProv t WHERE t.numTelefonoP = :numTelefonoP")})
 public class TelsProv implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -94,8 +98,18 @@ public class TelsProv implements Serializable {
         return "com.porcupine.psp.model.entity.TelsProv[ idTp=" + idTp + " ]";
     }
 
-    TelefonosVO toVO() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public TelefonosVO toVO() {
+        TelefonosVO telefono = new TelefonosVO();
+
+        telefono.setIdTelefono(this.getIdTp());
+        telefono.setNumeroTelefonoEmpleado(this.getNumTelefonoP());
+        telefono.setTipoTelefono(TipoTelefono.PROVEEDOR.toString());
+
+        List proveedores = new ArrayList<Integer>();
+
+        proveedores.add(getIdPro());
+
+        telefono.setUsersList(proveedores);
+        return telefono;
     }
-    
 }

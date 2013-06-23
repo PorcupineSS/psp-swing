@@ -4,8 +4,11 @@
  */
 package com.porcupine.psp.model.entity;
 
+import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.util.TipoTelefono;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -23,6 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TelsEmp.findByIdTe", query = "SELECT t FROM TelsEmp t WHERE t.idTe = :idTe"),
     @NamedQuery(name = "TelsEmp.findByNumTelefonoE", query = "SELECT t FROM TelsEmp t WHERE t.numTelefonoE = :numTelefonoE")})
 public class TelsEmp implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -99,9 +103,17 @@ public class TelsEmp implements Serializable {
 
     public TelefonosVO toVO() {
         TelefonosVO telefono = new TelefonosVO();
-        
+
         telefono.setIdTelefono(this.getIdTe());
+        telefono.setNumeroTelefonoEmpleado(this.getNumTelefonoE());
+        telefono.setTipoTelefono(TipoTelefono.EMPLEADO.toString());
+
+        List empleados = new ArrayList<Integer>();
+        for(Empleados each : this.getEmpleadosList()){
+            empleados.add(each.getCedulae());
+        }
+        telefono.setUsersList(empleados);
+
         return telefono;
     }
-    
 }

@@ -19,16 +19,16 @@ public class TelefonosVO implements IValueObject, Serializable{
     private String numeroTelefonoEmpleado;
     
     
-    private List<IValueObject> usersList;
+    private List<Object> usersList;
     
     //Tipo de telefono
-    private int tipoTelefono;
+    private String tipoTelefono;
 
-    public List<IValueObject> getUsersList() {
+    public List<Object> getUsersList() {
         return usersList;
     }
 
-    public void setUsersList(List<IValueObject> usersList) {
+    public void setUsersList(List<Object> usersList) {
         this.usersList = usersList;
     }
 
@@ -48,11 +48,11 @@ public class TelefonosVO implements IValueObject, Serializable{
         this.numeroTelefonoEmpleado = numeroTelefonoEmpleado;
     }
 
-    public int getTipoTelefono() {
+    public String getTipoTelefono() {
         return tipoTelefono;
     }
 
-    public void setTipoTelefono(int tipoTelefono) {
+    public void setTipoTelefono(String tipoTelefono) {
         this.tipoTelefono = tipoTelefono;
     }
     

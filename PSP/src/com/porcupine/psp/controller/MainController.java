@@ -165,6 +165,7 @@ public class MainController {
 
         if (empleadoLogin != null) {
             switch (empleadoLogin.getRol()) {
+                //TODO set parameters
                 case TipoEmpleado.COORDINADOR_CONTRATO:
                     ContractCordination cCordination = new ContractCordination();
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), cCordination);
@@ -174,7 +175,8 @@ public class MainController {
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), ttcordination);
                     break;
                 case TipoEmpleado.DIRECTOR_COMERCIAL:
-                    //TODO
+                    AddClient addclient = new AddClient();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), addclient);
                     break;
                 case TipoEmpleado.DIRECTOR_GESTION_HUMANA:
                     HumanManagement hmanagement = new HumanManagement();
@@ -188,9 +190,14 @@ public class MainController {
                     BusinessManagement bmanagement = new BusinessManagement();
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), bmanagement);
                     break;
-                case TipoEmpleado.TEMPORAL:
+                //no es mi codigo mas bonito pero parece funcionar
+                case TipoEmpleado.TEMPORAL_ESCOLTA:
                     TemporaryEmployee temployee = new TemporaryEmployee();
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), temployee);
+                    break;
+                case TipoEmpleado.TEMPORAL_GUARDA:
+                    TemporaryEmployee temployee2 = new TemporaryEmployee();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), temployee2);
                     break;
                 default:
                     reportarError(new InternalErrorException("Rol erroneo"), login);
@@ -264,7 +271,7 @@ public class MainController {
             dbprops.put("javax.persistence.jdbc.driver", "oracle.jdbc.OracleDriver");
             dbprops.put("javax.persistence.jdbc.url", "jdbc:oracle:thin:@168.176.36.14:1521:UNBDS7");
         }
-    
+
 
         connectionPropierties = dbprops;
     }

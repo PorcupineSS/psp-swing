@@ -94,8 +94,7 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
         ImplSeguridad implSeguridad = DAOFactory.getInstance().getImplSeguridadDAO().find(id);
         if (implSeguridad != null) {
             DAOFactory.getInstance().getImplSeguridadDAO().delete(id);
-        } else 
-        
+        } 
     }
 
     @Override

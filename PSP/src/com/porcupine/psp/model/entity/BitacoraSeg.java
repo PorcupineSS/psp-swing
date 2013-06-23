@@ -146,7 +146,15 @@ public class BitacoraSeg implements Serializable {
     }
 
     public BitacoraSegVO toVO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        BitacoraSegVO bitacora = new BitacoraSegVO();
+        bitacora.setCedulae(this.getCedulae().getCedulae());
+        bitacora.setFechaOper(this.getFechaOper());
+        bitacora.setIdOper(this.getIdOper());
+        bitacora.setMaqOper(this.getMaqOper());
+        bitacora.setTablaMod(this.getTablaMod());
+        bitacora.setTipoOper(this.getTipoOper());
+        bitacora.setUsuOper(this.getUsuOper());
+        return bitacora;
     }
     
 }

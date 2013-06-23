@@ -21,6 +21,10 @@ public class ServiceFactory {
     public EmpleadosService getEmpleadosService() {
         return EmpleadosService.getInstance();
     }
+    
+    public ImplSeguridadService getImplSeguridadService() {
+        return ImplSeguridadService.getInstance();
+    }
 
     
 }

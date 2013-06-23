@@ -64,9 +64,30 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
         }
     }
 
+    
     @Override
     public void update(ImplSeguridadVO vo) throws NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ImplSeguridad entity = new ImplSeguridad();
+        entity.setIdImplemento(vo.getIdImplemento());
+        entity.setNombreI(vo.getNombreI());
+        entity.setPrecioUnitarioI(vo.getPrecioUnitarioI());
+        entity.setCantidad(vo.getCantidad());
+        entity.setDescripcionI(vo.getDescripcionI());
+        entity.setEstadoI(vo.getEstadoI());
+        entity.setFechaRegIm(vo.getFechaRegIm());
+    
+         if (vo.getIdPro() != 0) {
+            Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find((int) vo.getIdPro());
+            entity.setIdPro(proveedor);
+            proveedor.getImplSeguridadList().set(proveedor.getImplSeguridadList().get(entity.getIdImplemento()).getIdImplemento(), entity);
+        }
+        if (vo.getCedulaCoordTyT() != 0) {
+            CoordTYT coordTyT = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
+            entity.setCedulae(coordTyT);
+            coordTyT.getImplSeguridadList().set(coordTyT.getImplSeguridadList().get(entity.getIdImplemento()).getIdImplemento(), entity);
+        } 
+        
+        DAOFactory.getInstance().getImplSeguridadDAO().update(entity);       
     }
 
     @Override

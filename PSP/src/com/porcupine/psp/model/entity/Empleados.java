@@ -202,7 +202,7 @@ public class Empleados implements Serializable {
 
     public EmpleadosVO toVO() {
         EmpleadosVO empleado = new EmpleadosVO();
-        empleado.setCedulaDirector(cedulae);
+        empleado.setCedulaEmpleado(cedulae);
         empleado.setNombreEmpleado(nombree);
         empleado.setApellidoEmpleado(apellidoe);
         empleado.setContraseniaEmpleado(contrasenae);
@@ -212,7 +212,7 @@ public class Empleados implements Serializable {
 
 
         if (this.getDirCedulae() != null) {
-            empleado.setCedulaEmpleado(dirCedulae.getCedulae());
+            empleado.setCedulaDirector(dirCedulae.getCedulae());
         }
 
         List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();

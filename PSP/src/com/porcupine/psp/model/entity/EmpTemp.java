@@ -147,9 +147,12 @@ public class EmpTemp implements Serializable {
     public EmpTempVO toVO() {
         EmpTempVO empleado = new EmpTempVO();
         empleado.setCedulaEmpleado(this.getCedulae());
-        empleado.setIdAsig(this.getIdAsig().getIdAsig());
         empleado.setTieneContrato(this.getTieneContrato());
         empleado.setTipoTemp(this.getTipoTemp());
+
+        if (this.getIdAsig() != null) {
+            empleado.setIdAsig(this.getIdAsig().getIdAsig());
+        }
 
         List<Short> asigImplList = new ArrayList<Short>();
         for (AsigImpl each : getAsigImplList()) {
@@ -157,7 +160,7 @@ public class EmpTemp implements Serializable {
         }
         empleado.setAsigImplList(asigImplList);
 
-        
+
         List<Short> comunicadoList = new ArrayList<Short>();
         for (Comunicado each : getComunicadoList()) {
             comunicadoList.add(each.getIdComunicado());

@@ -4,22 +4,23 @@
  */
 package com.porcupine.psp.controller;
 
+import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.exceptions.InternalErrorException;
 import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.EmpleadosVO;
-import com.porcupine.psp.util.DrawingUtilities;
-import com.porcupine.psp.view.*;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
+import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.util.DrawingUtilities;
 import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;
+import com.porcupine.psp.view.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**

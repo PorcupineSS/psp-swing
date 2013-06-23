@@ -12,10 +12,13 @@ import com.porcupine.psp.view.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
+import com.porcupine.psp.model.vo.TelefonosVO;
 import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 
 /**
@@ -228,8 +231,56 @@ public class MainController {
      */
     public static void registrarEmpleado() {
 
-        try {
-            ServiceFactory.getInstance().getEmpleadosService().create(empleadoTemporal);
+        EmpleadosVO empleado = new EmpleadosVO();
+        empleado.setNombreEmpleado(crearEmpleado.getjTextFieldNombres().getText());
+        empleado.setApellidoEmpleado(crearEmpleado.getjTextFieldApellidos().getText());
+        empleado.setCedulaEmpleado(Integer.parseInt(crearEmpleado.getjTextFieldCC().getText()));
+        empleado.setContraseniaEmpleado(crearEmpleado.getjTextFieldContraseña().getText());
+        empleado.setRol(crearEmpleado.getjComboBoxTipoEmpleado().getSelectedItem().toString());
+
+        //No hay problema en bd si es nulo
+        if (getEmpleadoActivo() != null) {
+            empleado.setCedulaDirector(getEmpleadoActivo().getCedulaEmpleado());
+        }
+        //Vos Externos
+
+        DefaultListModel model = (DefaultListModel) crearEmpleado.getjListTelefono().getModel();
+
+        ArrayList<String> tels = new ArrayList<String>();
+        for (int x = 0; x < model.size(); x++) {
+            String tel = (String) model.elementAt(x);
+            tels.add(tel);
+        }
+
+
+
+        //Se agrega cada telefono
+        List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+        for (String each : tels) {
+//            //TODO Obtener los empleados por este telefono y agrega el nuevo
+//            ArrayList empTels = new ArrayList<Short>();
+//            empTels.add(empleado.getCedulaEmpleado());
+//            TelefonosVO telefonos = new TelefonosVO();
+//            //Hace falta obtener los otros usuarios en la bd y "concatenar" el que se ingresa
+//            telefonos.setUsersList(empTels);
+//            telefonos.setNumeroTelefonoEmpleado((each));
+//            List<TelefonosVO> newTels = empleado.getTelsEmpList();
+//            if (newTels == null) {
+//                newTels = new ArrayList<TelefonosVO>();
+//            }
+//            newTels.add(telefonos);
+//            empleado.setTelsEmpList(newTels);
+
+            TelefonosVO temp = new TelefonosVO();
+            temp.setNumeroTelefonoEmpleado(each);
+            telefonos.add(temp);
+
+        }
+
+        empleado.setTelsEmpList(telefonos);
+
+       try {
+            ServiceFactory.getInstance().getEmpleadosService().create(empleado);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             int opcion = JOptionPane.showOptionDialog(crearEmpleado, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");

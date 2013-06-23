@@ -8,6 +8,7 @@ import com.porcupine.psp.model.vo.EmpPlantaVO;
 import com.porcupine.psp.model.dao.exceptions.*;
 import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.entity.*;
+import com.porcupine.psp.model.vo.EmpTempVO;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.util.Hash;
 import com.porcupine.psp.util.TipoEmpleado;
@@ -119,9 +120,13 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
         Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().login(entity);
         EmpleadosVO temp = empleado.toVO();
+        System.out.println(temp.getRol() + "Congrats");
         if (temp.getRol() != TipoEmpleado.TEMPORAL) {
             EmpPlantaVO empPlanta = DAOFactory.getInstance().getEmpPlantaDAO().find(temp.getCedulaEmpleado()).toVO();
             temp.setRol(empPlanta.getRol());
+        }else{
+            EmpTempVO empTemp = DAOFactory.getInstance().getEmpTempDAO().find(temp.getCedulaEmpleado()).toVO();
+            temp.setRol(empTemp.getTipoTemp());
         }
 
         return empleado != null ? temp : null;

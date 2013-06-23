@@ -4,7 +4,10 @@
  */
 package com.porcupine.psp.model.vo;
 
+import com.porcupine.psp.model.entity.AsigImpl;
+import com.porcupine.psp.model.entity.Comunicado;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -16,10 +19,27 @@ public class EmpTempVO implements IValueObject, Serializable{
     
     private Integer cedulaEmpleado;
     private Short idAsig;
-    private Short tieneContrato;
+    private Boolean tieneContrato;
     private String tipoTemp;
+    private List<Short> comunicadoList;
+    private List<Short> asigImplList;
+
+    public List<Short> getAsigImplList() {
+        return asigImplList;
+    }
+
+    public void setAsigImplList(List<Short> asigImplList) {
+        this.asigImplList = asigImplList;
+    }
+
+    public List<Short> getComunicadoList() {
+        return comunicadoList;
+    }
+
+    public void setComunicadoList(List<Short> comunicadoList) {
+        this.comunicadoList = comunicadoList;
+    }
     
-    //AHI QUE TERMINAR ESTE VO
     public Integer getCedulaEmpleado() {
         return cedulaEmpleado;
     }
@@ -36,11 +56,11 @@ public class EmpTempVO implements IValueObject, Serializable{
         this.idAsig = idAsig;
     }
 
-    public Short getTieneContrato() {
+    public Boolean getTieneContrato() {
         return tieneContrato;
     }
 
-    public void setTieneContrato(Short tieneContrato) {
+    public void setTieneContrato(Boolean tieneContrato) {
         this.tieneContrato = tieneContrato;
     }
 

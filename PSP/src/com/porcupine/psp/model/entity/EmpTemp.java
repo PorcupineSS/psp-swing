@@ -6,6 +6,7 @@ package com.porcupine.psp.model.entity;
 
 import com.porcupine.psp.model.vo.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,6 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "EmpTemp.findByTieneContrato", query = "SELECT e FROM EmpTemp e WHERE e.tieneContrato = :tieneContrato"),
     @NamedQuery(name = "EmpTemp.findByTipoTemp", query = "SELECT e FROM EmpTemp e WHERE e.tipoTemp = :tipoTemp")})
 public class EmpTemp implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -142,8 +144,25 @@ public class EmpTemp implements Serializable {
         return "com.porcupine.psp.model.entity.EmpTemp[ cedulae=" + cedulae + " ]";
     }
 
-    EmpTempVO toVO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public EmpTempVO toVO() {
+        EmpTempVO empleado = new EmpTempVO();
+        empleado.setCedulaEmpleado(this.getCedulae());
+        empleado.setIdAsig(this.getIdAsig().getIdAsig());
+        empleado.setTieneContrato(this.getTieneContrato());
+        empleado.setTipoTemp(this.getTipoTemp());
+
+        List<Short> asigImplList = new ArrayList<Short>();
+        for (AsigImpl each : getAsigImplList()) {
+            asigImplList.add(each.getIdAsignacionI());
+        }
+        empleado.setAsigImplList(asigImplList);
+
+        
+        List<Short> comunicadoList = new ArrayList<Short>();
+        for (Comunicado each : getComunicadoList()) {
+            comunicadoList.add(each.getIdComunicado());
+        }
+        empleado.setComunicadoList(comunicadoList);
+        return empleado;
     }
-    
 }

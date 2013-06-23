@@ -215,17 +215,17 @@ public class Empleados implements Serializable {
             empleado.setCedulaEmpleado(dirCedulae.getCedulae());
         }
 
-        List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
-        for (TelsEmp each : getTelsEmpList()) {
-            telefonos.add((each.toVO()));
-        }
-        empleado.setTelsEmpList(telefonos);
-
-        List<BitacoraSegVO> bitacoras = new ArrayList<BitacoraSegVO>();
-        for (BitacoraSeg each : getBitacoraSegList()) {
-            bitacoras.add((each.toVO()));
-        }
-        empleado.setBitacoraSegList(bitacoras);
+//        List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+//        for (TelsEmp each : getTelsEmpList()) {
+//            telefonos.add((each.toVO()));
+//        }
+//        empleado.setTelsEmpList(telefonos);
+//
+//        List<BitacoraSegVO> bitacoras = new ArrayList<BitacoraSegVO>();
+//        for (BitacoraSeg each : getBitacoraSegList()) {
+//            bitacoras.add((each.toVO()));
+//        }
+//        empleado.setBitacoraSegList(bitacoras);
 
         empleado.setRol(discoverRole());
 

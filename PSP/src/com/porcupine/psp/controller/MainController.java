@@ -272,7 +272,7 @@ public class MainController {
             dbprops.put("javax.persistence.jdbc.url", "jdbc:oracle:thin:@168.176.36.14:1521:UNBDS7");
         }
 
-
+        dbprops.put("eclipselink.logging.level", "FINEST");
         connectionPropierties = dbprops;
     }
 

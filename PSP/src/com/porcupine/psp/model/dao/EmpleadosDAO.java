@@ -14,7 +14,6 @@ import com.porcupine.psp.model.entity.*;
 import com.porcupine.psp.util.TipoEmpleado;
 import java.util.Map;
 
-
 /**
  *
  * @author Zergio
@@ -183,8 +182,8 @@ public class EmpleadosDAO implements ICrudDAO<Empleados, Integer> {
             entityManager = getEntityManager();
             Empleados empleado;
             Query q = entityManager.createQuery("SELECT u FROM Empleados u "
-                    + "WHERE u.cedulae=:username "
-                    + "AND u.contrasenae=:password").setParameter("username", entity.getCedulae()).setParameter("password", entity.getContrasenae());
+                    + "WHERE u.cedulae =:username "
+                    + "AND u.contrasenae =:password").setParameter("username", entity.getCedulae()).setParameter("password", entity.getContrasenae());
             try {
                 empleado = (Empleados) q.getSingleResult();
             } catch (NoResultException e) {

@@ -119,16 +119,20 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         entity.setContrasenae(((vo.getContraseniaEmpleado())));
 
         Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().login(entity);
-        EmpleadosVO temp = empleado.toVO();
-        System.out.println(temp.getRol() + "Congrats");
-        if (temp.getRol() != TipoEmpleado.TEMPORAL) {
-            EmpPlantaVO empPlanta = DAOFactory.getInstance().getEmpPlantaDAO().find(temp.getCedulaEmpleado()).toVO();
-            temp.setRol(empPlanta.getRol());
-        }else{
-            EmpTempVO empTemp = DAOFactory.getInstance().getEmpTempDAO().find(temp.getCedulaEmpleado()).toVO();
-            temp.setRol(empTemp.getTipoTemp());
-        }
+        EmpleadosVO temp = new EmpleadosVO();
+        if (empleado != null) {
+            temp = empleado.toVO();
+            System.out.println(temp.getRol() + "Congrats");
 
+
+            if (temp.getRol() != TipoEmpleado.TEMPORAL) {
+                EmpPlantaVO empPlanta = DAOFactory.getInstance().getEmpPlantaDAO().find(temp.getCedulaEmpleado()).toVO();
+                temp.setRol(empPlanta.getRol());
+            } else {
+                EmpTempVO empTemp = DAOFactory.getInstance().getEmpTempDAO().find(temp.getCedulaEmpleado()).toVO();
+                temp.setRol(empTemp.getTipoTemp());
+            }
+        }
         return empleado != null ? temp : null;
 
     }

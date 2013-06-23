@@ -12,9 +12,10 @@ import com.porcupine.psp.view.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
-import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.model.vo.ImplSeguridadVO;
 import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,8 @@ public class MainController {
     static Helper helper;
     public static EmpleadosVO empleadoActivo;
     public static String selectedDB;
+    static AddImplement addImplement;
+    static Secondary secondary;
     //VOS Temporales para hacer operaciones
     public static EmpleadosVO empleadoTemporal;
 
@@ -335,7 +338,23 @@ public class MainController {
     public static void listarInventario() {
     }
 
-    public static void crearImplemento() {
+    public static void crearImplemento() {   
+       ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
+       implSeguridadVO.setNombreI(addImplement.getjTextFieldNombre().getText());
+       implSeguridadVO.setPrecioUnitarioI(new BigDecimal(addImplement.getjTextFieldValorUnitario().getText()));
+       implSeguridadVO.setCantidad(new Short(addImplement.getjTextFieldCantidad().getText()));
+       implSeguridadVO.setEstadoI(addImplement.getjTextFieldEstado().getText());
+       implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
+       
+       try {
+           ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
+       } catch (Exception e) {
+           JOptionPane.showMessageDialog(addImplement, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
+       JOptionPane.showMessageDialog(addImplement, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+       secondary.setVisible(false);
+       secondary = new Secondary();
     }
 
     public static void borrarImplemento() {

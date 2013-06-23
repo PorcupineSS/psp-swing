@@ -4,6 +4,10 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
+import com.porcupine.psp.util.TipoEmpleado;
+import java.util.ArrayList;
+
 /**
  *
  * @author andres
@@ -149,8 +153,19 @@ public class HumanManagement extends javax.swing.JPanel {
 
     private void jButtonCreateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateEmployeeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCreateEmployeeActionPerformed
+        ArrayList<String> empleado = new ArrayList<String>();
+        
+        empleado.add(TipoEmpleado.DIRECTOR_GESTION_HUMANA);
+        empleado.add(TipoEmpleado.DIRECTOR_COMERCIAL);
+        empleado.add(TipoEmpleado.DIRECTOR_OPERACIONES);
+        empleado.add(TipoEmpleado.COORDINADOR_CONTRATO);
+        empleado.add(TipoEmpleado.COORDINADOR_TECNICO_TECNOLOGICO);
+        empleado.add(TipoEmpleado.SUBGERENTE);
+        empleado.add(TipoEmpleado.TEMPORAL_ESCOLTA);
+        empleado.add(TipoEmpleado.TEMPORAL_GUARDA);
 
+        MainController.mostrarFormularioCrearEmpleado(empleado);
+    }//GEN-LAST:event_jButtonCreateEmployeeActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCreateEmployee;
     private javax.swing.JButton jButtonFindPerson;

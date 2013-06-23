@@ -183,7 +183,9 @@ public class EmpleadosDAO implements ICrudDAO<Empleados, Integer> {
             Empleados empleado;
             Query q = entityManager.createQuery("SELECT u FROM Empleados u "
                     + "WHERE u.cedulae =:username "
-                    + "AND u.contrasenae =:password").setParameter("username", entity.getCedulae()).setParameter("password", entity.getContrasenae());
+                    + "AND u.contrasenae =:password ")
+                    .setParameter("username", entity.getCedulae())
+                    .setParameter("password", entity.getContrasenae());
             try {
                 empleado = (Empleados) q.getSingleResult();
             } catch (NoResultException e) {

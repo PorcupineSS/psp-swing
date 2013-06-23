@@ -13,8 +13,7 @@ import java.lang.String;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -247,6 +246,72 @@ public class CreateEmployee extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public JComboBox getjComboBoxTipoEmpleado() {
+        return jComboBoxTipoEmpleado;
+    }
+
+    public void setjComboBoxTipoEmpleado(JComboBox jComboBoxTipoEmpleado) {
+        this.jComboBoxTipoEmpleado = jComboBoxTipoEmpleado;
+    }
+
+    public JTextField getjTextField5() {
+        return jTextField5;
+    }
+
+    public void setjTextField5(JTextField jTextField5) {
+        this.jTextField5 = jTextField5;
+    }
+
+    public JTextField getjTextFieldApellidos() {
+        return jTextFieldApellidos;
+    }
+
+    public void setjTextFieldApellidos(JTextField jTextFieldApellidos) {
+        this.jTextFieldApellidos = jTextFieldApellidos;
+    }
+
+    public JTextField getjTextFieldCC() {
+        return jTextFieldCC;
+    }
+
+    public void setjTextFieldCC(JTextField jTextFieldCC) {
+        this.jTextFieldCC = jTextFieldCC;
+    }
+
+    public JTextField getjTextFieldContraseña() {
+        return jTextFieldContraseña;
+    }
+
+    public void setjTextFieldContraseña(JTextField jTextFieldContraseña) {
+        this.jTextFieldContraseña = jTextFieldContraseña;
+    }
+
+    public JTextField getjTextFieldDireccion() {
+        return jTextFieldDireccion;
+    }
+
+    public void setjTextFieldDireccion(JTextField jTextFieldDireccion) {
+        this.jTextFieldDireccion = jTextFieldDireccion;
+    }
+
+    public JTextField getjTextFieldNombres() {
+        return jTextFieldNombres;
+    }
+
+    public void setjTextFieldNombres(JTextField jTextFieldNombres) {
+        this.jTextFieldNombres = jTextFieldNombres;
+    }
+
+    public JList getjListTelefono() {
+        return jListTelefono;
+    }
+
+    public void setjListTelefono(JList jListTelefono) {
+        this.jListTelefono = jListTelefono;
+    }
+    
+    
+
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
         String numero = JOptionPane.showInputDialog("Ingrese el número de teléfono");
@@ -263,55 +328,7 @@ public class CreateEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        //TODO Checkear campos vacios
 
-        //Armar VOS
-        EmpleadosVO empleado = new EmpleadosVO();
-        empleado.setNombreEmpleado(jTextFieldNombres.getText());
-        empleado.setApellidoEmpleado(jTextFieldApellidos.getText());
-        empleado.setCedulaEmpleado(Integer.parseInt(jTextFieldCC.getText()));
-        empleado.setContraseniaEmpleado(jTextFieldContraseña.getText());
-        empleado.setRol(jComboBoxTipoEmpleado.getSelectedItem().toString());
-
-        //No hay problema en bd si es nulo
-        if (MainController.getEmpleadoActivo() != null) {
-            empleado.setCedulaDirector(MainController.getEmpleadoActivo().getCedulaEmpleado());
-        } else {
-            
-        }
-        //Vos Externos
-
-        DefaultListModel model = (DefaultListModel) jListTelefono.getModel();
-
-        ArrayList<String> tels = new ArrayList<String>();
-        for (int x = 0; x < model.size(); x++) {
-            String tel = (String) model.elementAt(x);
-            tels.add(tel);
-        }
-
-        
-
-        //Se agrega cada telefono
-
-        for (String each : tels) {
-            //TODO Obtener los empleados por este telefono y agrega el nuevo
-            ArrayList empTels = new ArrayList<EmpleadosVO>();
-            empTels.add(empleado);
-            TelefonosVO telefonos = new TelefonosVO();
-            telefonos.setUsersList(empTels);
-            telefonos.setNumeroTelefonoEmpleado((each));
-            List<TelefonosVO> newTels = empleado.getTelsEmpList();
-            if (newTels == null){
-                newTels=new ArrayList<TelefonosVO>();
-            }
-            newTels.add(telefonos);
-            empleado.setTelsEmpList(newTels);
-        }
-
-
-
-        //Pasar al controlador
-        MainController.setEmpleadoTemporal(empleado);
         MainController.registrarEmpleado();
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 

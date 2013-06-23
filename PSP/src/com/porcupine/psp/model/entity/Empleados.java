@@ -215,17 +215,22 @@ public class Empleados implements Serializable {
             empleado.setCedulaEmpleado(dirCedulae.getCedulae());
         }
 
-//        List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
-//        for (TelsEmp each : getTelsEmpList()) {
-//            telefonos.add((each.toVO()));
-//        }
-//        empleado.setTelsEmpList(telefonos);
-//
-//        List<BitacoraSegVO> bitacoras = new ArrayList<BitacoraSegVO>();
-//        for (BitacoraSeg each : getBitacoraSegList()) {
-//            bitacoras.add((each.toVO()));
-//        }
-//        empleado.setBitacoraSegList(bitacoras);
+        List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+        if (getTelsEmpList() != null) {
+            for (TelsEmp each : getTelsEmpList()) {
+                telefonos.add((each.toVO()));
+            }
+        }
+        empleado.setTelsEmpList(telefonos);
+
+
+        List<BitacoraSegVO> bitacoras = new ArrayList<BitacoraSegVO>();
+        if (getTelsEmpList() != null) {
+            for (BitacoraSeg each : getBitacoraSegList()) {
+                bitacoras.add((each.toVO()));
+            }
+        }
+        empleado.setBitacoraSegList(bitacoras);
 
         empleado.setRol(discoverRole());
 
@@ -236,7 +241,7 @@ public class Empleados implements Serializable {
         //Se ofrecen dos enfoques... Utilizar el cogigo de la empresa o averiguarlo en la base de datos. Por ahora es mas facil averiguarlo en el string pero puede discutirse
         if (this.getEmpTemp() != null) {
             return TipoEmpleado.TEMPORAL;
-        }else{
+        } else {
             //Desde esta capa no se puede saber que tipo de  Empleado es, solo que es de planta o no.
             return TipoEmpleado.PLANTA;
         }

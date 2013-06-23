@@ -18,17 +18,18 @@ public class TelefonosVO implements IValueObject, Serializable{
     private Short idTelefono;
     private String numeroTelefonoEmpleado;
     
-    private List<EmpleadosVO> empleadosList;
+    
+    private List<IValueObject> usersList;
     
     //Tipo de telefono
     private int tipoTelefono;
 
-    public List<EmpleadosVO> getEmpleadosList() {
-        return empleadosList;
+    public List<IValueObject> getUsersList() {
+        return usersList;
     }
 
-    public void setEmpleadosList(List<EmpleadosVO> empleadosList) {
-        this.empleadosList = empleadosList;
+    public void setUsersList(List<IValueObject> usersList) {
+        this.usersList = usersList;
     }
 
     public Short getIdTelefono() {

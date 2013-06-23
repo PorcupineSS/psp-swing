@@ -298,7 +298,7 @@ public class CreateEmployee extends javax.swing.JPanel {
             ArrayList empTels = new ArrayList<EmpleadosVO>();
             empTels.add(empleado);
             TelefonosVO telefonos = new TelefonosVO();
-            telefonos.setEmpleadosList(empTels);
+            telefonos.setUsersList(empTels);
             telefonos.setNumeroTelefonoEmpleado((each));
             List<TelefonosVO> newTels = empleado.getTelsEmpList();
             if (newTels == null){

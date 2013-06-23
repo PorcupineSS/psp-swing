@@ -98,7 +98,10 @@ public class TelsEmp implements Serializable {
     }
 
     public TelefonosVO toVO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TelefonosVO telefono = new TelefonosVO();
+        
+        telefono.setIdTelefono(this.getIdTe());
+        return telefono;
     }
     
 }

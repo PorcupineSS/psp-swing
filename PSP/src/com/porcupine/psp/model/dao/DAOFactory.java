@@ -1,7 +1,6 @@
 package com.porcupine.psp.model.dao;
 
 import com.porcupine.psp.controller.MainController;
-import com.porcupine.psp.model.entity.DirComercial;
 import com.porcupine.psp.model.entity.EmpPlanta;
 import java.util.Map;
 
@@ -57,5 +56,9 @@ public class DAOFactory {
 
     public ContratoDAO getContratoDAO() {
         return new ContratoDAO(PU, propierties);
+    }
+    
+    public ClienteDAO getClienteDAO(){
+        return new ClienteDAO(PU, propierties);
     }
 }

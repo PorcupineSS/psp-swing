@@ -10,9 +10,11 @@ import com.porcupine.psp.model.dao.exceptions.InvalidAttributeException;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import com.porcupine.psp.model.dao.exceptions.PreexistingEntityException;
 import com.porcupine.psp.model.dao.exceptions.RequiredAttributeException;
+import com.porcupine.psp.model.entity.Cliente;
 import com.porcupine.psp.model.entity.Contrato;
 import com.porcupine.psp.model.entity.DirComercial;
 import com.porcupine.psp.model.vo.ContratoVO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
@@ -41,12 +43,18 @@ public class ContratoService implements IService<ContratoVO, Integer> {
         entity.setFechaInicioC(vo.getFechaInicioCont());
         entity.setFechaRegCon(vo.getFechaRegCont());
         entity.setHorarioC(vo.getHorarioCont());
-        // VAN LAS ID'S
+        entity.setIdContrato(vo.getIdContrato());
         entity.setTelefonoC(vo.getTelefonoCont());
         entity.setTiempoC(vo.getTiempoCont());
         entity.setTipoC(vo.getTipoCont());
         entity.setTipoPersonalC(vo.getTipoPersonalCont());
         entity.setUbicacionC(vo.getUbicacionCont());
+        
+        if(vo.getIdCliente() != 0){
+           Cliente cliente = DAOFactory.getInstance().getClienteDAO().find((int) vo.getIdCliente());
+           entity.setIdcl(cliente);
+           cliente.getContratoList().add(entity);
+        }
         
         if(vo.getCedulaDirComer() != 0){
             DirComercial dirComercial = DAOFactory.getInstance().getDirComercialDAO().find(vo.getCedulaDirComer());
@@ -59,22 +67,63 @@ public class ContratoService implements IService<ContratoVO, Integer> {
 
     @Override
     public ContratoVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Contrato contrato = DAOFactory.getInstance().getContratoDAO().find(id);
+        if (contrato != null) {
+            return contrato.toVO();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public void update(ContratoVO vo) throws NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Contrato entity = new Contrato();
+        
+        entity.setCantidadPersonalC(vo.getCantPersonalCont());
+        entity.setCelularC(vo.getCelularCont());
+        entity.setCostoMensualC(vo.getCostoMensual());
+        entity.setFechaInicioC(vo.getFechaInicioCont());
+        entity.setFechaRegCon(vo.getFechaRegCont());
+        entity.setHorarioC(vo.getHorarioCont());
+        entity.setIdContrato(vo.getIdContrato());
+        entity.setTelefonoC(vo.getTelefonoCont());
+        entity.setTiempoC(vo.getTiempoCont());
+        entity.setTipoC(vo.getTipoCont());
+        entity.setTipoPersonalC(vo.getTipoPersonalCont());
+        entity.setUbicacionC(vo.getUbicacionCont());
+        
+        if(vo.getIdCliente() != 0){
+           Cliente cliente = DAOFactory.getInstance().getClienteDAO().find((int) vo.getIdCliente());
+           entity.setIdcl(cliente);
+           cliente.getContratoList().set(cliente.getContratoList().get(entity.getIdContrato()).getIdContrato(), entity);
+        }
+        
+        if(vo.getCedulaDirComer() != 0){
+            DirComercial dirComercial = DAOFactory.getInstance().getDirComercialDAO().find(vo.getCedulaDirComer());
+            entity.setCedulae(dirComercial);
+            dirComercial.getContratoList().set(dirComercial.getContratoList().get(entity.getIdContrato()).getIdContrato(), entity);
+        }
+        
+        DAOFactory.getInstance().getContratoDAO().update(entity);
     }
 
     @Override
     public void delete(Integer id) throws NonexistentEntityException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Contrato contrato = DAOFactory.getInstance().getContratoDAO().find(id);
+        if (contrato != null) {
+            DAOFactory.getInstance().getImplSeguridadDAO().delete(id);
+        }
     }
 
     @Override
     public List<ContratoVO> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<ContratoVO> listaVO = new ArrayList<ContratoVO>();
+        List<Contrato> lista = DAOFactory.getInstance().getContratoDAO().getList();;
+        for (Contrato contrato : lista) {
+            ContratoVO contr = contrato.toVO();
+            listaVO.add(contr);
+        }
+        return listaVO;
     }
 
     @Override

@@ -30,4 +30,7 @@ public class ServiceFactory {
         return ContratoService.getInstance();
     }
     
+    public ComunicadoService getComunicadoService() {
+        return ComunicadoService.getInstance();
+    }
 }

@@ -7,6 +7,7 @@ package com.porcupine.psp.controller;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.exceptions.InternalErrorException;
 import com.porcupine.psp.model.service.ServiceFactory;
+import com.porcupine.psp.model.vo.ComunicadoVO;
 import com.porcupine.psp.model.vo.ContratoVO;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
@@ -47,6 +48,7 @@ public class MainController {
     public static String selectedDB;
     static AddImplement addImplement;
     static AddContract addContract;
+    static WriteNotice writeNotice;
     static Secondary secondary;
     //VOS Temporales para hacer operaciones
     public static EmpleadosVO empleadoTemporal;
@@ -412,6 +414,23 @@ public class MainController {
     }
 
     public static void crearComunicacion() {
+        ComunicadoVO comunicadoVO = new ComunicadoVO();
+        
+        comunicadoVO.setTipoCom(writeNotice.getjComboBoxTipo().getSelectedItem().toString());
+        comunicadoVO.setContenidoCom(writeNotice.getjTextAreaComunicado().getText());
+        //Revisar que este bien manejado el CheckBox
+        comunicadoVO.setUrgente(writeNotice.getjCheckBoxUrgente().isSelected());
+        
+        try{
+            ServiceFactory.getInstance().getComunicadoService().create(comunicadoVO);
+        }catch (Exception e) {
+           JOptionPane.showMessageDialog(writeNotice, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
+       JOptionPane.showMessageDialog(writeNotice, "¡Comunicado agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+       //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
+       //secondary.setVisible(false);
+       //secondary = new Secondary();
     }
 
     public static void listarComunicacion() {

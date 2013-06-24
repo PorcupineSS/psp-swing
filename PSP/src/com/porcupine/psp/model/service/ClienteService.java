@@ -13,6 +13,7 @@ import com.porcupine.psp.model.dao.exceptions.RequiredAttributeException;
 import com.porcupine.psp.model.entity.Cliente;
 import com.porcupine.psp.model.entity.Contrato;
 import com.porcupine.psp.model.entity.DirComercial;
+import com.porcupine.psp.model.entity.TelsCli;
 import com.porcupine.psp.model.vo.ClienteVO;
 import com.porcupine.psp.model.vo.ContratoVO;
 import com.porcupine.psp.model.vo.EmpleadosVO;
@@ -45,13 +46,15 @@ public class ClienteService implements IService<ClienteVO, Integer> {
             DirComercial director = DAOFactory.getInstance().getDirComercialDAO().find((int) vo.getCedulaDirector());
             entity.setCedulae(director);
         }
-
-        List<ContratoVO> contratosVO = vo.getContratoList();
-        List<Contrato> contrato = new ArrayList<Contrato>();
-        Contrato contratoAdd = new Contrato();
-        for (ContratoVO contratoV : contratosVO) {
-        }
-
+        
+        entity.setDireccioncl(vo.getDireccionCliente());
+        entity.setFechaRegCl(vo.getFechaRegCliente());
+        entity.setIdcl(vo.getIdCliente());
+        entity.setNombrecl(vo.getNombreCliente());
+        //son arreglos vacíos por ahora
+        entity.setContratoList(new ArrayList<Contrato>());
+        entity.setTelsCliList(new ArrayList<TelsCli>());
+        DAOFactory.getInstance().getClienteDAO().create(entity);
     }
 
     @Override

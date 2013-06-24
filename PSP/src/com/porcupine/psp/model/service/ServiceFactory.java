@@ -25,6 +25,9 @@ public class ServiceFactory {
     public ImplSeguridadService getImplSeguridadService() {
         return ImplSeguridadService.getInstance();
     }
-
+    
+    public ContratoService getContratoService() {
+        return ContratoService.getInstance();
+    }
     
 }

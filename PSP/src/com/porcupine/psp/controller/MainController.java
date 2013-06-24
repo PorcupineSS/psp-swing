@@ -7,6 +7,7 @@ package com.porcupine.psp.controller;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.exceptions.InternalErrorException;
 import com.porcupine.psp.model.service.ServiceFactory;
+import com.porcupine.psp.model.vo.ContratoVO;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
 import com.porcupine.psp.model.vo.TelefonosVO;
@@ -16,6 +17,7 @@ import com.porcupine.psp.util.TipoEmpleado;
 import com.porcupine.psp.view.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +46,7 @@ public class MainController {
     public static EmpleadosVO empleadoActivo;
     public static String selectedDB;
     static AddImplement addImplement;
+    static AddContract addContract;
     static Secondary secondary;
     //VOS Temporales para hacer operaciones
     public static EmpleadosVO empleadoTemporal;
@@ -378,6 +381,28 @@ public class MainController {
 
     //Coordinador de contrato
     public static void crearContrato() {
+        ContratoVO contratoVO = new ContratoVO();
+        
+        contratoVO.setTipoCont(addContract.getjComboBoxTipoContrato().getSelectedItem().toString());
+        contratoVO.setFechaInicioCont(addContract.getjDateChooserFechaInicio().getDate());
+        contratoVO.setTipoPersonalCont(addContract.getjComboBoxTipoPersonal().getSelectedItem().toString());
+        contratoVO.setCantPersonalCont(new Short (addContract.getjTextFieldCantPerson().getText()));
+        contratoVO.setCostoMensual(new BigDecimal(addContract.getjTextFieldCosto().getText()));
+        contratoVO.setUbicacionCont(addContract.getjTextFieldUbicacion().getText());
+        contratoVO.setHorarioCont(addContract.getjTextFieldHorario().getText());
+        contratoVO.setTiempoCont(new Integer (addContract.getjTextFieldTiempo().getText()));
+        //Me queda la duda si tambien hay que crear campos para el celular y tel del contrato
+        
+        try{
+            ServiceFactory.getInstance().getContratoService().create(contratoVO);
+        }catch (Exception e) {
+           JOptionPane.showMessageDialog(addContract, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
+       JOptionPane.showMessageDialog(addContract, "¡Contrato agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+       //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
+       //secondary.setVisible(false);
+       //secondary = new Secondary();
     }
 
     public static void borrarContrato() {

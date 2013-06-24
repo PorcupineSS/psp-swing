@@ -4,6 +4,15 @@
  */
 package com.porcupine.psp.view;
 
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.event.EventListenerList;
+import javax.swing.plaf.ComponentUI;
+
 /**
  *
  * @author Jeisson Andrés Vergara
@@ -17,6 +26,159 @@ public class AddContract extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JButton getjButtonCancelar() {
+        return jButtonCancelar;
+    }
+
+    public void setjButtonCancelar(JButton jButtonCancelar) {
+        this.jButtonCancelar = jButtonCancelar;
+    }
+
+    public JButton getjButtonGuardar() {
+        return jButtonGuardar;
+    }
+
+    public void setjButtonGuardar(JButton jButtonGuardar) {
+        this.jButtonGuardar = jButtonGuardar;
+    }
+
+    public JComboBox getjComboBoxTipoContrato() {
+        return jComboBoxTipoContrato;
+    }
+
+    public void setjComboBoxTipoContrato(JComboBox jComboBoxTipoContrato) {
+        this.jComboBoxTipoContrato = jComboBoxTipoContrato;
+    }
+
+    public JComboBox getjComboBoxTipoPersonal() {
+        return jComboBoxTipoPersonal;
+    }
+
+    public void setjComboBoxTipoPersonal(JComboBox jComboBoxTipoPersonal) {
+        this.jComboBoxTipoPersonal = jComboBoxTipoPersonal;
+    }
+
+    public JDateChooser getjDateChooserFechaInicio() {
+        return jDateChooserFechaInicio;
+    }
+
+    public void setjDateChooserFechaInicio(JDateChooser jDateChooserFechaInicio) {
+        this.jDateChooserFechaInicio = jDateChooserFechaInicio;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public void setjLabel5(JLabel jLabel5) {
+        this.jLabel5 = jLabel5;
+    }
+
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public void setjLabel6(JLabel jLabel6) {
+        this.jLabel6 = jLabel6;
+    }
+
+    public JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    public void setjLabel7(JLabel jLabel7) {
+        this.jLabel7 = jLabel7;
+    }
+
+    public JSeparator getjSeparator1() {
+        return jSeparator1;
+    }
+
+    public void setjSeparator1(JSeparator jSeparator1) {
+        this.jSeparator1 = jSeparator1;
+    }
+
+    public JSeparator getjSeparator2() {
+        return jSeparator2;
+    }
+
+    public void setjSeparator2(JSeparator jSeparator2) {
+        this.jSeparator2 = jSeparator2;
+    }
+
+    public JTextField getjTextFieldCosto() {
+        return jTextFieldCosto;
+    }
+
+    public void setjTextFieldCosto(JTextField jTextFieldCosto) {
+        this.jTextFieldCosto = jTextFieldCosto;
+    }
+
+    public JTextField getjTextFieldHorario() {
+        return jTextFieldHorario;
+    }
+
+    public void setjTextFieldHorario(JTextField jTextFieldHorario) {
+        this.jTextFieldHorario = jTextFieldHorario;
+    }
+
+    public JTextField getjTextFieldTiempo() {
+        return jTextFieldTiempo;
+    }
+
+    public void setjTextFieldTiempo(JTextField jTextFieldTiempo) {
+        this.jTextFieldTiempo = jTextFieldTiempo;
+    }
+
+    public ComponentUI getUi() {
+        return ui;
+    }
+
+    public void setUi(ComponentUI ui) {
+        this.ui = ui;
+    }
+
+    public EventListenerList getListenerList() {
+        return listenerList;
+    }
+
+    public void setListenerList(EventListenerList listenerList) {
+        this.listenerList = listenerList;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

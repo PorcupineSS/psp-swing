@@ -59,7 +59,12 @@ public class ClienteService implements IService<ClienteVO, Integer> {
 
     @Override
     public ClienteVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Cliente cliente = DAOFactory.getInstance().getClienteDAO().find(id);
+        if (cliente != null) {
+            return cliente.toVO();
+        } else {
+            return null;
+        }
     }
 
     @Override

@@ -4,20 +4,26 @@
  */
 package com.porcupine.psp.controller;
 
+import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.exceptions.InternalErrorException;
 import com.porcupine.psp.model.service.ServiceFactory;
+import com.porcupine.psp.model.vo.ComunicadoVO;
+import com.porcupine.psp.model.vo.ContratoVO;
 import com.porcupine.psp.model.vo.EmpleadosVO;
-import com.porcupine.psp.util.DrawingUtilities;
-import com.porcupine.psp.view.*;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
+import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.util.DrawingUtilities;
 import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;
+import com.porcupine.psp.view.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -41,6 +47,8 @@ public class MainController {
     public static EmpleadosVO empleadoActivo;
     public static String selectedDB;
     static AddImplement addImplement;
+    static AddContract addContract;
+    static WriteNotice writeNotice;
     static Secondary secondary;
     //VOS Temporales para hacer operaciones
     public static EmpleadosVO empleadoTemporal;
@@ -232,8 +240,56 @@ public class MainController {
      */
     public static void registrarEmpleado() {
 
-        try {
-            ServiceFactory.getInstance().getEmpleadosService().create(empleadoTemporal);
+        EmpleadosVO empleado = new EmpleadosVO();
+        empleado.setNombreEmpleado(crearEmpleado.getjTextFieldNombres().getText());
+        empleado.setApellidoEmpleado(crearEmpleado.getjTextFieldApellidos().getText());
+        empleado.setCedulaEmpleado(Integer.parseInt(crearEmpleado.getjTextFieldCC().getText()));
+        empleado.setContraseniaEmpleado(crearEmpleado.getjTextFieldContraseña().getText());
+        empleado.setRol(crearEmpleado.getjComboBoxTipoEmpleado().getSelectedItem().toString());
+
+        //No hay problema en bd si es nulo
+        if (getEmpleadoActivo() != null) {
+            empleado.setCedulaDirector(getEmpleadoActivo().getCedulaEmpleado());
+        }
+        //Vos Externos
+
+        DefaultListModel model = (DefaultListModel) crearEmpleado.getjListTelefono().getModel();
+
+        ArrayList<String> tels = new ArrayList<String>();
+        for (int x = 0; x < model.size(); x++) {
+            String tel = (String) model.elementAt(x);
+            tels.add(tel);
+        }
+
+
+
+        //Se agrega cada telefono
+        List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+        for (String each : tels) {
+//            //TODO Obtener los empleados por este telefono y agrega el nuevo
+//            ArrayList empTels = new ArrayList<Short>();
+//            empTels.add(empleado.getCedulaEmpleado());
+//            TelefonosVO telefonos = new TelefonosVO();
+//            //Hace falta obtener los otros usuarios en la bd y "concatenar" el que se ingresa
+//            telefonos.setUsersList(empTels);
+//            telefonos.setNumeroTelefonoEmpleado((each));
+//            List<TelefonosVO> newTels = empleado.getTelsEmpList();
+//            if (newTels == null) {
+//                newTels = new ArrayList<TelefonosVO>();
+//            }
+//            newTels.add(telefonos);
+//            empleado.setTelsEmpList(newTels);
+
+            TelefonosVO temp = new TelefonosVO();
+            temp.setNumeroTelefonoEmpleado(each);
+            telefonos.add(temp);
+
+        }
+
+        empleado.setTelsEmpList(telefonos);
+
+       try {
+            ServiceFactory.getInstance().getEmpleadosService().create(empleado);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             int opcion = JOptionPane.showOptionDialog(crearEmpleado, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
@@ -327,6 +383,28 @@ public class MainController {
 
     //Coordinador de contrato
     public static void crearContrato() {
+        ContratoVO contratoVO = new ContratoVO();
+        
+        contratoVO.setTipoCont(addContract.getjComboBoxTipoContrato().getSelectedItem().toString());
+        contratoVO.setFechaInicioCont(addContract.getjDateChooserFechaInicio().getDate());
+        contratoVO.setTipoPersonalCont(addContract.getjComboBoxTipoPersonal().getSelectedItem().toString());
+        contratoVO.setCantPersonalCont(new Short (addContract.getjTextFieldCantPerson().getText()));
+        contratoVO.setCostoMensual(new BigDecimal(addContract.getjTextFieldCosto().getText()));
+        contratoVO.setUbicacionCont(addContract.getjTextFieldUbicacion().getText());
+        contratoVO.setHorarioCont(addContract.getjTextFieldHorario().getText());
+        contratoVO.setTiempoCont(new Integer (addContract.getjTextFieldTiempo().getText()));
+        //Me queda la duda si tambien hay que crear campos para el celular y tel del contrato
+        
+        try{
+            ServiceFactory.getInstance().getContratoService().create(contratoVO);
+        }catch (Exception e) {
+           JOptionPane.showMessageDialog(addContract, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
+       JOptionPane.showMessageDialog(addContract, "¡Contrato agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+       //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
+       //secondary.setVisible(false);
+       //secondary = new Secondary();
     }
 
     public static void borrarContrato() {
@@ -336,6 +414,23 @@ public class MainController {
     }
 
     public static void crearComunicacion() {
+        ComunicadoVO comunicadoVO = new ComunicadoVO();
+        
+        comunicadoVO.setTipoCom(writeNotice.getjComboBoxTipo().getSelectedItem().toString());
+        comunicadoVO.setContenidoCom(writeNotice.getjTextAreaComunicado().getText());
+        //Revisar que este bien manejado el CheckBox
+        comunicadoVO.setUrgente(writeNotice.getjCheckBoxUrgente().isSelected());
+        
+        try{
+            ServiceFactory.getInstance().getComunicadoService().create(comunicadoVO);
+        }catch (Exception e) {
+           JOptionPane.showMessageDialog(writeNotice, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
+       JOptionPane.showMessageDialog(writeNotice, "¡Comunicado agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+       //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
+       //secondary.setVisible(false);
+       //secondary = new Secondary();
     }
 
     public static void listarComunicacion() {

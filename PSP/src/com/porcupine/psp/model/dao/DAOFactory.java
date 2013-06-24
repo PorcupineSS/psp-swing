@@ -49,4 +49,24 @@ public class DAOFactory {
     public EmpTempDAO getEmpTempDAO() {
         return new EmpTempDAO(PU, propierties);
     }
+
+    public DirComercialDAO getDirComercialDAO() {
+        return new DirComercialDAO(PU, propierties);
+    }
+
+    public ContratoDAO getContratoDAO() {
+        return new ContratoDAO(PU, propierties);
+    }
+    
+    public ClienteDAO getClienteDAO(){
+        return new ClienteDAO(PU, propierties);
+    }
+    
+    public DirOperacionesDAO getDirOperacionesDAO(){
+        return new DirOperacionesDAO(PU, propierties);
+    }
+    
+    public ComunicadoDAO getComunicadoDAO(){
+        return new ComunicadoDAO(PU, propierties);
+    }
 }

@@ -61,4 +61,8 @@ public class DAOFactory {
     public ClienteDAO getClienteDAO(){
         return new ClienteDAO(PU, propierties);
     }
+    
+    public DirOperacionesDAO getDirOperacionesDAO(){
+        return new DirOperacionesDAO(PU, propierties);
+    }
 }

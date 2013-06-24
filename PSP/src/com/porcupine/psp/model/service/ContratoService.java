@@ -111,7 +111,7 @@ public class ContratoService implements IService<ContratoVO, Integer> {
     public void delete(Integer id) throws NonexistentEntityException, InsufficientPermissionsException {
         Contrato contrato = DAOFactory.getInstance().getContratoDAO().find(id);
         if (contrato != null) {
-            DAOFactory.getInstance().getImplSeguridadDAO().delete(id);
+            DAOFactory.getInstance().getContratoDAO().delete(id);
         }
     }
 

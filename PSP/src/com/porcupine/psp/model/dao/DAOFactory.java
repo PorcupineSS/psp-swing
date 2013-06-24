@@ -65,4 +65,8 @@ public class DAOFactory {
     public DirOperacionesDAO getDirOperacionesDAO(){
         return new DirOperacionesDAO(PU, propierties);
     }
+    
+    public ComunicadoDAO getComunicadoDAO(){
+        return new ComunicadoDAO(PU, propierties);
+    }
 }

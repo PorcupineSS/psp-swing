@@ -74,7 +74,10 @@ public class ClienteService implements IService<ClienteVO, Integer> {
 
     @Override
     public void delete(Integer id) throws NonexistentEntityException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet.");
+         Cliente cliente = DAOFactory.getInstance().getClienteDAO().find(id);
+        if (cliente != null) {
+            DAOFactory.getInstance().getClienteDAO().delete(id);
+        } 
     }
 
     @Override

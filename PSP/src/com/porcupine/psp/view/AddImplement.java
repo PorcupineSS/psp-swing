@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -235,6 +236,11 @@ public class AddImplement extends javax.swing.JPanel {
         jButtonGuardar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonGuardar.setForeground(new java.awt.Color(0, 102, 0));
         jButtonGuardar.setText("Guardar");
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
 
@@ -319,6 +325,10 @@ public class AddImplement extends javax.swing.JPanel {
     private void jTextFieldCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCantidadActionPerformed
+
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+        MainController.crearImplemento();
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

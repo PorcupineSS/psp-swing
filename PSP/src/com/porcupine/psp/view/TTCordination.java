@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
 import com.porcupine.psp.util.DrawingUtilities;
 
 /**
@@ -176,8 +177,7 @@ public class TTCordination extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jButtonAddImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddImplementActionPerformed
-        AddImplement addImplement = new AddImplement();
-        DrawingUtilities.drawPanel(psp, psp.getViewport(), addImplement);
+        MainController.mostrarFormuariosImplementos();
                  
     }//GEN-LAST:event_jButtonAddImplementActionPerformed
 

@@ -42,6 +42,7 @@ public class MainController {
     static SelectDataBaseConnection sdb;
     public static Map connectionPropierties;
     static CreateEmployee crearEmpleado;
+    static AddImplement agregarImplemento;
     static Psp psp;
     static Helper helper;
     public static EmpleadosVO empleadoActivo;
@@ -151,6 +152,14 @@ public class MainController {
         crearEmpleado = new CreateEmployee(empleadosDisponibles);
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), crearEmpleado);
+    }
+    
+    public static void mostrarFormuariosImplementos() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        agregarImplemento = new AddImplement();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarImplemento);
     }
 
     //utilidades
@@ -351,6 +360,7 @@ public class MainController {
        implSeguridadVO.setCantidad(new Short(addImplement.getjTextFieldCantidad().getText()));
        implSeguridadVO.setEstadoI(addImplement.getjTextFieldEstado().getText());
        implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
+       implSeguridadVO.setIdPro(new Short(addImplement.getjTextFieldIdProveedor().getText()));
        
        try {
            ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);

@@ -485,7 +485,7 @@ alter table ASIG_IMPL add constraint DOM_ESTADO
 /* Constraint: CK1_ASIG_IMPL_CANT                          */
 /*==============================================================*/
 alter table ASIG_IMPL add constraint CK1_ASIG_IMPL_CANT
-      CHECK (CANTIDAD_ASIGNADA>0);
+      CHECK (CANTIDAD_ASIGNADA > 0);
 
 /*==============================================================*/
 /* Table: BITACORA_SEG                                          */

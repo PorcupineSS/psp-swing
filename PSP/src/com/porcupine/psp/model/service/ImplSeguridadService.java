@@ -10,6 +10,7 @@ import com.porcupine.psp.model.entity.CoordTYT;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
+import com.porcupine.psp.model.vo.ProveedorVO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
@@ -39,8 +40,10 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
         entity.setDescripcionI(vo.getDescripcionI());
         entity.setEstadoI(vo.getEstadoI());
         entity.setFechaRegIm(vo.getFechaRegIm());
+        
+        //entity.setIdPro(vo.getIdPro());
 
-        if (vo.getIdPro() != 0) {
+        if (vo.getIdPro() != null) {
             Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find((int) vo.getIdPro());
             entity.setIdPro(proveedor);
             proveedor.getImplSeguridadList().add(entity);

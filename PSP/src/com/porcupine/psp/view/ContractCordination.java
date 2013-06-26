@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.view;
 
+
 /**
  *
  * @author Jeisson Andrés Vergara
@@ -33,7 +34,7 @@ public class ContractCordination extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jButtonLogout = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButtonAssignImplement = new javax.swing.JButton();
+        jButtonAssignIContract = new javax.swing.JButton();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/LogoPSPMin.png"))); // NOI18N
 
@@ -56,13 +57,13 @@ public class ContractCordination extends javax.swing.JPanel {
             }
         });
 
-        jButtonAssignImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonAssignImplement.setForeground(new java.awt.Color(0, 51, 0));
-        jButtonAssignImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/AssignContract.png"))); // NOI18N
-        jButtonAssignImplement.setText("Asignación de Contratos");
-        jButtonAssignImplement.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAssignIContract.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonAssignIContract.setForeground(new java.awt.Color(0, 51, 0));
+        jButtonAssignIContract.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/AssignContract.png"))); // NOI18N
+        jButtonAssignIContract.setText("Asignación de Contratos");
+        jButtonAssignIContract.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAssignImplementActionPerformed(evt);
+                jButtonAssignIContractActionPerformed(evt);
             }
         });
 
@@ -72,14 +73,14 @@ public class ContractCordination extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonAssignImplement, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addComponent(jButtonAssignIContract, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                 .addGap(147, 147, 147))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonAssignImplement)
+                .addComponent(jButtonAssignIContract)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -133,12 +134,12 @@ public class ContractCordination extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
-    private void jButtonAssignImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssignImplementActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAssignImplementActionPerformed
+    private void jButtonAssignIContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssignIContractActionPerformed
+        
+    }//GEN-LAST:event_jButtonAssignIContractActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAssignImplement;
+    private javax.swing.JButton jButtonAssignIContract;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

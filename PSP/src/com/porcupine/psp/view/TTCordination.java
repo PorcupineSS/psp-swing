@@ -4,12 +4,16 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
+import com.porcupine.psp.util.DrawingUtilities;
+
 /**
  *
  * @author andres
  */
 public class TTCordination extends javax.swing.JPanel {
-
+    
+    static Psp psp;
     /**
      * Creates new form TTCordination
      */
@@ -173,7 +177,8 @@ public class TTCordination extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jButtonAddImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddImplementActionPerformed
-        // TODO add your handling code here:
+        MainController.mostrarFormuariosImplementos();
+                 
     }//GEN-LAST:event_jButtonAddImplementActionPerformed
 
     private void jButtonAssignImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssignImplementActionPerformed

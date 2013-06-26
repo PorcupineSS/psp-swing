@@ -42,6 +42,9 @@ public class MainController {
     static SelectDataBaseConnection sdb;
     public static Map connectionPropierties;
     static CreateEmployee crearEmpleado;
+    static AddImplement agregarImplemento;
+    static AddContract agregarContrato;
+    static WriteNotice agregarWriteNotice;
     static Psp psp;
     static Helper helper;
     public static EmpleadosVO empleadoActivo;
@@ -151,6 +154,30 @@ public class MainController {
         crearEmpleado = new CreateEmployee(empleadosDisponibles);
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), crearEmpleado);
+    }
+    
+    public static void mostrarFormuariosImplementos() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        agregarImplemento = new AddImplement();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarImplemento);
+    }
+    
+    public static void mostrarFormularioContratos() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        agregarContrato = new AddContract();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarContrato);
+    }
+    
+    public static void mostrarFormularioWriteNotice() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        agregarWriteNotice = new WriteNotice();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarWriteNotice);
     }
 
     //utilidades
@@ -351,6 +378,7 @@ public class MainController {
        implSeguridadVO.setCantidad(new Short(addImplement.getjTextFieldCantidad().getText()));
        implSeguridadVO.setEstadoI(addImplement.getjTextFieldEstado().getText());
        implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
+       implSeguridadVO.setIdPro(new Short(addImplement.getjTextFieldIdProveedor().getText()));
        
        try {
            ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
@@ -393,7 +421,8 @@ public class MainController {
         contratoVO.setUbicacionCont(addContract.getjTextFieldUbicacion().getText());
         contratoVO.setHorarioCont(addContract.getjTextFieldHorario().getText());
         contratoVO.setTiempoCont(new Integer (addContract.getjTextFieldTiempo().getText()));
-        //Me queda la duda si tambien hay que crear campos para el celular y tel del contrato
+        contratoVO.setCelularCont(addContract.getjTextFieldCelularC().getText());
+        contratoVO.setTelefonoCont(addContract.getjTextFieldTelefonoC().getText());
         
         try{
             ServiceFactory.getInstance().getContratoService().create(contratoVO);

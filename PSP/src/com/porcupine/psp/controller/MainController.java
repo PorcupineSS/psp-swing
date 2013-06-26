@@ -43,6 +43,7 @@ public class MainController {
     public static Map connectionPropierties;
     static CreateEmployee crearEmpleado;
     static AddImplement agregarImplemento;
+    static AddContract agregarContrato;
     static Psp psp;
     static Helper helper;
     public static EmpleadosVO empleadoActivo;
@@ -160,6 +161,14 @@ public class MainController {
         agregarImplemento = new AddImplement();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarImplemento);
+    }
+    
+    public static void mostrarFormuarioContratos() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        agregarContrato = new AddContract();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarContrato);
     }
 
     //utilidades
@@ -403,7 +412,8 @@ public class MainController {
         contratoVO.setUbicacionCont(addContract.getjTextFieldUbicacion().getText());
         contratoVO.setHorarioCont(addContract.getjTextFieldHorario().getText());
         contratoVO.setTiempoCont(new Integer (addContract.getjTextFieldTiempo().getText()));
-        //Me queda la duda si tambien hay que crear campos para el celular y tel del contrato
+        contratoVO.setCelularCont(addContract.getjTextFieldCelularC().getText());
+        contratoVO.setTelefonoCont(addContract.getjTextFieldTelefonoC().getText());
         
         try{
             ServiceFactory.getInstance().getContratoService().create(contratoVO);

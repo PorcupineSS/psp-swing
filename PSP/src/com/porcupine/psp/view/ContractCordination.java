@@ -4,7 +4,6 @@
  */
 package com.porcupine.psp.view;
 
-import com.porcupine.psp.controller.MainController;
 
 /**
  *
@@ -136,7 +135,7 @@ public class ContractCordination extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jButtonAssignIContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssignIContractActionPerformed
-        MainController.mostrarFormuarioContratos();
+        
     }//GEN-LAST:event_jButtonAssignIContractActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

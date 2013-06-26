@@ -44,6 +44,7 @@ public class MainController {
     static CreateEmployee crearEmpleado;
     static AddImplement agregarImplemento;
     static AddContract agregarContrato;
+    static WriteNotice agregarWriteNotice;
     static Psp psp;
     static Helper helper;
     public static EmpleadosVO empleadoActivo;
@@ -163,12 +164,20 @@ public class MainController {
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarImplemento);
     }
     
-    public static void mostrarFormuarioContratos() {
+    public static void mostrarFormularioContratos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
         agregarContrato = new AddContract();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarContrato);
+    }
+    
+    public static void mostrarFormularioWriteNotice() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        agregarWriteNotice = new WriteNotice();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarWriteNotice);
     }
 
     //utilidades

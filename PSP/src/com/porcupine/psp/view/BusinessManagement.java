@@ -4,6 +4,8 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
+
 /**
  *
  * @author Jeisson Andrés Vergara
@@ -153,7 +155,7 @@ public class BusinessManagement extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonAddClientActionPerformed
 
     private void jButtonAddContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddContractActionPerformed
-        // TODO add your handling code here:
+        MainController.mostrarFormularioContratos();
     }//GEN-LAST:event_jButtonAddContractActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

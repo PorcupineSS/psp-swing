@@ -23,6 +23,7 @@ public class Login extends javax.swing.JPanel {
     public Login() throws UnsupportedEncodingException, FileNotFoundException, IOException {
         initComponents();
         MainController.leerFicherosConfiguracion();
+        MainController.saveConnectionValues();
     }
 
     public JPasswordField getContrasenaPF() {

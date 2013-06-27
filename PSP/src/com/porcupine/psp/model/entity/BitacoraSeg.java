@@ -46,9 +46,9 @@ public class BitacoraSeg implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIPO_OPER")
     private String tipoOper;
-    @JoinColumn(name = "CEDULAE", referencedColumnName = "CEDULAE")
-    @ManyToOne
-    private Empleados cedulae;
+//    @JoinColumn(name = "CEDULAE", referencedColumnName = "CEDULAE")
+//    @ManyToOne
+//    private Empleados cedulae;
 
     public BitacoraSeg() {
     }
@@ -112,13 +112,13 @@ public class BitacoraSeg implements Serializable {
         this.tipoOper = tipoOper;
     }
 
-    public Empleados getCedulae() {
-        return cedulae;
-    }
-
-    public void setCedulae(Empleados cedulae) {
-        this.cedulae = cedulae;
-    }
+//    public Empleados getCedulae() {
+//        return cedulae;
+//    }
+//
+//    public void setCedulae(Empleados cedulae) {
+//        this.cedulae = cedulae;
+//    }
 
     @Override
     public int hashCode() {
@@ -147,7 +147,7 @@ public class BitacoraSeg implements Serializable {
 
     public BitacoraSegVO toVO() {
         BitacoraSegVO bitacora = new BitacoraSegVO();
-        bitacora.setCedulae(this.getCedulae().getCedulae());
+//        bitacora.setCedulae(this.getCedulae().getCedulae());
         bitacora.setFechaOper(this.getFechaOper());
         bitacora.setIdOper(this.getIdOper());
         bitacora.setMaqOper(this.getMaqOper());

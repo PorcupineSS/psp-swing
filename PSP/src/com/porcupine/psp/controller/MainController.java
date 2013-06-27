@@ -4,13 +4,16 @@
  */
 package com.porcupine.psp.controller;
 
+import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.exceptions.InternalErrorException;
+import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.ComunicadoVO;
 import com.porcupine.psp.model.vo.ContratoVO;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
+import com.porcupine.psp.model.vo.ProveedorVO;
 import com.porcupine.psp.model.vo.TelefonosVO;
 import com.porcupine.psp.util.DrawingUtilities;
 import com.porcupine.psp.util.ServidoresDisponibles;
@@ -25,6 +28,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * El proposito de esta clase es tener un lugar integrado con todos los metodos
@@ -58,6 +62,9 @@ public class MainController {
     public static String password;
     //VOS Temporales para hacer operaciones
     public static EmpleadosVO empleadoTemporal;
+    static DeleteImplement eliminarImplemento = new DeleteImplement();
+    DefaultTableModel modelTable;
+    static ImplSeguridadVO implSeguridadVO;
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -364,7 +371,7 @@ public class MainController {
         }
         //Vos Externos
 
-               
+
         DefaultListModel model = (DefaultListModel) crearEmpleado.getjListTelefono().getModel();
 
         ArrayList<String> tels = new ArrayList<String>();
@@ -442,6 +449,7 @@ public class MainController {
     public static void listarInventario() {
     }
 
+    //IMPLEMENTOS - INICIO
     public static void crearImplemento() {
         ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
         implSeguridadVO.setNombreI(addImplement.getjTextFieldNombre().getText());
@@ -462,11 +470,73 @@ public class MainController {
         secondary = new Secondary();
     }
 
+    public void llenarTabla() {
+
+        List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance()
+                .getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
+        modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
+        modelTable.getDataVector().removeAllElements();
+        modelTable.fireTableDataChanged();
+
+        for (ImplSeguridadVO implSeguridadVO : implementosList) {
+            Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(new Integer(implSeguridadVO.getIdPro()));
+            Object[] datos = {new Short(implSeguridadVO.getIdImplemento()),
+                implSeguridadVO.getNombreI(),
+                implSeguridadVO.getPrecioUnitarioI(),
+                new Short(implSeguridadVO.getCantidad()),
+                implSeguridadVO.getEstadoI(),
+                implSeguridadVO.getFechaRegIm().toString(),
+                proveedor.getNombre()};
+            modelTable.addRow(datos);
+        }
+    }
+
+    public void listarImplementos() {
+        secondary.setVisible(true);
+        secondary.setTitle("Eliminar Implemento");
+        DrawingUtilities.drawPanel(secondary, secondary.getViewport(), eliminarImplemento);
+        llenarTabla();
+    }
+
+    public void buscar() {
+        modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
+        modelTable.getDataVector().removeAllElements();
+        modelTable.fireTableDataChanged();
+        List<ImplSeguridadVO> implementos;
+        implementos = ServiceFactory.getInstance().getImplSeguridadService()
+                .findByName(eliminarImplemento.getjTextFieldBuscar().getText());
+        for (ImplSeguridadVO implementoVO : implementos) {
+            Object[] datos = {new Short(implSeguridadVO.getIdImplemento()),
+                implementoVO.getNombreI(),
+                implementoVO.getPrecioUnitarioI(),
+                new Short(implementoVO.getCantidad()),
+                implementoVO.getEstadoI(),
+                implementoVO.getFechaRegIm().toString(),
+                DAOFactory.getInstance().getImplSeguridadDAO().find(new Integer(implementoVO.getIdImplemento())).getNombreI()};
+            modelTable.addRow(datos);
+        }
+    }
+
     public static void borrarImplemento() {
+        int opcion = JOptionPane.showOptionDialog(eliminarImplemento, "Realmente desea eliminar al usuario?", "Confirmación", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "Cancelar"}, "Cancelar");
+        switch (opcion) {
+            case JOptionPane.OK_OPTION:
+                /*try {
+                    ServiceFactory.getInstance().getImplSeguridadService().delete(new Integer(eliminarImplemento.getjTableBusqueda().getValueAt(eliminarImplemento.getjTableBusqueda().getSelectedRow(), 0).toString()));
+                    JOptionPane.showMessageDialog(eliminarImplemento, "¡El implemento se ha eliminado satisfactoriamente!", "Error", JOptionPane.ERROR_MESSAGE);
+                    llenarTabla();
+                } catch (NonexistentEntityException | InsufficientPermissionsException ex) {
+                    JOptionPane.showMessageDialog(eliminarImplemento, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }*/
+                break;
+            case JOptionPane.CANCEL_OPTION:
+                break;
+        }
     }
 
     public static void asignarImplemento() {
     }
+    //IMPLEMENTOS - FIN
 
     /**
      * Disponible para: Wachiturros Vista principal para este coordinador

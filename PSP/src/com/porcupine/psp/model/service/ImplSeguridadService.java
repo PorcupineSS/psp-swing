@@ -12,6 +12,8 @@ import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
 import com.porcupine.psp.model.vo.ProveedorVO;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
@@ -41,9 +43,13 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
         entity.setEstadoI(vo.getEstadoI());
         entity.setFechaRegIm(vo.getFechaRegIm());
         
-        //entity.setIdPro(vo.getIdPro());
+        Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(new Integer(vo.getIdPro()));
+        entity.setIdPro(proveedor);
+        
+        CoordTYT coordinadorTyT = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
+        entity.setCedulae(coordinadorTyT);
 
-        if (vo.getIdPro() != null) {
+        /*if (vo.getIdPro() != null) {
             Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find((int) vo.getIdPro());
             entity.setIdPro(proveedor);
             proveedor.getImplSeguridadList().add(entity);
@@ -52,7 +58,7 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
             CoordTYT coordTyT = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
             entity.setCedulae(coordTyT);
             coordTyT.getImplSeguridadList().add(entity);
-        }
+        }*/
 
         DAOFactory.getInstance().getImplSeguridadDAO().create(entity);
     }
@@ -114,5 +120,26 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
     @Override
     public void removeAll() throws NonexistentEntityException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public List<ImplSeguridadVO> findByName(String name) throws EntityNotFoundException {
+        //TODO validar permisos
+        List<ImplSeguridadVO> list = new ArrayList<>();
+        for (ImplSeguridad implemento : DAOFactory.getInstance().getImplSeguridadDAO().findByName(name)) {
+            list.add((implemento).toVO());
+        }
+        Collections.sort(list, getComparatorImplSeguridad());
+        return list;
+    }
+    
+    private Comparator getComparatorImplSeguridad(){
+        return new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                ImplSeguridadVO i1 = (ImplSeguridadVO) o1;
+                ImplSeguridadVO i2 = (ImplSeguridadVO) o2;
+                return i1.getIdImplemento().compareTo(i2.getIdImplemento());
+            }
+        };
     }
 }

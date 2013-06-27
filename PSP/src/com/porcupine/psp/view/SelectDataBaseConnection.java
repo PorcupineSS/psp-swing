@@ -195,6 +195,8 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        MainController.saveConnectionValues();
 
         MainController.helper1.setVisible(false);
         MainController.helper1.dispose();

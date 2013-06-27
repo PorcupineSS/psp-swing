@@ -84,4 +84,8 @@ public class DAOFactory {
     public TelefonosDAO getTelefonosDAO() {
         return new TelefonosDAO(PU, propierties);
     }
+    
+    public AsigImplDAO getAsigImplDAO(){
+        return new AsigImplDAO(PU, propierties);
+    }
 }

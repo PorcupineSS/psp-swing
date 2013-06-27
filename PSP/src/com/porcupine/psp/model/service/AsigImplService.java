@@ -15,6 +15,8 @@ import com.porcupine.psp.model.entity.CoordTYT;
 import com.porcupine.psp.model.entity.EmpTemp;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.vo.AsigImplVO;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
@@ -41,34 +43,66 @@ public class AsigImplService implements IService<AsigImplVO, Short> {
             EmpTemp empleado = DAOFactory.getInstance().getEmpTempDAO().find(vo.getCedulaEmpTemp());
             asignacion.setCedulae(empleado);
         }
-        if(vo.getIdImplemento()!=null) {
-            ImplSeguridad implemento = DAOFactory.getInstance().getImplSeguridadDAO().find((int)vo.getIdImplemento());
+        if (vo.getIdImplemento() != null) {
+            ImplSeguridad implemento = DAOFactory.getInstance().getImplSeguridadDAO().find((int) vo.getIdImplemento());
             asignacion.setIdImplemento(implemento);
         }
     }
 
     @Override
     public AsigImplVO find(Short id) throws EntityNotFoundException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        AsigImpl asignacion = DAOFactory.getInstance().getAsigImplDAO().find(id);
+        if (asignacion != null) {
+            return asignacion.toVO();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public void update(AsigImplVO vo) throws NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        AsigImpl asignacion = new AsigImpl();
+        asignacion.setCantidadAsignada(vo.getCantidadAsignada());
+        asignacion.setEstadoAsignacion(vo.isEstadoAsignacion());
+        asignacion.setFechaAsignacionI(vo.getFechaAsignacionI());
+        asignacion.setIdAsignacionI(vo.getIdAsignacionI());
+
+        if (vo.getCedulaCoordTyT() != null) {
+            CoordTYT coordinador = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
+            asignacion.setCooCedulae(coordinador);
+        }
+
+        if (vo.getCedulaEmpTemp() != null) {
+            EmpTemp empleado = DAOFactory.getInstance().getEmpTempDAO().find(vo.getCedulaEmpTemp());
+            asignacion.setCedulae(empleado);
+        }
+        if (vo.getIdImplemento() != null) {
+            ImplSeguridad implemento = DAOFactory.getInstance().getImplSeguridadDAO().find((int) vo.getIdImplemento());
+            asignacion.setIdImplemento(implemento);
+        }
+        DAOFactory.getInstance().getAsigImplDAO().update(asignacion);
     }
 
     @Override
     public void delete(Short id) throws NonexistentEntityException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        AsigImpl asignacion = DAOFactory.getInstance().getAsigImplDAO().find(id);
+        if (asignacion != null) {
+            DAOFactory.getInstance().getAsigImplDAO().delete(id);
+        }
     }
 
     @Override
     public List<AsigImplVO> getList() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<AsigImplVO> listaVO = new ArrayList<AsigImplVO>();
+        List<AsigImpl> ListaAsignacion = DAOFactory.getInstance().getAsigImplDAO().getList();
+        for (AsigImpl implemento : ListaAsignacion) {
+            listaVO.add(implemento.toVO());
+        }
+        return listaVO;
     }
 
     @Override
     public void removeAll() throws NonexistentEntityException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        ;
     }
 }

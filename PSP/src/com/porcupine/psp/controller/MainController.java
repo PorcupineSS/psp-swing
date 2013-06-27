@@ -6,7 +6,9 @@ package com.porcupine.psp.controller;
 
 import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
+import com.porcupine.psp.model.dao.exceptions.InsufficientPermissionsException;
 import com.porcupine.psp.model.dao.exceptions.InternalErrorException;
+import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.ComunicadoVO;
@@ -25,6 +27,7 @@ import java.net.URLDecoder;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityNotFoundException;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -63,7 +66,7 @@ public class MainController {
     //VOS Temporales para hacer operaciones
     public static EmpleadosVO empleadoTemporal;
     static DeleteImplement eliminarImplemento = new DeleteImplement();
-    DefaultTableModel modelTable;
+    public static DefaultTableModel modelTable;
     static ImplSeguridadVO implSeguridadVO;
 
     public static Map getConnectionPropierties() {
@@ -247,12 +250,20 @@ public class MainController {
         DrawingUtilities.drawPanel(helper, helper.getViewport(), crearEmpleado);
     }
 
-    public static void mostrarFormuariosImplementos() {
+    public static void mostrarFormuariosCrearImplementos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
         agregarImplemento = new AddImplement();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarImplemento);
+    }
+
+    public static void mostrarFormuariosEliminarImplementos() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        eliminarImplemento = new DeleteImplement();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), eliminarImplemento);
     }
 
     public static void mostrarFormularioContratos() {
@@ -459,6 +470,8 @@ public class MainController {
         implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
         implSeguridadVO.setIdPro(new Short(addImplement.getjTextFieldIdProveedor().getText()));
 
+
+
         try {
             ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
         } catch (Exception e) {
@@ -470,7 +483,7 @@ public class MainController {
         secondary = new Secondary();
     }
 
-    public void llenarTabla() {
+    public static void llenarTabla() {
 
         List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance()
                 .getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
@@ -479,14 +492,14 @@ public class MainController {
         modelTable.fireTableDataChanged();
 
         for (ImplSeguridadVO implSeguridadVO : implementosList) {
-            Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(new Integer(implSeguridadVO.getIdPro()));
+            //Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(new Integer(implSeguridadVO.getIdPro()));
             Object[] datos = {new Short(implSeguridadVO.getIdImplemento()),
                 implSeguridadVO.getNombreI(),
                 implSeguridadVO.getPrecioUnitarioI(),
                 new Short(implSeguridadVO.getCantidad()),
                 implSeguridadVO.getEstadoI(),
-                implSeguridadVO.getFechaRegIm().toString(),
-                proveedor.getNombre()};
+                implSeguridadVO.getFechaRegIm().toString()};
+            //proveedor.getNombre()};
             modelTable.addRow(datos);
         }
     }
@@ -498,7 +511,7 @@ public class MainController {
         llenarTabla();
     }
 
-    public void buscar() {
+    public static void buscar() {
         modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
         modelTable.getDataVector().removeAllElements();
         modelTable.fireTableDataChanged();
@@ -506,28 +519,30 @@ public class MainController {
         implementos = ServiceFactory.getInstance().getImplSeguridadService()
                 .findByName(eliminarImplemento.getjTextFieldBuscar().getText());
         for (ImplSeguridadVO implementoVO : implementos) {
-            Object[] datos = {new Short(implSeguridadVO.getIdImplemento()),
+            Object[] datos = {new Short(implementoVO.getIdImplemento()),
                 implementoVO.getNombreI(),
                 implementoVO.getPrecioUnitarioI(),
                 new Short(implementoVO.getCantidad()),
                 implementoVO.getEstadoI(),
-                implementoVO.getFechaRegIm().toString(),
-                DAOFactory.getInstance().getImplSeguridadDAO().find(new Integer(implementoVO.getIdImplemento())).getNombreI()};
+                implementoVO.getFechaRegIm().toString()};
+            //ServiceFactory.getInstance().getProveedorService().find(new Integer(implementoVO.getIdImplemento())).getNombre()};           
             modelTable.addRow(datos);
         }
+        modelTable.fireTableDataChanged();
+        System.out.println("Terminó!!");
     }
 
     public static void borrarImplemento() {
         int opcion = JOptionPane.showOptionDialog(eliminarImplemento, "Realmente desea eliminar al usuario?", "Confirmación", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "Cancelar"}, "Cancelar");
         switch (opcion) {
             case JOptionPane.OK_OPTION:
-                /*try {
-                    ServiceFactory.getInstance().getImplSeguridadService().delete(new Integer(eliminarImplemento.getjTableBusqueda().getValueAt(eliminarImplemento.getjTableBusqueda().getSelectedRow(), 0).toString()));
-                    JOptionPane.showMessageDialog(eliminarImplemento, "¡El implemento se ha eliminado satisfactoriamente!", "Error", JOptionPane.ERROR_MESSAGE);
+                try {
+                    ServiceFactory.getInstance().getImplSeguridadService().delete(new Short(eliminarImplemento.getjTableBusqueda().getValueAt(eliminarImplemento.getjTableBusqueda().getSelectedRow(), 0).toString()));
+                    JOptionPane.showMessageDialog(eliminarImplemento, "¡El implemento se ha eliminado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
                     llenarTabla();
                 } catch (NonexistentEntityException | InsufficientPermissionsException ex) {
                     JOptionPane.showMessageDialog(eliminarImplemento, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }*/
+                }
                 break;
             case JOptionPane.CANCEL_OPTION:
                 break;

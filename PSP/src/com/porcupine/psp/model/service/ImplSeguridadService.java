@@ -21,7 +21,7 @@ import javax.persistence.EntityNotFoundException;
  *
  * @author Jeisson Andrés Vergara
  */
-public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> {
+public class ImplSeguridadService implements IService<ImplSeguridadVO, Short> {
 
     private static ImplSeguridadService instance;
 
@@ -43,13 +43,13 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
         entity.setEstadoI(vo.getEstadoI());
         entity.setFechaRegIm(vo.getFechaRegIm());
         
-        Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(new Integer(vo.getIdPro()));
-        entity.setIdPro(proveedor);
-        
-        CoordTYT coordinadorTyT = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
-        entity.setCedulae(coordinadorTyT);
+//        Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(new Integer(vo.getIdPro()));
+//        entity.setIdPro(proveedor);
+//        
+//        CoordTYT coordinadorTyT = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
+//        entity.setCedulae(coordinadorTyT);
 
-        /*if (vo.getIdPro() != null) {
+        if (vo.getIdPro() != null) {
             Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find((int) vo.getIdPro());
             entity.setIdPro(proveedor);
             proveedor.getImplSeguridadList().add(entity);
@@ -58,13 +58,13 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
             CoordTYT coordTyT = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
             entity.setCedulae(coordTyT);
             coordTyT.getImplSeguridadList().add(entity);
-        }*/
+        }
 
         DAOFactory.getInstance().getImplSeguridadDAO().create(entity);
     }
 
     @Override
-    public ImplSeguridadVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {
+    public ImplSeguridadVO find(Short id) throws EntityNotFoundException, InsufficientPermissionsException {
         ImplSeguridad implSeguridad = DAOFactory.getInstance().getImplSeguridadDAO().find(id);
         if (implSeguridad != null) {
             return implSeguridad.toVO();
@@ -99,7 +99,7 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
     }
 
     @Override
-    public void delete(Integer id) throws NonexistentEntityException, InsufficientPermissionsException {
+    public void delete(Short id) throws NonexistentEntityException, InsufficientPermissionsException {
         ImplSeguridad implSeguridad = DAOFactory.getInstance().getImplSeguridadDAO().find(id);
         if (implSeguridad != null) {
             DAOFactory.getInstance().getImplSeguridadDAO().delete(id);

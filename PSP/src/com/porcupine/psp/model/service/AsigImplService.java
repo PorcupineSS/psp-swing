@@ -44,7 +44,7 @@ public class AsigImplService implements IService<AsigImplVO, Short> {
             asignacion.setCedulae(empleado);
         }
         if (vo.getIdImplemento() != null) {
-            ImplSeguridad implemento = DAOFactory.getInstance().getImplSeguridadDAO().find((int) vo.getIdImplemento());
+            ImplSeguridad implemento = DAOFactory.getInstance().getImplSeguridadDAO().find(new Short(vo.getIdImplemento()));
             asignacion.setIdImplemento(implemento);
         }
     }
@@ -77,7 +77,7 @@ public class AsigImplService implements IService<AsigImplVO, Short> {
             asignacion.setCedulae(empleado);
         }
         if (vo.getIdImplemento() != null) {
-            ImplSeguridad implemento = DAOFactory.getInstance().getImplSeguridadDAO().find((int) vo.getIdImplemento());
+            ImplSeguridad implemento = DAOFactory.getInstance().getImplSeguridadDAO().find(new Short(vo.getIdImplemento()));
             asignacion.setIdImplemento(implemento);
         }
         DAOFactory.getInstance().getAsigImplDAO().update(asignacion);

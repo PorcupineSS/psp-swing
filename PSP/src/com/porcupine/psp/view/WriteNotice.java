@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -247,7 +248,7 @@ public class WriteNotice extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckBoxUrgenteActionPerformed
 
     private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
-        // TODO add your handling code here:
+        MainController.crearComunicacion();
     }//GEN-LAST:event_jButtonEnviarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

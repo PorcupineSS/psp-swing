@@ -4,6 +4,8 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
+
 /**
  *
  * @author Jeisson Andrés Vergara
@@ -61,6 +63,11 @@ public class TemporaryEmployee extends javax.swing.JPanel {
         jButtonWriteNotice.setForeground(new java.awt.Color(0, 51, 0));
         jButtonWriteNotice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Notice.png"))); // NOI18N
         jButtonWriteNotice.setText("Redactar Comunicado");
+        jButtonWriteNotice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWriteNoticeActionPerformed(evt);
+            }
+        });
 
         jButtonCheckMyContract.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonCheckMyContract.setForeground(new java.awt.Color(0, 51, 0));
@@ -144,6 +151,10 @@ public class TemporaryEmployee extends javax.swing.JPanel {
     private void jButtonCheckMyContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckMyContractActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCheckMyContractActionPerformed
+
+    private void jButtonWriteNoticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteNoticeActionPerformed
+        MainController.mostrarFormularioWriteNotice();
+    }//GEN-LAST:event_jButtonWriteNoticeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCheckMyContract;

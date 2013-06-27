@@ -118,9 +118,6 @@ alter table ASIG_IMPL
 alter table ASIG_IMPL
    drop constraint FK_ASIG_IMP_RELATIONS_EMP_TEMP;
 
-alter table BITACORA_SEG
-   drop constraint FK_BITACORA_SIGUE_EMPLEADO;
-
 alter table CLIENTE
    drop constraint FK_CLIENTE_REG_CLI_DIR_COME;
 
@@ -215,8 +212,6 @@ drop index RELATIONSHIP_4_FK;
 drop index ASIGNA_I_FK;
 
 drop table ASIG_IMPL cascade constraints;
-
-drop index SIGUE_FK;
 
 drop table BITACORA_SEG cascade constraints;
 
@@ -485,27 +480,20 @@ alter table ASIG_IMPL add constraint DOM_ESTADO
 /* Constraint: CK1_ASIG_IMPL_CANT                          */
 /*==============================================================*/
 alter table ASIG_IMPL add constraint CK1_ASIG_IMPL_CANT
-      CHECK (CANTIDAD_ASIGNADA>0);
+      CHECK (CANTIDAD_ASIGNADA > 0);
 
 /*==============================================================*/
 /* Table: BITACORA_SEG                                          */
 /*==============================================================*/
 create table BITACORA_SEG  (
    ID_OPER              INTEGER                         not null,
-   CEDULAE              INTEGER,
    FECHA_OPER           DATE                            not null,
    USU_OPER             VARCHAR2(20),
    MAQ_OPER             VARCHAR2(20),
    TABLA_MOD            VARCHAR2(20)                    not null,
    TIPO_OPER            VARCHAR2(6)                     not null,
+   DESC_OPER            VARCHAR2(100),
    constraint PK_BITACORA_SEG primary key (ID_OPER)
-);
-
-/*==============================================================*/
-/* Index: SIGUE_FK                                              */
-/*==============================================================*/
-create index SIGUE_FK on BITACORA_SEG (
-   CEDULAE ASC
 );
 
 /*==============================================================*/
@@ -1164,10 +1152,6 @@ alter table ASIG_IMPL
 alter table ASIG_IMPL
    add constraint FK_ASIG_IMP_RELATIONS_EMP_TEMP foreign key (CEDULAE)
       references EMP_TEMP (CEDULAE);
-
-alter table BITACORA_SEG
-   add constraint FK_BITACORA_SIGUE_EMPLEADO foreign key (CEDULAE)
-      references EMPLEADOS (CEDULAE);
 
 alter table CLIENTE
    add constraint FK_CLIENTE_REG_CLI_DIR_COME foreign key (CEDULAE)

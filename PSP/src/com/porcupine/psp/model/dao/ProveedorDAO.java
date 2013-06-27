@@ -12,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 
 
 /**
@@ -32,27 +34,99 @@ public class ProveedorDAO implements ICrudDAO<Proveedor, Integer> {
     
     @Override
     public void create(Proveedor entity) throws PreexistingEntityException, NonexistentEntityException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }  
     }
 
     @Override
     public Proveedor find(Integer id) throws EntityNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            return entityManager.find(Proveedor.class, id);
+        } catch (EntityNotFoundException ex) {
+            throw new EntityNotFoundException("¡El proveedor con id: " + id + ", no existe!");
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        } 
     }
 
     @Override
     public void update(Proveedor entity) throws NonexistentEntityException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            entity = entityManager.merge(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager != null && entityManager.getTransaction() != null) {
+                entityManager.getTransaction().rollback();
+            }
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
     }
 
     @Override
     public void delete(Integer id) throws NonexistentEntityException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            Proveedor proveedor = null;
+            try {
+                proveedor = entityManager.getReference(Proveedor.class, id);
+            } catch (EntityNotFoundException e) {
+                throw new NonexistentEntityException("¡El proveedor con id: " + id + ", no existe!", e);
+            }
+
+            entityManager.remove(proveedor);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager != null && entityManager.getTransaction() != null) {
+                entityManager.getTransaction().rollback();
+            }
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
     }
 
     @Override
     public List<Proveedor> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Proveedor.class));
+            Query q = entityManager.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
     }
     
 }

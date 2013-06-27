@@ -236,6 +236,30 @@ public class MainController {
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), crearEmpleado);
     }
+    
+    public static void mostrarFormuariosImplementos() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        agregarImplemento = new AddImplement();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarImplemento);
+    }
+    
+    public static void mostrarFormularioContratos() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        agregarContrato = new AddContract();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarContrato);
+    }
+    
+    public static void mostrarFormularioWriteNotice() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        agregarWriteNotice = new WriteNotice();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarWriteNotice);
+    }
 
     //utilidades
     public static void cerrar() {
@@ -427,23 +451,24 @@ public class MainController {
     public static void listarInventario() {
     }
 
-    public static void crearImplemento() {
-        ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
-        implSeguridadVO.setNombreI(addImplement.getjTextFieldNombre().getText());
-        implSeguridadVO.setPrecioUnitarioI(new BigDecimal(addImplement.getjTextFieldValorUnitario().getText()));
-        implSeguridadVO.setCantidad(new Short(addImplement.getjTextFieldCantidad().getText()));
-        implSeguridadVO.setEstadoI(addImplement.getjTextFieldEstado().getText());
-        implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
-
-        try {
-            ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(addImplement, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        JOptionPane.showMessageDialog(addImplement, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-        secondary.setVisible(false);
-        secondary = new Secondary();
+    public static void crearImplemento() {   
+       ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
+       implSeguridadVO.setNombreI(addImplement.getjTextFieldNombre().getText());
+       implSeguridadVO.setPrecioUnitarioI(new BigDecimal(addImplement.getjTextFieldValorUnitario().getText()));
+       implSeguridadVO.setCantidad(new Short(addImplement.getjTextFieldCantidad().getText()));
+       implSeguridadVO.setEstadoI(addImplement.getjTextFieldEstado().getText());
+       implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
+       implSeguridadVO.setIdPro(new Short(addImplement.getjTextFieldIdProveedor().getText()));
+       
+       try {
+           ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
+       } catch (Exception e) {
+           JOptionPane.showMessageDialog(addImplement, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
+       JOptionPane.showMessageDialog(addImplement, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+       secondary.setVisible(false);
+       secondary = new Secondary();
     }
 
     public static void borrarImplemento() {
@@ -475,10 +500,11 @@ public class MainController {
         contratoVO.setCostoMensual(new BigDecimal(addContract.getjTextFieldCosto().getText()));
         contratoVO.setUbicacionCont(addContract.getjTextFieldUbicacion().getText());
         contratoVO.setHorarioCont(addContract.getjTextFieldHorario().getText());
-        contratoVO.setTiempoCont(new Integer(addContract.getjTextFieldTiempo().getText()));
-        //Me queda la duda si tambien hay que crear campos para el celular y tel del contrato
-
-        try {
+        contratoVO.setTiempoCont(new Integer (addContract.getjTextFieldTiempo().getText()));
+        contratoVO.setCelularCont(addContract.getjTextFieldCelularC().getText());
+        contratoVO.setTelefonoCont(addContract.getjTextFieldTelefonoC().getText());
+        
+        try{
             ServiceFactory.getInstance().getContratoService().create(contratoVO);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(addContract, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

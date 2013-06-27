@@ -9,6 +9,7 @@ import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;
 import java.awt.Frame;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -184,7 +185,8 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_closeActionPerformed
-        MainController.cerrar();
+        MainController.helper1.setVisible(false);
+        MainController.helper1.dispose();
     }//GEN-LAST:event_jButton_closeActionPerformed
 
     private void jButton_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OKActionPerformed
@@ -195,18 +197,44 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         MainController.saveConnectionValues();
+        try {
+            MainController.leerFicherosConfiguracion();
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         MainController.helper1.setVisible(false);
         MainController.helper1.dispose();
-        
-        
+
+
     }//GEN-LAST:event_jButton_OKActionPerformed
 
     private void jButtonNewDirGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewDirGHActionPerformed
 
+        try {
+            MainController.modificarFicheroSeguridad();
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         MainController.saveConnectionValues();
+        try {
+            MainController.leerFicherosConfiguracion();
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<String> empleado = new ArrayList<String>();
         empleado.add(TipoEmpleado.DIRECTOR_GESTION_HUMANA);
         MainController.mostrarFormularioCrearEmpleado(empleado);

@@ -52,13 +52,13 @@ public class CoordTYTDAO implements ICrudDAO<CoordTYT, Integer> {
             entityManager = getEntityManager();
             return entityManager.find(CoordTYT.class, id);
         } catch (EntityNotFoundException ex) {
-            throw new EntityNotFoundException("El empleado con id " + id + " no existe.");
+            throw new EntityNotFoundException("¡El coordinador T y T con id: " + id + ", no existe!");
         } finally {
             if (entityManager != null) {
                 entityManager.clear();
                 entityManager.close();
             }
-        }
+        } 
     }
 
     @Override

@@ -56,7 +56,6 @@ public class MainController {
     public static AddContract agregarContrato;
     public static WriteNotice agregarWriteNotice;
     public static EmpleadosVO empleadoActivo;
-    public static AddImplement addImplement;
     public static AddContract addContract;
     public static WriteNotice writeNotice;
     public static Secondary secondary;
@@ -67,7 +66,6 @@ public class MainController {
     public static EmpleadosVO empleadoTemporal;
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
-    static ImplSeguridadVO implSeguridadVO;
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -463,22 +461,23 @@ public class MainController {
     //IMPLEMENTOS - INICIO
     public static void crearImplemento() {
         ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
-        implSeguridadVO.setNombreI(addImplement.getjTextFieldNombre().getText());
-        implSeguridadVO.setPrecioUnitarioI(new BigDecimal(addImplement.getjTextFieldValorUnitario().getText()));
-        implSeguridadVO.setCantidad(new Short(addImplement.getjTextFieldCantidad().getText()));
-        implSeguridadVO.setEstadoI(addImplement.getjTextFieldEstado().getText());
-        implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
-        implSeguridadVO.setIdPro(new Short(addImplement.getjTextFieldIdProveedor().getText()));
-
-
-
+        implSeguridadVO.setIdImplemento(new Integer(1).shortValue());
+        implSeguridadVO.setNombreI(agregarImplemento.getjTextFieldNombre().getText());
+        implSeguridadVO.setPrecioUnitarioI(new BigDecimal(agregarImplemento.getjTextFieldValorUnitario().getText()));
+        implSeguridadVO.setCantidad(new Short(agregarImplemento.getjTextFieldCantidad().getText()));
+        implSeguridadVO.setEstadoI(agregarImplemento.getjTextFieldEstado().getText());
+        implSeguridadVO.setFechaRegIm(new Date());
+        implSeguridadVO.setDescripcionI(agregarImplemento.getjTextAreaDescripcion().getText());
+        implSeguridadVO.setIdPro(new Short(agregarImplemento.getjTextFieldIdProveedor().getText()));
+        implSeguridadVO.setCedulaCoordTyT(new Integer(agregarImplemento.getjTextFieldCedulaCoo().getText()));
+        
         try {
             ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(addImplement, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(agregarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        JOptionPane.showMessageDialog(addImplement, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(agregarImplemento, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
         secondary.setVisible(false);
         secondary = new Secondary();
     }

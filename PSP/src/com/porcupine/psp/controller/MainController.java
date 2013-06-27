@@ -371,7 +371,7 @@ public class MainController {
         }
         //Vos Externos
 
-               
+
         DefaultListModel model = (DefaultListModel) crearEmpleado.getjListTelefono().getModel();
 
         ArrayList<String> tels = new ArrayList<String>();
@@ -469,7 +469,7 @@ public class MainController {
         secondary.setVisible(false);
         secondary = new Secondary();
     }
-    
+
     public void llenarTabla() {
 
         List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance()
@@ -477,27 +477,46 @@ public class MainController {
         modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
         modelTable.getDataVector().removeAllElements();
         modelTable.fireTableDataChanged();
-        
+
         for (ImplSeguridadVO implSeguridadVO : implementosList) {
             Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(new Integer(implSeguridadVO.getIdPro()));
             Object[] datos = {new Short(implSeguridadVO.getIdImplemento()),
-                              implSeguridadVO.getNombreI(),
-                              implSeguridadVO.getPrecioUnitarioI(),
-                              new Short(implSeguridadVO.getCantidad()),
-                              implSeguridadVO.getEstadoI(),
-                              implSeguridadVO.getFechaRegIm().toString(),
-                              proveedor.getNombre()};
+                implSeguridadVO.getNombreI(),
+                implSeguridadVO.getPrecioUnitarioI(),
+                new Short(implSeguridadVO.getCantidad()),
+                implSeguridadVO.getEstadoI(),
+                implSeguridadVO.getFechaRegIm().toString(),
+                proveedor.getNombre()};
             modelTable.addRow(datos);
         }
     }
-    
+
     public void listarImplementos() {
         secondary.setVisible(true);
         secondary.setTitle("Eliminar Implemento");
         DrawingUtilities.drawPanel(secondary, secondary.getViewport(), eliminarImplemento);
         llenarTabla();
     }
-    
+
+    public void buscar() {
+        modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
+        modelTable.getDataVector().removeAllElements();
+        modelTable.fireTableDataChanged();
+        List<ImplSeguridadVO> implementos;
+        implementos = ServiceFactory.getInstance().getImplSeguridadService()
+                .findByName(eliminarImplemento.getjTextFieldBuscar().getText());
+        for (ImplSeguridadVO implementoVO : implementos) {
+            Object[] datos = {new Short(implSeguridadVO.getIdImplemento()),
+                implementoVO.getNombreI(),
+                implementoVO.getPrecioUnitarioI(),
+                new Short(implementoVO.getCantidad()),
+                implementoVO.getEstadoI(),
+                implementoVO.getFechaRegIm().toString(),
+                DAOFactory.getInstance().getImplSeguridadDAO().find(new Integer(implementoVO.getIdImplemento())).getNombreI()};
+            modelTable.addRow(datos);
+        }
+    }
+
     public static void borrarImplemento() {
     }
 

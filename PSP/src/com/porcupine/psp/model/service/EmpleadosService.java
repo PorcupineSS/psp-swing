@@ -51,30 +51,34 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
 
         List<TelsEmp> telslist = new ArrayList<TelsEmp>();
-
+        Integer count = 1;
         for (TelefonosVO each : vo.getTelsEmpList()) {
-            TelefonosVO r = (TelefonosVO) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.EMPLEADO);
+
+            TelsEmp r = (TelsEmp) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.EMPLEADO);
             TelsEmp telemp;
             if (r == null) {
                 telemp = new TelsEmp();
                 List<Empleados> empllist = new ArrayList<Empleados>();
                 empllist.add(entity);
                 telemp.setNumTelefonoE(each.getNumeroTelefonoEmpleado());
-                telemp.setIdTe(DAOFactory.getInstance().getTelefonosDAO().getNewID());
-
+                telemp.setIdTe(DAOFactory.getInstance().getTelefonosDAO().getNewID(1));
+                DAOFactory.getInstance().getTelefonosDAO().create(telemp);
+                telemp = (TelsEmp) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.EMPLEADO);
+                //count++;
                 //TODO Commit
-                
+
             } else {
-                telemp = DAOFactory.getInstance().getTelefonosDAO().find(r.getIdTelefono());
-                //List<Empleados> empllist = telemp.getEmpleadosList();
+                telemp = DAOFactory.getInstance().getTelefonosDAO().find(r.getIdTe());
+                List<Empleados> empllist = telemp.getEmpleadosList();
 
-                //empllist.add(entity);
+                empllist.add(entity);
 
-                //telemp.setEmpleadosList(empllist);
+                telemp.setEmpleadosList(empllist);
 
-                //DAOFactory.getInstance().getTelefonosDAO().update(telemp);
+                DAOFactory.getInstance().getTelefonosDAO().update(telemp);
             }
             telslist.add(telemp);
+
         }
 
         entity.setTelsEmpList(telslist);

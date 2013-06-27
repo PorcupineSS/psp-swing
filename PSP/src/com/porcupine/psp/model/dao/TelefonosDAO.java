@@ -39,14 +39,14 @@ public class TelefonosDAO {
                 entityManager = getEntityManager();
                 Query query = entityManager.createNamedQuery("TelsCli.findByNumTelefonoC", TelsCli.class).setParameter(1, telefono);
                 TelsCli r = (TelsCli) query.getSingleResult();
-                return r.toVO();
+                return r;
             } else if (tipoTelefono == TipoTelefono.EMPLEADO) {
                 entityManager = getEntityManager();
                 Query query = entityManager.createNamedQuery("TelsEmp.findByNumTelefonoE", TelsEmp.class).setParameter("numTelefonoE", telefono);
                 TelsEmp r = null;
                 try {
                     r = (TelsEmp) query.getSingleResult();
-                    return r.toVO();
+                    return r;
                 } catch (Exception e) {
                     return null;
                 }
@@ -55,7 +55,7 @@ public class TelefonosDAO {
                 entityManager = getEntityManager();
                 Query query = entityManager.createNamedQuery("TelsProv.findByNumTelefonoP", TelsProv.class).setParameter(1, telefono);
                 TelsProv r = (TelsProv) query.getSingleResult();
-                return r.toVO();
+                return r;
             }
             return null;
 
@@ -155,12 +155,12 @@ public class TelefonosDAO {
         }
     }
 
-    public List<TelsCli> getListCli() {
+    public List<TelsEmp> getListEmp() {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
             CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Empleados.class));
+            cq.select(cq.from(TelsEmp.class));
             Query q = entityManager.createQuery(cq);
 
             return q.getResultList();
@@ -172,8 +172,8 @@ public class TelefonosDAO {
         }
     }
 
-    public Short getNewID() {
-        Integer count = getListCli().size() + 1;
+    public Short getNewID(Integer count1) {
+        Integer count = getListEmp().get(getListEmp().size()-1).getIdTe() + count1;
         return count.shortValue();
     }
 }

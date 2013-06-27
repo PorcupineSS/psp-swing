@@ -61,8 +61,8 @@ public class Empleados implements Serializable {
     private List<TelsEmp> telsEmpList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "empleados")
     private EmpTemp empTemp;
-    @OneToMany(mappedBy = "cedulae")
-    private List<BitacoraSeg> bitacoraSegList;
+//    @OneToMany(mappedBy = "cedulae")
+//    private List<BitacoraSeg> bitacoraSegList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "empleados")
     private EmpPlanta empPlanta;
     @JoinColumn(name = "DIR_CEDULAE", referencedColumnName = "CEDULAE")
@@ -150,14 +150,14 @@ public class Empleados implements Serializable {
         this.empTemp = empTemp;
     }
 
-    @XmlTransient
-    public List<BitacoraSeg> getBitacoraSegList() {
-        return bitacoraSegList;
-    }
-
-    public void setBitacoraSegList(List<BitacoraSeg> bitacoraSegList) {
-        this.bitacoraSegList = bitacoraSegList;
-    }
+//    @XmlTransient
+//    public List<BitacoraSeg> getBitacoraSegList() {
+//        return bitacoraSegList;
+//    }
+//
+//    public void setBitacoraSegList(List<BitacoraSeg> bitacoraSegList) {
+//        this.bitacoraSegList = bitacoraSegList;
+//    }
 
     public EmpPlanta getEmpPlanta() {
         return empPlanta;
@@ -224,13 +224,13 @@ public class Empleados implements Serializable {
         empleado.setTelsEmpList(telefonos);
 
 
-        List<BitacoraSegVO> bitacoras = new ArrayList<BitacoraSegVO>();
-        if (getTelsEmpList() != null) {
-            for (BitacoraSeg each : getBitacoraSegList()) {
-                bitacoras.add((each.toVO()));
-            }
-        }
-        empleado.setBitacoraSegList(bitacoras);
+//        List<BitacoraSegVO> bitacoras = new ArrayList<BitacoraSegVO>();
+//        if (getTelsEmpList() != null) {
+//            for (BitacoraSeg each : getBitacoraSegList()) {
+//                bitacoras.add((each.toVO()));
+//            }
+//        }
+//        empleado.setBitacoraSegList(bitacoras);
 
         empleado.setRol(discoverRole());
 

@@ -49,8 +49,8 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         entity.setCoddocume(getPrefix(vo.getRol()) + vo.getCedulaEmpleado().toString());
 
 
-        //En teoria se esta creando entonces no es necesario
-        entity.setBitacoraSegList(null);
+//        //En teoria se esta creando entonces no es necesario
+//        entity.setBitacoraSegList(null);
 
 
 //        for (TelefonosVO each : vo.getTelsEmpList()) {

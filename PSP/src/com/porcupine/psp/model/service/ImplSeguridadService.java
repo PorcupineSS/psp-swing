@@ -12,6 +12,8 @@ import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
 import com.porcupine.psp.model.vo.ProveedorVO;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
@@ -123,10 +125,21 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
     public List<ImplSeguridadVO> findByName(String name) throws EntityNotFoundException {
         //TODO validar permisos
         List<ImplSeguridadVO> list = new ArrayList<>();
-        for (ImplSeguridad implemento : DAOFactory.getInstance().getImplSeguridadDAO().) {
-            list.add((usuario).toVO());
+        for (ImplSeguridad implemento : DAOFactory.getInstance().getImplSeguridadDAO().findByName(name)) {
+            list.add((implemento).toVO());
         }
         Collections.sort(list, getComparatorUsuario());
         return list;
+    }
+    
+    private Comparator getComparatorImplSeguridad(){
+        return new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                ImplSeguridadVO i1 = (ImplSeguridadVO) o1;
+                ImplSeguridadVO i2 = (ImplSeguridadVO) o2;
+                return i1.getIdImplemento().compareTo(i2.getIdImplemento());
+            }
+        };
     }
 }

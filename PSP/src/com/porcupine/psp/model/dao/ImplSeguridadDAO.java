@@ -21,7 +21,7 @@ import javax.persistence.criteria.CriteriaQuery;
  *
  * @author Jeisson Andrés Vergara
  */
-public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
+public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
 
     private EntityManagerFactory entityManagerFactory;
 
@@ -65,7 +65,7 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
             entityManager.persist(entity);          
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
-            if (find(new Integer(entity.getIdImplemento())) != null) {
+            if (find(new Short(entity.getIdImplemento())) != null) {
                 throw new PreexistingEntityException("¡El implemento" + entity.getNombreI() + " ya existe!", ex);
             }
             throw ex;
@@ -77,7 +77,7 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
     }
 
     @Override
-    public ImplSeguridad find(Integer id) throws EntityNotFoundException {
+    public ImplSeguridad find(Short id) throws EntityNotFoundException {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
@@ -113,7 +113,7 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
     }
 
     @Override
-    public void delete(Integer id) throws NonexistentEntityException {
+    public void delete(Short id) throws NonexistentEntityException {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
@@ -161,12 +161,11 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
         try {
             entityManager = getEntityManager();
             List<ImplSeguridad> implementos;
-            Query q = entityManager.createQuery("SELECT u FROM IMPL_SEGURIDAD u "
-                    + "WHERE u.NOMBRE_I LIKE :name ")
-                    .setParameter("name", "%" + name + "%");
-
+//            Query q = entityManager.createQuery("SELECT u FROM ImplSeguridad u "
+//                    + "WHERE u.nombreI LIKE :name ")
+//                    .setParameter("name", "%" + name + "%");
+            Query q = entityManager.createNamedQuery("ImplSeguridad.findByNombreI").setParameter("nombreI", name);
             implementos = q.getResultList();
-
             return implementos;
         } catch (EntityNotFoundException e) {
             throw new EntityNotFoundException("¡No hay implementos con nombre: " + name + "!");

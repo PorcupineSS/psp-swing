@@ -77,6 +77,11 @@ public class TTCordination extends javax.swing.JPanel {
         jButtonManageImplement.setForeground(new java.awt.Color(0, 51, 0));
         jButtonManageImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Manage.png"))); // NOI18N
         jButtonManageImplement.setText("Administrar Implementos");
+        jButtonManageImplement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonManageImplementActionPerformed(evt);
+            }
+        });
 
         jButtonAssignImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonAssignImplement.setForeground(new java.awt.Color(0, 51, 0));
@@ -106,10 +111,9 @@ public class TTCordination extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jButtonAddProvider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButtonAddImplement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonManageImplement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAssignImplement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jButtonAddImplement, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonManageImplement, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAssignImplement, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -177,7 +181,7 @@ public class TTCordination extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jButtonAddImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddImplementActionPerformed
-        MainController.mostrarFormuariosImplementos();
+        MainController.mostrarFormuariosCrearImplementos();
                  
     }//GEN-LAST:event_jButtonAddImplementActionPerformed
 
@@ -188,6 +192,10 @@ public class TTCordination extends javax.swing.JPanel {
     private void jButtonAddProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddProviderActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAddProviderActionPerformed
+
+    private void jButtonManageImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManageImplementActionPerformed
+        MainController.mostrarFormuariosEliminarImplementos();
+    }//GEN-LAST:event_jButtonManageImplementActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddImplement;

@@ -4,6 +4,14 @@
  */
 package com.porcupine.psp.view;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.event.EventListenerList;
+import javax.swing.plaf.ComponentUI;
+
 /**
  *
  * @author andres
@@ -16,6 +24,88 @@ public class DeleteImplement extends javax.swing.JPanel {
     public DeleteImplement() {
         initComponents();
     }
+
+    public JButton getjButtonBuscar() {
+        return jButtonBuscar;
+    }
+
+    public void setjButtonBuscar(JButton jButtonBuscar) {
+        this.jButtonBuscar = jButtonBuscar;
+    }
+
+    public JButton getjButtonCancelar() {
+        return jButtonCancelar;
+    }
+
+    public void setjButtonCancelar(JButton jButtonCancelar) {
+        this.jButtonCancelar = jButtonCancelar;
+    }
+
+    public JButton getjButtonEliminar() {
+        return jButtonEliminar;
+    }
+
+    public void setjButtonEliminar(JButton jButtonEliminar) {
+        this.jButtonEliminar = jButtonEliminar;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JTable getjTableBusqueda() {
+        return jTableBusqueda;
+    }
+
+    public void setjTableBusqueda(JTable jTableBusqueda) {
+        this.jTableBusqueda = jTableBusqueda;
+    }
+
+    public JTextField getjTextFieldBuscar() {
+        return jTextFieldBuscar;
+    }
+
+    public void setjTextFieldBuscar(JTextField jTextFieldBuscar) {
+        this.jTextFieldBuscar = jTextFieldBuscar;
+    }
+
+    public ComponentUI getUi() {
+        return ui;
+    }
+
+    public void setUi(ComponentUI ui) {
+        this.ui = ui;
+    }
+
+    public EventListenerList getListenerList() {
+        return listenerList;
+    }
+
+    public void setListenerList(EventListenerList listenerList) {
+        this.listenerList = listenerList;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

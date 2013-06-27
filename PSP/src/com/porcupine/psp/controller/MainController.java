@@ -4,13 +4,16 @@
  */
 package com.porcupine.psp.controller;
 
+import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.exceptions.InternalErrorException;
+import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.ComunicadoVO;
 import com.porcupine.psp.model.vo.ContratoVO;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
+import com.porcupine.psp.model.vo.ProveedorVO;
 import com.porcupine.psp.model.vo.TelefonosVO;
 import com.porcupine.psp.util.DrawingUtilities;
 import com.porcupine.psp.util.ServidoresDisponibles;
@@ -468,21 +471,23 @@ public class MainController {
     }
     
     public void llenarTabla() {
-        List<UsuarioVO> usuariosList = ServiceFactory.getInstance()
-                .getUsuarioService().findByEnterprise(LoginController.usuarioActivo.getEmpresasNIT());
+
         List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance()
-                .getImplSeguridadService()
-        model = (DefaultTableModel) eliminarUsuario.getUsuarioT()
-                .getModel();
-        model.getDataVector().removeAllElements();
-        model.fireTableDataChanged();
-        for (UsuarioVO usuarioVO : usuariosList) {
-            if(!usuarioVO.getRol().equals(Rol.PRIMER_ADMINISTRADOR)){
-                Object[] datos = {usuarioVO.getDni(), usuarioVO.getNombre(),
-                    usuarioVO.getCorreo(), usuarioVO.getRol(),
-                    ServiceFactory.getInstance().getEmpresaService().find(usuarioVO.getEmpresasNIT()).getNombre()};
-                model.addRow(datos);
-            }
+                .getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
+        modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
+        modelTable.getDataVector().removeAllElements();
+        modelTable.fireTableDataChanged();
+        
+        for (ImplSeguridadVO implSeguridadVO : implementosList) {
+            Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(new Integer(implSeguridadVO.getIdPro()));
+            Object[] datos = {new Short(implSeguridadVO.getIdImplemento()),
+                              implSeguridadVO.getNombreI(),
+                              implSeguridadVO.getPrecioUnitarioI(),
+                              new Short(implSeguridadVO.getCantidad()),
+                              implSeguridadVO.getEstadoI(),
+                              implSeguridadVO.getFechaRegIm().toString(),
+                              proveedor.getNombre()};
+            modelTable.addRow(datos);
         }
     }
     

@@ -209,8 +209,13 @@ public class ImplSeguridad implements Serializable {
         vo.setPrecioUnitarioI(precioUnitarioI);
         vo.setEstadoI(estadoI);
         vo.setFechaRegIm(fechaRegIm);
-        vo.setIdPro(getIdPro().getIdPro());
-        vo.setCedulaCoordTyT(getCedulae().getCedulae());
+        
+        if (getIdPro() != null) {
+            vo.setIdPro(getIdPro().getIdPro());
+        }
+        if (getCedulae() != null) {
+            vo.setCedulaCoordTyT(getCedulae().getCedulae());
+        }  
         
         ArrayList<AsigImplVO> listAsigImplVO = new ArrayList<AsigImplVO>();
         for(AsigImpl entity : getAsigImplList()) {

@@ -57,7 +57,7 @@ public class Empleados implements Serializable {
     @JoinTable(name = "EM_TIENE_TELS", joinColumns = {
         @JoinColumn(name = "CEDULAE", referencedColumnName = "CEDULAE")}, inverseJoinColumns = {
         @JoinColumn(name = "ID_TE", referencedColumnName = "ID_TE")})
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     private List<TelsEmp> telsEmpList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "empleados")
     private EmpTemp empTemp;

@@ -48,7 +48,7 @@ public class MainController {
     static Login login;
     static SelectDataBaseConnection sdb;
     public static Map connectionPropierties;
-    static CreateEmployee crearEmpleado;
+    public static CreateEmployee crearEmpleado;
     public static Psp psp;
     public static Helper helper;
     public static Helper helper1;
@@ -204,7 +204,7 @@ public class MainController {
             try {
 
                 Properties properties = new Properties();
-                properties.setProperty("username", "jdrozo");
+                properties.setProperty("username", "jdrozob");
                 properties.setProperty("password", "s02257974");
                 properties.setProperty("server", ServidoresDisponibles.ORA);
 

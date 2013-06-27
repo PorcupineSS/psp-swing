@@ -11,15 +11,17 @@ import com.porcupine.psp.model.entity.TelsCli;
 import com.porcupine.psp.model.entity.TelsEmp;
 import com.porcupine.psp.model.entity.TelsProv;
 import com.porcupine.psp.util.TipoTelefono;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
  * @author Zergio
  */
 public class TelefonosDAO {
-    
+
     private EntityManagerFactory entityManagerFactory;
 
     TelefonosDAO(String PU, Map propierties) {
@@ -29,30 +31,32 @@ public class TelefonosDAO {
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }
-    
-    
+
     public Object findSpecific(String telefono, TipoTelefono tipoTelefono) throws EntityNotFoundException {
         EntityManager entityManager = null;
         try {
             if (tipoTelefono == TipoTelefono.CLIENTE) {
                 entityManager = getEntityManager();
-                Query query = entityManager.createNamedQuery("TelsCli.findByNumTelefonoC", TelsCli.class)
-                        .setParameter(1, telefono);
+                Query query = entityManager.createNamedQuery("TelsCli.findByNumTelefonoC", TelsCli.class).setParameter(1, telefono);
                 TelsCli r = (TelsCli) query.getSingleResult();
                 return r.toVO();
             } else if (tipoTelefono == TipoTelefono.EMPLEADO) {
                 entityManager = getEntityManager();
-                Query query = entityManager.createNamedQuery("TelsEmp.findByNumTelefonoE", TelsEmp.class)
-                        .setParameter(1, telefono);
-                TelsEmp r = (TelsEmp) query.getSingleResult();
-                return r.toVO();
+                Query query = entityManager.createNamedQuery("TelsEmp.findByNumTelefonoE", TelsEmp.class).setParameter("numTelefonoE", telefono);
+                TelsEmp r = null;
+                try {
+                    r = (TelsEmp) query.getSingleResult();
+                    return r.toVO();
+                } catch (Exception e) {
+                    return null;
+                }
+
             } else if (tipoTelefono == TipoTelefono.PROVEEDOR) {
                 entityManager = getEntityManager();
-                Query query = entityManager.createNamedQuery("TelsProv.findByNumTelefonoP", TelsProv.class)
-                        .setParameter(1, telefono);
+                Query query = entityManager.createNamedQuery("TelsProv.findByNumTelefonoP", TelsProv.class).setParameter(1, telefono);
                 TelsProv r = (TelsProv) query.getSingleResult();
                 return r.toVO();
-            } 
+            }
             return null;
 
 
@@ -65,7 +69,7 @@ public class TelefonosDAO {
             }
         }
     }
-    
+
     public void create(TelsEmp entity) throws PreexistingEntityException, NonexistentEntityException {
         EntityManager entityManager = null;
         try {
@@ -81,7 +85,7 @@ public class TelefonosDAO {
             }
         }
     }
-    
+
     public void create(TelsCli entity) throws PreexistingEntityException, NonexistentEntityException {
         EntityManager entityManager = null;
         try {
@@ -97,7 +101,7 @@ public class TelefonosDAO {
             }
         }
     }
-    
+
     public void create(TelsProv entity) throws PreexistingEntityException, NonexistentEntityException {
         EntityManager entityManager = null;
         try {
@@ -113,7 +117,7 @@ public class TelefonosDAO {
             }
         }
     }
-    
+
     public void update(TelsEmp entity) throws NonexistentEntityException {
         EntityManager entityManager = null;
         try {
@@ -135,7 +139,7 @@ public class TelefonosDAO {
             }
         }
     }
-    
+
     public TelsEmp find(Short id) throws EntityNotFoundException {
         EntityManager entityManager = null;
         try {
@@ -150,5 +154,26 @@ public class TelefonosDAO {
             }
         }
     }
-    
+
+    public List<TelsCli> getListCli() {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Empleados.class));
+            Query q = entityManager.createQuery(cq);
+
+            return q.getResultList();
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
+    }
+
+    public Short getNewID() {
+        Integer count = getListCli().size() + 1;
+        return count.shortValue();
+    }
 }

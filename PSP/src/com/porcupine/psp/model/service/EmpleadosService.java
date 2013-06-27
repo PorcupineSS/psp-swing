@@ -48,7 +48,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
         entity.setCoddocume(getPrefix(vo.getRol()) + vo.getCedulaEmpleado().toString());
 
-      
+
 
         List<TelsEmp> telslist = new ArrayList<TelsEmp>();
 
@@ -57,26 +57,26 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
             TelsEmp telemp;
             if (r == null) {
                 telemp = new TelsEmp();
-                List<Empleados> empllist= new ArrayList<Empleados>();
+                List<Empleados> empllist = new ArrayList<Empleados>();
                 empllist.add(entity);
                 telemp.setNumTelefonoE(each.getNumeroTelefonoEmpleado());
-                telemp.setEmpleadosList(empllist);
-                
+                telemp.setIdTe(DAOFactory.getInstance().getTelefonosDAO().getNewID());
+
                 //TODO Commit
-                DAOFactory.getInstance().getTelefonosDAO().create(telemp);
+                
             } else {
                 telemp = DAOFactory.getInstance().getTelefonosDAO().find(r.getIdTelefono());
-                List<Empleados> empllist = telemp.getEmpleadosList();
-                                        
-                empllist.add(entity);
-                
-                telemp.setEmpleadosList(empllist);
-                
-                DAOFactory.getInstance().getTelefonosDAO().update(telemp);
+                //List<Empleados> empllist = telemp.getEmpleadosList();
+
+                //empllist.add(entity);
+
+                //telemp.setEmpleadosList(empllist);
+
+                //DAOFactory.getInstance().getTelefonosDAO().update(telemp);
             }
             telslist.add(telemp);
         }
-        
+
         entity.setTelsEmpList(telslist);
 
         if (vo.getCedulaDirector() != null) {

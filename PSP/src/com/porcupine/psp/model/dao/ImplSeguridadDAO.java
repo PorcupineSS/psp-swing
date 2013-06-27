@@ -62,9 +62,12 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
                 entity.setCedulae(coordinadorTyT);
             }
             
-            entityManager.persist(entity);
+            entityManager.persist(entity);          
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
+            if (find(new Integer(entity.getIdImplemento())) != null) {
+                throw new PreexistingEntityException("¡El implemento" + entity.getNombreI() + " ya existe!", ex);
+            }
             throw ex;
         } finally {
             if (entityManager != null) {

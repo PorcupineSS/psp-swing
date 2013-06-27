@@ -58,8 +58,8 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
             TelsEmp telemp;
             if (r == null) {
                 telemp = new TelsEmp();
-                List<Empleados> empllist = new ArrayList<Empleados>();
-                empllist.add(entity);
+//                List<Empleados> empllist = new ArrayList<Empleados>();
+//                empllist.add(entity);
                 telemp.setNumTelefonoE(each.getNumeroTelefonoEmpleado());
                 telemp.setIdTe(DAOFactory.getInstance().getTelefonosDAO().getNewID(1));
                 DAOFactory.getInstance().getTelefonosDAO().create(telemp);
@@ -69,13 +69,13 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
             } else {
                 telemp = DAOFactory.getInstance().getTelefonosDAO().find(r.getIdTe());
-                List<Empleados> empllist = telemp.getEmpleadosList();
-
-                empllist.add(entity);
-
-                telemp.setEmpleadosList(empllist);
-
-                DAOFactory.getInstance().getTelefonosDAO().update(telemp);
+//                List<Empleados> empllist = telemp.getEmpleadosList();
+//
+//                empllist.add(entity);
+//
+//                telemp.setEmpleadosList(empllist);
+//
+//                DAOFactory.getInstance().getTelefonosDAO().update(telemp);
             }
             telslist.add(telemp);
 
@@ -115,6 +115,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
             tempEntity.setEmpleados(entity);
             //TODO implementar sueldo en vista
             tempEntity.setSueldoe(new BigDecimal(200000));
+
             try {
                 DAOFactory.getInstance().getEmpPlantaDAO().create(tempEntity);
             } catch (PreexistingEntityException ex) {
@@ -123,37 +124,33 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
             switch (vo.getRol()) {
                 case TipoEmpleado.COORDINADOR_CONTRATO:
-                    CoordContrato tempEntity1 = new CoordContrato();
-                    tempEntity1.setCedulae(entity.getCedulae());
-                    DAOFactory.getInstance().getCoordContratoDAO().create(tempEntity1);
+                    tempEntity.setCoordContrato(new CoordContrato(tempEntity.getCedulae()));
                     break;
                 case TipoEmpleado.COORDINADOR_TECNICO_TECNOLOGICO:
-                    CoordTYT tempEntity2 = new CoordTYT();
-                    tempEntity2.setCedulae(entity.getCedulae());
-                    DAOFactory.getInstance().getCoordTYTDAO().create(tempEntity2);
+                    tempEntity.setCoordTYT(new CoordTYT(tempEntity.getCedulae()));
                     break;
                 case TipoEmpleado.DIRECTOR_COMERCIAL:
-                    DirComercial tempEntity3 = new DirComercial();
-                    tempEntity3.setCedulae(entity.getCedulae());
-                    DAOFactory.getInstance().getDirComercialDAO().create(tempEntity3);
+                    tempEntity.setDirComercial(new DirComercial(tempEntity.getCedulae()));
                     break;
                 case TipoEmpleado.DIRECTOR_GESTION_HUMANA:
-                    DirGestionHum tempEntity4 = new DirGestionHum();
-                    tempEntity4.setCedulae(entity.getCedulae());
-                    DAOFactory.getInstance().getDirGestionHumDAO().create(tempEntity4);
+                    tempEntity.setDirGestionHum(new DirGestionHum(tempEntity.getCedulae()));
                     break;
                 case TipoEmpleado.DIRECTOR_OPERACIONES:
-                    DirOperaciones tempEntity5 = new DirOperaciones();
-                    tempEntity5.setCedulae(entity.getCedulae());
-                    DAOFactory.getInstance().getDirOperacionesDAO().create(tempEntity5);
+                    tempEntity.setDirOperaciones(new DirOperaciones(tempEntity.getCedulae()));
                     break;
                 case TipoEmpleado.SUBGERENTE:
-                    Subgerente tempEntity6 = new Subgerente();
-                    tempEntity6.setCedulae(entity.getCedulae());
-                    DAOFactory.getInstance().getSubgerenteDAO().create(tempEntity6);
+                    tempEntity.setSubgerente(new Subgerente(tempEntity.getCedulae()));
                     break;
 
             }
+
+            try {
+                DAOFactory.getInstance().getEmpPlantaDAO().update(tempEntity);
+            } catch (Exception ex) {
+                Logger.getLogger(EmpleadosService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+
 
         }
     }

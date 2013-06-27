@@ -39,10 +39,10 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
         try {
             entityManager = getEntityManager();
             entityManager.getTransaction().begin();
-            
+
             Proveedor proveedor = entity.getIdPro();
             CoordTYT coordinadorTyT = entity.getCedulae();
-            
+
             if (proveedor != null) {
                 Short idProveedor = proveedor.getIdPro();
                 try {
@@ -61,8 +61,8 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
                 }
                 entity.setCedulae(coordinadorTyT);
             }
-            
-            entityManager.persist(entity);          
+
+            entityManager.persist(entity);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
             if (find(new Short(entity.getIdImplemento())) != null) {
@@ -155,7 +155,7 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
             }
         }
     }
-    
+
     public Iterable<ImplSeguridad> findByName(String name) {
         EntityManager entityManager = null;
         try {
@@ -175,5 +175,25 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
                 entityManager.close();
             }
         }
+    }
+
+    public void adicionarImplemento(Short id, Integer cantidad) {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            Query query = entityManager.createNativeQuery("{call ADICIONAR_IMPLEMENTO(?,?)}",
+                    ImplSeguridad.class).setParameter(1, id).setParameter(2, cantidad);
+            query.getSingleResult();
+        } catch (Exception ex) {
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
+
+
+
+
     }
 }

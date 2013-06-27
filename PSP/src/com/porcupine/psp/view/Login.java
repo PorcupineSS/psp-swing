@@ -5,6 +5,7 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import com.porcupine.psp.model.dao.DAOFactory;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -24,6 +25,8 @@ public class Login extends javax.swing.JPanel {
         initComponents();
         MainController.leerFicherosConfiguracion();
         MainController.saveConnectionValues();
+        DAOFactory.getInstance().getImplSeguridadDAO().adicionarImplemento((new Integer(51).shortValue()), 20);
+
     }
 
     public JPasswordField getContrasenaPF() {
@@ -155,7 +158,6 @@ public class Login extends javax.swing.JPanel {
             MainController.mostrarSeleccionDB();
         }
     }//GEN-LAST:event_jLabel4MouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JLabel jLabel1;

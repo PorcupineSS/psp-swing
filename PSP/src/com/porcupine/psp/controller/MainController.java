@@ -45,6 +45,9 @@ public class MainController {
     public static Psp psp;
     public static Helper helper;
     public static Helper helper1;
+    public static AddImplement agregarImplemento;
+    public static AddContract agregarContrato;
+    public static WriteNotice agregarWriteNotice;
     public static EmpleadosVO empleadoActivo;
     static AddImplement addImplement;
     static AddContract addContract;
@@ -236,7 +239,7 @@ public class MainController {
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), crearEmpleado);
     }
-    
+
     public static void mostrarFormuariosImplementos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
@@ -244,7 +247,7 @@ public class MainController {
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarImplemento);
     }
-    
+
     public static void mostrarFormularioContratos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
@@ -252,7 +255,7 @@ public class MainController {
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarContrato);
     }
-    
+
     public static void mostrarFormularioWriteNotice() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
@@ -451,24 +454,24 @@ public class MainController {
     public static void listarInventario() {
     }
 
-    public static void crearImplemento() {   
-       ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
-       implSeguridadVO.setNombreI(addImplement.getjTextFieldNombre().getText());
-       implSeguridadVO.setPrecioUnitarioI(new BigDecimal(addImplement.getjTextFieldValorUnitario().getText()));
-       implSeguridadVO.setCantidad(new Short(addImplement.getjTextFieldCantidad().getText()));
-       implSeguridadVO.setEstadoI(addImplement.getjTextFieldEstado().getText());
-       implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
-       implSeguridadVO.setIdPro(new Short(addImplement.getjTextFieldIdProveedor().getText()));
-       
-       try {
-           ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
-       } catch (Exception e) {
-           JOptionPane.showMessageDialog(addImplement, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-           return;
-       }
-       JOptionPane.showMessageDialog(addImplement, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-       secondary.setVisible(false);
-       secondary = new Secondary();
+    public static void crearImplemento() {
+        ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
+        implSeguridadVO.setNombreI(addImplement.getjTextFieldNombre().getText());
+        implSeguridadVO.setPrecioUnitarioI(new BigDecimal(addImplement.getjTextFieldValorUnitario().getText()));
+        implSeguridadVO.setCantidad(new Short(addImplement.getjTextFieldCantidad().getText()));
+        implSeguridadVO.setEstadoI(addImplement.getjTextFieldEstado().getText());
+        implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
+        implSeguridadVO.setIdPro(new Short(addImplement.getjTextFieldIdProveedor().getText()));
+
+        try {
+            ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(addImplement, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(addImplement, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        secondary.setVisible(false);
+        secondary = new Secondary();
     }
 
     public static void borrarImplemento() {
@@ -500,11 +503,11 @@ public class MainController {
         contratoVO.setCostoMensual(new BigDecimal(addContract.getjTextFieldCosto().getText()));
         contratoVO.setUbicacionCont(addContract.getjTextFieldUbicacion().getText());
         contratoVO.setHorarioCont(addContract.getjTextFieldHorario().getText());
-        contratoVO.setTiempoCont(new Integer (addContract.getjTextFieldTiempo().getText()));
+        contratoVO.setTiempoCont(new Integer(addContract.getjTextFieldTiempo().getText()));
         contratoVO.setCelularCont(addContract.getjTextFieldCelularC().getText());
         contratoVO.setTelefonoCont(addContract.getjTextFieldTelefonoC().getText());
-        
-        try{
+
+        try {
             ServiceFactory.getInstance().getContratoService().create(contratoVO);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(addContract, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

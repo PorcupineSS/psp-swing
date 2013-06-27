@@ -155,4 +155,26 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
             }
         }
     }
+    
+    public Iterable<ImplSeguridad> findByName(String name) {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            List<ImplSeguridad> implementos;
+            Query q = entityManager.createQuery("SELECT u FROM IMPL_SEGURIDAD u "
+                    + "WHERE u.NOMBRE_I LIKE :name ")
+                    .setParameter("name", "%" + name + "%");
+
+            implementos = q.getResultList();
+
+            return implementos;
+        } catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException("¡No hay implementos con nombre: " + name + "!");
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
+    }
 }

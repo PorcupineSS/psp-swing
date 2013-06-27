@@ -119,4 +119,14 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
     public void removeAll() throws NonexistentEntityException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public List<ImplSeguridadVO> findByName(String name) throws EntityNotFoundException {
+        //TODO validar permisos
+        List<ImplSeguridadVO> list = new ArrayList<>();
+        for (ImplSeguridad implemento : DAOFactory.getInstance().getImplSeguridadDAO().) {
+            list.add((usuario).toVO());
+        }
+        Collections.sort(list, getComparatorUsuario());
+        return list;
+    }
 }

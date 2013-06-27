@@ -128,5 +128,41 @@ public class ProveedorDAO implements ICrudDAO<Proveedor, Short> {
             }
         }
     }
+
+    public Iterable<Proveedor> findByName(String name) {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            List<Proveedor> proveedores;
+            Query q = entityManager.createNamedQuery("Proveedor.findByNombre").setParameter("nombre", name);
+            proveedores = q.getResultList();
+            return proveedores;
+        } catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException("¡No hay proveedores con nombre: " + name + "!");
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
+    }
+    
+    public Short findName(String name) {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            List<Proveedor> proveedores;
+            Query q = entityManager.createNamedQuery("Proveedor.findByNombre").setParameter("nombre", name);
+            proveedores = q.getResultList();
+            return proveedores.get(0).getIdPro();
+        } catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException("¡No hay proveedores con nombre: " + name + "!");
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
+    }
     
 }

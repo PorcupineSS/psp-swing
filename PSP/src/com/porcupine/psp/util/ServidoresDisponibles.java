@@ -22,9 +22,7 @@ public final class ServidoresDisponibles {
 
     public static List<String> obtenerListaServidores() {
         ArrayList<String> lista = new ArrayList<String>();
-
-
-
+        
         lista.add(ORA);
         lista.add(SQL);
         lista.add(SYB);

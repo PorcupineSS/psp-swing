@@ -5,6 +5,7 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import com.porcupine.psp.model.dao.DAOFactory;
 import javax.swing.JViewport;
 import javax.swing.UIManager;
 

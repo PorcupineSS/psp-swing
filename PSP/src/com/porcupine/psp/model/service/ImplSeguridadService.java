@@ -128,7 +128,7 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Integer> 
         for (ImplSeguridad implemento : DAOFactory.getInstance().getImplSeguridadDAO().findByName(name)) {
             list.add((implemento).toVO());
         }
-        Collections.sort(list, getComparatorUsuario());
+        Collections.sort(list, getComparatorImplSeguridad());
         return list;
     }
     

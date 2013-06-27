@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * El proposito de esta clase es tener un lugar integrado con todos los metodos
@@ -58,6 +59,9 @@ public class MainController {
     public static String password;
     //VOS Temporales para hacer operaciones
     public static EmpleadosVO empleadoTemporal;
+    static DeleteImplement eliminarImplemento = new DeleteImplement();
+    DefaultTableModel modelTable;
+    static ImplSeguridadVO implSeguridadVO;
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -442,6 +446,7 @@ public class MainController {
     public static void listarInventario() {
     }
 
+    //IMPLEMENTOS - INICIO
     public static void crearImplemento() {
         ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
         implSeguridadVO.setNombreI(addImplement.getjTextFieldNombre().getText());
@@ -461,12 +466,32 @@ public class MainController {
         secondary.setVisible(false);
         secondary = new Secondary();
     }
-
+    
+    public void llenarTabla() {
+        List<UsuarioVO> usuariosList = ServiceFactory.getInstance()
+                .getUsuarioService().findByEnterprise(LoginController.usuarioActivo.getEmpresasNIT());
+        List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance()
+                .getImplSeguridadService()
+        model = (DefaultTableModel) eliminarUsuario.getUsuarioT()
+                .getModel();
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        for (UsuarioVO usuarioVO : usuariosList) {
+            if(!usuarioVO.getRol().equals(Rol.PRIMER_ADMINISTRADOR)){
+                Object[] datos = {usuarioVO.getDni(), usuarioVO.getNombre(),
+                    usuarioVO.getCorreo(), usuarioVO.getRol(),
+                    ServiceFactory.getInstance().getEmpresaService().find(usuarioVO.getEmpresasNIT()).getNombre()};
+                model.addRow(datos);
+            }
+        }
+    }
+    
     public static void borrarImplemento() {
     }
 
     public static void asignarImplemento() {
     }
+    //IMPLEMENTOS - FIN
 
     /**
      * Disponible para: Wachiturros Vista principal para este coordinador

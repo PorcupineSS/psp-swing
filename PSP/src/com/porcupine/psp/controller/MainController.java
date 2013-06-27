@@ -67,7 +67,6 @@ public class MainController {
     public static EmpleadosVO empleadoTemporal;
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
-    static ImplSeguridadVO implSeguridadVO;
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -469,9 +468,8 @@ public class MainController {
         implSeguridadVO.setEstadoI(addImplement.getjTextFieldEstado().getText());
         implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
         implSeguridadVO.setIdPro(new Short(addImplement.getjTextFieldIdProveedor().getText()));
-
-
-
+        implSeguridadVO.setCedulaCoordTyT(new Short(addImplement.getjTextFieldCedulaCoo().getText()));
+        
         try {
             ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
         } catch (Exception e) {

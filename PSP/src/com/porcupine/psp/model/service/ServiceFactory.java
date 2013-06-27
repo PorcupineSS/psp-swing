@@ -37,4 +37,5 @@ public class ServiceFactory {
     public ProveedorService getProveedorService() {
         return ProveedorService.getInstance();
     }
+
 }

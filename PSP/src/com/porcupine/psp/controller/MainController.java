@@ -219,17 +219,12 @@ public class MainController {
             }
         }
 
-
         Properties props = new Properties();
         props.loadFromXML(new FileInputStream(f));
 
         username = props.getProperty("username");
         password = props.getProperty("password");
         selectedDB = props.getProperty("server");
-
-
-
-
     }
 
     public static void mostrarSeleccionDB() {
@@ -468,9 +463,14 @@ public class MainController {
         implSeguridadVO.setEstadoI(agregarImplemento.getjTextFieldEstado().getText());
         implSeguridadVO.setFechaRegIm(new Date());
         implSeguridadVO.setDescripcionI(agregarImplemento.getjTextAreaDescripcion().getText());
-        implSeguridadVO.setIdPro(new Short(agregarImplemento.getjTextFieldIdProveedor().getText()));
-        implSeguridadVO.setCedulaCoordTyT(new Integer(agregarImplemento.getjTextFieldCedulaCoo().getText()));
         
+        //implSeguridadVO.setIdPro(new Short(agregarImplemento.getjTextFieldIdProveedor().getText()));
+        String nombreProveedor = agregarImplemento.getjComboBoxProveedor().getSelectedItem().toString();
+        Short idProveedor = ServiceFactory.getInstance().getProveedorService().findName(nombreProveedor);
+        implSeguridadVO.setIdPro(idProveedor);
+        
+        //implSeguridadVO.setCedulaCoordTyT(new Integer(agregarImplemento.getjTextFieldCedulaCoo().getText()));
+        implSeguridadVO.setCedulaCoordTyT(empleadoActivo.getCedulaEmpleado());
         try {
             ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
         } catch (Exception e) {
@@ -480,6 +480,15 @@ public class MainController {
         JOptionPane.showMessageDialog(agregarImplemento, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
         secondary.setVisible(false);
         secondary = new Secondary();
+    }
+    
+    public static List<String> obtenerListaProveedores(){
+        List<ProveedorVO> listaProveedores = ServiceFactory.getInstance().getProveedorService().getList();
+        List<String> lista = new ArrayList<>();
+        for (ProveedorVO proveedor : listaProveedores) {
+            lista.add(proveedor.getNombre());
+        }
+        return lista;    
     }
 
     public static void llenarTabla() {

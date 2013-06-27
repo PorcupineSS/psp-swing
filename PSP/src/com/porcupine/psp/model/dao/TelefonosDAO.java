@@ -4,6 +4,9 @@
  */
 package com.porcupine.psp.model.dao;
 
+import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.dao.exceptions.PreexistingEntityException;
+import com.porcupine.psp.model.entity.Empleados;
 import com.porcupine.psp.model.entity.TelsCli;
 import com.porcupine.psp.model.entity.TelsEmp;
 import com.porcupine.psp.model.entity.TelsProv;
@@ -55,6 +58,91 @@ public class TelefonosDAO {
 
         } catch (EntityNotFoundException ex) {
             throw new EntityNotFoundException("El telefono " + telefono + " no existe.");
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
+    }
+    
+    public void create(TelsEmp entity) throws PreexistingEntityException, NonexistentEntityException {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+    }
+    
+    public void create(TelsCli entity) throws PreexistingEntityException, NonexistentEntityException {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+    }
+    
+    public void create(TelsProv entity) throws PreexistingEntityException, NonexistentEntityException {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+    }
+    
+    public void update(TelsEmp entity) throws NonexistentEntityException {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+
+            entity = entityManager.merge(entity);
+
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager != null && entityManager.getTransaction() != null) {
+                entityManager.getTransaction().rollback();
+            }
+
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
+    }
+    
+    public TelsEmp find(Short id) throws EntityNotFoundException {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            return entityManager.find(TelsEmp.class, id);
+        } catch (EntityNotFoundException ex) {
+            throw new EntityNotFoundException("El telefono con " + id + " no existe.");
         } finally {
             if (entityManager != null) {
                 entityManager.clear();

@@ -491,6 +491,13 @@ public class MainController {
         }
     }
     
+    public void listarImplementos() {
+        secondary.setVisible(true);
+        secondary.setTitle("Eliminar Implemento");
+        DrawingUtilities.drawPanel(secondary, secondary.getViewport(), eliminarImplemento);
+        llenarTabla();
+    }
+    
     public static void borrarImplemento() {
     }
 

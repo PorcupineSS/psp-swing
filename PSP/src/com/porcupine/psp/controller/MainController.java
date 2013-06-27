@@ -42,8 +42,9 @@ public class MainController {
     static SelectDataBaseConnection sdb;
     public static Map connectionPropierties;
     static CreateEmployee crearEmpleado;
-    static Psp psp;
-    static Helper helper;
+    public static Psp psp;
+    public static Helper helper;
+    public static Helper helper1;
     public static EmpleadosVO empleadoActivo;
     static AddImplement addImplement;
     static AddContract addContract;
@@ -221,11 +222,11 @@ public class MainController {
     }
 
     public static void mostrarSeleccionDB() {
-        psp = new Psp();
-        psp.setLocationRelativeTo(null);
+        helper1 = new Helper();
+        helper1.setLocationRelativeTo(null);
         sdb = new SelectDataBaseConnection();
-        psp.setVisible(true);
-        DrawingUtilities.drawPanel(psp, psp.getViewport(), sdb);
+        helper1.setVisible(true);
+        DrawingUtilities.drawPanel(helper1, helper1.getViewport(), sdb);
     }
 
     public static void mostrarFormularioCrearEmpleado(ArrayList<String> empleadosDisponibles) {

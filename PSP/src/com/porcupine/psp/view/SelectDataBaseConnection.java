@@ -7,6 +7,8 @@ package com.porcupine.psp.view;
 import com.porcupine.psp.controller.MainController;
 import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;
+import java.awt.Frame;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -27,7 +29,6 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
      */
     public SelectDataBaseConnection() {
         initComponents();
-        
         getjComboBox1().setSelectedItem(MainController.selectedDB);
         getjTextFieldUserName().setText(MainController.username);
         getjPasswordField().setText(MainController.password);
@@ -57,8 +58,6 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
     public void setjTextFieldUserName(JTextField jTextFieldUserName) {
         this.jTextFieldUserName = jTextFieldUserName;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -196,17 +195,20 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-        MainController.mostrarLogin();
+
+        MainController.helper1.setVisible(false);
+        MainController.helper1.dispose();
+        
+        
     }//GEN-LAST:event_jButton_OKActionPerformed
 
     private void jButtonNewDirGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewDirGHActionPerformed
-              
+
         MainController.saveConnectionValues();
         ArrayList<String> empleado = new ArrayList<String>();
         empleado.add(TipoEmpleado.DIRECTOR_GESTION_HUMANA);
         MainController.mostrarFormularioCrearEmpleado(empleado);
     }//GEN-LAST:event_jButtonNewDirGHActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonNewDirGH;
     private javax.swing.JButton jButton_OK;

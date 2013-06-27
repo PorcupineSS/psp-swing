@@ -48,32 +48,36 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
         entity.setCoddocume(getPrefix(vo.getRol()) + vo.getCedulaEmpleado().toString());
 
+      
 
-        //En teoria se esta creando entonces no es necesario
-        entity.setBitacoraSegList(null);
+        List<TelsEmp> telslist = new ArrayList<TelsEmp>();
 
-
-//        for (TelefonosVO each : vo.getTelsEmpList()) {
-//            TelefonosVO r = (TelefonosVO) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.EMPLEADO);
-//            if (r == null) {
-//                TelsEmp telemp = new TelsEmp();
-//                List<Empleados> empllist= new ArrayList<Empleados>();
-//                empllist.add(entity);
-//                telemp.setNumTelefonoE(each.getNumeroTelefonoEmpleado());
-//                telemp.setEmpleadosList(empllist);
-//                //TODO Commit
-//            } else {
-//                TelsEmp telemp = new TelsEmp();
-//                List<Empleados> empllist = (List<Empleados>)r.getUsersList();
-//                empllist.add(entity);
-//                telemp.setNumTelefonoE(r.getNumeroTelefonoEmpleado());
-//                telemp.setEmpleadosList(empllist);
-//                telemp.setIdTe(r.getIdTelefono());
-//                //TODO update
-//            }
-//        }
-
-        entity.setTelsEmpList(null);
+        for (TelefonosVO each : vo.getTelsEmpList()) {
+            TelefonosVO r = (TelefonosVO) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.EMPLEADO);
+            TelsEmp telemp;
+            if (r == null) {
+                telemp = new TelsEmp();
+                List<Empleados> empllist= new ArrayList<Empleados>();
+                empllist.add(entity);
+                telemp.setNumTelefonoE(each.getNumeroTelefonoEmpleado());
+                telemp.setEmpleadosList(empllist);
+                
+                //TODO Commit
+                DAOFactory.getInstance().getTelefonosDAO().create(telemp);
+            } else {
+                telemp = DAOFactory.getInstance().getTelefonosDAO().find(r.getIdTelefono());
+                List<Empleados> empllist = telemp.getEmpleadosList();
+                                        
+                empllist.add(entity);
+                
+                telemp.setEmpleadosList(empllist);
+                
+                DAOFactory.getInstance().getTelefonosDAO().update(telemp);
+            }
+            telslist.add(telemp);
+        }
+        
+        entity.setTelsEmpList(telslist);
 
         if (vo.getCedulaDirector() != null) {
             DirGestionHum temp = (DirGestionHum) DAOFactory.getInstance().getEmpleadosDAO().findSpecific(vo.getCedulaDirector(), TipoEmpleado.DIRECTOR_GESTION_HUMANA);

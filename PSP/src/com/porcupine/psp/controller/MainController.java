@@ -16,12 +16,12 @@ import com.porcupine.psp.util.DrawingUtilities;
 import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;
 import com.porcupine.psp.view.*;
+import java.io.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.net.URLDecoder;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -45,11 +45,13 @@ public class MainController {
     static Psp psp;
     static Helper helper;
     public static EmpleadosVO empleadoActivo;
-    public static String selectedDB;
     static AddImplement addImplement;
     static AddContract addContract;
     static WriteNotice writeNotice;
     static Secondary secondary;
+    public static String username;
+    public static String selectedDB;
+    public static String password;
     //VOS Temporales para hacer operaciones
     public static EmpleadosVO empleadoTemporal;
 
@@ -132,9 +134,90 @@ public class MainController {
     public static void mostrarLogin() {
         psp = new Psp();
         psp.setLocationRelativeTo(null);
-        login = new Login();
+        try {
+            login = new Login();
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         psp.setVisible(true);
         DrawingUtilities.drawPanel(psp, psp.getViewport(), login);
+    }
+
+    public static void modificarFicheroSeguridad() throws UnsupportedEncodingException, IOException {
+        String fileName = "propierties.psp";
+
+        String path = Psp.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        path = URLDecoder.decode(path, "UTF-8");
+
+        path = path + File.separator + fileName;
+        File f = new File(path);
+
+        try {
+
+            Properties properties = new Properties();
+            properties.setProperty("username", sdb.getjTextFieldUserName().getText());
+            properties.setProperty("password", new String(sdb.getjPasswordField().getPassword()));
+            properties.setProperty("server", sdb.getjComboBox1().getSelectedItem().toString());
+
+            FileOutputStream fileOut = new FileOutputStream(f);
+            properties.storeToXML(fileOut, "PSPPropierties");
+            fileOut.close();
+
+            JOptionPane.showMessageDialog(helper, "Nuevos parametros guardados con éxito!", "Proceso Exitoso", JOptionPane.INFORMATION_MESSAGE, null);
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(helper, "Error en el almacenamiento de parametros!", "Proceso Fallido", JOptionPane.INFORMATION_MESSAGE, null);
+        }
+
+    }
+
+    public static void leerFicherosConfiguracion() throws UnsupportedEncodingException, FileNotFoundException, IOException {
+        String fileName = "propierties.psp";
+
+        String path = Psp.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        path = URLDecoder.decode(path, "UTF-8");
+
+        path = path + File.separator + fileName;
+        File f = new File(path);
+
+
+        if (!f.exists()) {
+
+            JOptionPane.showMessageDialog(psp, "No existen parametros de configuración, Se intentaran crear a continuación", "Atención", JOptionPane.INFORMATION_MESSAGE, null);
+            try {
+
+                Properties properties = new Properties();
+                properties.setProperty("username", "jdrozo");
+                properties.setProperty("password", "s02257974");
+                properties.setProperty("server", ServidoresDisponibles.ORA);
+
+                FileOutputStream fileOut = new FileOutputStream(f);
+                properties.storeToXML(fileOut, "PSPPropierties");
+                fileOut.close();
+
+
+
+                JOptionPane.showMessageDialog(psp, "Nuevos parametros guardados con éxito!", "Proceso Exitoso", JOptionPane.INFORMATION_MESSAGE, null);
+
+            } catch (Exception ex) {
+            }
+        }
+
+
+        Properties props = new Properties();
+        props.loadFromXML(new FileInputStream(f));
+
+        username = props.getProperty("username");
+        password = props.getProperty("password");
+        selectedDB = props.getProperty("server");
+
+
+
+
     }
 
     public static void mostrarSeleccionDB() {
@@ -288,7 +371,7 @@ public class MainController {
 
         empleado.setTelsEmpList(telefonos);
 
-       try {
+        try {
             ServiceFactory.getInstance().getEmpleadosService().create(empleado);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -308,15 +391,14 @@ public class MainController {
     public static void saveConnectionValues() {
         //TODO edit with values obtained from the view
 
-        MainController.selectedDB = sdb.getjComboBox1().getModel().getSelectedItem().toString();
-        String username = sdb.getjTextFieldUserName().getText();
-        String password = new String(sdb.getjPasswordField().getPassword());
+        String susername = username;
+        String spassword = password;
         Map dbprops = new HashMap();
 
         //http://java-persistence.blogspot.com/2008/02/testing-eclipselink-jpa-in-javase.html
 
-        dbprops.put("javax.persistence.jdbc.user", username);
-        dbprops.put("javax.persistence.jdbc.password", password);
+        dbprops.put("javax.persistence.jdbc.user", susername);
+        dbprops.put("javax.persistence.jdbc.password", spassword);
 
         if (selectedDB == ServidoresDisponibles.SQL) {
 
@@ -344,23 +426,23 @@ public class MainController {
     public static void listarInventario() {
     }
 
-    public static void crearImplemento() {   
-       ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
-       implSeguridadVO.setNombreI(addImplement.getjTextFieldNombre().getText());
-       implSeguridadVO.setPrecioUnitarioI(new BigDecimal(addImplement.getjTextFieldValorUnitario().getText()));
-       implSeguridadVO.setCantidad(new Short(addImplement.getjTextFieldCantidad().getText()));
-       implSeguridadVO.setEstadoI(addImplement.getjTextFieldEstado().getText());
-       implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
-       
-       try {
-           ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
-       } catch (Exception e) {
-           JOptionPane.showMessageDialog(addImplement, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-           return;
-       }
-       JOptionPane.showMessageDialog(addImplement, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-       secondary.setVisible(false);
-       secondary = new Secondary();
+    public static void crearImplemento() {
+        ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
+        implSeguridadVO.setNombreI(addImplement.getjTextFieldNombre().getText());
+        implSeguridadVO.setPrecioUnitarioI(new BigDecimal(addImplement.getjTextFieldValorUnitario().getText()));
+        implSeguridadVO.setCantidad(new Short(addImplement.getjTextFieldCantidad().getText()));
+        implSeguridadVO.setEstadoI(addImplement.getjTextFieldEstado().getText());
+        implSeguridadVO.setDescripcionI(addImplement.getjTextAreaDescripcion().getText());
+
+        try {
+            ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(addImplement, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(addImplement, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        secondary.setVisible(false);
+        secondary = new Secondary();
     }
 
     public static void borrarImplemento() {
@@ -384,27 +466,27 @@ public class MainController {
     //Coordinador de contrato
     public static void crearContrato() {
         ContratoVO contratoVO = new ContratoVO();
-        
+
         contratoVO.setTipoCont(addContract.getjComboBoxTipoContrato().getSelectedItem().toString());
         contratoVO.setFechaInicioCont(addContract.getjDateChooserFechaInicio().getDate());
         contratoVO.setTipoPersonalCont(addContract.getjComboBoxTipoPersonal().getSelectedItem().toString());
-        contratoVO.setCantPersonalCont(new Short (addContract.getjTextFieldCantPerson().getText()));
+        contratoVO.setCantPersonalCont(new Short(addContract.getjTextFieldCantPerson().getText()));
         contratoVO.setCostoMensual(new BigDecimal(addContract.getjTextFieldCosto().getText()));
         contratoVO.setUbicacionCont(addContract.getjTextFieldUbicacion().getText());
         contratoVO.setHorarioCont(addContract.getjTextFieldHorario().getText());
-        contratoVO.setTiempoCont(new Integer (addContract.getjTextFieldTiempo().getText()));
+        contratoVO.setTiempoCont(new Integer(addContract.getjTextFieldTiempo().getText()));
         //Me queda la duda si tambien hay que crear campos para el celular y tel del contrato
-        
-        try{
+
+        try {
             ServiceFactory.getInstance().getContratoService().create(contratoVO);
-        }catch (Exception e) {
-           JOptionPane.showMessageDialog(addContract, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-           return;
-       }
-       JOptionPane.showMessageDialog(addContract, "¡Contrato agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-       //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
-       //secondary.setVisible(false);
-       //secondary = new Secondary();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(addContract, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(addContract, "¡Contrato agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
+        //secondary.setVisible(false);
+        //secondary = new Secondary();
     }
 
     public static void borrarContrato() {
@@ -415,22 +497,22 @@ public class MainController {
 
     public static void crearComunicacion() {
         ComunicadoVO comunicadoVO = new ComunicadoVO();
-        
+
         comunicadoVO.setTipoCom(writeNotice.getjComboBoxTipo().getSelectedItem().toString());
         comunicadoVO.setContenidoCom(writeNotice.getjTextAreaComunicado().getText());
         //Revisar que este bien manejado el CheckBox
         comunicadoVO.setUrgente(writeNotice.getjCheckBoxUrgente().isSelected());
-        
-        try{
+
+        try {
             ServiceFactory.getInstance().getComunicadoService().create(comunicadoVO);
-        }catch (Exception e) {
-           JOptionPane.showMessageDialog(writeNotice, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-           return;
-       }
-       JOptionPane.showMessageDialog(writeNotice, "¡Comunicado agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-       //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
-       //secondary.setVisible(false);
-       //secondary = new Secondary();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(writeNotice, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(writeNotice, "¡Comunicado agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
+        //secondary.setVisible(false);
+        //secondary = new Secondary();
     }
 
     public static void listarComunicacion() {

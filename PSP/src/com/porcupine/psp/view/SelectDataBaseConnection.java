@@ -7,7 +7,11 @@ package com.porcupine.psp.view;
 import com.porcupine.psp.controller.MainController;
 import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -23,6 +27,10 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
      */
     public SelectDataBaseConnection() {
         initComponents();
+        
+        getjComboBox1().setSelectedItem(MainController.selectedDB);
+        getjTextFieldUserName().setText(MainController.username);
+        getjPasswordField().setText(MainController.password);
 
     }
 
@@ -181,7 +189,13 @@ public class SelectDataBaseConnection extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_closeActionPerformed
 
     private void jButton_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OKActionPerformed
-        MainController.saveConnectionValues();
+        try {
+            MainController.modificarFicheroSeguridad();
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SelectDataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
         MainController.mostrarLogin();
     }//GEN-LAST:event_jButton_OKActionPerformed
 

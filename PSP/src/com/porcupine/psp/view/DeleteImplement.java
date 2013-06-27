@@ -175,6 +175,11 @@ public class DeleteImplement extends javax.swing.JPanel {
         });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -226,6 +231,11 @@ public class DeleteImplement extends javax.swing.JPanel {
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         MainController.borrarImplemento();
     }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        MainController.helper.setVisible(false);
+        MainController.helper.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscar;

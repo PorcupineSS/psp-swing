@@ -556,6 +556,11 @@ public class MainController {
                 break;
         }
     }
+    
+    public static void cancelar() {
+        secondary.setVisible(false);
+        secondary.dispose();
+    }
 
     public static void asignarImplemento() {
     }

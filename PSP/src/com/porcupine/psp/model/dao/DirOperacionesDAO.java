@@ -22,7 +22,7 @@ public class DirOperacionesDAO implements ICrudDAO<DirOperaciones, Integer>{
     
     private EntityManagerFactory entityManagerFactory;
     
-    DirOperacionesDAO(String PU, Map propierties) {
+    public DirOperacionesDAO(String PU, Map propierties) {
         entityManagerFactory = Persistence.createEntityManagerFactory(PU, propierties);
     }
 

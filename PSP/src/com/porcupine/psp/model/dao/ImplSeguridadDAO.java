@@ -6,6 +6,7 @@ package com.porcupine.psp.model.dao;
 
 import com.porcupine.psp.model.dao.exceptions.*;
 import com.porcupine.psp.model.entity.ImplSeguridad;
+import com.porcupine.psp.model.entity.Proveedor;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -37,6 +38,19 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
         try {
             entityManager = getEntityManager();
             entityManager.getTransaction().begin();
+            
+            Proveedor proveedor = entity.getIdPro();
+            
+            if (proveedor != null) {
+                Short nitEmpresa = proveedor.getIdPro();
+                try {
+                    proveedor = entityManager.getReference(proveedor.getClass(), proveedor.getIdPro());
+                } catch (EntityNotFoundException e) {
+                    throw new NonexistentEntityException("La Empresa con Nit " + nitEmpresa + ", asociada al usuario que intenta crear, no existe.", e);
+                }
+                entity.setIdPro(proveedor);
+            }
+            
             entityManager.persist(entity);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {

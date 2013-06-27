@@ -5,6 +5,7 @@
 package com.porcupine.psp.model.dao;
 
 import com.porcupine.psp.model.dao.exceptions.*;
+import com.porcupine.psp.model.entity.CoordTYT;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.entity.Proveedor;
 import java.util.List;
@@ -40,15 +41,25 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Integer> {
             entityManager.getTransaction().begin();
             
             Proveedor proveedor = entity.getIdPro();
+            CoordTYT coordinadorTyT = entity.getCedulae();
             
             if (proveedor != null) {
-                Short nitEmpresa = proveedor.getIdPro();
+                Short idProveedor = proveedor.getIdPro();
                 try {
                     proveedor = entityManager.getReference(proveedor.getClass(), proveedor.getIdPro());
                 } catch (EntityNotFoundException e) {
-                    throw new NonexistentEntityException("La Empresa con Nit " + nitEmpresa + ", asociada al usuario que intenta crear, no existe.", e);
+                    throw new NonexistentEntityException("¡El proveedor con id: " + idProveedor + ", asociado al implemento que intenta crear, no existe!", e);
                 }
                 entity.setIdPro(proveedor);
+            }
+            if (coordinadorTyT != null) {
+                Integer cedulaCoordinadorTyT = coordinadorTyT.getCedulae();
+                try {
+                    coordinadorTyT = entityManager.getReference(coordinadorTyT.getClass(), coordinadorTyT.getCedulae());
+                } catch (EntityNotFoundException e) {
+                    throw new NonexistentEntityException("¡El coordinador técnico y tecnológico con cédula: " + cedulaCoordinadorTyT + ", asociado al implemento que intenta crear, no existe!", e);
+                }
+                entity.setCedulae(coordinadorTyT);
             }
             
             entityManager.persist(entity);

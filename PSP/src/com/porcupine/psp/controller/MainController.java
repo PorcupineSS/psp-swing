@@ -49,10 +49,10 @@ public class MainController {
     public static AddContract agregarContrato;
     public static WriteNotice agregarWriteNotice;
     public static EmpleadosVO empleadoActivo;
-    static AddImplement addImplement;
-    static AddContract addContract;
-    static WriteNotice writeNotice;
-    static Secondary secondary;
+    public static AddImplement addImplement;
+    public static AddContract addContract;
+    public static WriteNotice writeNotice;
+    public static Secondary secondary;
     public static String username;
     public static String selectedDB;
     public static String password;

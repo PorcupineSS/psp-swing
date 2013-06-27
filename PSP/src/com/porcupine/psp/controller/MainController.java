@@ -364,6 +364,7 @@ public class MainController {
         }
         //Vos Externos
 
+               
         DefaultListModel model = (DefaultListModel) crearEmpleado.getjListTelefono().getModel();
 
         ArrayList<String> tels = new ArrayList<String>();
@@ -377,19 +378,6 @@ public class MainController {
         //Se agrega cada telefono
         List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
         for (String each : tels) {
-//            //TODO Obtener los empleados por este telefono y agrega el nuevo
-//            ArrayList empTels = new ArrayList<Short>();
-//            empTels.add(empleado.getCedulaEmpleado());
-//            TelefonosVO telefonos = new TelefonosVO();
-//            //Hace falta obtener los otros usuarios en la bd y "concatenar" el que se ingresa
-//            telefonos.setUsersList(empTels);
-//            telefonos.setNumeroTelefonoEmpleado((each));
-//            List<TelefonosVO> newTels = empleado.getTelsEmpList();
-//            if (newTels == null) {
-//                newTels = new ArrayList<TelefonosVO>();
-//            }
-//            newTels.add(telefonos);
-//            empleado.setTelsEmpList(newTels);
 
             TelefonosVO temp = new TelefonosVO();
             temp.setNumeroTelefonoEmpleado(each);

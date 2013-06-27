@@ -9,7 +9,7 @@ import java.util.Map;
  * @author Alexander
  */
 public class DAOFactory {
-    
+
     //Debe ser inicializado
     private static String PU = "com.porcupine.psp.pu.database";
     private Map propierties = MainController.getConnectionPropierties();
@@ -20,19 +20,18 @@ public class DAOFactory {
     public EmpleadosDAO getEmpleadosDAO() {
         return new EmpleadosDAO(PU, propierties);
     }
-    
+
     public ImplSeguridadDAO getImplSeguridadDAO() {
         return new ImplSeguridadDAO(PU, propierties);
     }
-    
+
     public ProveedorDAO getProveedorDAO() {
         return new ProveedorDAO(PU, propierties);
     }
-    
+
     public CoordTYTDAO getCoordTYTDAO() {
         return new CoordTYTDAO(PU, propierties);
     }
-    
     private static DAOFactory instance;
 
     public static synchronized DAOFactory getInstance() {
@@ -57,16 +56,28 @@ public class DAOFactory {
     public ContratoDAO getContratoDAO() {
         return new ContratoDAO(PU, propierties);
     }
-    
-    public ClienteDAO getClienteDAO(){
+
+    public ClienteDAO getClienteDAO() {
         return new ClienteDAO(PU, propierties);
     }
-    
-    public DirOperacionesDAO getDirOperacionesDAO(){
+
+    public DirOperacionesDAO getDirOperacionesDAO() {
         return new DirOperacionesDAO(PU, propierties);
     }
-    
-    public ComunicadoDAO getComunicadoDAO(){
+
+    public ComunicadoDAO getComunicadoDAO() {
         return new ComunicadoDAO(PU, propierties);
+    }
+
+    public CoordContratoDAO getCoordContratoDAO() {
+        return new CoordContratoDAO(PU, propierties);
+    }
+
+    public DirGestionHumDAO getDirGestionHumDAO() {
+        return new DirGestionHumDAO(PU, propierties);
+    }
+
+    public SubgerenteDAO getSubgerenteDAO() {
+        return new SubgerenteDAO(PU, propierties);
     }
 }

@@ -12,6 +12,7 @@ import com.porcupine.psp.model.vo.EmpTempVO;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.util.Hash;
 import com.porcupine.psp.util.TipoEmpleado;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +36,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
     }
 
     @Override
-    public void create(EmpleadosVO vo) throws NonexistentEntityException {
+    public void create(EmpleadosVO vo) throws NonexistentEntityException, PreexistingEntityException {
         Empleados entity = new Empleados();
         entity.setCedulae(vo.getCedulaEmpleado());
         entity.setNombree(vo.getNombreEmpleado());
@@ -48,8 +49,8 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
         //En teoria se esta creando entonces no es necesario
         entity.setBitacoraSegList(null);
-        
-        
+
+
         entity.setTelsEmpList(null);
 
         if (vo.getCedulaDirector() != null) {
@@ -61,7 +62,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         } catch (PreexistingEntityException ex) {
             Logger.getLogger(EmpleadosService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //Commit de los telefonos
 
         if (vo.getRol().equals(TipoEmpleado.TEMPORAL_ESCOLTA) || vo.getRol().equals(TipoEmpleado.TEMPORAL_GUARDA)) {
@@ -79,7 +80,51 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
             }
 
         } else {
-            entity.setEmpPlanta(null);
+            EmpPlanta tempEntity = new EmpPlanta();
+            tempEntity.setCedulae(vo.getCedulaEmpleado());
+            tempEntity.setEmpleados(entity);
+            //TODO implementar sueldo en vista
+            tempEntity.setSueldoe(new BigDecimal(200000));
+            try {
+                DAOFactory.getInstance().getEmpPlantaDAO().create(tempEntity);
+            } catch (PreexistingEntityException ex) {
+                Logger.getLogger(EmpleadosService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            switch (vo.getRol()) {
+                case TipoEmpleado.COORDINADOR_CONTRATO:
+                    CoordContrato tempEntity1 = new CoordContrato();
+                    tempEntity1.setCedulae(entity.getCedulae());
+                    DAOFactory.getInstance().getCoordContratoDAO().create(tempEntity1);
+                    break;
+                case TipoEmpleado.COORDINADOR_TECNICO_TECNOLOGICO:
+                    CoordTYT tempEntity2 = new CoordTYT();
+                    tempEntity2.setCedulae(entity.getCedulae());
+                    DAOFactory.getInstance().getCoordTYTDAO().create(tempEntity2);
+                    break;
+                case TipoEmpleado.DIRECTOR_COMERCIAL:
+                    DirComercial tempEntity3 = new DirComercial();
+                    tempEntity3.setCedulae(entity.getCedulae());
+                    DAOFactory.getInstance().getDirComercialDAO().create(tempEntity3);
+                    break;
+                case TipoEmpleado.DIRECTOR_GESTION_HUMANA:
+                    DirGestionHum tempEntity4 = new DirGestionHum();
+                    tempEntity4.setCedulae(entity.getCedulae());
+                    DAOFactory.getInstance().getDirGestionHumDAO().create(tempEntity4);
+                    break;
+                case TipoEmpleado.DIRECTOR_OPERACIONES:
+                    DirOperaciones tempEntity5 = new DirOperaciones();
+                    tempEntity5.setCedulae(entity.getCedulae());
+                    DAOFactory.getInstance().getDirOperacionesDAO().create(tempEntity5);
+                    break;
+                case TipoEmpleado.SUBGERENTE:
+                    Subgerente tempEntity6 = new Subgerente();
+                    tempEntity6.setCedulae(entity.getCedulae());
+                    DAOFactory.getInstance().getSubgerenteDAO().create(tempEntity6);
+                    break;
+                
+            }
+
         }
     }
 

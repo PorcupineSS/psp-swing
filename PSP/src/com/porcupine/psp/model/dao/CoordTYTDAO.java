@@ -37,7 +37,18 @@ public class CoordTYTDAO implements ICrudDAO<CoordTYT, Integer> {
 
     @Override
     public CoordTYT find(Integer id) throws EntityNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            return entityManager.find(CoordTYT.class, id);
+        } catch (EntityNotFoundException ex) {
+            throw new EntityNotFoundException("¡El coordinador T y T con id: " + id + ", no existe!");
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        } 
     }
 
     @Override

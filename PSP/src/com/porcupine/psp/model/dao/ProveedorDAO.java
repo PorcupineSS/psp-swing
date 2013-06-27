@@ -20,7 +20,7 @@ import javax.persistence.criteria.CriteriaQuery;
  *
  * @author Jeisson Andrés Vergara
  */
-public class ProveedorDAO implements ICrudDAO<Proveedor, Integer> {
+public class ProveedorDAO implements ICrudDAO<Proveedor, Short> {
     
     private EntityManagerFactory entityManagerFactory;
 
@@ -50,7 +50,7 @@ public class ProveedorDAO implements ICrudDAO<Proveedor, Integer> {
     }
 
     @Override
-    public Proveedor find(Integer id) throws EntityNotFoundException {
+    public Proveedor find(Short id) throws EntityNotFoundException {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
@@ -86,7 +86,7 @@ public class ProveedorDAO implements ICrudDAO<Proveedor, Integer> {
     }
 
     @Override
-    public void delete(Integer id) throws NonexistentEntityException {
+    public void delete(Short id) throws NonexistentEntityException {
          EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();

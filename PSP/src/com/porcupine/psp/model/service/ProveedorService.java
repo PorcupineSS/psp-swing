@@ -19,7 +19,7 @@ import javax.persistence.EntityNotFoundException;
  *
  * @author andres
  */
-public class ProveedorService implements IService<ProveedorVO, Integer> {
+public class ProveedorService implements IService<ProveedorVO, Short> {
     
     private static ProveedorService instance;
 
@@ -36,7 +36,7 @@ public class ProveedorService implements IService<ProveedorVO, Integer> {
     }
 
     @Override
-    public ProveedorVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {
+    public ProveedorVO find(Short id) throws EntityNotFoundException, InsufficientPermissionsException {
         Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(id);
         if (proveedor != null) {
             return proveedor.toVO();
@@ -51,7 +51,7 @@ public class ProveedorService implements IService<ProveedorVO, Integer> {
     }
 
     @Override
-    public void delete(Integer id) throws NonexistentEntityException, InsufficientPermissionsException {
+    public void delete(Short id) throws NonexistentEntityException, InsufficientPermissionsException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

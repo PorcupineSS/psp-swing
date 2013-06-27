@@ -518,6 +518,20 @@ public class MainController {
     }
 
     public static void borrarImplemento() {
+        int opcion = JOptionPane.showOptionDialog(eliminarImplemento, "Realmente desea eliminar al usuario?", "Confirmación", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "Cancelar"}, "Cancelar");
+        switch (opcion) {
+            case JOptionPane.OK_OPTION:
+                /*try {
+                    ServiceFactory.getInstance().getImplSeguridadService().delete(new Integer(eliminarImplemento.getjTableBusqueda().getValueAt(eliminarImplemento.getjTableBusqueda().getSelectedRow(), 0).toString()));
+                    JOptionPane.showMessageDialog(eliminarImplemento, "¡El implemento se ha eliminado satisfactoriamente!", "Error", JOptionPane.ERROR_MESSAGE);
+                    llenarTabla();
+                } catch (NonexistentEntityException | InsufficientPermissionsException ex) {
+                    JOptionPane.showMessageDialog(eliminarImplemento, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }*/
+                break;
+            case JOptionPane.CANCEL_OPTION:
+                break;
+        }
     }
 
     public static void asignarImplemento() {

@@ -10,8 +10,10 @@ import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.entity.*;
 import com.porcupine.psp.model.vo.EmpTempVO;
 import com.porcupine.psp.model.vo.EmpleadosVO;
+import com.porcupine.psp.model.vo.TelefonosVO;
 import com.porcupine.psp.util.Hash;
 import com.porcupine.psp.util.TipoEmpleado;
+import com.porcupine.psp.util.TipoTelefono;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,6 +52,26 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         //En teoria se esta creando entonces no es necesario
         entity.setBitacoraSegList(null);
 
+
+//        for (TelefonosVO each : vo.getTelsEmpList()) {
+//            TelefonosVO r = (TelefonosVO) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.EMPLEADO);
+//            if (r == null) {
+//                TelsEmp telemp = new TelsEmp();
+//                List<Empleados> empllist= new ArrayList<Empleados>();
+//                empllist.add(entity);
+//                telemp.setNumTelefonoE(each.getNumeroTelefonoEmpleado());
+//                telemp.setEmpleadosList(empllist);
+//                //TODO Commit
+//            } else {
+//                TelsEmp telemp = new TelsEmp();
+//                List<Empleados> empllist = (List<Empleados>)r.getUsersList();
+//                empllist.add(entity);
+//                telemp.setNumTelefonoE(r.getNumeroTelefonoEmpleado());
+//                telemp.setEmpleadosList(empllist);
+//                telemp.setIdTe(r.getIdTelefono());
+//                //TODO update
+//            }
+//        }
 
         entity.setTelsEmpList(null);
 
@@ -122,7 +144,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
                     tempEntity6.setCedulae(entity.getCedulae());
                     DAOFactory.getInstance().getSubgerenteDAO().create(tempEntity6);
                     break;
-                
+
             }
 
         }

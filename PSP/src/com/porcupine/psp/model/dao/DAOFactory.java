@@ -80,4 +80,8 @@ public class DAOFactory {
     public SubgerenteDAO getSubgerenteDAO() {
         return new SubgerenteDAO(PU, propierties);
     }
+    
+    public TelefonosDAO getTelefonosDAO() {
+        return new TelefonosDAO(PU, propierties);
+    }
 }

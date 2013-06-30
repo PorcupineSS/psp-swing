@@ -9,6 +9,7 @@ import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.exceptions.InsufficientPermissionsException;
 import com.porcupine.psp.model.dao.exceptions.InternalErrorException;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.ComunicadoVO;

@@ -25,7 +25,7 @@ public class Login extends javax.swing.JPanel {
         initComponents();
         MainController.leerFicherosConfiguracion();
         MainController.saveConnectionValues();
-        DAOFactory.getInstance().getImplSeguridadDAO().adicionarImplemento((new Integer(51).shortValue()), 20);
+        //DAOFactory.getInstance().getImplSeguridadDAO().adicionarImplemento((new Integer(51).shortValue()), 20);
 
     }
 

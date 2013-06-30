@@ -5,9 +5,15 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import com.porcupine.psp.model.dao.DAOFactory;
+import com.porcupine.psp.model.entity.ImplSeguridad;
+import com.porcupine.psp.model.service.ServiceFactory;
+import com.porcupine.psp.model.vo.ImplSeguridadVO;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
@@ -20,10 +26,14 @@ import javax.swing.plaf.ComponentUI;
  * @author andres
  */
 public class AddImplement extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form AddImplement
      */
+    
+    public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad mínima debe ser 0!";
+    public static final String NOMBRE_IMPL_VALIDACION = "¡Ya existe un implemento con ese nombre, por favor seleccione otro!";
+
     public AddImplement() {
         initComponents();
     }
@@ -178,6 +188,22 @@ public class AddImplement extends javax.swing.JPanel {
 
     public void setjComboBoxProveedor(JComboBox jComboBoxProveedor) {
         this.jComboBoxProveedor = jComboBoxProveedor;
+    }
+    
+    public boolean validarNombre(String str) {
+        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(str);
+        if (implementos.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean validarCantidad(Short str) {
+        if (new Integer(str) < 0) {
+            return false;
+        }
+        return true;
     }
     
     /**
@@ -340,9 +366,9 @@ public class AddImplement extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCancelar)
-                    .addComponent(jButtonGuardar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonGuardar)
+                    .addComponent(jButtonCancelar))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -360,7 +386,15 @@ public class AddImplement extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldCantidadActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        MainController.crearImplemento(); 
+        if (validarNombre(getjTextFieldNombre().getText())) {
+            if (validarCantidad(new Short(getjTextFieldCantidad().getText()))) {
+                MainController.crearImplemento();
+            } else {
+                JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);  
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, NOMBRE_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jComboBoxProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProveedorActionPerformed

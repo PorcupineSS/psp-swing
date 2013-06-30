@@ -8,6 +8,7 @@ import com.porcupine.psp.model.dao.exceptions.*;
 import com.porcupine.psp.model.entity.CoordTYT;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.entity.Proveedor;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -168,7 +169,7 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
             implementos = q.getResultList();
             return implementos;
         } catch (EntityNotFoundException e) {
-            throw new EntityNotFoundException("¡No hay implementos con nombre: " + name + "!");
+            throw new EntityNotFoundException("¡No existen implementos con nombre: " + name + "!");
         } finally {
             if (entityManager != null) {
                 entityManager.clear();
@@ -191,9 +192,6 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
                 entityManager.close();
             }
         }
-
-
-
 
     }
 }

@@ -68,9 +68,7 @@ public class MainController {
     public static EmpleadosVO empleadoTemporal;
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
-    public static String message;
-    public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad mínima debe ser 0! Se guardarán 0 implementos de este tipo.";
-
+    
     public static Map getConnectionPropierties() {
         return connectionPropierties;
     }
@@ -462,13 +460,9 @@ public class MainController {
     public static void crearImplemento() {
         ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
         implSeguridadVO.setIdImplemento(new Integer(1).shortValue());
-        implSeguridadVO.setNombreI(agregarImplemento.getjTextFieldNombre().getText());
+        implSeguridadVO.setNombreI(agregarImplemento.getjTextFieldNombre().getText()); 
         implSeguridadVO.setPrecioUnitarioI(new BigDecimal(agregarImplemento.getjTextFieldValorUnitario().getText()));
-        if (validarCantidadImplemento(agregarImplemento.getjTextFieldCantidad().getText())) {
-            implSeguridadVO.setCantidad(new Short(agregarImplemento.getjTextFieldCantidad().getText()));
-        } else {
-            JOptionPane.showMessageDialog(agregarImplemento, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
-        }
+        implSeguridadVO.setCantidad(new Short(agregarImplemento.getjTextFieldCantidad().getText()));
         implSeguridadVO.setEstadoI(agregarImplemento.getjTextFieldEstado().getText());
         implSeguridadVO.setFechaRegIm(new Date());
         implSeguridadVO.setDescripcionI(agregarImplemento.getjTextAreaDescripcion().getText());
@@ -565,14 +559,6 @@ public class MainController {
     }
 
     public static void asignarImplemento() {
-    }
-    
-    //Validaciones de campos
-    public static boolean validarCantidadImplemento(String str) {
-        if (new Integer(str) < 0) {
-            return false;
-        }
-        return true;
     }
     
     //IMPLEMENTOS - FIN

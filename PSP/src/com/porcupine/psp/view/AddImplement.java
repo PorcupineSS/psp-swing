@@ -30,7 +30,8 @@ public class AddImplement extends javax.swing.JPanel {
     
     public static final String NOMBRE_IMPL_VALIDACION = "¡Ya existe un implemento con ese nombre, por favor seleccione otro!";
     public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad debe ser un número entero mayor o igual a 0!";
-    public static final String PRECIO_IMPL_VALIDACION = "¡El precio debe ser un número mayor o igual a $0.0!";
+    public static final String VALOR_UNITARIO_IMPL_VALIDACION = "¡El precio debe ser un número mayor o igual a $0.0!";
+    public static final String DESCRIPCION_IMPL_VALIDACION = "¡Debe ingresar una descripción!";
 
     public AddImplement() {
         initComponents();
@@ -211,7 +212,15 @@ public class AddImplement extends javax.swing.JPanel {
         }  
     }
     
-    public boolean validarPrecio(String str) {
+    public boolean validarDescripcion(String str) {
+        if (str.length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public boolean validarValorUnitario(String str) {
         BigDecimal precio;
         try {
             precio = new BigDecimal(str);
@@ -406,14 +415,18 @@ public class AddImplement extends javax.swing.JPanel {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         if (validarNombre(getjTextFieldNombre().getText())) {
-            if (validarCantidad(getjTextFieldCantidad().getText())) {
-                if (validarPrecio(getjTextFieldValorUnitario().getText())) {
-                    MainController.crearImplemento();
+            if (validarValorUnitario(getjTextFieldValorUnitario().getText())) {
+                if (validarCantidad(getjTextFieldCantidad().getText())) {
+                    if (validarDescripcion(getjTextAreaDescripcion().getText())) {
+                        MainController.crearImplemento();
+                    } else {
+                        JOptionPane.showMessageDialog(this, DESCRIPCION_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);  
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, PRECIO_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, VALOR_UNITARIO_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, NOMBRE_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);

@@ -33,6 +33,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import oracle.jdbc.driver.Message;
 
 /**
  * El proposito de esta clase es tener un lugar integrado con todos los metodos
@@ -67,6 +68,8 @@ public class MainController {
     public static EmpleadosVO empleadoTemporal;
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
+    public static String message;
+    public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad mínima debe ser 0! Se guardarán 0 implementos de este tipo.";
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -461,7 +464,11 @@ public class MainController {
         implSeguridadVO.setIdImplemento(new Integer(1).shortValue());
         implSeguridadVO.setNombreI(agregarImplemento.getjTextFieldNombre().getText());
         implSeguridadVO.setPrecioUnitarioI(new BigDecimal(agregarImplemento.getjTextFieldValorUnitario().getText()));
-        implSeguridadVO.setCantidad(new Short(agregarImplemento.getjTextFieldCantidad().getText()));
+        if (validarCantidadImplemento(agregarImplemento.getjTextFieldCantidad().getText())) {
+            implSeguridadVO.setCantidad(new Short(agregarImplemento.getjTextFieldCantidad().getText()));
+        } else {
+            JOptionPane.showMessageDialog(agregarImplemento, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+        }
         implSeguridadVO.setEstadoI(agregarImplemento.getjTextFieldEstado().getText());
         implSeguridadVO.setFechaRegIm(new Date());
         implSeguridadVO.setDescripcionI(agregarImplemento.getjTextAreaDescripcion().getText());
@@ -490,7 +497,6 @@ public class MainController {
     }
 
     public static void llenarTabla() {
-
         List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance()
                 .getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
         modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
@@ -498,14 +504,12 @@ public class MainController {
         modelTable.fireTableDataChanged();
 
         for (ImplSeguridadVO implSeguridadVO : implementosList) {
-            //Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(new Integer(implSeguridadVO.getIdPro()));
             Object[] datos = {new Short(implSeguridadVO.getIdImplemento()),
                 implSeguridadVO.getNombreI(),
                 implSeguridadVO.getPrecioUnitarioI(),
                 new Short(implSeguridadVO.getCantidad()),
                 implSeguridadVO.getEstadoI(),
                 implSeguridadVO.getFechaRegIm().toString()};
-            //proveedor.getNombre()};
             modelTable.addRow(datos);
         }
     }
@@ -562,6 +566,15 @@ public class MainController {
 
     public static void asignarImplemento() {
     }
+    
+    //Validaciones de campos
+    public static boolean validarCantidadImplemento(String str) {
+        if (new Integer(str) < 0) {
+            return false;
+        }
+        return true;
+    }
+    
     //IMPLEMENTOS - FIN
 
     /**

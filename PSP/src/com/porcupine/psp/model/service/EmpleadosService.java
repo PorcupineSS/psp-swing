@@ -48,8 +48,6 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
         entity.setCoddocume(getPrefix(vo.getRol()) + vo.getCedulaEmpleado().toString());
 
-
-
         List<TelsEmp> telslist = new ArrayList<TelsEmp>();
         Integer count = 1;
         for (TelefonosVO each : vo.getTelsEmpList()) {

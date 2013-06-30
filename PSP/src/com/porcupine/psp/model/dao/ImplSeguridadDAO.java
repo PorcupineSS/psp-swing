@@ -161,10 +161,10 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
         try {
             entityManager = getEntityManager();
             List<ImplSeguridad> implementos;
-//            Query q = entityManager.createQuery("SELECT u FROM ImplSeguridad u "
-//                    + "WHERE u.nombreI LIKE :name ")
-//                    .setParameter("name", "%" + name + "%");
-            Query q = entityManager.createNamedQuery("ImplSeguridad.findByNombreI").setParameter("nombreI", name);
+            Query q = entityManager.createQuery("SELECT u FROM ImplSeguridad u "
+                    + "WHERE u.nombreI LIKE :name ")
+                    .setParameter("name", "%" + name + "%");
+            //Query q = entityManager.createNamedQuery("ImplSeguridad.findByNombreI").setParameter("nombreI", name);
             implementos = q.getResultList();
             return implementos;
         } catch (EntityNotFoundException e) {

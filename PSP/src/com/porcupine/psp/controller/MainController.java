@@ -455,6 +455,7 @@ public class MainController {
     }
 
     //IMPLEMENTOS - INICIO
+    
     public static void crearImplemento() {
         ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
         implSeguridadVO.setIdImplemento(new Integer(1).shortValue());
@@ -464,13 +465,9 @@ public class MainController {
         implSeguridadVO.setEstadoI(agregarImplemento.getjTextFieldEstado().getText());
         implSeguridadVO.setFechaRegIm(new Date());
         implSeguridadVO.setDescripcionI(agregarImplemento.getjTextAreaDescripcion().getText());
-        
-        //implSeguridadVO.setIdPro(new Short(agregarImplemento.getjTextFieldIdProveedor().getText()));
         String nombreProveedor = agregarImplemento.getjComboBoxProveedor().getSelectedItem().toString();
         Short idProveedor = ServiceFactory.getInstance().getProveedorService().findName(nombreProveedor);
         implSeguridadVO.setIdPro(idProveedor);
-        
-        //implSeguridadVO.setCedulaCoordTyT(new Integer(agregarImplemento.getjTextFieldCedulaCoo().getText()));
         implSeguridadVO.setCedulaCoordTyT(empleadoActivo.getCedulaEmpleado());
         try {
             ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);

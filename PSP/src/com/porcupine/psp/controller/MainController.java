@@ -243,6 +243,7 @@ public class MainController {
         crearEmpleado = new CreateEmployee(empleadosDisponibles);
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), crearEmpleado);
+        helper.setTitle("Porcupine Software Portal");
     }
 
     public static void mostrarFormuariosCrearImplementos() {
@@ -251,6 +252,7 @@ public class MainController {
         agregarImplemento = new AddImplement();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarImplemento);
+        helper.setTitle("Porcupine Software Portal");
     }
 
     public static void mostrarFormuariosEliminarImplementos() {
@@ -463,7 +465,7 @@ public class MainController {
         implSeguridadVO.setNombreI(agregarImplemento.getjTextFieldNombre().getText()); 
         implSeguridadVO.setPrecioUnitarioI(new BigDecimal(agregarImplemento.getjTextFieldValorUnitario().getText()));
         implSeguridadVO.setCantidad(new Short(agregarImplemento.getjTextFieldCantidad().getText()));
-        implSeguridadVO.setEstadoI(agregarImplemento.getjTextFieldEstado().getText());
+        implSeguridadVO.setEstadoI(agregarImplemento.getjComboBoxEstado().getSelectedItem().toString());
         implSeguridadVO.setFechaRegIm(new Date());
         implSeguridadVO.setDescripcionI(agregarImplemento.getjTextAreaDescripcion().getText());
         String nombreProveedor = agregarImplemento.getjComboBoxProveedor().getSelectedItem().toString();

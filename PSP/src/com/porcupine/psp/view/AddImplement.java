@@ -9,6 +9,7 @@ import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -26,12 +27,10 @@ import javax.swing.plaf.ComponentUI;
  * @author andres
  */
 public class AddImplement extends javax.swing.JPanel {
-
-    /**
-     * Creates new form AddImplement
-     */
-    public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad debe ser un número y mínimo debe ser 0!";
+    
     public static final String NOMBRE_IMPL_VALIDACION = "¡Ya existe un implemento con ese nombre, por favor seleccione otro!";
+    public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad debe ser un número entero mayor o igual a 0!";
+    public static final String PRECIO_IMPL_VALIDACION = "¡El precio debe ser un número mayor o igual a $0.0!";
 
     public AddImplement() {
         initComponents();
@@ -210,6 +209,20 @@ public class AddImplement extends javax.swing.JPanel {
         } catch (Exception e) {
             return false;
         }  
+    }
+    
+    public boolean validarPrecio(String str) {
+        BigDecimal precio;
+        try {
+            precio = new BigDecimal(str);
+            if (precio.signum() < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        } 
     }
 
     /**
@@ -394,7 +407,11 @@ public class AddImplement extends javax.swing.JPanel {
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         if (validarNombre(getjTextFieldNombre().getText())) {
             if (validarCantidad(getjTextFieldCantidad().getText())) {
-                MainController.crearImplemento();
+                if (validarPrecio(getjTextFieldValorUnitario().getText())) {
+                    MainController.crearImplemento();
+                } else {
+                    JOptionPane.showMessageDialog(this, PRECIO_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
             }

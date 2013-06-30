@@ -163,8 +163,7 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
             entityManager = getEntityManager();
             List<ImplSeguridad> implementos;
             Query q = entityManager.createQuery("SELECT u FROM ImplSeguridad u "
-                    + "WHERE u.nombreI LIKE :name ")
-                    .setParameter("name", "%" + name + "%");
+                    + "WHERE u.nombreI LIKE :name ").setParameter("name", "%" + name + "%");
             //Query q = entityManager.createNamedQuery("ImplSeguridad.findByNombreI").setParameter("nombreI", name);
             implementos = q.getResultList();
             return implementos;
@@ -184,6 +183,26 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
             entityManager = getEntityManager();
             Query query = entityManager.createNativeQuery("{call ADICIONAR_IMPLEMENTO(?,?)}",
                     ImplSeguridad.class).setParameter(1, id).setParameter(2, cantidad);
+            query.getSingleResult();
+        } catch (Exception ex) {
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
+
+    }
+
+    public void asignarImplemento(Short idImplemento, Integer idEmpleadoTemporal,
+            Integer idCoordinador, Integer cantidadAsignada) {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            Query query = entityManager.createNativeQuery("{call ASIGNAR_IMPLEMENTO"
+                    + " (?, ?, ?, ?)}",
+                    ImplSeguridad.class).setParameter(1, idImplemento).setParameter(2, idEmpleadoTemporal)
+                    .setParameter(3, idCoordinador).setParameter(4, cantidadAsignada);
             query.getSingleResult();
         } catch (Exception ex) {
         } finally {

@@ -62,6 +62,7 @@ public class MainController {
     public static AddContract addContract;
     public static WriteNotice writeNotice;
     public static Secondary secondary;
+    public static FindPerson findPerson;
     public static String username;
     public static String selectedDB;
     public static String password;
@@ -70,7 +71,7 @@ public class MainController {
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
     static AssignImplements asignarImplementos = new AssignImplements();
-    
+
     public static Map getConnectionPropierties() {
         return connectionPropierties;
     }
@@ -265,7 +266,7 @@ public class MainController {
         DrawingUtilities.drawPanel(helper, helper.getViewport(), eliminarImplemento);
         helper.setTitle("Porcupine Software Portal");
     }
-    
+
     public static void mostrarFormularioAsignarImplementos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
@@ -370,6 +371,43 @@ public class MainController {
         }
     }
 
+    public static void consultarEmpleado() {
+        EmpleadosVO empleado = new EmpleadosVO();
+
+        //TODO añadir la captura de todos los campos en la interfaz
+        empleado.setCedulaDirector(Integer.parseInt((String) findPerson.getjListResultados().getSelectedValue()));
+
+        try {
+            empleado = ServiceFactory.getInstance().getEmpleadosService().find(empleado.getCedulaEmpleado());
+        } catch (Exception ex) {
+            reportarError(ex, findPerson);
+        }
+
+        ArrayList<String> listaRoles = new ArrayList<String>();
+        listaRoles.add(empleado.getRol());
+
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        crearEmpleado = new CreateEmployee(listaRoles);
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper1, helper1.getViewport(), crearEmpleado);
+        helper.setTitle("Consulta de empleado...");
+
+        crearEmpleado.getjTextFieldCC().setText(empleado.getCedulaEmpleado().toString());
+        crearEmpleado.getjTextFieldNombres().setText(empleado.getNombreEmpleado());
+        crearEmpleado.getjTextFieldApellidos().setText(empleado.getApellidoEmpleado());
+        crearEmpleado.getjTextFieldContraseña().setEnabled(false);
+//        crearEmpleado.getjTextFieldDireccion().setText(empleado.getDireccionEmpleado());
+        if (empleado.getRol() == TipoEmpleado.TEMPORAL) {
+            crearEmpleado.getjTextFieldDireccion().setText(empleado.getSueldoEmpleadoPlanta().toString());
+        } else {
+            crearEmpleado.getjTextFieldDireccion().setEnabled(false);
+        }
+
+        crearEmpleado.getjButtonGuardar().setText("Modificar");
+
+    }
+
     /**
      * Disponible para: Director de Gestion Humana Guardias y escoltas,
      * coordinador de contrato, tecnico y operaciones Modelo gestionado por
@@ -470,11 +508,10 @@ public class MainController {
     }
 
     //IMPLEMENTOS - INICIO
-    
     public static void crearImplemento() {
         ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
         implSeguridadVO.setIdImplemento(new Integer(1).shortValue());
-        implSeguridadVO.setNombreI(agregarImplemento.getjTextFieldNombre().getText()); 
+        implSeguridadVO.setNombreI(agregarImplemento.getjTextFieldNombre().getText());
         implSeguridadVO.setPrecioUnitarioI(new BigDecimal(agregarImplemento.getjTextFieldValorUnitario().getText()));
         implSeguridadVO.setCantidad(new Short(agregarImplemento.getjTextFieldCantidad().getText()));
         implSeguridadVO.setEstadoI(agregarImplemento.getjComboBoxEstado().getSelectedItem().toString());
@@ -494,23 +531,21 @@ public class MainController {
         secondary.setVisible(false);
         secondary = new Secondary();
     }
-    
-    public static List<String> obtenerListaProveedores(){
+
+    public static List<String> obtenerListaProveedores() {
         List<ProveedorVO> listaProveedores = ServiceFactory.getInstance().getProveedorService().getList();
         List<String> lista = new ArrayList<>();
         for (ProveedorVO proveedor : listaProveedores) {
             lista.add(proveedor.getNombre());
         }
-        return lista;    
+        return lista;
     }
-    
+
 //    public static List<String> obtenerLitsEmpleadosTemporales(){
 //        List<EmplTempVO> listaEmpleados = ServiceFactory.getInstance().
 //    }
-
     public static void llenarTabla() {
-        List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance()
-                .getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
+        List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance().getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
         modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
         modelTable.getDataVector().removeAllElements();
         modelTable.fireTableDataChanged();
@@ -525,7 +560,7 @@ public class MainController {
             modelTable.addRow(datos);
         }
     }
-    
+
     public void listarImplementos() {
         secondary.setVisible(true);
         secondary.setTitle("Eliminar Implemento");
@@ -538,8 +573,7 @@ public class MainController {
         modelTable.getDataVector().removeAllElements();
         modelTable.fireTableDataChanged();
         List<ImplSeguridadVO> implementos;
-        implementos = ServiceFactory.getInstance().getImplSeguridadService()
-                .findByName(eliminarImplemento.getjTextFieldBuscar().getText());
+        implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
         for (ImplSeguridadVO implementoVO : implementos) {
             Object[] datos = {new Short(implementoVO.getIdImplemento()),
                 implementoVO.getNombreI(),
@@ -570,7 +604,7 @@ public class MainController {
                 break;
         }
     }
-    
+
     public static void cancelar() {
         secondary.setVisible(false);
         secondary.dispose();
@@ -578,9 +612,8 @@ public class MainController {
 
     public static void asignarImplemento() {
     }
-    
-    //IMPLEMENTOS - FIN
 
+    //IMPLEMENTOS - FIN
     /**
      * Disponible para: Wachiturros Vista principal para este coordinador
      */
@@ -653,9 +686,6 @@ public class MainController {
     }
 
     public static void eliminarEmpleado() {
-    }
-
-    public static void consultarEmpleado() {
     }
 
     public static void consultarBitacora() {

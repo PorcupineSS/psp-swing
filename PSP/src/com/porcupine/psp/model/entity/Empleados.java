@@ -223,15 +223,6 @@ public class Empleados implements Serializable {
         }
         empleado.setTelsEmpList(telefonos);
 
-
-//        List<BitacoraSegVO> bitacoras = new ArrayList<BitacoraSegVO>();
-//        if (getTelsEmpList() != null) {
-//            for (BitacoraSeg each : getBitacoraSegList()) {
-//                bitacoras.add((each.toVO()));
-//            }
-//        }
-//        empleado.setBitacoraSegList(bitacoras);
-
         empleado.setRol(discoverRole());
 
         return empleado;

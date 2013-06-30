@@ -69,7 +69,7 @@ public class MainController {
     public static EmpleadosVO empleadoTemporal;
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
-    static AssignImplements administrarImplementos = new AssignImplements();
+    static AssignImplements asignarImplementos = new AssignImplements();
     
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -263,14 +263,16 @@ public class MainController {
         eliminarImplemento = new DeleteImplement();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), eliminarImplemento);
+        helper.setTitle("Porcupine Software Portal");
     }
     
-    public static void mostrarFormularioAdministrarImplementos() {
+    public static void mostrarFormularioAsignarImplementos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
-        administrarImplementos = new AssignImplements();
+        asignarImplementos = new AssignImplements();
         helper.setVisible(true);
-        DrawingUtilities.drawPanel(helper, helper.getViewport(), administrarImplementos);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), asignarImplementos);
+        helper.setTitle("Porcupine Software Portal");
     }
 
     public static void mostrarFormularioContratos() {
@@ -501,6 +503,10 @@ public class MainController {
         }
         return lista;    
     }
+    
+//    public static List<String> obtenerLitsEmpleadosTemporales(){
+//        List<EmplTempVO> listaEmpleados = ServiceFactory.getInstance().
+//    }
 
     public static void llenarTabla() {
         List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance()

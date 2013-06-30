@@ -69,6 +69,7 @@ public class MainController {
     public static EmpleadosVO empleadoTemporal;
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
+    static SelectEmployeeType seleccionarTipoEmpleado = new SelectEmployeeType();
     
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -247,7 +248,7 @@ public class MainController {
         helper.setTitle("Porcupine Software Portal");
     }
 
-    public static void mostrarFormuariosCrearImplementos() {
+    public static void mostrarFormuarioCrearImplementos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
         agregarImplemento = new AddImplement();
@@ -262,6 +263,14 @@ public class MainController {
         eliminarImplemento = new DeleteImplement();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), eliminarImplemento);
+    }
+    
+    public static void mostrarFormularioSeleccionarTipoEmpleado() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        seleccionarTipoEmpleado = new SelectEmployeeType();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), seleccionarTipoEmpleado);
     }
 
     public static void mostrarFormularioContratos() {
@@ -510,7 +519,7 @@ public class MainController {
             modelTable.addRow(datos);
         }
     }
-
+    
     public void listarImplementos() {
         secondary.setVisible(true);
         secondary.setTitle("Eliminar Implemento");

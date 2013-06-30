@@ -5,10 +5,12 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import static com.porcupine.psp.controller.MainController.psp;
 import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.service.ServiceFactory;
 import com.porcupine.psp.model.vo.ImplSeguridadVO;
+import com.porcupine.psp.util.DrawingUtilities;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JButton;
@@ -454,7 +456,7 @@ public class AddImplement extends javax.swing.JPanel {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         MainController.helper.setVisible(false);
-        MainController.helper.dispose();
+        MainController.helper.dispose();                   
     }//GEN-LAST:event_jButtonCancelarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

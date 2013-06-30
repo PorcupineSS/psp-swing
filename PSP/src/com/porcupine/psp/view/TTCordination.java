@@ -172,12 +172,11 @@ public class TTCordination extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jButtonAddImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddImplementActionPerformed
-        MainController.mostrarFormuariosCrearImplementos();
-
+        MainController.mostrarFormuarioCrearImplementos();
     }//GEN-LAST:event_jButtonAddImplementActionPerformed
 
     private void jButtonAssignImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssignImplementActionPerformed
-        // TODO add your handling code here:
+        MainController.mostrarFormularioSeleccionarTipoEmpleado();
     }//GEN-LAST:event_jButtonAssignImplementActionPerformed
 
     private void jButtonManageImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManageImplementActionPerformed

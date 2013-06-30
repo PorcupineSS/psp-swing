@@ -176,7 +176,7 @@ public class TTCordination extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonAddImplementActionPerformed
 
     private void jButtonAssignImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssignImplementActionPerformed
-        MainController.mostrarFormularioSeleccionarTipoEmpleado();
+        MainController.mostrarFormularioAdministrarImplementos();
     }//GEN-LAST:event_jButtonAssignImplementActionPerformed
 
     private void jButtonManageImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManageImplementActionPerformed

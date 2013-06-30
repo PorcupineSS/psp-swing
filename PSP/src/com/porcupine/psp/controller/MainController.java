@@ -69,7 +69,7 @@ public class MainController {
     public static EmpleadosVO empleadoTemporal;
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
-    static SelectEmployeeType seleccionarTipoEmpleado = new SelectEmployeeType();
+    static AssignImplements administrarImplementos = new AssignImplements();
     
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -265,12 +265,12 @@ public class MainController {
         DrawingUtilities.drawPanel(helper, helper.getViewport(), eliminarImplemento);
     }
     
-    public static void mostrarFormularioSeleccionarTipoEmpleado() {
+    public static void mostrarFormularioAdministrarImplementos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
-        seleccionarTipoEmpleado = new SelectEmployeeType();
+        administrarImplementos = new AssignImplements();
         helper.setVisible(true);
-        DrawingUtilities.drawPanel(helper, helper.getViewport(), seleccionarTipoEmpleado);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), administrarImplementos);
     }
 
     public static void mostrarFormularioContratos() {

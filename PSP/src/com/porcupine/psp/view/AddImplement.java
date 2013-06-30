@@ -26,12 +26,11 @@ import javax.swing.plaf.ComponentUI;
  * @author andres
  */
 public class AddImplement extends javax.swing.JPanel {
-    
+
     /**
      * Creates new form AddImplement
      */
-    
-    public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad mínima debe ser 0!";
+    public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad debe ser un número y mínimo debe ser 0!";
     public static final String NOMBRE_IMPL_VALIDACION = "¡Ya existe un implemento con ese nombre, por favor seleccione otro!";
 
     public AddImplement() {
@@ -189,7 +188,7 @@ public class AddImplement extends javax.swing.JPanel {
     public void setjComboBoxProveedor(JComboBox jComboBoxProveedor) {
         this.jComboBoxProveedor = jComboBoxProveedor;
     }
-    
+
     public boolean validarNombre(String str) {
         List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(str);
         if (implementos.isEmpty()) {
@@ -198,14 +197,21 @@ public class AddImplement extends javax.swing.JPanel {
             return false;
         }
     }
-    
-    public boolean validarCantidad(Short str) {
-        if (new Integer(str) < 0) {
+
+    public boolean validarCantidad(String str) {
+        Short cantidad;
+        try {
+            cantidad = new Short(str);
+            if (cantidad < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
             return false;
-        }
-        return true;
+        }  
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -387,10 +393,10 @@ public class AddImplement extends javax.swing.JPanel {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         if (validarNombre(getjTextFieldNombre().getText())) {
-            if (validarCantidad(new Short(getjTextFieldCantidad().getText()))) {
+            if (validarCantidad(getjTextFieldCantidad().getText())) {
                 MainController.crearImplemento();
             } else {
-                JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);  
+                JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, NOMBRE_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
@@ -405,7 +411,6 @@ public class AddImplement extends javax.swing.JPanel {
         MainController.helper.setVisible(false);
         MainController.helper.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardar;

@@ -60,6 +60,7 @@ public class MainController {
     public static Helper helper1;
     public static AddImplement agregarImplemento;
     public static AddContract agregarContrato;
+    public static AddClient agregarCliente;
     public static WriteNotice agregarWriteNotice;
     public static EmpleadosVO empleadoActivo;
     public static AddContract addContract;
@@ -296,6 +297,18 @@ public class MainController {
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarWriteNotice);
     }
+    
+    public static void mostrarFormularioCrearCliente() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        agregarCliente = new AddClient();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarCliente);
+        helper.setTitle("Crear Cliente...");
+        
+        agregarCliente.getjButtonEncontrarContrato().setEnabled(false);
+    }
+    
 
     //utilidades
     public static void cerrar() {

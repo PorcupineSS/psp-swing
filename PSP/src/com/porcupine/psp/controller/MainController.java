@@ -687,6 +687,15 @@ public class MainController {
         }
         return empleados;
     }
+    
+    public static List<String> obtenerListaImplementos() {
+        List<ImplSeguridadVO> implementosVO = ServiceFactory.getInstance().getImplSeguridadService().getList();
+        List<String> lista = new ArrayList<>();
+        for (ImplSeguridadVO implemento : implementosVO) {
+            lista.add(implemento.getNombreI());
+        }
+        return lista;
+    }
 
     public static void llenarTabla() {
         List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance().getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());

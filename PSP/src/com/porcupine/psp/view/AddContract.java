@@ -295,7 +295,7 @@ public class AddContract extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jTextFieldTelefonoC = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jComboBoxCliente = new javax.swing.JComboBox();
+        jComboBoxCliente = new javax.swing.JComboBox(MainController.obtenerListaClientes().toArray());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/AddContract.png"))); // NOI18N
@@ -354,6 +354,12 @@ public class AddContract extends javax.swing.JPanel {
         jLabel11.setText("Telefono:");
 
         jLabel12.setText("Cliente:");
+
+        jComboBoxCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -495,6 +501,10 @@ public class AddContract extends javax.swing.JPanel {
         MainController.helper.setVisible(false);
         MainController.helper.dispose(); 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxClienteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

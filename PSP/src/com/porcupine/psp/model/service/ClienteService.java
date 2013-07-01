@@ -114,6 +114,6 @@ public class ClienteService implements IService<ClienteVO, Integer> {
     }
 
     public Short findName(String nombreCliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return DAOFactory.getInstance().getClienteDAO().findName(nombreCliente);
     }
 }

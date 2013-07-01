@@ -16,7 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
  *
  * @author Sergio
  */
-public class ClienteDAO implements ICrudDAO<Cliente, Integer> {
+public class ClienteDAO implements ICrudDAO<Cliente, Short> {
 
     private EntityManagerFactory entityManagerFactory;
 
@@ -46,7 +46,7 @@ public class ClienteDAO implements ICrudDAO<Cliente, Integer> {
     }
 
     @Override
-    public Cliente find(Integer id) throws EntityNotFoundException {
+    public Cliente find(Short id) throws EntityNotFoundException {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
@@ -82,7 +82,7 @@ public class ClienteDAO implements ICrudDAO<Cliente, Integer> {
     }
 
     @Override
-    public void delete(Integer id) throws NonexistentEntityException {
+    public void delete(Short id) throws NonexistentEntityException {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
@@ -117,6 +117,25 @@ public class ClienteDAO implements ICrudDAO<Cliente, Integer> {
             Query q = entityManager.createQuery(cq);
 
             return q.getResultList();
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
+    }
+
+    //Es necesario revisar este metodo, la parte del Query
+    public Short findName(String nombreCliente) {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            List<Cliente> clientes;
+            Query q = entityManager.createNamedQuery("Cliente.findByNombrecl").setParameter("nombrecl", nombreCliente);
+            clientes = q.getResultList();
+            return clientes.get(0).getIdcl();
+        } catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException("¡No hay proveedores con nombre: " + nombreCliente + "!");
         } finally {
             if (entityManager != null) {
                 entityManager.clear();

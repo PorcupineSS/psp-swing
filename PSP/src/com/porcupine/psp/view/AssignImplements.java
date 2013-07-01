@@ -37,11 +37,11 @@ public class AssignImplements extends javax.swing.JPanel {
     }
 
     public JButton getjButton1() {
-        return jButton1;
+        return jButtonDespojar;
     }
 
     public void setjButton1(JButton jButton1) {
-        this.jButton1 = jButton1;
+        this.jButtonDespojar = jButton1;
     }
 
     public JButton getjButtonAsignar() {
@@ -196,7 +196,7 @@ public class AssignImplements extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldCantidad = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonDespojar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Assign.png"))); // NOI18N
@@ -224,6 +224,7 @@ public class AssignImplements extends javax.swing.JPanel {
         jButtonAsignar.setForeground(new java.awt.Color(0, 102, 0));
         jButtonAsignar.setText("Asignar");
         jButtonAsignar.setToolTipText("");
+        jButtonAsignar.setEnabled(false);
 
         jButtonCancelar.setText("Cancelar");
 
@@ -240,9 +241,10 @@ public class AssignImplements extends javax.swing.JPanel {
 
         jLabel4.setText("Cantidad:");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(153, 0, 0));
-        jButton1.setText("Despojar");
+        jButtonDespojar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonDespojar.setForeground(new java.awt.Color(153, 0, 0));
+        jButtonDespojar.setText("Despojar");
+        jButtonDespojar.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -282,7 +284,7 @@ public class AssignImplements extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(jButtonDespojar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonAsignar)))
                 .addContainerGap())
@@ -318,13 +320,14 @@ public class AssignImplements extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAsignar)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonDespojar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAsignarActionPerformed
-
+        this.jButtonAsignar.setEnabled(true);
+        this.jButtonDespojar.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonAsignarActionPerformed
 
     private void jComboBoxEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpleadoActionPerformed
@@ -337,9 +340,9 @@ public class AssignImplements extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupOpcion;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAsignar;
     private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonDespojar;
     private javax.swing.JComboBox jComboBoxEmpleado;
     private javax.swing.JComboBox jComboBoxImplemento;
     private javax.swing.JLabel jLabel1;

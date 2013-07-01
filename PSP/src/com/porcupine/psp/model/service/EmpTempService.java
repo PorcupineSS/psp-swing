@@ -37,6 +37,13 @@ public class EmpTempService implements IService<EmpTempVO, Integer> {
     public void create(EmpTempVO vo) throws PreexistingEntityException, NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
         EmpTemp entity = new EmpTemp();
         entity.setCedulae(vo.getCedulaEmpleado());
+        //AsignacionC asignacionC = DAOFactory.getInstance().getAsignacionCDAO.find(vo.getIdAsig());
+        //entity.setIdAsig(asignacionC);
+        entity.setTieneContrato(vo.getTieneContrato());
+        entity.setTipoTemp(vo.getTipoTemp());
+        
+        DAOFactory.getInstance().getEmpTempDAO().create(entity);
+        
     }
 
     @Override

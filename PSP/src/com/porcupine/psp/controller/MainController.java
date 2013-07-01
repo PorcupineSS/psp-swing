@@ -56,6 +56,7 @@ public class MainController {
     public static AddContract agregarContrato;
     public static AddClient agregarCliente;
     public static WriteNotice agregarWriteNotice;
+    public static ReplyNotice crearReplyNotice;
     public static EmpleadosVO empleadoActivo;
     public static AddContract addContract;
     public static WriteNotice writeNotice;
@@ -292,6 +293,15 @@ public class MainController {
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarWriteNotice);
         helper.setTitle("Crear comunicado...");
+    }
+    
+    public static void mostrarFormularioReplyNotice() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        crearReplyNotice = new ReplyNotice();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), crearReplyNotice);
+        helper.setTitle("Responder comunicado...");
     }
 
     public static void mostrarFormularioCrearCliente() {

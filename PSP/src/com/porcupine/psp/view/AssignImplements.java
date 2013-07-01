@@ -5,6 +5,15 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.event.EventListenerList;
+import javax.swing.plaf.ComponentUI;
 
 /**
  *
@@ -17,6 +26,150 @@ public class AssignImplements extends javax.swing.JPanel {
      */
     public AssignImplements() {
         initComponents();
+    }
+
+    public ButtonGroup getButtonGroupOpcion() {
+        return buttonGroupOpcion;
+    }
+
+    public void setButtonGroupOpcion(ButtonGroup buttonGroupOpcion) {
+        this.buttonGroupOpcion = buttonGroupOpcion;
+    }
+
+    public JButton getjButton1() {
+        return jButton1;
+    }
+
+    public void setjButton1(JButton jButton1) {
+        this.jButton1 = jButton1;
+    }
+
+    public JButton getjButtonAsignar() {
+        return jButtonAsignar;
+    }
+
+    public void setjButtonAsignar(JButton jButtonAsignar) {
+        this.jButtonAsignar = jButtonAsignar;
+    }
+
+    public JButton getjButtonCancelar() {
+        return jButtonCancelar;
+    }
+
+    public void setjButtonCancelar(JButton jButtonCancelar) {
+        this.jButtonCancelar = jButtonCancelar;
+    }
+
+    public JComboBox getjComboBoxEmpleado() {
+        return jComboBoxEmpleado;
+    }
+
+    public void setjComboBoxEmpleado(JComboBox jComboBoxEmpleado) {
+        this.jComboBoxEmpleado = jComboBoxEmpleado;
+    }
+
+    public JComboBox getjComboBoxImplemento() {
+        return jComboBoxImplemento;
+    }
+
+    public void setjComboBoxImplemento(JComboBox jComboBoxImplemento) {
+        this.jComboBoxImplemento = jComboBoxImplemento;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JRadioButton getjRadioButtonAsignar() {
+        return jRadioButtonAsignar;
+    }
+
+    public void setjRadioButtonAsignar(JRadioButton jRadioButtonAsignar) {
+        this.jRadioButtonAsignar = jRadioButtonAsignar;
+    }
+
+    public JRadioButton getjRadioButtonDespojar() {
+        return jRadioButtonDespojar;
+    }
+
+    public void setjRadioButtonDespojar(JRadioButton jRadioButtonDespojar) {
+        this.jRadioButtonDespojar = jRadioButtonDespojar;
+    }
+
+    public JSeparator getjSeparator1() {
+        return jSeparator1;
+    }
+
+    public void setjSeparator1(JSeparator jSeparator1) {
+        this.jSeparator1 = jSeparator1;
+    }
+
+    public JSeparator getjSeparator2() {
+        return jSeparator2;
+    }
+
+    public void setjSeparator2(JSeparator jSeparator2) {
+        this.jSeparator2 = jSeparator2;
+    }
+
+    public JSeparator getjSeparator3() {
+        return jSeparator3;
+    }
+
+    public void setjSeparator3(JSeparator jSeparator3) {
+        this.jSeparator3 = jSeparator3;
+    }
+
+    public JTextField getjTextFieldCantidad() {
+        return jTextFieldCantidad;
+    }
+
+    public void setjTextFieldCantidad(JTextField jTextFieldCantidad) {
+        this.jTextFieldCantidad = jTextFieldCantidad;
+    }
+
+    public ComponentUI getUi() {
+        return ui;
+    }
+
+    public void setUi(ComponentUI ui) {
+        this.ui = ui;
+    }
+
+    public EventListenerList getListenerList() {
+        return listenerList;
+    }
+
+    public void setListenerList(EventListenerList listenerList) {
+        this.listenerList = listenerList;
     }
 
     /**
@@ -34,7 +187,7 @@ public class AssignImplements extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxEmpleado = new javax.swing.JComboBox(MainController.obtenerListaEmpTemp().toArray());
-        jComboBoxImplemento = new javax.swing.JComboBox();
+        jComboBoxImplemento = new javax.swing.JComboBox(MainController.obtenerListaImplementos().toArray());
         jButtonAsignar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
@@ -61,7 +214,11 @@ public class AssignImplements extends javax.swing.JPanel {
             }
         });
 
-        jComboBoxImplemento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Implemento 1", "Implemento 2", "Implemento 3", "Implemento 4", "Implemento 5", "Implemanto 6", "..." }));
+        jComboBoxImplemento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxImplementoActionPerformed(evt);
+            }
+        });
 
         jButtonAsignar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonAsignar.setForeground(new java.awt.Color(0, 102, 0));
@@ -167,12 +324,16 @@ public class AssignImplements extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAsignarActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jRadioButtonAsignarActionPerformed
 
     private void jComboBoxEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpleadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxEmpleadoActionPerformed
+
+    private void jComboBoxImplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxImplementoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxImplementoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupOpcion;

@@ -57,7 +57,14 @@ public class EmpTempService implements IService<EmpTempVO, Integer> {
 
     @Override
     public void update(EmpTempVO vo) throws NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EmpTemp entity = new EmpTemp();
+        entity.setCedulae(vo.getCedulaEmpleado());
+        //AsignacionC asignacionC = DAOFactory.getInstance().getAsignacionCDAO.find(vo.getIdAsig());
+        //entity.setIdAsig(asignacionC);
+        entity.setTieneContrato(vo.getTieneContrato());
+        entity.setTipoTemp(vo.getTipoTemp());
+        
+        DAOFactory.getInstance().getEmpTempDAO().update(entity);
     }
 
     @Override

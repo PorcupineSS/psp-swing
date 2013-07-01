@@ -95,4 +95,8 @@ public class ClienteService implements IService<ClienteVO, Integer> {
     public void removeAll() throws NonexistentEntityException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public Short findName(String nombreCliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

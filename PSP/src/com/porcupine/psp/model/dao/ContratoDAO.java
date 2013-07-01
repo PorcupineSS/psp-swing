@@ -5,7 +5,9 @@
 package com.porcupine.psp.model.dao;
 
 import com.porcupine.psp.model.dao.exceptions.*;
+import com.porcupine.psp.model.entity.Cliente;
 import com.porcupine.psp.model.entity.Contrato;
+import com.porcupine.psp.model.entity.DirComercial;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -20,7 +22,7 @@ import javax.persistence.criteria.CriteriaQuery;
  *
  * @author Feanor
  */
-public class ContratoDAO implements ICrudDAO<Contrato, Integer> {
+public class ContratoDAO implements ICrudDAO<Contrato, Short> {
     
     private EntityManagerFactory entityManagerFactory;
     
@@ -38,9 +40,35 @@ public class ContratoDAO implements ICrudDAO<Contrato, Integer> {
         try {
             entityManager = getEntityManager();
             entityManager.getTransaction().begin();
+            
+            Cliente cliente = entity.getIdcl();
+            DirComercial dirComercial = entity.getCedulae();
+            
+            if (cliente != null) {
+                Short idCliente = cliente.getIdcl();
+                try {
+                    cliente = entityManager.getReference(cliente.getClass(), cliente.getIdcl());
+                } catch (EntityNotFoundException e) {
+                    throw new NonexistentEntityException("¡El cliente con id: " + idCliente + ", asociado al contrato que intenta crear, no existe!", e);
+                }
+                entity.setIdcl(cliente);
+            }
+            if (dirComercial != null) {
+                Integer cedulaDirComercial = dirComercial.getCedulae();
+                try {
+                    dirComercial = entityManager.getReference(dirComercial.getClass(), dirComercial.getCedulae());
+                } catch (EntityNotFoundException e) {
+                    throw new NonexistentEntityException("¡El director comercial con cédula: " + cedulaDirComercial + ", asociado al contrato que intenta crear, no existe!", e);
+                }
+                entity.setCedulae(dirComercial);
+            }
+            
             entityManager.persist(entity);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
+            if (find(new Short(entity.getIdContrato())) != null) {
+                throw new PreexistingEntityException("¡El contrato" + entity.getIdContrato() + " ya existe!", ex);
+            }
             throw ex;
         } finally {
             if (entityManager != null) {
@@ -50,7 +78,7 @@ public class ContratoDAO implements ICrudDAO<Contrato, Integer> {
     }
     
     @Override
-    public Contrato find(Integer id) throws EntityNotFoundException {
+    public Contrato find(Short id) throws EntityNotFoundException {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
@@ -86,7 +114,7 @@ public class ContratoDAO implements ICrudDAO<Contrato, Integer> {
     }
     
     @Override
-    public void delete(Integer id) throws NonexistentEntityException {
+    public void delete(Short id) throws NonexistentEntityException {
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();

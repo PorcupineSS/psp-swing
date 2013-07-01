@@ -15,6 +15,7 @@ import com.porcupine.psp.model.entity.AsignacionC;
 import com.porcupine.psp.model.entity.EmpTemp;
 import com.porcupine.psp.model.vo.EmpTempVO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
@@ -77,7 +78,13 @@ public class EmpTempService implements IService<EmpTempVO, Integer> {
 
     @Override
     public List<EmpTempVO> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EmpTempVO> listaVO = new ArrayList<EmpTempVO>();
+        List<EmpTemp> lista = DAOFactory.getInstance().getEmpTempDAO().getList();
+        for (EmpTemp implemento : lista) {
+            EmpTempVO impl = implemento.toVO();
+            listaVO.add(impl);
+        }
+        return listaVO;
     }
 
     @Override

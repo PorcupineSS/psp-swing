@@ -36,12 +36,15 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTextFieldNombres" pref="203" max="32767" attributes="0"/>
+                          <Component id="jTextFieldNombres" pref="223" max="32767" attributes="0"/>
                           <Component id="jTextFieldApellidos" max="32767" attributes="0"/>
-                          <Component id="jTextFieldCC" max="32767" attributes="0"/>
+                          <Component id="jTextFieldCC" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jLabelWindowName" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabelWindowName" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -74,7 +77,8 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jButtonEncontrarContratos" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonGuardar" min="-2" max="-2" attributes="0"/>
@@ -146,7 +150,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButtonGuardar" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonCancelar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="jButtonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonEncontrarContratos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -303,6 +310,11 @@
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
         <Property name="text" type="java.lang.String" value="COP"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonEncontrarContratos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Encontrar Contratos"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -68,6 +68,7 @@ public class CreateEmployee extends javax.swing.JPanel {
         jListTelefono = new javax.swing.JList();
         jButtonRemover = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jButtonEncontrarContratos = new javax.swing.JButton();
 
         jTextField5.setText("jTextField5");
 
@@ -146,6 +147,8 @@ public class CreateEmployee extends javax.swing.JPanel {
 
         jLabel9.setText("COP");
 
+        jButtonEncontrarContratos.setText("Encontrar Contratos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,10 +165,12 @@ public class CreateEmployee extends javax.swing.JPanel {
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                            .addComponent(jTextFieldNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                             .addComponent(jTextFieldApellidos)
-                            .addComponent(jTextFieldCC)))
-                    .addComponent(jLabelWindowName)
+                            .addComponent(jTextFieldCC, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelWindowName)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -189,7 +194,8 @@ public class CreateEmployee extends javax.swing.JPanel {
                                             .addComponent(jLabel9))))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonEncontrarContratos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonGuardar))
@@ -246,11 +252,48 @@ public class CreateEmployee extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonGuardar)
-                    .addComponent(jButtonCancelar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonCancelar)
+                        .addComponent(jButtonEncontrarContratos)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getjButtonAgregar() {
+        return jButtonAgregar;
+    }
+
+    public void setjButtonAgregar(JButton jButtonAgregar) {
+        this.jButtonAgregar = jButtonAgregar;
+    }
+
+    public JButton getjButtonCancelar() {
+        return jButtonCancelar;
+    }
+
+    public void setjButtonCancelar(JButton jButtonCancelar) {
+        this.jButtonCancelar = jButtonCancelar;
+    }
+
+    public JButton getjButtonEncontrarContratos() {
+        return jButtonEncontrarContratos;
+    }
+
+    public void setjButtonEncontrarContratos(JButton jButtonEncontrarContratos) {
+        this.jButtonEncontrarContratos = jButtonEncontrarContratos;
+    }
+
+    public JButton getjButtonRemover() {
+        return jButtonRemover;
+    }
+
+    public void setjButtonRemover(JButton jButtonRemover) {
+        this.jButtonRemover = jButtonRemover;
+    }
+
+    
+    
+    
     public JButton getjButtonGuardar() {
         return jButtonGuardar;
     }
@@ -389,6 +432,7 @@ public class CreateEmployee extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonEncontrarContratos;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonRemover;
     private javax.swing.JComboBox jComboBoxTipoEmpleado;

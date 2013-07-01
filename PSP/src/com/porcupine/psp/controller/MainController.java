@@ -249,7 +249,9 @@ public class MainController {
         crearEmpleado = new CreateEmployee(empleadosDisponibles);
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), crearEmpleado);
-        helper.setTitle("Porcupine Software Portal");
+        helper.setTitle("Crear Empleado...");
+        
+        crearEmpleado.getjButtonEncontrarContratos().setEnabled(false);
     }
 
     public static void mostrarFormuarioCrearImplementos() {

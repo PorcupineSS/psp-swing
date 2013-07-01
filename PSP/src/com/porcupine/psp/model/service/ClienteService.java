@@ -17,6 +17,8 @@ import com.porcupine.psp.model.entity.TelsCli;
 import com.porcupine.psp.model.vo.ClienteVO;
 import com.porcupine.psp.model.vo.ContratoVO;
 import com.porcupine.psp.model.vo.EmpleadosVO;
+import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.util.TipoTelefono;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
@@ -36,23 +38,38 @@ public class ClienteService implements IService<ClienteVO, Integer> {
         return instance;
     }
 
-    
     //sin terminar
     @Override
     public void create(ClienteVO vo) throws PreexistingEntityException, NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
         Cliente entity = new Cliente();
 
-        if (vo.getCedulaDirector() != null) {
-            DirComercial director = DAOFactory.getInstance().getDirComercialDAO().find((int) vo.getCedulaDirector());
-            entity.setCedulae(director);
-        }
-        
         entity.setDireccioncl(vo.getDireccionCliente());
         entity.setFechaRegCl(vo.getFechaRegCliente());
         entity.setIdcl(vo.getIdCliente());
         entity.setNombrecl(vo.getNombreCliente());
-        //son arreglos vacíos por ahora
-        entity.setContratoList(new ArrayList<Contrato>());
+
+
+        DirComercial director = DAOFactory.getInstance().getDirComercialDAO().find(vo.getCedulaDirector());
+        entity.setCedulae(director);
+
+
+        List<TelsCli> tels = new ArrayList<TelsCli>();
+
+
+        for (TelefonosVO each : vo.getTelsCliList()) {
+            TelsCli emp = (TelsCli) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.CLIENTE);
+            if (emp != null) {
+                tels.add(emp);
+            } else {
+                emp = new TelsCli();
+                emp.setNumTelefonoC(each.getNumeroTelefonoEmpleado());
+                DAOFactory.getInstance().getTelefonosDAO().create(emp);
+                emp = (TelsCli) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.CLIENTE);
+                tels.add(emp);
+            }
+
+        }
+
         entity.setTelsCliList(new ArrayList<TelsCli>());
         DAOFactory.getInstance().getClienteDAO().create(entity);
     }
@@ -74,10 +91,10 @@ public class ClienteService implements IService<ClienteVO, Integer> {
 
     @Override
     public void delete(Integer id) throws NonexistentEntityException, InsufficientPermissionsException {
-         Cliente cliente = DAOFactory.getInstance().getClienteDAO().find(id);
+        Cliente cliente = DAOFactory.getInstance().getClienteDAO().find(id);
         if (cliente != null) {
             DAOFactory.getInstance().getClienteDAO().delete(id);
-        } 
+        }
     }
 
     @Override

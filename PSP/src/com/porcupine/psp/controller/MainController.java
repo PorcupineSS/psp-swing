@@ -12,12 +12,7 @@ import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.service.ServiceFactory;
-import com.porcupine.psp.model.vo.ComunicadoVO;
-import com.porcupine.psp.model.vo.ContratoVO;
-import com.porcupine.psp.model.vo.EmpleadosVO;
-import com.porcupine.psp.model.vo.ImplSeguridadVO;
-import com.porcupine.psp.model.vo.ProveedorVO;
-import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.model.vo.*;
 import com.porcupine.psp.util.DrawingUtilities;
 import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;
@@ -37,7 +32,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 
 /**
  * El proposito de esta clase es tener un lugar integrado con todos los metodos
@@ -251,7 +245,7 @@ public class MainController {
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), crearEmpleado);
         helper.setTitle("Crear Empleado...");
-        
+
         crearEmpleado.getjButtonEncontrarContratos().setEnabled(false);
     }
 
@@ -297,7 +291,7 @@ public class MainController {
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarWriteNotice);
     }
-    
+
     public static void mostrarFormularioCrearCliente() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
@@ -305,10 +299,9 @@ public class MainController {
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarCliente);
         helper.setTitle("Crear Cliente...");
-        
+
         agregarCliente.getjButtonEncontrarContrato().setEnabled(false);
     }
-    
 
     //utilidades
     public static void cerrar() {
@@ -494,28 +487,31 @@ public class MainController {
         }
         //Vos Externos
 
+        if (agregarCliente.getjListTelefono().getModel().getSize() != 0) {
 
-        DefaultListModel model = (DefaultListModel) crearEmpleado.getjListTelefono().getModel();
+            DefaultListModel model = (DefaultListModel) crearEmpleado.getjListTelefono().getModel();
 
-        ArrayList<String> tels = new ArrayList<String>();
-        for (int x = 0; x < model.size(); x++) {
-            String tel = (String) model.elementAt(x);
-            tels.add(tel);
+            ArrayList<String> tels = new ArrayList<String>();
+            for (int x = 0; x < model.size(); x++) {
+                String tel = (String) model.elementAt(x);
+                tels.add(tel);
+            }
+
+
+
+            //Se agrega cada telefono
+            List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+            for (String each : tels) {
+
+                TelefonosVO temp = new TelefonosVO();
+                temp.setNumeroTelefonoEmpleado(each);
+                telefonos.add(temp);
+
+            }
+
+            empleado.setTelsEmpList(telefonos);
+
         }
-
-
-
-        //Se agrega cada telefono
-        List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
-        for (String each : tels) {
-
-            TelefonosVO temp = new TelefonosVO();
-            temp.setNumeroTelefonoEmpleado(each);
-            telefonos.add(temp);
-
-        }
-
-        empleado.setTelsEmpList(telefonos);
 
         try {
             ServiceFactory.getInstance().getEmpleadosService().create(empleado);
@@ -524,7 +520,62 @@ public class MainController {
             int opcion = JOptionPane.showOptionDialog(crearEmpleado, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
             switch (opcion) {
                 case JOptionPane.OK_OPTION:
-                    //TODO Reportar Error
+                    reportarError(ex, crearEmpleado);
+                    break;
+                case JOptionPane.CANCEL_OPTION:
+                    break;
+            }
+            return;
+        }
+
+    }
+
+    public static void crearCliente() {
+
+        ClienteVO cliente = new ClienteVO();
+
+        cliente.setIdCliente(new Short(agregarCliente.getjTextFieldCC().getText()));
+        cliente.setCedulaDirector(empleadoActivo.getCedulaEmpleado());
+        cliente.setDireccionCliente(agregarCliente.getjTextFieldDireccion().getText());
+        cliente.setFechaRegCliente(new Date());
+        //No debería ser necesario
+        //cliente.setIdCliente(Short.MIN_VALUE);
+        cliente.setNombreCliente(agregarCliente.getjTextFieldNombre().getText());
+
+        if (agregarCliente.getjListTelefono().getModel().getSize() != 0) {
+
+            DefaultListModel model = (DefaultListModel) agregarCliente.getjListTelefono().getModel();
+
+            ArrayList<String> tels = new ArrayList<String>();
+            for (int x = 0; x < model.size(); x++) {
+                String tel = (String) model.elementAt(x);
+                tels.add(tel);
+            }
+
+            //Se agrega cada telefono
+            List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+            for (String each : tels) {
+
+                TelefonosVO temp = new TelefonosVO();
+                temp.setNumeroTelefonoEmpleado(each);
+                telefonos.add(temp);
+
+            }
+
+            cliente.setTelsCliList(telefonos);
+
+        }
+
+
+
+        try {
+            ServiceFactory.getInstance().getClienteService().create(cliente);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            int opcion = JOptionPane.showOptionDialog(agregarCliente, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
+            switch (opcion) {
+                case JOptionPane.OK_OPTION:
+                    reportarError(ex, agregarCliente);
                     break;
                 case JOptionPane.CANCEL_OPTION:
                     break;

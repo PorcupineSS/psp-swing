@@ -683,7 +683,7 @@ public class MainController {
         }
         List<String> empleados = new ArrayList<>();
         for (EmpleadosVO empleadoVO : listaEmpleados) {
-            empleados.add(empleadoVO.getNombreEmpleado());
+            empleados.add(empleadoVO.getCodigoDocumento().toString() + " - " + empleadoVO.getApellidoEmpleado() + " " + empleadoVO.getNombreEmpleado());
         }
         return empleados;
     }

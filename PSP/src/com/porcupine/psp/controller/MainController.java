@@ -797,10 +797,12 @@ public class MainController {
     public static void crearComunicacion() {
         ComunicadoVO comunicadoVO = new ComunicadoVO();
 
+        comunicadoVO.setIdComunicado(new Integer(1).shortValue());
         comunicadoVO.setTipoCom(agregarWriteNotice.getjComboBoxTipo().getSelectedItem().toString());
         comunicadoVO.setContenidoCom(agregarWriteNotice.getjTextAreaComunicado().getText());
-        //Revisar que este bien manejado el CheckBox
         comunicadoVO.setUrgente(agregarWriteNotice.getjCheckBoxUrgente().isSelected());
+        comunicadoVO.setFechaCom(new Date());
+        comunicadoVO.setCedulaEmpTemp(empleadoActivo.getCedulaEmpleado());
 
         try {
             ServiceFactory.getInstance().getComunicadoService().create(comunicadoVO);
@@ -809,8 +811,8 @@ public class MainController {
             return;
         }
         JOptionPane.showMessageDialog(agregarWriteNotice, "¡Comunicado agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-        //secondary.setVisible(false);
-        //secondary = new Secondary();
+//      helper.setVisible(false);
+//      helper.dispose();
     }
 
     public static void listarComunicacion() {

@@ -27,7 +27,7 @@ import javax.persistence.EntityNotFoundException;
  *
  * @author Johan
  */
-public class ClienteService implements IService<ClienteVO, Integer> {
+public class ClienteService implements IService<ClienteVO, Short> {
 
     private static ClienteService instance;
 
@@ -75,7 +75,7 @@ public class ClienteService implements IService<ClienteVO, Integer> {
     }
 
     @Override
-    public ClienteVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {
+    public ClienteVO find(Short id) throws EntityNotFoundException, InsufficientPermissionsException {
         Cliente cliente = DAOFactory.getInstance().getClienteDAO().find(id);
         if (cliente != null) {
             return cliente.toVO();
@@ -90,7 +90,7 @@ public class ClienteService implements IService<ClienteVO, Integer> {
     }
 
     @Override
-    public void delete(Integer id) throws NonexistentEntityException, InsufficientPermissionsException {
+    public void delete(Short id) throws NonexistentEntityException, InsufficientPermissionsException {
         Cliente cliente = DAOFactory.getInstance().getClienteDAO().find(id);
         if (cliente != null) {
             DAOFactory.getInstance().getClienteDAO().delete(id);

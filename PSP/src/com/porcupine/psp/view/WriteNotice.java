@@ -161,7 +161,7 @@ public class WriteNotice extends javax.swing.JPanel {
 
         jLabel3.setText("Comunicado:");
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo 1", "Tipo 2", "Tipo 3", "..." }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "RECLAMO", "QUEJA", "SUGERENCIA" }));
 
         jTextAreaComunicado.setColumns(20);
         jTextAreaComunicado.setRows(5);

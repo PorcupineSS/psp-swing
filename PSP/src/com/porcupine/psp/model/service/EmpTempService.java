@@ -69,7 +69,10 @@ public class EmpTempService implements IService<EmpTempVO, Integer> {
 
     @Override
     public void delete(Integer id) throws NonexistentEntityException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EmpTemp empTemp = DAOFactory.getInstance().getEmpTempDAO().find(id);
+        if (empTemp != null) {
+            DAOFactory.getInstance().getEmpTempDAO().delete(id);
+        } 
     }
 
     @Override

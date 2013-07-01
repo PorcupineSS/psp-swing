@@ -42,13 +42,17 @@ public class EmpTempService implements IService<EmpTempVO, Integer> {
         entity.setTieneContrato(vo.getTieneContrato());
         entity.setTipoTemp(vo.getTipoTemp());
         
-        DAOFactory.getInstance().getEmpTempDAO().create(entity);
-        
+        DAOFactory.getInstance().getEmpTempDAO().create(entity);  
     }
 
     @Override
     public EmpTempVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EmpTemp empTemp = DAOFactory.getInstance().getEmpTempDAO().find(id);
+        if (empTemp != null) {
+            return empTemp.toVO();
+        } else {
+            return null;
+        }
     }
 
     @Override

@@ -69,7 +69,7 @@ public class MainController {
     public static EmpleadosVO empleadoTemporal;
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
-    static AssignImplements asignarImplementos = new AssignImplements();
+    public static AssignImplements asignarImplementos;
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -670,10 +670,24 @@ public class MainController {
         }
         return lista;
     }
+    
+    public static List<String> obtenerListaEmpTemp() {
+        List<EmpTempVO> listaEmpTemp = ServiceFactory.getInstance().getEmpTempService().getList();
+        List<Integer> listaCedulas = new ArrayList<>();
+        for (EmpTempVO empTemp: listaEmpTemp) {
+            listaCedulas.add(empTemp.getCedulaEmpleado());
+        }
+        List<EmpleadosVO> listaEmpleados = new ArrayList<>();
+        for (Integer cedula : listaCedulas) {
+            listaEmpleados.add(ServiceFactory.getInstance().getEmpleadosService().find(cedula));
+        }
+        List<String> empleados = new ArrayList<>();
+        for (EmpleadosVO empleadoVO : listaEmpleados) {
+            empleados.add(empleadoVO.getNombreEmpleado());
+        }
+        return empleados;
+    }
 
-//    public static List<String> obtenerLitsEmpleadosTemporales(){
-//        List<EmplTempVO> listaEmpleados = ServiceFactory.getInstance().
-//    }
     public static void llenarTabla() {
         List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance().getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
         modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();

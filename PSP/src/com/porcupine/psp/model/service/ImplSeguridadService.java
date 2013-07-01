@@ -103,7 +103,7 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Short> {
     @Override
     public List<ImplSeguridadVO> getList() {
         List<ImplSeguridadVO> listaVO = new ArrayList<ImplSeguridadVO>();
-        List<ImplSeguridad> lista = DAOFactory.getInstance().getImplSeguridadDAO().getList();;
+        List<ImplSeguridad> lista = DAOFactory.getInstance().getImplSeguridadDAO().getList();
         for (ImplSeguridad implemento : lista) {
             ImplSeguridadVO impl = implemento.toVO();
             listaVO.add(impl);

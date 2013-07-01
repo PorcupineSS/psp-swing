@@ -80,9 +80,9 @@ public class EmpTempService implements IService<EmpTempVO, Integer> {
     public List<EmpTempVO> getList() {
         List<EmpTempVO> listaVO = new ArrayList<EmpTempVO>();
         List<EmpTemp> lista = DAOFactory.getInstance().getEmpTempDAO().getList();
-        for (EmpTemp implemento : lista) {
-            EmpTempVO impl = implemento.toVO();
-            listaVO.add(impl);
+        for (EmpTemp empleados : lista) {
+            EmpTempVO empl = empleados.toVO();
+            listaVO.add(empl);
         }
         return listaVO;
     }

@@ -41,5 +41,9 @@ public class ServiceFactory {
     public ClienteService getClienteService() {
         return ClienteService.getInstance();
     }
+    
+    public EmpTempService getEmpTempService() {
+        return EmpTempService.getInstance();
+    }
 
 }

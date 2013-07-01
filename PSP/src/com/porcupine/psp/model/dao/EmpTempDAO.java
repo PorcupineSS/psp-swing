@@ -24,14 +24,6 @@ public class EmpTempDAO implements ICrudDAO<EmpTemp, Integer> {
         entityManagerFactory = Persistence.createEntityManagerFactory(PU, propierties);
     }
 
-    public EntityManagerFactory getEntityManagerFactory() {
-        return entityManagerFactory;
-    }
-
-    public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
-    }
-
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }

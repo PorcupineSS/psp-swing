@@ -4,6 +4,8 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
+
 /**
  *
  * @author Jeisson Andrés Vergara
@@ -31,7 +33,7 @@ public class AssignImplements extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBoxEmpleado = new javax.swing.JComboBox();
+        jComboBoxEmpleado = new javax.swing.JComboBox(MainController.obtenerListaEmpTemp().toArray());
         jComboBoxImplemento = new javax.swing.JComboBox();
         jButtonAsignar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -53,7 +55,11 @@ public class AssignImplements extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel3.setText("Seleccionar Implemento:");
 
-        jComboBoxEmpleado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Empleado 1", "Empleado 2", "Empleado 3", "Empleado 4", "..." }));
+        jComboBoxEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEmpleadoActionPerformed(evt);
+            }
+        });
 
         jComboBoxImplemento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Implemento 1", "Implemento 2", "Implemento 3", "Implemento 4", "Implemento 5", "Implemanto 6", "..." }));
 
@@ -162,6 +168,10 @@ public class AssignImplements extends javax.swing.JPanel {
     private void jRadioButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAsignarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonAsignarActionPerformed
+
+    private void jComboBoxEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpleadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEmpleadoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupOpcion;

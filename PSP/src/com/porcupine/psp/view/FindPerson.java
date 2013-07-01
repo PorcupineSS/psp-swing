@@ -4,6 +4,8 @@
  */
 package com.porcupine.psp.view;
 
+import javax.swing.JList;
+
 /**
  *
  * @author andres
@@ -17,6 +19,16 @@ public class FindPerson extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JList getjListResultados() {
+        return jListResultados;
+    }
+
+    public void setjListResultados(JList jListResultados) {
+        this.jListResultados = jListResultados;
+    }
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

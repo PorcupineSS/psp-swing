@@ -4,7 +4,7 @@
  */
 package com.porcupine.psp.view;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -19,6 +19,88 @@ public class AddClient extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JButton getjButtonAgregar() {
+        return jButtonAgregar;
+    }
+
+    public void setjButtonAgregar(JButton jButtonAgregar) {
+        this.jButtonAgregar = jButtonAgregar;
+    }
+
+    public JButton getjButtonCancelar() {
+        return jButtonCancelar;
+    }
+
+    public void setjButtonCancelar(JButton jButtonCancelar) {
+        this.jButtonCancelar = jButtonCancelar;
+    }
+
+    public JButton getjButtonEncontrarContrato() {
+        return jButtonEncontrarContrato;
+    }
+
+    public void setjButtonEncontrarContrato(JButton jButtonEncontrarContrato) {
+        this.jButtonEncontrarContrato = jButtonEncontrarContrato;
+    }
+
+    public JButton getjButtonGuardar() {
+        return jButtonGuardar;
+    }
+
+    public void setjButtonGuardar(JButton jButtonGuardar) {
+        this.jButtonGuardar = jButtonGuardar;
+    }
+
+    public JButton getjButtonRemover() {
+        return jButtonRemover;
+    }
+
+    public void setjButtonRemover(JButton jButtonRemover) {
+        this.jButtonRemover = jButtonRemover;
+    }
+
+    public JLabel getjLabelWindowName() {
+        return jLabelWindowName;
+    }
+
+    public void setjLabelWindowName(JLabel jLabelWindowName) {
+        this.jLabelWindowName = jLabelWindowName;
+    }
+
+    public JList getjListTelefono() {
+        return jListTelefono;
+    }
+
+    public void setjListTelefono(JList jListTelefono) {
+        this.jListTelefono = jListTelefono;
+    }
+
+    public JTextField getjTextFieldCC() {
+        return jTextFieldCC;
+    }
+
+    public void setjTextFieldCC(JTextField jTextFieldCC) {
+        this.jTextFieldCC = jTextFieldCC;
+    }
+
+    public JTextField getjTextFieldDireccion() {
+        return jTextFieldDireccion;
+    }
+
+    public void setjTextFieldDireccion(JTextField jTextFieldDireccion) {
+        this.jTextFieldDireccion = jTextFieldDireccion;
+    }
+
+    public JTextField getjTextFieldNombre() {
+        return jTextFieldNombre;
+    }
+
+    public void setjTextFieldNombre(JTextField jTextFieldNombre) {
+        this.jTextFieldNombre = jTextFieldNombre;
+    }
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,7 +110,7 @@ public class AddClient extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabelWindowName = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
@@ -44,10 +126,11 @@ public class AddClient extends javax.swing.JPanel {
         jButtonCancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldCC = new javax.swing.JTextField();
+        jButtonEncontrarContrato = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/AddClient.png"))); // NOI18N
-        jLabel1.setText("Nuevo Cliente");
+        jLabelWindowName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelWindowName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/AddClient.png"))); // NOI18N
+        jLabelWindowName.setText("Nuevo Cliente");
 
         jLabel3.setText("Nombre:");
 
@@ -106,6 +189,13 @@ public class AddClient extends javax.swing.JPanel {
             }
         });
 
+        jButtonEncontrarContrato.setText("Encontrar Contrato");
+        jButtonEncontrarContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEncontrarContratoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,11 +206,11 @@ public class AddClient extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonEncontrarContrato)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonGuardar))
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(39, 39, 39)
@@ -128,28 +218,31 @@ public class AddClient extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(14, 14, 14)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonAgregar)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addComponent(jButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelWindowName)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldNombre)
-                            .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextFieldDireccion))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelWindowName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -177,7 +270,8 @@ public class AddClient extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButtonGuardar))
+                    .addComponent(jButtonGuardar)
+                    .addComponent(jButtonEncontrarContrato))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -208,16 +302,21 @@ public class AddClient extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCCActionPerformed
 
+    private void jButtonEncontrarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncontrarContratoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEncontrarContratoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonEncontrarContrato;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonRemover;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelWindowName;
     private javax.swing.JList jListTelefono;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

@@ -4,6 +4,8 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
+
 /**
  *
  * @author Jeisson Andrés Vergara
@@ -130,11 +132,14 @@ public class OperationsManagement extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
-        // TODO add your handling code here:
+        MainController.psp.setVisible(false);
+        MainController.psp.dispose();
+        MainController.setEmpleadoActivo(null);
+        MainController.mostrarLogin();
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jButtonReplyNoticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReplyNoticeActionPerformed
-        // TODO add your handling code here:
+        MainController.mostrarFormularioReplyNotice();
     }//GEN-LAST:event_jButtonReplyNoticeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

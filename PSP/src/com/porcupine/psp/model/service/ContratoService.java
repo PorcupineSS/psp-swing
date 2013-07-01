@@ -22,7 +22,7 @@ import javax.persistence.EntityNotFoundException;
  *
  * @author Feanor
  */
-public class ContratoService implements IService<ContratoVO, Integer> {
+public class ContratoService implements IService<ContratoVO, Short> {
     
     private static ContratoService instance;
     
@@ -51,7 +51,7 @@ public class ContratoService implements IService<ContratoVO, Integer> {
         entity.setUbicacionC(vo.getUbicacionCont());
         
         if(vo.getIdCliente() != 0){
-           Cliente cliente = DAOFactory.getInstance().getClienteDAO().find((int) vo.getIdCliente());
+           Cliente cliente = DAOFactory.getInstance().getClienteDAO().find((Short) vo.getIdCliente());
            entity.setIdcl(cliente);
            cliente.getContratoList().add(entity);
         }
@@ -66,7 +66,7 @@ public class ContratoService implements IService<ContratoVO, Integer> {
     }
 
     @Override
-    public ContratoVO find(Integer id) throws EntityNotFoundException, InsufficientPermissionsException {
+    public ContratoVO find(Short id) throws EntityNotFoundException, InsufficientPermissionsException {
         Contrato contrato = DAOFactory.getInstance().getContratoDAO().find(id);
         if (contrato != null) {
             return contrato.toVO();
@@ -93,7 +93,7 @@ public class ContratoService implements IService<ContratoVO, Integer> {
         entity.setUbicacionC(vo.getUbicacionCont());
         
         if(vo.getIdCliente() != 0){
-           Cliente cliente = DAOFactory.getInstance().getClienteDAO().find((int) vo.getIdCliente());
+           Cliente cliente = DAOFactory.getInstance().getClienteDAO().find((Short) vo.getIdCliente());
            entity.setIdcl(cliente);
            cliente.getContratoList().set(cliente.getContratoList().get(entity.getIdContrato()).getIdContrato(), entity);
         }
@@ -108,7 +108,7 @@ public class ContratoService implements IService<ContratoVO, Integer> {
     }
 
     @Override
-    public void delete(Integer id) throws NonexistentEntityException, InsufficientPermissionsException {
+    public void delete(Short id) throws NonexistentEntityException, InsufficientPermissionsException {
         Contrato contrato = DAOFactory.getInstance().getContratoDAO().find(id);
         if (contrato != null) {
             DAOFactory.getInstance().getContratoDAO().delete(id);

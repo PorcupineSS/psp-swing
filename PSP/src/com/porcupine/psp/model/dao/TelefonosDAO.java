@@ -37,9 +37,14 @@ public class TelefonosDAO {
         try {
             if (tipoTelefono == TipoTelefono.CLIENTE) {
                 entityManager = getEntityManager();
-                Query query = entityManager.createNamedQuery("TelsCli.findByNumTelefonoC", TelsCli.class).setParameter(1, telefono);
-                TelsCli r = (TelsCli) query.getSingleResult();
-                return r;
+                Query query = entityManager.createNamedQuery("TelsCli.findByNumTelefonoC", TelsCli.class).setParameter("numTelefonoC", telefono);
+                TelsCli r = null;
+                try {
+                    r = (TelsCli) query.getSingleResult();
+                    return r;
+                } catch (Exception e) {
+                    return null;
+                }
             } else if (tipoTelefono == TipoTelefono.EMPLEADO) {
                 entityManager = getEntityManager();
                 Query query = entityManager.createNamedQuery("TelsEmp.findByNumTelefonoE", TelsEmp.class).setParameter("numTelefonoE", telefono);

@@ -158,7 +158,14 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
         Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().find(id);
         if (empleado != null) {
-            return empleado.toVO();
+            EmpleadosVO empleadoVO = empleado.toVO();
+            if (empleadoVO.getRol() == TipoEmpleado.TEMPORAL){
+                EmpPlantaVO empleadoPlanta = DAOFactory.getInstance().getEmpPlantaDAO().find(id).toVO();
+                empleadoVO.setSueldoEmpleadoPlanta(Integer.parseInt(empleadoPlanta.getSueldoe().toString()));
+            }
+
+
+            return empleadoVO;
         } else {
             return null;
         }

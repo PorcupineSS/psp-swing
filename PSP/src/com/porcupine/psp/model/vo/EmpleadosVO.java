@@ -13,8 +13,7 @@ import java.util.List;
  * @author Zergio
  */
 public class EmpleadosVO implements IValueObject, Serializable {
-    
-    
+
     //Variables no opcionales
     private Integer cedulaEmpleado;
     private String nombreEmpleado;
@@ -22,11 +21,9 @@ public class EmpleadosVO implements IValueObject, Serializable {
     private String contraseniaEmpleado;
     private String codigoDocumento;
     private Date fechaRegistro;
-    
     //variables opcionales
     private Integer cedulaDirector;
-    
-    
+    private Integer sueldoEmpleadoPlanta;
     //Colecciones
     private List<TelefonosVO> telsEmpList;
     private List<BitacoraSegVO> bitacoraSegList;
@@ -56,8 +53,6 @@ public class EmpleadosVO implements IValueObject, Serializable {
     public void setBitacoraSegList(List<BitacoraSegVO> bitacoraSegList) {
         this.bitacoraSegList = bitacoraSegList;
     }
-    
-    
 
     public String getApellidoEmpleado() {
         return apellidoEmpleado;
@@ -67,12 +62,9 @@ public class EmpleadosVO implements IValueObject, Serializable {
         this.apellidoEmpleado = apellidoEmpleado;
     }
 
-   
-
     public void setCedulaDirector(int cedulaDirector) {
         this.cedulaDirector = cedulaDirector;
     }
-
 
     public void setCedulaEmpleado(int cedulaEmpleado) {
         this.cedulaEmpleado = cedulaEmpleado;
@@ -125,7 +117,15 @@ public class EmpleadosVO implements IValueObject, Serializable {
     public void setTelsEmpList(List<TelefonosVO> telsEmpList) {
         this.telsEmpList = telsEmpList;
     }
+
     
+    public Integer getSueldoEmpleadoPlanta() {
+        return sueldoEmpleadoPlanta;
+    }
+
+    public void setSueldoEmpleadoPlanta(Integer sueldoEmpleadoPlanta) {
+        this.sueldoEmpleadoPlanta = sueldoEmpleadoPlanta;
+    }
     
     
 }

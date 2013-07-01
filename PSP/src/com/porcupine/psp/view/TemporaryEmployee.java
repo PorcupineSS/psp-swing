@@ -145,7 +145,10 @@ public class TemporaryEmployee extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
-        // TODO add your handling code here:
+        MainController.psp.setVisible(false);
+        MainController.psp.dispose();
+        MainController.setEmpleadoActivo(null);
+        MainController.mostrarLogin();
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jButtonCheckMyContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckMyContractActionPerformed

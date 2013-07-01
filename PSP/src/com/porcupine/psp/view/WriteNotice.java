@@ -161,7 +161,7 @@ public class WriteNotice extends javax.swing.JPanel {
 
         jLabel3.setText("Comunicado:");
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo 1", "Tipo 2", "Tipo 3", "..." }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "RECLAMO", "QUEJA", "SUGERENCIA" }));
 
         jTextAreaComunicado.setColumns(20);
         jTextAreaComunicado.setRows(5);
@@ -175,6 +175,11 @@ public class WriteNotice extends javax.swing.JPanel {
         });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonEnviar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonEnviar.setForeground(new java.awt.Color(0, 102, 0));
@@ -250,6 +255,11 @@ public class WriteNotice extends javax.swing.JPanel {
     private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
         MainController.crearComunicacion();
     }//GEN-LAST:event_jButtonEnviarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        MainController.helper.setVisible(false);
+        MainController.helper.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

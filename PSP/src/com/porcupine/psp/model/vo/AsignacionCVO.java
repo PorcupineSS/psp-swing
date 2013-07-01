@@ -18,7 +18,7 @@ public class AsignacionCVO implements IValueObject, Serializable{
     
     private Short idAsig;
     private Short idContrato;
-    private Integer cedulaEmpTemp;//tengo duda sobre si este si el nombre xD
+    private Integer cedulaEmpTemp;
     private Integer cedulaCoordCont;
     private Date fechaAsignacionC;
     private String horarioAsignado;

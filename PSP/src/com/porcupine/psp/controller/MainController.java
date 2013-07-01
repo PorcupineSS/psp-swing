@@ -12,12 +12,7 @@ import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.service.ServiceFactory;
-import com.porcupine.psp.model.vo.ComunicadoVO;
-import com.porcupine.psp.model.vo.ContratoVO;
-import com.porcupine.psp.model.vo.EmpleadosVO;
-import com.porcupine.psp.model.vo.ImplSeguridadVO;
-import com.porcupine.psp.model.vo.ProveedorVO;
-import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.model.vo.*;
 import com.porcupine.psp.util.DrawingUtilities;
 import com.porcupine.psp.util.ServidoresDisponibles;
 import com.porcupine.psp.util.TipoEmpleado;
@@ -34,7 +29,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import oracle.jdbc.driver.Message;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  * El proposito de esta clase es tener un lugar integrado con todos los metodos
@@ -57,11 +54,14 @@ public class MainController {
     public static Helper helper1;
     public static AddImplement agregarImplemento;
     public static AddContract agregarContrato;
+    public static AddClient agregarCliente;
     public static WriteNotice agregarWriteNotice;
+    public static ReplyNotice crearReplyNotice;
     public static EmpleadosVO empleadoActivo;
     public static AddContract addContract;
     public static WriteNotice writeNotice;
     public static Secondary secondary;
+    public static FindPerson findPerson;
     public static String username;
     public static String selectedDB;
     public static String password;
@@ -70,7 +70,7 @@ public class MainController {
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
     static AssignImplements asignarImplementos = new AssignImplements();
-    
+
     public static Map getConnectionPropierties() {
         return connectionPropierties;
     }
@@ -245,7 +245,9 @@ public class MainController {
         crearEmpleado = new CreateEmployee(empleadosDisponibles);
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), crearEmpleado);
-        helper.setTitle("Porcupine Software Portal");
+        helper.setTitle("Crear Empleado...");
+
+        crearEmpleado.getjButtonEncontrarContratos().setEnabled(false);
     }
 
     public static void mostrarFormuarioCrearImplementos() {
@@ -265,7 +267,7 @@ public class MainController {
         DrawingUtilities.drawPanel(helper, helper.getViewport(), eliminarImplemento);
         helper.setTitle("Porcupine Software Portal");
     }
-    
+
     public static void mostrarFormularioAsignarImplementos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
@@ -281,6 +283,7 @@ public class MainController {
         agregarContrato = new AddContract();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarContrato);
+        helper.setTitle("Porcupine Software Portal");
     }
 
     public static void mostrarFormularioWriteNotice() {
@@ -289,6 +292,27 @@ public class MainController {
         agregarWriteNotice = new WriteNotice();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarWriteNotice);
+        helper.setTitle("Crear comunicado...");
+    }
+    
+    public static void mostrarFormularioReplyNotice() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        crearReplyNotice = new ReplyNotice();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), crearReplyNotice);
+        helper.setTitle("Responder comunicado...");
+    }
+
+    public static void mostrarFormularioCrearCliente() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        agregarCliente = new AddClient();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarCliente);
+        helper.setTitle("Crear Cliente...");
+
+        agregarCliente.getjButtonEncontrarContrato().setEnabled(false);
     }
 
     //utilidades
@@ -325,8 +349,10 @@ public class MainController {
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), ttcordination);
                     break;
                 case TipoEmpleado.DIRECTOR_COMERCIAL:
-                    AddClient addclient = new AddClient();
-                    DrawingUtilities.drawPanel(psp, psp.getViewport(), addclient);
+//                    AddClient addclient = new AddClient();
+//                    DrawingUtilities.drawPanel(psp, psp.getViewport(), addclient);
+                    BusinessManagement bmanagement = new BusinessManagement();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), bmanagement);
                     break;
                 case TipoEmpleado.DIRECTOR_GESTION_HUMANA:
                     HumanManagement hmanagement = new HumanManagement();
@@ -337,8 +363,8 @@ public class MainController {
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), omanagement);
                     break;
                 case TipoEmpleado.SUBGERENTE:
-                    BusinessManagement bmanagement = new BusinessManagement();
-                    DrawingUtilities.drawPanel(psp, psp.getViewport(), bmanagement);
+                    BusinessManagement b2management = new BusinessManagement();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), b2management);
                     break;
                 //no es mi codigo mas bonito pero parece funcionar
                 case TipoEmpleado.TEMPORAL_ESCOLTA:
@@ -363,11 +389,95 @@ public class MainController {
         int opcion = JOptionPane.showOptionDialog(parent, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
         switch (opcion) {
             case JOptionPane.OK_OPTION:
-                //TODO Reportar Error
+
+                try {
+                    // Conection Properties
+                    Properties props = new Properties();
+                    props.setProperty("mail.smtp.host", "smtp.gmail.com");
+                    props.setProperty("mail.smtp.starttls.enable", "true");
+                    props.setProperty("mail.smtp.port", "587");
+                    props.setProperty("mail.smtp.user", "sacortesh@gmail.com");
+                    props.setProperty("mail.smtp.auth", "true");
+
+                    // Prepare session
+                    Session session = Session.getDefaultInstance(props);
+
+                    // Build Message
+                    MimeMessage message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress("gnosisun@gmail.com"));
+                    message.addRecipient(
+                            Message.RecipientType.TO,
+                            new InternetAddress("sacortesh@gmail.com"));
+                    message.setSubject("PSP - Reporte de error");
+                    message.setText(
+                            "<p>Reporte de fallas</p>\n"
+                            + "<p>Ha sido reportado una falla en el sistema PSP</p>\n"
+                            + "<p>\n"
+                            + "" + ex.getMessage()
+                            + "</p>"
+                            + "<p>\n"
+                            + "" + ex.getStackTrace()
+                            + "</p>"
+                            + "<p>\n"
+                            + "Reportado por usuario " + empleadoActivo.getNombreEmpleado() + " " + empleadoActivo.getApellidoEmpleado() + " @ " + empleadoActivo.getCedulaEmpleado().toString()
+                            + "</p>",
+                            "ISO-8859-1",
+                            "html");
+
+                    // Send Message
+                    Transport t = session.getTransport("smtp");
+                    t.connect("gnosisun@gmail.com", "4123gnosis");
+                    t.sendMessage(message, message.getAllRecipients());
+
+                    // Close
+                    t.close();
+                } catch (MessagingException exc) {
+                    JOptionPane.showMessageDialog(parent, "Oops... Error enviando el error", "Error", JOptionPane.ERROR_MESSAGE, null);
+                }
+
+
+
                 break;
             case JOptionPane.CANCEL_OPTION:
                 break;
         }
+    }
+
+    public static void consultarEmpleado() {
+        EmpleadosVO empleado = new EmpleadosVO();
+
+        //TODO añadir la captura de todos los campos en la interfaz
+        empleado.setCedulaDirector(Integer.parseInt((String) findPerson.getjListResultados().getSelectedValue()));
+
+        try {
+            empleado = ServiceFactory.getInstance().getEmpleadosService().find(empleado.getCedulaEmpleado());
+        } catch (Exception ex) {
+            reportarError(ex, findPerson);
+        }
+
+        ArrayList<String> listaRoles = new ArrayList<String>();
+        listaRoles.add(empleado.getRol());
+
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        crearEmpleado = new CreateEmployee(listaRoles);
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper1, helper1.getViewport(), crearEmpleado);
+        helper.setTitle("Consulta de empleado...");
+
+        crearEmpleado.getjTextFieldCC().setText(empleado.getCedulaEmpleado().toString());
+        crearEmpleado.getjTextFieldNombres().setText(empleado.getNombreEmpleado());
+        crearEmpleado.getjTextFieldApellidos().setText(empleado.getApellidoEmpleado());
+        crearEmpleado.getjTextFieldContraseña().setEnabled(false);
+//        crearEmpleado.getjTextFieldDireccion().setText(empleado.getDireccionEmpleado());
+        if (empleado.getRol() == TipoEmpleado.TEMPORAL) {
+            crearEmpleado.getjTextFieldDireccion().setText(empleado.getSueldoEmpleadoPlanta().toString());
+        } else {
+            crearEmpleado.getjTextFieldDireccion().setEnabled(false);
+        }
+
+        crearEmpleado.getjButtonGuardar().setText("Modificar");
+
     }
 
     /**
@@ -391,28 +501,31 @@ public class MainController {
         }
         //Vos Externos
 
+        if (agregarCliente.getjListTelefono().getModel().getSize() != 0) {
 
-        DefaultListModel model = (DefaultListModel) crearEmpleado.getjListTelefono().getModel();
+            DefaultListModel model = (DefaultListModel) crearEmpleado.getjListTelefono().getModel();
 
-        ArrayList<String> tels = new ArrayList<String>();
-        for (int x = 0; x < model.size(); x++) {
-            String tel = (String) model.elementAt(x);
-            tels.add(tel);
+            ArrayList<String> tels = new ArrayList<String>();
+            for (int x = 0; x < model.size(); x++) {
+                String tel = (String) model.elementAt(x);
+                tels.add(tel);
+            }
+
+
+
+            //Se agrega cada telefono
+            List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+            for (String each : tels) {
+
+                TelefonosVO temp = new TelefonosVO();
+                temp.setNumeroTelefonoEmpleado(each);
+                telefonos.add(temp);
+
+            }
+
+            empleado.setTelsEmpList(telefonos);
+
         }
-
-
-
-        //Se agrega cada telefono
-        List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
-        for (String each : tels) {
-
-            TelefonosVO temp = new TelefonosVO();
-            temp.setNumeroTelefonoEmpleado(each);
-            telefonos.add(temp);
-
-        }
-
-        empleado.setTelsEmpList(telefonos);
 
         try {
             ServiceFactory.getInstance().getEmpleadosService().create(empleado);
@@ -421,7 +534,62 @@ public class MainController {
             int opcion = JOptionPane.showOptionDialog(crearEmpleado, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
             switch (opcion) {
                 case JOptionPane.OK_OPTION:
-                    //TODO Reportar Error
+                    reportarError(ex, crearEmpleado);
+                    break;
+                case JOptionPane.CANCEL_OPTION:
+                    break;
+            }
+            return;
+        }
+
+    }
+
+    public static void crearCliente() {
+
+        ClienteVO cliente = new ClienteVO();
+
+        cliente.setIdCliente(new Short(agregarCliente.getjTextFieldCC().getText()));
+        cliente.setCedulaDirector(empleadoActivo.getCedulaEmpleado());
+        cliente.setDireccionCliente(agregarCliente.getjTextFieldDireccion().getText());
+        cliente.setFechaRegCliente(new Date());
+        //No debería ser necesario
+        //cliente.setIdCliente(Short.MIN_VALUE);
+        cliente.setNombreCliente(agregarCliente.getjTextFieldNombre().getText());
+
+        if (agregarCliente.getjListTelefono().getModel().getSize() != 0) {
+
+            DefaultListModel model = (DefaultListModel) agregarCliente.getjListTelefono().getModel();
+
+            ArrayList<String> tels = new ArrayList<String>();
+            for (int x = 0; x < model.size(); x++) {
+                String tel = (String) model.elementAt(x);
+                tels.add(tel);
+            }
+
+            //Se agrega cada telefono
+            List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+            for (String each : tels) {
+
+                TelefonosVO temp = new TelefonosVO();
+                temp.setNumeroTelefonoEmpleado(each);
+                telefonos.add(temp);
+
+            }
+
+            cliente.setTelsCliList(telefonos);
+
+        }
+
+
+
+        try {
+            ServiceFactory.getInstance().getClienteService().create(cliente);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            int opcion = JOptionPane.showOptionDialog(agregarCliente, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
+            switch (opcion) {
+                case JOptionPane.OK_OPTION:
+                    reportarError(ex, agregarCliente);
                     break;
                 case JOptionPane.CANCEL_OPTION:
                     break;
@@ -470,11 +638,10 @@ public class MainController {
     }
 
     //IMPLEMENTOS - INICIO
-    
     public static void crearImplemento() {
         ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
         implSeguridadVO.setIdImplemento(new Integer(1).shortValue());
-        implSeguridadVO.setNombreI(agregarImplemento.getjTextFieldNombre().getText()); 
+        implSeguridadVO.setNombreI(agregarImplemento.getjTextFieldNombre().getText());
         implSeguridadVO.setPrecioUnitarioI(new BigDecimal(agregarImplemento.getjTextFieldValorUnitario().getText()));
         implSeguridadVO.setCantidad(new Short(agregarImplemento.getjTextFieldCantidad().getText()));
         implSeguridadVO.setEstadoI(agregarImplemento.getjComboBoxEstado().getSelectedItem().toString());
@@ -494,23 +661,21 @@ public class MainController {
         secondary.setVisible(false);
         secondary = new Secondary();
     }
-    
-    public static List<String> obtenerListaProveedores(){
+
+    public static List<String> obtenerListaProveedores() {
         List<ProveedorVO> listaProveedores = ServiceFactory.getInstance().getProveedorService().getList();
         List<String> lista = new ArrayList<>();
         for (ProveedorVO proveedor : listaProveedores) {
             lista.add(proveedor.getNombre());
         }
-        return lista;    
+        return lista;
     }
-    
+
 //    public static List<String> obtenerLitsEmpleadosTemporales(){
 //        List<EmplTempVO> listaEmpleados = ServiceFactory.getInstance().
 //    }
-
     public static void llenarTabla() {
-        List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance()
-                .getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
+        List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance().getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
         modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
         modelTable.getDataVector().removeAllElements();
         modelTable.fireTableDataChanged();
@@ -525,7 +690,7 @@ public class MainController {
             modelTable.addRow(datos);
         }
     }
-    
+
     public void listarImplementos() {
         secondary.setVisible(true);
         secondary.setTitle("Eliminar Implemento");
@@ -538,8 +703,7 @@ public class MainController {
         modelTable.getDataVector().removeAllElements();
         modelTable.fireTableDataChanged();
         List<ImplSeguridadVO> implementos;
-        implementos = ServiceFactory.getInstance().getImplSeguridadService()
-                .findByName(eliminarImplemento.getjTextFieldBuscar().getText());
+        implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
         for (ImplSeguridadVO implementoVO : implementos) {
             Object[] datos = {new Short(implementoVO.getIdImplemento()),
                 implementoVO.getNombreI(),
@@ -570,7 +734,7 @@ public class MainController {
                 break;
         }
     }
-    
+
     public static void cancelar() {
         secondary.setVisible(false);
         secondary.dispose();
@@ -578,9 +742,8 @@ public class MainController {
 
     public static void asignarImplemento() {
     }
-    
-    //IMPLEMENTOS - FIN
 
+    //IMPLEMENTOS - FIN
     /**
      * Disponible para: Wachiturros Vista principal para este coordinador
      */
@@ -597,27 +760,42 @@ public class MainController {
     public static void crearContrato() {
         ContratoVO contratoVO = new ContratoVO();
 
-        contratoVO.setTipoCont(addContract.getjComboBoxTipoContrato().getSelectedItem().toString());
-        contratoVO.setFechaInicioCont(addContract.getjDateChooserFechaInicio().getDate());
-        contratoVO.setTipoPersonalCont(addContract.getjComboBoxTipoPersonal().getSelectedItem().toString());
-        contratoVO.setCantPersonalCont(new Short(addContract.getjTextFieldCantPerson().getText()));
-        contratoVO.setCostoMensual(new BigDecimal(addContract.getjTextFieldCosto().getText()));
-        contratoVO.setUbicacionCont(addContract.getjTextFieldUbicacion().getText());
-        contratoVO.setHorarioCont(addContract.getjTextFieldHorario().getText());
-        contratoVO.setTiempoCont(new Integer(addContract.getjTextFieldTiempo().getText()));
-        contratoVO.setCelularCont(addContract.getjTextFieldCelularC().getText());
-        contratoVO.setTelefonoCont(addContract.getjTextFieldTelefonoC().getText());
+        contratoVO.setIdContrato(new Integer(1).shortValue());
+        contratoVO.setTipoCont(agregarContrato.getjComboBoxTipoContrato().getSelectedItem().toString());
+        contratoVO.setFechaInicioCont(agregarContrato.getjDateChooserFechaInicio().getDate());
+        contratoVO.setTipoPersonalCont(agregarContrato.getjComboBoxTipoPersonal().getSelectedItem().toString());
+        contratoVO.setCantPersonalCont(new Short(agregarContrato.getjTextFieldCantPerson().getText()));
+        contratoVO.setCostoMensual(new BigDecimal(agregarContrato.getjTextFieldCosto().getText()));
+        contratoVO.setUbicacionCont(agregarContrato.getjTextFieldUbicacion().getText());
+        contratoVO.setHorarioCont(agregarContrato.getjTextFieldHorario().getText());
+        contratoVO.setTiempoCont(new Integer(agregarContrato.getjTextFieldTiempo().getText()));
+        contratoVO.setCelularCont(agregarContrato.getjTextFieldCelularC().getText());
+        contratoVO.setTelefonoCont(agregarContrato.getjTextFieldTelefonoC().getText());
+        contratoVO.setCedulaDirComer(empleadoActivo.getCedulaEmpleado());
+        contratoVO.setFechaRegCont(new Date());
+        
+        String nombreCliente = agregarContrato.getjComboBoxCliente().getSelectedItem().toString();
+        Short idCliente = ServiceFactory.getInstance().getClienteService().findName(nombreCliente);
+        contratoVO.setIdCliente(idCliente);
 
         try {
             ServiceFactory.getInstance().getContratoService().create(contratoVO);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(addContract, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(agregarContrato, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        JOptionPane.showMessageDialog(addContract, "¡Contrato agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-        //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
-        //secondary.setVisible(false);
-        //secondary = new Secondary();
+        JOptionPane.showMessageDialog(agregarContrato, "¡Contrato agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+//        helper.setVisible(false);
+//        helper.dispose(); 
+    }
+    
+    public static List<String> obtenerListaClientes() {
+        List<ClienteVO> listaClientes = ServiceFactory.getInstance().getClienteService().getList();
+        List<String> lista = new ArrayList<>();
+        for (ClienteVO cliente : listaClientes) {
+            lista.add(cliente.getNombreCliente());
+        }
+        return lista;
     }
 
     public static void borrarContrato() {
@@ -629,21 +807,22 @@ public class MainController {
     public static void crearComunicacion() {
         ComunicadoVO comunicadoVO = new ComunicadoVO();
 
-        comunicadoVO.setTipoCom(writeNotice.getjComboBoxTipo().getSelectedItem().toString());
-        comunicadoVO.setContenidoCom(writeNotice.getjTextAreaComunicado().getText());
-        //Revisar que este bien manejado el CheckBox
-        comunicadoVO.setUrgente(writeNotice.getjCheckBoxUrgente().isSelected());
+        comunicadoVO.setIdComunicado(new Integer(1).shortValue());
+        comunicadoVO.setTipoCom(agregarWriteNotice.getjComboBoxTipo().getSelectedItem().toString());
+        comunicadoVO.setContenidoCom(agregarWriteNotice.getjTextAreaComunicado().getText());
+        comunicadoVO.setUrgente(agregarWriteNotice.getjCheckBoxUrgente().isSelected());
+        comunicadoVO.setFechaCom(new Date());
+        comunicadoVO.setCedulaEmpTemp(empleadoActivo.getCedulaEmpleado());
 
         try {
             ServiceFactory.getInstance().getComunicadoService().create(comunicadoVO);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(writeNotice, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(agregarWriteNotice, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        JOptionPane.showMessageDialog(writeNotice, "¡Comunicado agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-        //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
-        //secondary.setVisible(false);
-        //secondary = new Secondary();
+        JOptionPane.showMessageDialog(agregarWriteNotice, "¡Comunicado agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+//      helper.setVisible(false);
+//      helper.dispose();
     }
 
     public static void listarComunicacion() {
@@ -653,9 +832,6 @@ public class MainController {
     }
 
     public static void eliminarEmpleado() {
-    }
-
-    public static void consultarEmpleado() {
     }
 
     public static void consultarBitacora() {

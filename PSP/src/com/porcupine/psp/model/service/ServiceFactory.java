@@ -37,5 +37,9 @@ public class ServiceFactory {
     public ProveedorService getProveedorService() {
         return ProveedorService.getInstance();
     }
+    
+    public ClienteService getClienteService() {
+        return ClienteService.getInstance();
+    }
 
 }

@@ -282,6 +282,7 @@ public class MainController {
         agregarContrato = new AddContract();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarContrato);
+        helper.setTitle("Porcupine Software Portal");
     }
 
     public static void mostrarFormularioWriteNotice() {
@@ -337,8 +338,10 @@ public class MainController {
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), ttcordination);
                     break;
                 case TipoEmpleado.DIRECTOR_COMERCIAL:
-                    AddClient addclient = new AddClient();
-                    DrawingUtilities.drawPanel(psp, psp.getViewport(), addclient);
+//                    AddClient addclient = new AddClient();
+//                    DrawingUtilities.drawPanel(psp, psp.getViewport(), addclient);
+                    BusinessManagement bmanagement = new BusinessManagement();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), bmanagement);
                     break;
                 case TipoEmpleado.DIRECTOR_GESTION_HUMANA:
                     HumanManagement hmanagement = new HumanManagement();
@@ -349,8 +352,8 @@ public class MainController {
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), omanagement);
                     break;
                 case TipoEmpleado.SUBGERENTE:
-                    BusinessManagement bmanagement = new BusinessManagement();
-                    DrawingUtilities.drawPanel(psp, psp.getViewport(), bmanagement);
+                    BusinessManagement b2management = new BusinessManagement();
+                    DrawingUtilities.drawPanel(psp, psp.getViewport(), b2management);
                     break;
                 //no es mi codigo mas bonito pero parece funcionar
                 case TipoEmpleado.TEMPORAL_ESCOLTA:
@@ -746,6 +749,7 @@ public class MainController {
     public static void crearContrato() {
         ContratoVO contratoVO = new ContratoVO();
 
+        contratoVO.setIdContrato(new Integer(1).shortValue());
         contratoVO.setTipoCont(addContract.getjComboBoxTipoContrato().getSelectedItem().toString());
         contratoVO.setFechaInicioCont(addContract.getjDateChooserFechaInicio().getDate());
         contratoVO.setTipoPersonalCont(addContract.getjComboBoxTipoPersonal().getSelectedItem().toString());
@@ -756,6 +760,12 @@ public class MainController {
         contratoVO.setTiempoCont(new Integer(addContract.getjTextFieldTiempo().getText()));
         contratoVO.setCelularCont(addContract.getjTextFieldCelularC().getText());
         contratoVO.setTelefonoCont(addContract.getjTextFieldTelefonoC().getText());
+        contratoVO.setCedulaDirComer(empleadoActivo.getCedulaEmpleado());
+        contratoVO.setFechaRegCont(new Date());
+        
+        String nombreCliente = addContract.getjComboBoxCliente().getSelectedItem().toString();
+        Short idCliente = ServiceFactory.getInstance().getClienteService().findName(nombreCliente);
+        contratoVO.setIdCliente(idCliente);
 
         try {
             ServiceFactory.getInstance().getContratoService().create(contratoVO);
@@ -764,9 +774,17 @@ public class MainController {
             return;
         }
         JOptionPane.showMessageDialog(addContract, "¡Contrato agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-        //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
-        //secondary.setVisible(false);
-        //secondary = new Secondary();
+//        helper.setVisible(false);
+//        helper.dispose(); 
+    }
+    
+    public static List<String> obtenerListaClientes() {
+        List<ClienteVO> listaClientes = ServiceFactory.getInstance().getClienteService().getList();
+        List<String> lista = new ArrayList<>();
+        for (ClienteVO cliente : listaClientes) {
+            lista.add(cliente.getNombreCliente());
+        }
+        return lista;
     }
 
     public static void borrarContrato() {

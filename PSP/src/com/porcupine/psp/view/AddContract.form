@@ -41,7 +41,7 @@
                                       <Component id="jComboBoxTipoPersonal" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Component id="jDateChooserFechaInicio" min="-2" pref="117" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="117" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="jComboBoxTipoContrato" max="32767" attributes="0"/>
                                   </Group>
@@ -49,20 +49,6 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jTextFieldTiempo" min="-2" pref="229" max="-2" attributes="0"/>
-                                              <Component id="jTextFieldHorario" min="-2" pref="229" max="-2" attributes="0"/>
-                                              <Component id="jTextFieldCelularC" alignment="0" min="-2" pref="229" max="-2" attributes="0"/>
-                                              <Component id="jTextFieldTelefonoC" min="-2" pref="229" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
                                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
@@ -79,6 +65,22 @@
                                                   <Component id="jTextFieldCosto" pref="229" max="32767" attributes="0"/>
                                                   <Component id="jTextFieldCantPerson" max="32767" attributes="0"/>
                                               </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jTextFieldTiempo" pref="229" max="32767" attributes="0"/>
+                                              <Component id="jTextFieldHorario" pref="229" max="32767" attributes="0"/>
+                                              <Component id="jTextFieldCelularC" alignment="0" pref="229" max="32767" attributes="0"/>
+                                              <Component id="jTextFieldTelefonoC" pref="229" max="32767" attributes="0"/>
+                                              <Component id="jComboBoxCliente" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -151,7 +153,12 @@
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldTelefonoC" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="11" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBoxCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="13" max="32767" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -219,10 +226,9 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxTipoContrato">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Tipo 1"/>
-            <StringItem index="1" value="Tipo 2"/>
-            <StringItem index="2" value="..."/>
+          <StringArray count="2">
+            <StringItem index="0" value="DEFINIDO"/>
+            <StringItem index="1" value="INDEFINIDO"/>
           </StringArray>
         </Property>
       </Properties>
@@ -230,11 +236,9 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxTipoPersonal">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Tipo Personal 1"/>
-            <StringItem index="1" value="Tipo Personal 2"/>
-            <StringItem index="2" value="Tipo Personal 3"/>
-            <StringItem index="3" value="..."/>
+          <StringArray count="2">
+            <StringItem index="0" value="VIGILANTE"/>
+            <StringItem index="1" value="ESCOLTA"/>
           </StringArray>
         </Property>
       </Properties>
@@ -245,6 +249,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonGuardar">
       <Properties>
@@ -292,6 +299,18 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldTelefonoC">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel12">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cliente:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBoxCliente">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

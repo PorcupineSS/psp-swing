@@ -258,19 +258,26 @@ public class Contrato implements Serializable {
         ContratoVO contrato = new ContratoVO();
         
         contrato.setCantPersonalCont(cantidadPersonalC);
-        contrato.setCedulaDirComer(this.getCedulae().getCedulae());//Tengo duda con este
+        //contrato.setCedulaDirComer(this.getCedulae().getCedulae());//Tengo duda con este
         contrato.setCelularCont(celularC);
         contrato.setCostoMensual(costoMensualC);
         contrato.setFechaInicioCont(fechaInicioC);
         contrato.setFechaRegCont(fechaRegCon);
         contrato.setHorarioCont(horarioC);
-        contrato.setIdCliente(this.getIdcl().getIdcl());//Dudo de este
+        //contrato.setIdCliente(this.getIdcl().getIdcl());//Dudo de este
         contrato.setIdContrato(idContrato);
         contrato.setTelefonoCont(telefonoC);
         contrato.setTiempoCont(tiempoC);
         contrato.setTipoCont(tipoC);
         contrato.setTipoPersonalCont(tipoPersonalC);
         contrato.setUbicacionCont(ubicacionC);
+        
+        if (getIdcl() != null) {
+            contrato.setIdCliente(getIdcl().getIdcl());
+        }
+        if (getCedulae() != null) {
+            contrato.setCedulaDirComer(getCedulae().getCedulae());
+        }
         
         ArrayList<AsignacionCVO> listAsigContratoVO = new ArrayList<AsignacionCVO>();
         for(AsignacionC entity : getAsignacionCList()){

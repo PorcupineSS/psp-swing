@@ -162,8 +162,8 @@ public class Comunicado implements Serializable {
         
         ComunicadoVO comunicado = new ComunicadoVO(); 
         
-        comunicado.setCedulaDirOper(this.getDirCedulae().getCedulae());//Dudo de este
-        comunicado.setCedulaEmpTemp(this.getCedulae().getCedulae());//Dudo de este
+//        comunicado.setCedulaDirOper(this.getDirCedulae().getCedulae());//Dudo de este
+//        comunicado.setCedulaEmpTemp(this.getCedulae().getCedulae());//Dudo de este
         
         comunicado.setContenidoCom(contenidoCo);
         comunicado.setFechaCom(fechaCo);
@@ -171,6 +171,13 @@ public class Comunicado implements Serializable {
         comunicado.setRespuestaCom(respuestaCo);
         comunicado.setTipoCom(tipoCo);
         comunicado.setUrgente(urgente);
+        
+        if (getCedulae() != null) {
+            comunicado.setCedulaDirOper(getDirCedulae().getCedulae());
+        }
+        if (getCedulae() != null) {
+            comunicado.setCedulaEmpTemp(getCedulae().getCedulae());
+        }
         
         return comunicado;
     }

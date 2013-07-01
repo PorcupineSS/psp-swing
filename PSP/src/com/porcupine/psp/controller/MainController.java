@@ -34,7 +34,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import oracle.jdbc.driver.Message;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 
 /**
  * El proposito de esta clase es tener un lugar integrado con todos los metodos
@@ -364,7 +367,54 @@ public class MainController {
         int opcion = JOptionPane.showOptionDialog(parent, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
         switch (opcion) {
             case JOptionPane.OK_OPTION:
-                //TODO Reportar Error
+
+                try {
+                    // Conection Properties
+                    Properties props = new Properties();
+                    props.setProperty("mail.smtp.host", "smtp.gmail.com");
+                    props.setProperty("mail.smtp.starttls.enable", "true");
+                    props.setProperty("mail.smtp.port", "587");
+                    props.setProperty("mail.smtp.user", "sacortesh@gmail.com");
+                    props.setProperty("mail.smtp.auth", "true");
+
+                    // Prepare session
+                    Session session = Session.getDefaultInstance(props);
+
+                    // Build Message
+                    MimeMessage message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress("gnosisun@gmail.com"));
+                    message.addRecipient(
+                            Message.RecipientType.TO,
+                            new InternetAddress("sacortesh@gmail.com"));
+                    message.setSubject("PSP - Reporte de error");
+                    message.setText(
+                            "<p>Reporte de fallas</p>\n"
+                            + "<p>Ha sido reportado una falla en el sistema PSP</p>\n"
+                            + "<p>\n"
+                            + "" + ex.getMessage()
+                            + "</p>"
+                            + "<p>\n"
+                            + "" + ex.getStackTrace()
+                            + "</p>"
+                            + "<p>\n"
+                            + "Reportado por usuario " + empleadoActivo.getNombreEmpleado() + " " + empleadoActivo.getApellidoEmpleado() + " @ " + empleadoActivo.getCedulaEmpleado().toString()
+                            + "</p>",
+                            "ISO-8859-1",
+                            "html");
+
+                    // Send Message
+                    Transport t = session.getTransport("smtp");
+                    t.connect("gnosisun@gmail.com", "4123gnosis");
+                    t.sendMessage(message, message.getAllRecipients());
+
+                    // Close
+                    t.close();
+                } catch (MessagingException exc) {
+                    JOptionPane.showMessageDialog(parent, "Oops... Error enviando el error", "Error", JOptionPane.ERROR_MESSAGE, null);
+                }
+
+
+
                 break;
             case JOptionPane.CANCEL_OPTION:
                 break;

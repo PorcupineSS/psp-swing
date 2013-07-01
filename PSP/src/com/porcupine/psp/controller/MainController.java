@@ -291,6 +291,7 @@ public class MainController {
         agregarWriteNotice = new WriteNotice();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarWriteNotice);
+        helper.setTitle("Crear comunicado...");
     }
 
     public static void mostrarFormularioCrearCliente() {

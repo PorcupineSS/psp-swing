@@ -42,8 +42,4 @@ public class ServiceFactory {
         return ClienteService.getInstance();
     }
 
-    public ClienteService getClienteService() {
-        return ClienteService.getInstance();
-    }
-
 }

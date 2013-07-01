@@ -238,6 +238,11 @@ public class AssignImplements extends javax.swing.JPanel {
 
         buttonGroupOpcion.add(jRadioButtonDespojar);
         jRadioButtonDespojar.setText("Despojar");
+        jRadioButtonDespojar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonDespojarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Cantidad:");
 
@@ -337,6 +342,11 @@ public class AssignImplements extends javax.swing.JPanel {
     private void jComboBoxImplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxImplementoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxImplementoActionPerformed
+
+    private void jRadioButtonDespojarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDespojarActionPerformed
+        this.jButtonDespojar.setEnabled(true);
+        this.jButtonAsignar.setEnabled(false);
+    }//GEN-LAST:event_jRadioButtonDespojarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupOpcion;

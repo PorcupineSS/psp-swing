@@ -751,30 +751,30 @@ public class MainController {
         ContratoVO contratoVO = new ContratoVO();
 
         contratoVO.setIdContrato(new Integer(1).shortValue());
-        contratoVO.setTipoCont(addContract.getjComboBoxTipoContrato().getSelectedItem().toString());
-        contratoVO.setFechaInicioCont(addContract.getjDateChooserFechaInicio().getDate());
-        contratoVO.setTipoPersonalCont(addContract.getjComboBoxTipoPersonal().getSelectedItem().toString());
-        contratoVO.setCantPersonalCont(new Short(addContract.getjTextFieldCantPerson().getText()));
-        contratoVO.setCostoMensual(new BigDecimal(addContract.getjTextFieldCosto().getText()));
-        contratoVO.setUbicacionCont(addContract.getjTextFieldUbicacion().getText());
-        contratoVO.setHorarioCont(addContract.getjTextFieldHorario().getText());
-        contratoVO.setTiempoCont(new Integer(addContract.getjTextFieldTiempo().getText()));
-        contratoVO.setCelularCont(addContract.getjTextFieldCelularC().getText());
-        contratoVO.setTelefonoCont(addContract.getjTextFieldTelefonoC().getText());
+        contratoVO.setTipoCont(agregarContrato.getjComboBoxTipoContrato().getSelectedItem().toString());
+        contratoVO.setFechaInicioCont(agregarContrato.getjDateChooserFechaInicio().getDate());
+        contratoVO.setTipoPersonalCont(agregarContrato.getjComboBoxTipoPersonal().getSelectedItem().toString());
+        contratoVO.setCantPersonalCont(new Short(agregarContrato.getjTextFieldCantPerson().getText()));
+        contratoVO.setCostoMensual(new BigDecimal(agregarContrato.getjTextFieldCosto().getText()));
+        contratoVO.setUbicacionCont(agregarContrato.getjTextFieldUbicacion().getText());
+        contratoVO.setHorarioCont(agregarContrato.getjTextFieldHorario().getText());
+        contratoVO.setTiempoCont(new Integer(agregarContrato.getjTextFieldTiempo().getText()));
+        contratoVO.setCelularCont(agregarContrato.getjTextFieldCelularC().getText());
+        contratoVO.setTelefonoCont(agregarContrato.getjTextFieldTelefonoC().getText());
         contratoVO.setCedulaDirComer(empleadoActivo.getCedulaEmpleado());
         contratoVO.setFechaRegCont(new Date());
         
-        String nombreCliente = addContract.getjComboBoxCliente().getSelectedItem().toString();
+        String nombreCliente = agregarContrato.getjComboBoxCliente().getSelectedItem().toString();
         Short idCliente = ServiceFactory.getInstance().getClienteService().findName(nombreCliente);
         contratoVO.setIdCliente(idCliente);
 
         try {
             ServiceFactory.getInstance().getContratoService().create(contratoVO);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(addContract, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(agregarContrato, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        JOptionPane.showMessageDialog(addContract, "¡Contrato agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(agregarContrato, "¡Contrato agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
 //        helper.setVisible(false);
 //        helper.dispose(); 
     }
@@ -797,19 +797,18 @@ public class MainController {
     public static void crearComunicacion() {
         ComunicadoVO comunicadoVO = new ComunicadoVO();
 
-        comunicadoVO.setTipoCom(writeNotice.getjComboBoxTipo().getSelectedItem().toString());
-        comunicadoVO.setContenidoCom(writeNotice.getjTextAreaComunicado().getText());
+        comunicadoVO.setTipoCom(agregarWriteNotice.getjComboBoxTipo().getSelectedItem().toString());
+        comunicadoVO.setContenidoCom(agregarWriteNotice.getjTextAreaComunicado().getText());
         //Revisar que este bien manejado el CheckBox
-        comunicadoVO.setUrgente(writeNotice.getjCheckBoxUrgente().isSelected());
+        comunicadoVO.setUrgente(agregarWriteNotice.getjCheckBoxUrgente().isSelected());
 
         try {
             ServiceFactory.getInstance().getComunicadoService().create(comunicadoVO);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(writeNotice, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(agregarWriteNotice, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        JOptionPane.showMessageDialog(writeNotice, "¡Comunicado agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-        //No estoy seguro de para que sirven estos de abajo, los dejo comentariados
+        JOptionPane.showMessageDialog(agregarWriteNotice, "¡Comunicado agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
         //secondary.setVisible(false);
         //secondary = new Secondary();
     }

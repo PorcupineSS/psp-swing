@@ -5,6 +5,7 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /**
@@ -28,6 +29,16 @@ public class BusinessManagement extends javax.swing.JPanel {
         this.jLabelUsername = jLabelUsername;
     }
 
+    public JButton getjButtonVerBitacora() {
+        return jButtonVerBitacora;
+    }
+
+    public void setjButtonVerBitacora(JButton jButtonVerBitacora) {
+        this.jButtonVerBitacora = jButtonVerBitacora;
+    }
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,6 +58,7 @@ public class BusinessManagement extends javax.swing.JPanel {
         jButtonAddClient = new javax.swing.JButton();
         jButtonListarClientes = new javax.swing.JButton();
         jButtonAddContract = new javax.swing.JButton();
+        jButtonVerBitacora = new javax.swing.JButton();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/LogoPSPMin.png"))); // NOI18N
 
@@ -115,12 +127,22 @@ public class BusinessManagement extends javax.swing.JPanel {
             }
         });
 
+        jButtonVerBitacora.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonVerBitacora.setForeground(new java.awt.Color(0, 51, 0));
+        jButtonVerBitacora.setText("Ver Bitacora");
+        jButtonVerBitacora.setEnabled(false);
+        jButtonVerBitacora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerBitacoraActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jSeparator1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,6 +151,7 @@ public class BusinessManagement extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonAddContract, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
@@ -137,7 +160,7 @@ public class BusinessManagement extends javax.swing.JPanel {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jButtonAddContract, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButtonVerBitacora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -160,7 +183,9 @@ public class BusinessManagement extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAddContract)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonVerBitacora, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -178,11 +203,16 @@ public class BusinessManagement extends javax.swing.JPanel {
     private void jButtonAddContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddContractActionPerformed
         MainController.mostrarFormularioContratos();
     }//GEN-LAST:event_jButtonAddContractActionPerformed
+
+    private void jButtonVerBitacoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerBitacoraActionPerformed
+        MainController.mostrarFormularioBitacora();
+    }//GEN-LAST:event_jButtonVerBitacoraActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddClient;
     private javax.swing.JButton jButtonAddContract;
     private javax.swing.JButton jButtonListarClientes;
     private javax.swing.JButton jButtonLogout;
+    private javax.swing.JButton jButtonVerBitacora;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

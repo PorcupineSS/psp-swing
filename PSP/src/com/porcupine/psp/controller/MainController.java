@@ -63,6 +63,7 @@ public class MainController {
     public static WriteNotice writeNotice;
     public static Secondary secondary;
     public static FindPerson findPerson;
+    public static BitacoraDisplay bitacora;
     public static String username;
     public static String selectedDB;
     public static String password;
@@ -380,6 +381,8 @@ public class MainController {
                     break;
                 case TipoEmpleado.SUBGERENTE:
                     BusinessManagement b2management = new BusinessManagement();
+                    b2management.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
+                    b2management.getjButtonVerBitacora().setEnabled(true);
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), b2management);
                     break;
                 //no es mi codigo mas bonito pero parece funcionar
@@ -459,6 +462,17 @@ public class MainController {
             case JOptionPane.CANCEL_OPTION:
                 break;
         }
+    }
+
+    public static void mostrarFormularioBitacora() {
+        helper2 = new Helper();
+        helper2.setLocationRelativeTo(null);
+        bitacora = new BitacoraDisplay();
+        helper2.setVisible(true);
+        DrawingUtilities.drawPanel(helper2, helper2.getViewport(), bitacora);
+        helper2.setTitle("Consulta de Bitacora...");
+        
+        //TODO Llenar la tabla
     }
 
     public void mostrarFormularioListarEmpleados() {

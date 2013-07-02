@@ -100,6 +100,11 @@ public class TTCordination extends javax.swing.JPanel {
         jButtonAddImplement.setForeground(new java.awt.Color(0, 51, 102));
         jButtonAddImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Add.png"))); // NOI18N
         jButtonAddImplement.setText("Adicionar Implementos");
+        jButtonAddImplement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddImplementActionPerformed(evt);
+            }
+        });
 
         jButtonUpdateImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonUpdateImplement.setForeground(new java.awt.Color(0, 51, 102));
@@ -208,6 +213,11 @@ public class TTCordination extends javax.swing.JPanel {
     private void jButtonManageImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManageImplementActionPerformed
         MainController.mostrarFormuariosEliminarImplementos();
     }//GEN-LAST:event_jButtonManageImplementActionPerformed
+
+    private void jButtonAddImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddImplementActionPerformed
+        MainController.mostrarFormularioAdicionarImplementos();
+    }//GEN-LAST:event_jButtonAddImplementActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddImplement;
     private javax.swing.JButton jButtonAssignImplement;

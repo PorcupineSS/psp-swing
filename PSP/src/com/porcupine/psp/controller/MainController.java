@@ -70,7 +70,7 @@ public class MainController {
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
     public static AssignImplements asignarImplementos;
-    public static AddImplement adicionarImplementos;
+    public static AddImplement adicionarImplemento;
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -275,6 +275,15 @@ public class MainController {
         asignarImplementos = new AssignImplements();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), asignarImplementos);
+        helper.setTitle("Porcupine Software Portal");
+    }
+
+    public static void mostrarFormularioAdicionarImplementos() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        adicionarImplemento = new AddImplement();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), adicionarImplemento);
         helper.setTitle("Porcupine Software Portal");
     }
 
@@ -688,10 +697,9 @@ public class MainController {
         }
         return empleados;
     }
-    
-    public static Short obtenerCantidadImplementos() {
-        adicionarImplementos = new AddImplement();
-        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(adicionarImplementos.getjComboBoxImplemento().getSelectedItem().toString());
+
+    public static Short obtenerCantidadImplementos(String nombreImplemento) {
+        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(nombreImplemento);
         ImplSeguridadVO implemento = implementos.get(0);
         Short cantidad = implemento.getCantidad();
         return cantidad;
@@ -784,9 +792,22 @@ public class MainController {
         Integer cantidadAsignada = Integer.parseInt(asignarImplementos.getjTextFieldCantidad().getText());
         try {
             DAOFactory.getInstance().getImplSeguridadDAO().asignarImplemento(idImplemento, idEmpleadoTemporal, idCoordinador, cantidadAsignada);
-            JOptionPane.showMessageDialog(eliminarImplemento, "¡La asignación de implementos al empleado " + empleadoSeleccionado[2] + ", ha sido exitosa!", "¡Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(asignarImplementos, "¡La asignación de implementos al empleado " + empleadoSeleccionado[2] + ", ha sido exitosa!", "¡Éxito!", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(eliminarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(asignarImplementos, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void adicionarImplemento() {
+        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(adicionarImplemento.getjComboBoxImplemento().getSelectedItem().toString());
+        ImplSeguridadVO implemento = implementos.get(0);
+        Short idImplemento = implemento.getIdImplemento();
+        Integer cantidad = Integer.parseInt(adicionarImplemento.getjTextFieldCantidadAgregada().getText());
+        try {
+            DAOFactory.getInstance().getImplSeguridadDAO().adicionarImplemento(idImplemento, cantidad);
+            JOptionPane.showMessageDialog(adicionarImplemento, "¡Se han agregado " + cantidad + " implementos satisfactoriamente!", "¡Éxito!", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(adicionarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
         }
     }
 

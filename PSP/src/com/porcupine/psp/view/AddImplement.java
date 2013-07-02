@@ -183,6 +183,7 @@ public class AddImplement extends javax.swing.JPanel {
         });
 
         jTextFieldCantidadActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldCantidadActual.setEnabled(false);
 
         jLabel2.setText("Adicionar");
 
@@ -193,6 +194,11 @@ public class AddImplement extends javax.swing.JPanel {
         jButtonAceptar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonAceptar.setForeground(new java.awt.Color(0, 102, 0));
         jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -266,12 +272,17 @@ public class AddImplement extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBoxImplementoActionPerformed
 
     private void jButtonVerCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerCantidadActionPerformed
-        // TODO add your handling code here:
+        String cantidadActual = MainController.obtenerCantidadImplementos(jComboBoxImplemento.getSelectedItem().toString()).toString();
+        jTextFieldCantidadActual.setText(cantidadActual);
     }//GEN-LAST:event_jButtonVerCantidadActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
+        
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;

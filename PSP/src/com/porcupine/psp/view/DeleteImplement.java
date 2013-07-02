@@ -239,7 +239,7 @@ public class DeleteImplement extends javax.swing.JPanel {
         if (jTableBusqueda.getSelectedRowCount() != 0) {
             MainController.borrarImplemento();
         } else {
-            JOptionPane.showMessageDialog(this, IMPL_SELECCIONADO_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, IMPL_SELECCIONADO_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 

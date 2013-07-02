@@ -401,10 +401,10 @@ public class AssignImplements extends javax.swing.JPanel {
             if (validarCantidadDisponible(jTextFieldCantidad.getText())) {
                 MainController.asignarImplemento();
             } else {
-               JOptionPane.showMessageDialog(this, CANTIDAD_DISP_ASIG_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(this, CANTIDAD_DISP_ASIG_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             }    
         } else {
-            JOptionPane.showMessageDialog(this, CANTIDAD_ASIG_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, CANTIDAD_ASIG_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonAsignarActionPerformed
 

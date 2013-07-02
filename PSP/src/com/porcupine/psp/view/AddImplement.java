@@ -299,7 +299,7 @@ public class AddImplement extends javax.swing.JPanel {
         if (validarCantidad(jTextFieldCantidadAgregada.getText())) {
             MainController.adicionarImplemento();
         } else {
-            JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 

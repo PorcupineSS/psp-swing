@@ -434,19 +434,19 @@ public class RegisterImplement extends javax.swing.JPanel {
                         if (validarDescripcion(getjTextAreaDescripcion().getText())) {
                             MainController.crearImplemento();
                         } else {
-                            JOptionPane.showMessageDialog(this, DESCRIPCION_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(this, DESCRIPCION_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, VALOR_UNITARIO_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, VALOR_UNITARIO_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, NOMBRE_INCORRECTO_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, NOMBRE_INCORRECTO_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, NOMBRE_VACIO_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, NOMBRE_VACIO_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 

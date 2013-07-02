@@ -504,22 +504,26 @@ public class MainController {
         helper.setTitle("Consulta de empleado...");
 
         crearEmpleado.getjTextFieldCC().setText(empleado.getCedulaEmpleado().toString());
+        crearEmpleado.getjTextFieldCC().setEnabled(false);
         crearEmpleado.getjTextFieldNombres().setText(empleado.getNombreEmpleado());
+        crearEmpleado.getjTextFieldCC().setEnabled(false);
         crearEmpleado.getjTextFieldApellidos().setText(empleado.getApellidoEmpleado());
+        crearEmpleado.getjTextFieldCC().setEnabled(false);
         crearEmpleado.getjTextFieldContraseña().setEnabled(false);
 //        crearEmpleado.getjTextFieldDireccion().setText(empleado.getDireccionEmpleado());
         if (empleado.getRol() == TipoEmpleado.TEMPORAL) {
             crearEmpleado.getjTextFieldDireccion().setText(empleado.getSueldoEmpleadoPlanta().toString());
-        } else {
-            crearEmpleado.getjTextFieldDireccion().setEnabled(false);
         }
-        
+        crearEmpleado.getjTextFieldDireccion().setEnabled(false);
+
+
         ArrayList<String> telefonos = new ArrayList<String>();
-        for(TelefonosVO each : empleado.getTelsEmpList()){
+        for (TelefonosVO each : empleado.getTelsEmpList()) {
             telefonos.add(each.getNumeroTelefonoEmpleado());
         }
-        
+
         crearEmpleado.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
+        crearEmpleado.getjListTelefono().setEnabled(false);
 
         crearEmpleado.getjButtonGuardar().setText("Modificar");
 

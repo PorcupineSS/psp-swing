@@ -48,7 +48,8 @@ public class HumanManagement extends javax.swing.JPanel {
         jLabel3.setText("¡Bienvenido XXX!");
 
         jButtonLogout.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonLogout.setForeground(new java.awt.Color(153, 0, 0));
+        jButtonLogout.setForeground(new java.awt.Color(51, 51, 51));
+        jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Logout.png"))); // NOI18N
         jButtonLogout.setText("Cerrar Sesión");
         jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

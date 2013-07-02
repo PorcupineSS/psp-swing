@@ -801,7 +801,7 @@ public class MainController {
         llenarTabla();
     }
 
-    public static void buscar() {
+    public static void busquedaCompleta() {
         modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
         modelTable.getDataVector().removeAllElements();
         modelTable.fireTableDataChanged();
@@ -820,6 +820,25 @@ public class MainController {
                 new Short(implementoVO.getCantidad()),
                 implementoVO.getEstadoI(),
                 implementoVO.getFechaRegIm().toString()};
+            modelTable.addRow(datos);
+        }
+        modelTable.fireTableDataChanged();
+    }
+    
+    public static void busquedaSencilla() {
+        modelTable = (DefaultTableModel) listaActualizarImplementos.getjTableBusqueda().getModel();
+        modelTable.getDataVector().removeAllElements();
+        modelTable.fireTableDataChanged();
+        List<ImplSeguridadVO> implementos;
+        implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(listaActualizarImplementos.getjTextFieldBuscar().getText());
+        if (implementos.isEmpty()) {
+            eliminarImplemento.getjButtonEliminar().setEnabled(false);
+            JOptionPane.showMessageDialog(eliminarImplemento, "¡No se han encontrado resultados!", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            eliminarImplemento.getjButtonEliminar().setEnabled(true);
+        }
+        for (ImplSeguridadVO implementoVO : implementos) {
+            Object[] datos = {new Short(implementoVO.getIdImplemento()), implementoVO.getNombreI()};
             modelTable.addRow(datos);
         }
         modelTable.fireTableDataChanged();

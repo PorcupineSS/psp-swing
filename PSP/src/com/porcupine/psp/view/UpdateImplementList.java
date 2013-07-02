@@ -5,7 +5,15 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.event.EventListenerList;
+import javax.swing.plaf.ComponentUI;
 
 /**
  *
@@ -20,6 +28,94 @@ public class UpdateImplementList extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JButton getjButtonBuscar() {
+        return jButtonBuscar;
+    }
+
+    public void setjButtonBuscar(JButton jButtonBuscar) {
+        this.jButtonBuscar = jButtonBuscar;
+    }
+
+    public JButton getjButtonCancelar() {
+        return jButtonCancelar;
+    }
+
+    public void setjButtonCancelar(JButton jButtonCancelar) {
+        this.jButtonCancelar = jButtonCancelar;
+    }
+
+    public JButton getjButtonEliminar() {
+        return jButtonEliminar;
+    }
+
+    public void setjButtonEliminar(JButton jButtonEliminar) {
+        this.jButtonEliminar = jButtonEliminar;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JSeparator getjSeparator1() {
+        return jSeparator1;
+    }
+
+    public void setjSeparator1(JSeparator jSeparator1) {
+        this.jSeparator1 = jSeparator1;
+    }
+
+    public JTable getjTableBusqueda() {
+        return jTableBusqueda;
+    }
+
+    public void setjTableBusqueda(JTable jTableBusqueda) {
+        this.jTableBusqueda = jTableBusqueda;
+    }
+
+    public JTextField getjTextFieldBuscar() {
+        return jTextFieldBuscar;
+    }
+
+    public void setjTextFieldBuscar(JTextField jTextFieldBuscar) {
+        this.jTextFieldBuscar = jTextFieldBuscar;
+    }
+
+    public ComponentUI getUi() {
+        return ui;
+    }
+
+    public void setUi(ComponentUI ui) {
+        this.ui = ui;
+    }
+
+    public EventListenerList getListenerList() {
+        return listenerList;
+    }
+
+    public void setListenerList(EventListenerList listenerList) {
+        this.listenerList = listenerList;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,16 +125,19 @@ public class UpdateImplementList extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldBuscar = new javax.swing.JTextField();
         jButtonBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableBusqueda = new javax.swing.JTable();
-        jButtonEliminar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel3 = new javax.swing.JLabel();
+        jButtonEliminar = new javax.swing.JButton();
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Update.png"))); // NOI18N
+        jLabel3.setText("Actualizar Implementos");
 
         jLabel1.setText("Buscar por nombre:");
 
@@ -54,14 +153,14 @@ public class UpdateImplementList extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Nombre", "Precio Unitario", "Cantidad", "Estado", "Fecha de Registro"
+                "ID", "Nombre"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Short.class, java.lang.String.class, java.lang.Double.class, java.lang.Short.class, java.lang.String.class, java.lang.String.class
+                java.lang.Short.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -74,16 +173,6 @@ public class UpdateImplementList extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTableBusqueda);
 
-        jButtonEliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonEliminar.setForeground(new java.awt.Color(153, 0, 0));
-        jButtonEliminar.setText("Eliminar");
-        jButtonEliminar.setEnabled(false);
-        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEliminarActionPerformed(evt);
-            }
-        });
-
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,38 +180,42 @@ public class UpdateImplementList extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Update.png"))); // NOI18N
-        jLabel3.setText("Actualizar Implementos");
+        jButtonEliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonEliminar.setForeground(new java.awt.Color(0, 102, 102));
+        jButtonEliminar.setText("Continuar");
+        jButtonEliminar.setEnabled(false);
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonEliminar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
+                            .addComponent(jLabel3))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -130,43 +223,27 @@ public class UpdateImplementList extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEliminar)
                     .addComponent(jButtonCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 735, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        MainController.buscar();
+        MainController.busquedaCompleta();
     }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        MainController.helper.setVisible(false);
+        MainController.helper.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         if (jTableBusqueda.getSelectedRowCount() != 0) {
@@ -176,18 +253,12 @@ public class UpdateImplementList extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        MainController.helper.setVisible(false);
-        MainController.helper.dispose();
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableBusqueda;

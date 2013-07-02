@@ -120,6 +120,11 @@ public class TTCordination extends javax.swing.JPanel {
         jButtonUpdateImplement.setForeground(new java.awt.Color(0, 51, 102));
         jButtonUpdateImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Update.png"))); // NOI18N
         jButtonUpdateImplement.setText("Actualizar Implemento");
+        jButtonUpdateImplement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateImplementActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -222,6 +227,10 @@ public class TTCordination extends javax.swing.JPanel {
     private void jButtonAddImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddImplementActionPerformed
         MainController.mostrarFormularioAdicionarImplementos();
     }//GEN-LAST:event_jButtonAddImplementActionPerformed
+
+    private void jButtonUpdateImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateImplementActionPerformed
+        MainController.mostrarFormularioListaActualizarImplementos();
+    }//GEN-LAST:event_jButtonUpdateImplementActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddImplement;

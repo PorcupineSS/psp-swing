@@ -683,7 +683,7 @@ public class MainController {
         }
         List<String> empleados = new ArrayList<>();
         for (EmpleadosVO empleadoVO : listaEmpleados) {
-            empleados.add(empleadoVO.getCodigoDocumento().toString() + " - " + empleadoVO.getApellidoEmpleado() + " " + empleadoVO.getNombreEmpleado());
+            empleados.add(empleadoVO.getCedulaEmpleado().toString() + " - " + empleadoVO.getApellidoEmpleado() + " " + empleadoVO.getNombreEmpleado());
         }
         return empleados;
     }
@@ -764,6 +764,15 @@ public class MainController {
     }
 
     public static void asignarImplemento() {
+        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService()
+                .findByName(asignarImplementos.getjComboBoxImplemento().getSelectedItem().toString());
+        ImplSeguridadVO implemento = implementos.get(0);
+        Short idImplemento = implemento.getIdImplemento();
+        String[] implementoSeleccionado = asignarImplementos.getjComboBoxImplemento().getSelectedItem().toString().split(" ");
+        Integer idEmpleadoTemporal = Integer.parseInt(implementoSeleccionado[0]);
+        Integer idCoordinador = empleadoActivo.getCedulaEmpleado();
+        Integer cantidadAsignada = Integer.parseInt(asignarImplementos.getjTextFieldCantidad().getText());
+        DAOFactory.getInstance().getImplSeguridadDAO().asignarImplemento(idImplemento, idEmpleadoTemporal, idCoordinador, cantidadAsignada); 
     }
 
     //IMPLEMENTOS - FIN

@@ -209,6 +209,7 @@ public class ImplSeguridad implements Serializable {
         vo.setPrecioUnitarioI(precioUnitarioI);
         vo.setEstadoI(estadoI);
         vo.setFechaRegIm(fechaRegIm);
+        vo.setDescripcionI(descripcionI);
         
         if (getIdPro() != null) {
             vo.setIdPro(getIdPro().getIdPro());

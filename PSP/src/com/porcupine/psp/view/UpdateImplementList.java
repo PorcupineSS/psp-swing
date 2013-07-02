@@ -5,6 +5,10 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import com.porcupine.psp.model.dao.exceptions.InsufficientPermissionsException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityNotFoundException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -246,7 +250,13 @@ public class UpdateImplementList extends javax.swing.JPanel {
 
     private void jButtonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContinuarActionPerformed
         if (jTableBusqueda.getSelectedRowCount() != 0) {
-            MainController.borrarImplemento();
+            try {
+                MainController.mostrarFormularioActualizarImplemento(new Short(this.getjTableBusqueda().getValueAt(this.getjTableBusqueda().getSelectedRow(), 0).toString()));
+            } catch (EntityNotFoundException ex) {
+                Logger.getLogger(UpdateImplementList.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InsufficientPermissionsException ex) {
+                Logger.getLogger(UpdateImplementList.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             JOptionPane.showMessageDialog(this, IMPL_SELECCIONADO_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }

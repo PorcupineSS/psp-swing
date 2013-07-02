@@ -74,6 +74,7 @@ public class MainController {
     public static AssignImplements asignarImplementos;
     public static AddImplement adicionarImplemento;
     public static UpdateImplementList listaActualizarImplementos;
+    public static UpdateImplement actualizarImplemento;
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -296,6 +297,24 @@ public class MainController {
         listaActualizarImplementos = new UpdateImplementList();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), listaActualizarImplementos);
+        helper.setTitle("Porcupine Software Portal");
+    }
+    
+    public static void mostrarFormularioActualizarImplemento(Short idImplemento) throws EntityNotFoundException, InsufficientPermissionsException {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        actualizarImplemento = new UpdateImplement();
+        ImplSeguridadVO implemento = ServiceFactory.getInstance().getImplSeguridadService().find(idImplemento);
+        actualizarImplemento.getjTextFieldNombre().setText(implemento.getNombreI());
+        actualizarImplemento.getjTextFieldValorUnitario().setText(implemento.getPrecioUnitarioI().toString());
+        Short cantidad = implemento.getCantidad();
+        actualizarImplemento.getjTextFieldCantidad().setText(cantidad.toString());
+        actualizarImplemento.getjComboBoxEstado().setSelectedItem(implemento.getEstadoI());
+        actualizarImplemento.getjTextAreaDescripcion().setText(implemento.getDescripcionI());      
+        ProveedorVO proveedor = ServiceFactory.getInstance().getProveedorService().find(implemento.getIdPro());
+        actualizarImplemento.getjComboBoxProveedor().setSelectedItem(proveedor.getNombre());
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), actualizarImplemento);
         helper.setTitle("Porcupine Software Portal");
     }
 

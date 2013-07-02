@@ -398,7 +398,7 @@ public class MainController {
                     props.setProperty("mail.smtp.port", "587");
                     props.setProperty("mail.smtp.user", "sacortesh@gmail.com");
                     props.setProperty("mail.smtp.auth", "true");
-
+                                     
                     // Prepare session
                     Session session = Session.getDefaultInstance(props);
 

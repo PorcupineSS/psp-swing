@@ -274,7 +274,7 @@ public class RegisterImplement extends javax.swing.JPanel {
         jComboBoxEstado = new javax.swing.JComboBox();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Add.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/RegisterImplement.png"))); // NOI18N
         jLabel1.setText("Nuevo Implemento");
 
         jLabel2.setText("Nombre:");

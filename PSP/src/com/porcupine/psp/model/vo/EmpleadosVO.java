@@ -126,6 +126,10 @@ public class EmpleadosVO implements IValueObject, Serializable {
     public void setSueldoEmpleadoPlanta(Integer sueldoEmpleadoPlanta) {
         this.sueldoEmpleadoPlanta = sueldoEmpleadoPlanta;
     }
+
+    public String toCoolString() {
+        return (this.getCedulaEmpleado() + " - " + this.getNombreEmpleado() + " " + this.getApellidoEmpleado());
+    }
     
     
 }

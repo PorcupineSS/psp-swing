@@ -52,6 +52,7 @@ public class MainController {
     public static Psp psp;
     public static Helper helper;
     public static Helper helper1;
+    public static Helper helper2;
     public static RegisterImplement registrarImplemento;
     public static AddContract agregarContrato;
     public static AddClient agregarCliente;
@@ -415,7 +416,7 @@ public class MainController {
                     props.setProperty("mail.smtp.port", "587");
                     props.setProperty("mail.smtp.user", "sacortesh@gmail.com");
                     props.setProperty("mail.smtp.auth", "true");
-                                     
+
                     // Prepare session
                     Session session = Session.getDefaultInstance(props);
 
@@ -458,6 +459,24 @@ public class MainController {
             case JOptionPane.CANCEL_OPTION:
                 break;
         }
+    }
+
+    public void mostrarFormularioListarEmpleados() {
+        helper2 = new Helper();
+        helper2.setLocationRelativeTo(null);
+        findPerson = new FindPerson();
+        helper2.setVisible(true);
+        DrawingUtilities.drawPanel(helper2, helper2.getViewport(), findPerson);
+        helper2.setTitle("Responder comunicado...");
+        
+        List<EmpleadosVO> empleados = ServiceFactory.getInstance().getEmpleadosService().getList();
+        ArrayList<String> output = new ArrayList<String>();
+        for (EmpleadosVO each : empleados){
+            output.add(each.toCoolString());
+        }
+        
+        findPerson.setjListResultados(new javax.swing.JList(output.toArray()));
+
     }
 
     public static void consultarEmpleado() {
@@ -792,8 +811,7 @@ public class MainController {
     }
 
     public static void asignarImplemento() {
-        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService()
-                .findByName(asignarImplementos.getjComboBoxImplemento().getSelectedItem().toString());
+        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(asignarImplementos.getjComboBoxImplemento().getSelectedItem().toString());
         ImplSeguridadVO implemento = implementos.get(0);
         Short idImplemento = implemento.getIdImplemento();
         String[] empleadoSeleccionado = asignarImplementos.getjComboBoxEmpleado().getSelectedItem().toString().split(" ");
@@ -818,11 +836,11 @@ public class MainController {
             DAOFactory.getInstance().getImplSeguridadDAO().adicionarImplemento(idImplemento, cantidad);
             JOptionPane.showMessageDialog(adicionarImplemento, "¡Se han agregado " + cantidad + " implementos satisfactoriamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(adicionarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
+            JOptionPane.showMessageDialog(adicionarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     //IMPLEMENTOS - FIN
-    
+
     /**
      * Disponible para: Wachiturros Vista principal para este coordinador
      */

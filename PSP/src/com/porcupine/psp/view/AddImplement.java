@@ -5,6 +5,13 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.event.EventListenerList;
+import javax.swing.plaf.ComponentUI;
 
 /**
  *
@@ -17,6 +24,118 @@ public class AddImplement extends javax.swing.JPanel {
      */
     public AddImplement() {
         initComponents();
+    }
+
+    public JButton getjButtonAceptar() {
+        return jButtonAceptar;
+    }
+
+    public void setjButtonAceptar(JButton jButtonAceptar) {
+        this.jButtonAceptar = jButtonAceptar;
+    }
+
+    public JButton getjButtonCancelar() {
+        return jButtonCancelar;
+    }
+
+    public void setjButtonCancelar(JButton jButtonCancelar) {
+        this.jButtonCancelar = jButtonCancelar;
+    }
+
+    public JButton getjButtonVerCantidad() {
+        return jButtonVerCantidad;
+    }
+
+    public void setjButtonVerCantidad(JButton jButtonVerCantidad) {
+        this.jButtonVerCantidad = jButtonVerCantidad;
+    }
+
+    public JComboBox getjComboBoxImplemento() {
+        return jComboBoxImplemento;
+    }
+
+    public void setjComboBoxImplemento(JComboBox jComboBoxImplemento) {
+        this.jComboBoxImplemento = jComboBoxImplemento;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JSeparator getjSeparator1() {
+        return jSeparator1;
+    }
+
+    public void setjSeparator1(JSeparator jSeparator1) {
+        this.jSeparator1 = jSeparator1;
+    }
+
+    public JSeparator getjSeparator2() {
+        return jSeparator2;
+    }
+
+    public void setjSeparator2(JSeparator jSeparator2) {
+        this.jSeparator2 = jSeparator2;
+    }
+
+    public JTextField getjTextFieldCantidadActual() {
+        return jTextFieldCantidadActual;
+    }
+
+    public void setjTextFieldCantidadActual(JTextField jTextFieldCantidadActual) {
+        this.jTextFieldCantidadActual = jTextFieldCantidadActual;
+    }
+
+    public JTextField getjTextFieldCantidadAgregada() {
+        return jTextFieldCantidadAgregada;
+    }
+
+    public void setjTextFieldCantidadAgregada(JTextField jTextFieldCantidadAgregada) {
+        this.jTextFieldCantidadAgregada = jTextFieldCantidadAgregada;
+    }
+
+    public ComponentUI getUi() {
+        return ui;
+    }
+
+    public void setUi(ComponentUI ui) {
+        this.ui = ui;
+    }
+
+    public EventListenerList getListenerList() {
+        return listenerList;
+    }
+
+    public void setListenerList(EventListenerList listenerList) {
+        this.listenerList = listenerList;
     }
 
     /**

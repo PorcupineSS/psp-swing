@@ -70,6 +70,7 @@ public class MainController {
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
     public static AssignImplements asignarImplementos;
+    public static AddImplement adicionarImplementos;
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -686,6 +687,14 @@ public class MainController {
             empleados.add(empleadoVO.getCedulaEmpleado().toString() + " - " + empleadoVO.getApellidoEmpleado() + " " + empleadoVO.getNombreEmpleado());
         }
         return empleados;
+    }
+    
+    public static Short obtenerCantidadImplementos() {
+        adicionarImplementos = new AddImplement();
+        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(adicionarImplementos.getjComboBoxImplemento().getSelectedItem().toString());
+        ImplSeguridadVO implemento = implementos.get(0);
+        Short cantidad = implemento.getCantidad();
+        return cantidad;
     }
 
     public static List<String> obtenerListaImplementos() {

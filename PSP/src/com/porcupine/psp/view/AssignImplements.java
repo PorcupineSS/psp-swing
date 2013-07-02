@@ -9,6 +9,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -20,7 +21,9 @@ import javax.swing.plaf.ComponentUI;
  * @author Jeisson Andrés Vergara
  */
 public class AssignImplements extends javax.swing.JPanel {
-
+    
+    public static final String CANTIDAD_ASIG_IMPL_VALIDACION = "¡La cantidad debe ser un número entero mayor o igual a 0!";
+    
     /**
      * Creates new form AssignImplements
      */
@@ -172,6 +175,20 @@ public class AssignImplements extends javax.swing.JPanel {
         this.listenerList = listenerList;
     }
 
+     public boolean validarCantidadAsignada(String str) {
+        Short cantidad;
+        try {
+            cantidad = new Short(str);
+            if (cantidad < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -225,6 +242,11 @@ public class AssignImplements extends javax.swing.JPanel {
         jButtonAsignar.setText("Asignar");
         jButtonAsignar.setToolTipText("");
         jButtonAsignar.setEnabled(false);
+        jButtonAsignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAsignarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
 
@@ -347,6 +369,14 @@ public class AssignImplements extends javax.swing.JPanel {
         this.jButtonDespojar.setEnabled(true);
         this.jButtonAsignar.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonDespojarActionPerformed
+
+    private void jButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignarActionPerformed
+        if (validarCantidadAsignada(jTextFieldCantidad.getText())) {
+            MainController.asignarImplemento();
+        } else {
+            JOptionPane.showMessageDialog(this, CANTIDAD_ASIG_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonAsignarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupOpcion;

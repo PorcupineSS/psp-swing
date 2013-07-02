@@ -52,7 +52,7 @@ public class MainController {
     public static Psp psp;
     public static Helper helper;
     public static Helper helper1;
-    public static AddImplement agregarImplemento;
+    public static RegisterImplement registrarImplemento;
     public static AddContract agregarContrato;
     public static AddClient agregarCliente;
     public static WriteNotice agregarWriteNotice;
@@ -253,9 +253,9 @@ public class MainController {
     public static void mostrarFormuarioCrearImplementos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
-        agregarImplemento = new AddImplement();
+        registrarImplemento = new RegisterImplement();
         helper.setVisible(true);
-        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarImplemento);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), registrarImplemento);
         helper.setTitle("Porcupine Software Portal");
     }
 
@@ -641,23 +641,23 @@ public class MainController {
     public static void crearImplemento() {
         ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
         implSeguridadVO.setIdImplemento(new Integer(1).shortValue());
-        implSeguridadVO.setNombreI(agregarImplemento.getjTextFieldNombre().getText());
-        implSeguridadVO.setPrecioUnitarioI(new BigDecimal(agregarImplemento.getjTextFieldValorUnitario().getText()));
-        implSeguridadVO.setCantidad(new Short(agregarImplemento.getjTextFieldCantidad().getText()));
-        implSeguridadVO.setEstadoI(agregarImplemento.getjComboBoxEstado().getSelectedItem().toString());
+        implSeguridadVO.setNombreI(registrarImplemento.getjTextFieldNombre().getText());
+        implSeguridadVO.setPrecioUnitarioI(new BigDecimal(registrarImplemento.getjTextFieldValorUnitario().getText()));
+        implSeguridadVO.setCantidad(new Short(registrarImplemento.getjTextFieldCantidad().getText()));
+        implSeguridadVO.setEstadoI(registrarImplemento.getjComboBoxEstado().getSelectedItem().toString());
         implSeguridadVO.setFechaRegIm(new Date());
-        implSeguridadVO.setDescripcionI(agregarImplemento.getjTextAreaDescripcion().getText());
-        String nombreProveedor = agregarImplemento.getjComboBoxProveedor().getSelectedItem().toString();
+        implSeguridadVO.setDescripcionI(registrarImplemento.getjTextAreaDescripcion().getText());
+        String nombreProveedor = registrarImplemento.getjComboBoxProveedor().getSelectedItem().toString();
         Short idProveedor = ServiceFactory.getInstance().getProveedorService().findName(nombreProveedor);
         implSeguridadVO.setIdPro(idProveedor);
         implSeguridadVO.setCedulaCoordTyT(empleadoActivo.getCedulaEmpleado());
         try {
             ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(agregarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(registrarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        JOptionPane.showMessageDialog(agregarImplemento, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(registrarImplemento, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
         secondary.setVisible(false);
         secondary = new Secondary();
     }

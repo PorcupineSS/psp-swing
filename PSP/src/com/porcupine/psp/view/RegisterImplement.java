@@ -28,7 +28,7 @@ import javax.swing.plaf.ComponentUI;
  *
  * @author andres
  */
-public class AddImplement extends javax.swing.JPanel {
+public class RegisterImplement extends javax.swing.JPanel {
 
     public static final String NOMBRE_VACIO_IMPL_VALIDACION = "¡El campo Nombre no debe estar vacío!";
     public static final String NOMBRE_INCORRECTO_IMPL_VALIDACION = "¡Ya existe un implemento con ese nombre, por favor seleccione otro!";
@@ -36,7 +36,7 @@ public class AddImplement extends javax.swing.JPanel {
     public static final String VALOR_UNITARIO_IMPL_VALIDACION = "¡El valor unitario debe ser un número mayor o igual a $0.0!";
     public static final String DESCRIPCION_IMPL_VALIDACION = "¡Debe ingresar una descripción!";
 
-    public AddImplement() {
+    public RegisterImplement() {
         initComponents();
     }
 

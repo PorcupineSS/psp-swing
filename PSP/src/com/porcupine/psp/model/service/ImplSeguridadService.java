@@ -42,12 +42,6 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Short> {
         entity.setDescripcionI(vo.getDescripcionI());
         entity.setEstadoI(vo.getEstadoI());
         entity.setFechaRegIm(vo.getFechaRegIm());
-       
-//        Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(vo.getIdPro());
-//        entity.setIdPro(proveedor);
-//        
-//        CoordTYT coordinadorTyT = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
-//        entity.setCedulae(coordinadorTyT);
 
         if (vo.getIdPro() != null) {
             Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(vo.getIdPro());
@@ -84,7 +78,7 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Short> {
         entity.setEstadoI(vo.getEstadoI());
         entity.setFechaRegIm(vo.getFechaRegIm());
 
-        if (vo.getIdPro() != 0) {
+        if (vo.getIdPro() != null) {
             Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(vo.getIdPro());
             entity.setIdPro(proveedor);
             proveedor.getImplSeguridadList().set(proveedor.getImplSeguridadList().get(entity.getIdImplemento()).getIdImplemento(), entity);
@@ -109,7 +103,7 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Short> {
     @Override
     public List<ImplSeguridadVO> getList() {
         List<ImplSeguridadVO> listaVO = new ArrayList<ImplSeguridadVO>();
-        List<ImplSeguridad> lista = DAOFactory.getInstance().getImplSeguridadDAO().getList();;
+        List<ImplSeguridad> lista = DAOFactory.getInstance().getImplSeguridadDAO().getList();
         for (ImplSeguridad implemento : lista) {
             ImplSeguridadVO impl = implemento.toVO();
             listaVO.add(impl);

@@ -5,6 +5,7 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import static com.porcupine.psp.controller.MainController.empleadoActivo;
 import com.porcupine.psp.util.DrawingUtilities;
 import javax.swing.JLabel;
 
@@ -23,6 +24,14 @@ public class TTCordination extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JLabel getjLabelUsername() {
+        return jLabelUsername;
+    }
+
+    public void setjLabelUsername(JLabel jLabelUsername) {
+        this.jLabelUsername = jLabelUsername;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,25 +43,28 @@ public class TTCordination extends javax.swing.JPanel {
 
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelUsername = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButtonLogout = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButtonAddImplement = new javax.swing.JButton();
+        jButtonRegisterImplement = new javax.swing.JButton();
         jButtonManageImplement = new javax.swing.JButton();
         jButtonAssignImplement = new javax.swing.JButton();
+        jButtonAddImplement = new javax.swing.JButton();
+        jButtonUpdateImplement = new javax.swing.JButton();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/LogoPSPMin.png"))); // NOI18N
 
-        jLabel3.setText("¡Bienvenido Jeisson Andrés!");
+        jLabelUsername.setText("Username");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("COORDINACIÓN");
 
         jButtonLogout.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonLogout.setForeground(new java.awt.Color(153, 0, 0));
+        jButtonLogout.setForeground(new java.awt.Color(51, 51, 51));
+        jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Logout.png"))); // NOI18N
         jButtonLogout.setText("Cerrar Sesión");
         jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,18 +76,18 @@ public class TTCordination extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("TÉCNICA Y TECNOLÓGICA");
 
-        jButtonAddImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonAddImplement.setForeground(new java.awt.Color(0, 51, 0));
-        jButtonAddImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Add.png"))); // NOI18N
-        jButtonAddImplement.setText("Registrar Implemento");
-        jButtonAddImplement.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRegisterImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonRegisterImplement.setForeground(new java.awt.Color(0, 51, 102));
+        jButtonRegisterImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/RegisterImplement.png"))); // NOI18N
+        jButtonRegisterImplement.setText("Registrar Implemento");
+        jButtonRegisterImplement.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddImplementActionPerformed(evt);
+                jButtonRegisterImplementActionPerformed(evt);
             }
         });
 
         jButtonManageImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonManageImplement.setForeground(new java.awt.Color(0, 51, 0));
+        jButtonManageImplement.setForeground(new java.awt.Color(0, 51, 102));
         jButtonManageImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Delete.png"))); // NOI18N
         jButtonManageImplement.setText("Eliminar Implementos");
         jButtonManageImplement.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +97,7 @@ public class TTCordination extends javax.swing.JPanel {
         });
 
         jButtonAssignImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonAssignImplement.setForeground(new java.awt.Color(0, 51, 0));
+        jButtonAssignImplement.setForeground(new java.awt.Color(0, 51, 102));
         jButtonAssignImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Assign.png"))); // NOI18N
         jButtonAssignImplement.setText("Asignación de Implementos");
         jButtonAssignImplement.addActionListener(new java.awt.event.ActionListener() {
@@ -94,25 +106,51 @@ public class TTCordination extends javax.swing.JPanel {
             }
         });
 
+        jButtonAddImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonAddImplement.setForeground(new java.awt.Color(0, 51, 102));
+        jButtonAddImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Add.png"))); // NOI18N
+        jButtonAddImplement.setText("Adicionar Implementos");
+        jButtonAddImplement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddImplementActionPerformed(evt);
+            }
+        });
+
+        jButtonUpdateImplement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonUpdateImplement.setForeground(new java.awt.Color(0, 51, 102));
+        jButtonUpdateImplement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Update.png"))); // NOI18N
+        jButtonUpdateImplement.setText("Actualizar Implemento");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButtonAddImplement, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonManageImplement, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonAssignImplement, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonAssignImplement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonRegisterImplement, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonUpdateImplement, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonAddImplement, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonManageImplement, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonAddImplement)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonRegisterImplement)
+                    .addComponent(jButtonUpdateImplement))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonManageImplement)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAddImplement, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonManageImplement))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAssignImplement)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -123,24 +161,22 @@ public class TTCordination extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jSeparator1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonLogout)
+                .addGap(13, 13, 13))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jSeparator1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonLogout))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                            .addComponent(jLabelUsername)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +188,7 @@ public class TTCordination extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
+                        .addComponent(jLabelUsername)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,7 +196,7 @@ public class TTCordination extends javax.swing.JPanel {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -171,9 +207,9 @@ public class TTCordination extends javax.swing.JPanel {
         MainController.mostrarLogin();
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
-    private void jButtonAddImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddImplementActionPerformed
+    private void jButtonRegisterImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterImplementActionPerformed
         MainController.mostrarFormuarioCrearImplementos();
-    }//GEN-LAST:event_jButtonAddImplementActionPerformed
+    }//GEN-LAST:event_jButtonRegisterImplementActionPerformed
 
     private void jButtonAssignImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssignImplementActionPerformed
         MainController.mostrarFormularioAsignarImplementos();
@@ -182,15 +218,22 @@ public class TTCordination extends javax.swing.JPanel {
     private void jButtonManageImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManageImplementActionPerformed
         MainController.mostrarFormuariosEliminarImplementos();
     }//GEN-LAST:event_jButtonManageImplementActionPerformed
+
+    private void jButtonAddImplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddImplementActionPerformed
+        MainController.mostrarFormularioAdicionarImplementos();
+    }//GEN-LAST:event_jButtonAddImplementActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddImplement;
     private javax.swing.JButton jButtonAssignImplement;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonManageImplement;
+    private javax.swing.JButton jButtonRegisterImplement;
+    private javax.swing.JButton jButtonUpdateImplement;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelUsername;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables

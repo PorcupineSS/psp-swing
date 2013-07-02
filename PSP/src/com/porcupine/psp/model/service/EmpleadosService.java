@@ -48,8 +48,6 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
         entity.setCoddocume(getPrefix(vo.getRol()) + vo.getCedulaEmpleado().toString());
 
-
-
         List<TelsEmp> telslist = new ArrayList<TelsEmp>();
         Integer count = 1;
         for (TelefonosVO each : vo.getTelsEmpList()) {
@@ -161,12 +159,10 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().find(id);
         if (empleado != null) {
             EmpleadosVO empleadoVO = empleado.toVO();
-            if (empleadoVO.getRol() == TipoEmpleado.TEMPORAL){
+            if (empleadoVO.getRol() == TipoEmpleado.PLANTA){//Cambió
                 EmpPlantaVO empleadoPlanta = DAOFactory.getInstance().getEmpPlantaDAO().find(id).toVO();
                 empleadoVO.setSueldoEmpleadoPlanta(Integer.parseInt(empleadoPlanta.getSueldoe().toString()));
             }
-
-
             return empleadoVO;
         } else {
             return null;
@@ -185,7 +181,13 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
 
     @Override
     public List<EmpleadosVO> getList() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<EmpleadosVO> listaVO = new ArrayList<EmpleadosVO>();
+        List<Empleados> lista = DAOFactory.getInstance().getEmpleadosDAO().getList();
+        for (Empleados empleados : lista) {
+            EmpleadosVO empl= empleados.toVO();
+            listaVO.add(empl);
+        }
+        return listaVO;
     }
 
     @Override

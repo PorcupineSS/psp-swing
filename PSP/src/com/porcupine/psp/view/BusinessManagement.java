@@ -5,6 +5,7 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import javax.swing.JLabel;
 
 /**
  *
@@ -19,6 +20,14 @@ public class BusinessManagement extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JLabel getjLabelUsername() {
+        return jLabelUsername;
+    }
+
+    public void setjLabelUsername(JLabel jLabelUsername) {
+        this.jLabelUsername = jLabelUsername;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +39,7 @@ public class BusinessManagement extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelUsername = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jButtonLogout = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -44,7 +53,7 @@ public class BusinessManagement extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Y SERVICIO AL CLIENTE");
 
-        jLabel3.setText("¡Bienvenido XXX!");
+        jLabelUsername.setText("Username");
 
         jButtonLogout.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonLogout.setForeground(new java.awt.Color(153, 0, 0));
@@ -114,7 +123,7 @@ public class BusinessManagement extends javax.swing.JPanel {
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
+                                    .addComponent(jLabelUsername)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4))
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -134,7 +143,7 @@ public class BusinessManagement extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
+                        .addComponent(jLabelUsername)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,8 +176,8 @@ public class BusinessManagement extends javax.swing.JPanel {
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelUsername;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables

@@ -5,21 +5,11 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
-import static com.porcupine.psp.controller.MainController.psp;
-import com.porcupine.psp.model.dao.DAOFactory;
-import com.porcupine.psp.model.entity.ImplSeguridad;
-import com.porcupine.psp.model.service.ServiceFactory;
-import com.porcupine.psp.model.vo.ImplSeguridadVO;
-import com.porcupine.psp.util.DrawingUtilities;
-import java.math.BigDecimal;
-import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
@@ -29,15 +19,19 @@ import javax.swing.plaf.ComponentUI;
  * @author andres
  */
 public class AddImplement extends javax.swing.JPanel {
-
-    public static final String NOMBRE_VACIO_IMPL_VALIDACION = "¡El campo Nombre no debe estar vacío!";
-    public static final String NOMBRE_INCORRECTO_IMPL_VALIDACION = "¡Ya existe un implemento con ese nombre, por favor seleccione otro!";
-    public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad debe ser un número entero mayor o igual a 0!";
-    public static final String VALOR_UNITARIO_IMPL_VALIDACION = "¡El valor unitario debe ser un número mayor o igual a $0.0!";
-    public static final String DESCRIPCION_IMPL_VALIDACION = "¡Debe ingresar una descripción!";
+    
+    public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad a agregar debe ser un número entero mayor o igual a 0!";
 
     public AddImplement() {
         initComponents();
+    }
+
+    public JButton getjButtonAceptar() {
+        return jButtonAceptar;
+    }
+
+    public void setjButtonAceptar(JButton jButtonAceptar) {
+        this.jButtonAceptar = jButtonAceptar;
     }
 
     public JButton getjButtonCancelar() {
@@ -48,12 +42,20 @@ public class AddImplement extends javax.swing.JPanel {
         this.jButtonCancelar = jButtonCancelar;
     }
 
-    public JButton getjButtonGuardar() {
-        return jButtonGuardar;
+    public JButton getjButtonVerCantidad() {
+        return jButtonVerCantidad;
     }
 
-    public void setjButtonGuardar(JButton jButtonGuardar) {
-        this.jButtonGuardar = jButtonGuardar;
+    public void setjButtonVerCantidad(JButton jButtonVerCantidad) {
+        this.jButtonVerCantidad = jButtonVerCantidad;
+    }
+
+    public JComboBox getjComboBoxImplemento() {
+        return jComboBoxImplemento;
+    }
+
+    public void setjComboBoxImplemento(JComboBox jComboBoxImplemento) {
+        this.jComboBoxImplemento = jComboBoxImplemento;
     }
 
     public JLabel getjLabel1() {
@@ -88,30 +90,6 @@ public class AddImplement extends javax.swing.JPanel {
         this.jLabel4 = jLabel4;
     }
 
-    public JLabel getjLabel5() {
-        return jLabel5;
-    }
-
-    public void setjLabel5(JLabel jLabel5) {
-        this.jLabel5 = jLabel5;
-    }
-
-    public JLabel getjLabel6() {
-        return jLabel6;
-    }
-
-    public void setjLabel6(JLabel jLabel6) {
-        this.jLabel6 = jLabel6;
-    }
-
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
-    }
-
-    public void setjScrollPane1(JScrollPane jScrollPane1) {
-        this.jScrollPane1 = jScrollPane1;
-    }
-
     public JSeparator getjSeparator1() {
         return jSeparator1;
     }
@@ -128,36 +106,20 @@ public class AddImplement extends javax.swing.JPanel {
         this.jSeparator2 = jSeparator2;
     }
 
-    public JTextArea getjTextAreaDescripcion() {
-        return jTextAreaDescripcion;
+    public JTextField getjTextFieldCantidadActual() {
+        return jTextFieldCantidadActual;
     }
 
-    public void setjTextAreaDescripcion(JTextArea jTextAreaDescripcion) {
-        this.jTextAreaDescripcion = jTextAreaDescripcion;
+    public void setjTextFieldCantidadActual(JTextField jTextFieldCantidadActual) {
+        this.jTextFieldCantidadActual = jTextFieldCantidadActual;
     }
 
-    public JTextField getjTextFieldCantidad() {
-        return jTextFieldCantidad;
+    public JTextField getjTextFieldCantidadAgregada() {
+        return jTextFieldCantidadAgregada;
     }
 
-    public void setjTextFieldCantidad(JTextField jTextFieldCantidad) {
-        this.jTextFieldCantidad = jTextFieldCantidad;
-    }
-
-    public JTextField getjTextFieldNombre() {
-        return jTextFieldNombre;
-    }
-
-    public void setjTextFieldNombre(JTextField jTextFieldNombre) {
-        this.jTextFieldNombre = jTextFieldNombre;
-    }
-
-    public JTextField getjTextFieldValorUnitario() {
-        return jTextFieldValorUnitario;
-    }
-
-    public void setjTextFieldValorUnitario(JTextField jTextFieldValorUnitario) {
-        this.jTextFieldValorUnitario = jTextFieldValorUnitario;
+    public void setjTextFieldCantidadAgregada(JTextField jTextFieldCantidadAgregada) {
+        this.jTextFieldCantidadAgregada = jTextFieldCantidadAgregada;
     }
 
     public ComponentUI getUi() {
@@ -175,67 +137,12 @@ public class AddImplement extends javax.swing.JPanel {
     public void setListenerList(EventListenerList listenerList) {
         this.listenerList = listenerList;
     }
-
-    public JComboBox getjComboBoxProveedor() {
-        return jComboBoxProveedor;
-    }
-
-    public void setjComboBoxProveedor(JComboBox jComboBoxProveedor) {
-        this.jComboBoxProveedor = jComboBoxProveedor;
-    }
-
-    public JComboBox getjComboBoxEstado() {
-        return jComboBoxEstado;
-    }
-
-    public void setjComboBoxEstado(JComboBox jComboBoxEstado) {
-        this.jComboBoxEstado = jComboBoxEstado;
-    }
-
-    public boolean validarNombreIncorrecto(String str) {
-        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(str);
-        if (implementos.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean validarNombreVacio(String str) {
-        if (str.length() == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
+    
     public boolean validarCantidad(String str) {
         Short cantidad;
         try {
             cantidad = new Short(str);
             if (cantidad < 0) {
-                return false;
-            } else {
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean validarDescripcion(String str) {
-        if (str.length() == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public boolean validarValorUnitario(String str) {
-        BigDecimal precio;
-        try {
-            precio = new BigDecimal(str);
-            if (precio.signum() < 0) {
                 return false;
             } else {
                 return true;
@@ -256,65 +163,54 @@ public class AddImplement extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldNombre = new javax.swing.JTextField();
-        jTextFieldValorUnitario = new javax.swing.JTextField();
-        jTextFieldCantidad = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaDescripcion = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jComboBoxImplemento = new javax.swing.JComboBox(MainController.obtenerListaImplementos().toArray());
+        jButtonVerCantidad = new javax.swing.JButton();
+        jTextFieldCantidadActual = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        jButtonGuardar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldCantidadAgregada = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jButtonAceptar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jComboBoxProveedor = new javax.swing.JComboBox(MainController.obtenerListaProveedores().toArray());
-        jComboBoxEstado = new javax.swing.JComboBox();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Add.png"))); // NOI18N
-        jLabel1.setText("Nuevo Implemento");
+        jLabel1.setText("Adicionar Implementos");
 
-        jLabel2.setText("Nombre:");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel3.setText("Seleccionar Implemento:");
 
-        jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxImplemento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNombreActionPerformed(evt);
+                jComboBoxImplementoActionPerformed(evt);
             }
         });
 
-        jTextFieldValorUnitario.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVerCantidad.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonVerCantidad.setForeground(new java.awt.Color(0, 51, 102));
+        jButtonVerCantidad.setText("Ver cantidad actual");
+        jButtonVerCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldValorUnitarioActionPerformed(evt);
+                jButtonVerCantidadActionPerformed(evt);
             }
         });
 
-        jTextFieldCantidad.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldCantidadActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldCantidadActual.setEnabled(false);
+
+        jLabel2.setText("Adicionar");
+
+        jTextFieldCantidadAgregada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel4.setText("implementos nuevos.");
+
+        jButtonAceptar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonAceptar.setForeground(new java.awt.Color(0, 102, 0));
+        jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCantidadActionPerformed(evt);
-            }
-        });
-
-        jTextAreaDescripcion.setColumns(20);
-        jTextAreaDescripcion.setRows(5);
-        jScrollPane1.setViewportView(jTextAreaDescripcion);
-
-        jLabel3.setText("Valor Unitario:");
-
-        jLabel4.setText("Cantidad:");
-
-        jLabel5.setText("Estado:");
-
-        jLabel6.setText("Descripción:");
-
-        jButtonGuardar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonGuardar.setForeground(new java.awt.Color(0, 102, 0));
-        jButtonGuardar.setText("Guardar");
-        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGuardarActionPerformed(evt);
+                jButtonAceptarActionPerformed(evt);
             }
         });
 
@@ -325,51 +221,36 @@ public class AddImplement extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Proveedor:");
-
-        jComboBoxProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxProveedorActionPerformed(evt);
-            }
-        });
-
-        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "OPTIMO", "MANTENIMIENTO" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
+            .addComponent(jSeparator2)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonGuardar))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldValorUnitario)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldCantidad)
-                                    .addComponent(jTextFieldNombre)
-                                    .addComponent(jComboBoxProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBoxEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jComboBoxImplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonVerCantidad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldCantidadActual, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(2, 2, 2)
+                        .addComponent(jTextFieldCantidadAgregada, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAceptar)
                 .addContainerGap())
-            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,103 +260,61 @@ public class AddImplement extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxImplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVerCantidad)
+                    .addComponent(jTextFieldCantidadActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCantidadAgregada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jComboBoxProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonGuardar)
+                    .addComponent(jButtonAceptar)
                     .addComponent(jButtonCancelar))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
+    private void jComboBoxImplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxImplementoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNombreActionPerformed
+    }//GEN-LAST:event_jComboBoxImplementoActionPerformed
 
-    private void jTextFieldValorUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorUnitarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldValorUnitarioActionPerformed
-
-    private void jTextFieldCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCantidadActionPerformed
-
-    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        if (validarNombreVacio(getjTextFieldNombre().getText())) {
-            if (validarNombreIncorrecto(getjTextFieldNombre().getText())) {
-                if (validarValorUnitario(getjTextFieldValorUnitario().getText())) {
-                    if (validarCantidad(getjTextFieldCantidad().getText())) {
-                        if (validarDescripcion(getjTextAreaDescripcion().getText())) {
-                            MainController.crearImplemento();
-                        } else {
-                            JOptionPane.showMessageDialog(this, DESCRIPCION_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, VALOR_UNITARIO_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, NOMBRE_INCORRECTO_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, NOMBRE_VACIO_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_jButtonGuardarActionPerformed
-
-    private void jComboBoxProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProveedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxProveedorActionPerformed
+    private void jButtonVerCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerCantidadActionPerformed
+        String cantidadActual = MainController.obtenerCantidadImplementos(jComboBoxImplemento.getSelectedItem().toString()).toString();
+        jTextFieldCantidadActual.setText(cantidadActual);
+    }//GEN-LAST:event_jButtonVerCantidadActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         MainController.helper.setVisible(false);
-        MainController.helper.dispose();                   
+        MainController.helper.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
+        if (validarCantidad(jTextFieldCantidadAgregada.getText())) {
+            MainController.adicionarImplemento();
+        } else {
+            JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonGuardar;
-    private javax.swing.JComboBox jComboBoxEstado;
-    private javax.swing.JComboBox jComboBoxProveedor;
+    private javax.swing.JButton jButtonVerCantidad;
+    private javax.swing.JComboBox jComboBoxImplemento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextArea jTextAreaDescripcion;
-    private javax.swing.JTextField jTextFieldCantidad;
-    private javax.swing.JTextField jTextFieldNombre;
-    private javax.swing.JTextField jTextFieldValorUnitario;
+    private javax.swing.JTextField jTextFieldCantidadActual;
+    private javax.swing.JTextField jTextFieldCantidadAgregada;
     // End of variables declaration//GEN-END:variables
 }

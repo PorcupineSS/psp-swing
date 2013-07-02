@@ -7,6 +7,7 @@ package com.porcupine.psp.view;
 import com.porcupine.psp.controller.MainController;
 import com.porcupine.psp.util.TipoEmpleado;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 
 /**
  *
@@ -21,6 +22,14 @@ public class HumanManagement extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JLabel getjLabelUsername() {
+        return jLabelUsername;
+    }
+
+    public void setjLabelUsername(JLabel jLabelUsername) {
+        this.jLabelUsername = jLabelUsername;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,7 +41,7 @@ public class HumanManagement extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelUsername = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jButtonLogout = new javax.swing.JButton();
         jPanelHumanManagement = new javax.swing.JPanel();
@@ -45,10 +54,11 @@ public class HumanManagement extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("GESTIÓN HUMANA");
 
-        jLabel3.setText("¡Bienvenido XXX!");
+        jLabelUsername.setText("Username");
 
         jButtonLogout.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonLogout.setForeground(new java.awt.Color(153, 0, 0));
+        jButtonLogout.setForeground(new java.awt.Color(51, 51, 51));
+        jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Logout.png"))); // NOI18N
         jButtonLogout.setText("Cerrar Sesión");
         jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +125,7 @@ public class HumanManagement extends javax.swing.JPanel {
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
+                                    .addComponent(jLabelUsername)
                                     .addComponent(jLabel2))
                                 .addGap(0, 36, Short.MAX_VALUE)))))
                 .addContainerGap())
@@ -128,7 +138,7 @@ public class HumanManagement extends javax.swing.JPanel {
                         .addGap(19, 19, 19)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
+                        .addComponent(jLabelUsername)
                         .addGap(10, 10, 10))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -172,7 +182,7 @@ public class HumanManagement extends javax.swing.JPanel {
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelUsername;
     private javax.swing.JPanel jPanelHumanManagement;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables

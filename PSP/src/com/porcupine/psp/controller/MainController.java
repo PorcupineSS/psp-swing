@@ -52,7 +52,7 @@ public class MainController {
     public static Psp psp;
     public static Helper helper;
     public static Helper helper1;
-    public static AddImplement agregarImplemento;
+    public static RegisterImplement registrarImplemento;
     public static AddContract agregarContrato;
     public static AddClient agregarCliente;
     public static WriteNotice agregarWriteNotice;
@@ -69,7 +69,8 @@ public class MainController {
     public static EmpleadosVO empleadoTemporal;
     static DeleteImplement eliminarImplemento = new DeleteImplement();
     public static DefaultTableModel modelTable;
-    static AssignImplements asignarImplementos = new AssignImplements();
+    public static AssignImplements asignarImplementos;
+    public static AddImplement adicionarImplemento;
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -253,9 +254,9 @@ public class MainController {
     public static void mostrarFormuarioCrearImplementos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
-        agregarImplemento = new AddImplement();
+        registrarImplemento = new RegisterImplement();
         helper.setVisible(true);
-        DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarImplemento);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), registrarImplemento);
         helper.setTitle("Porcupine Software Portal");
     }
 
@@ -277,6 +278,15 @@ public class MainController {
         helper.setTitle("Porcupine Software Portal");
     }
 
+    public static void mostrarFormularioAdicionarImplementos() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        adicionarImplemento = new AddImplement();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), adicionarImplemento);
+        helper.setTitle("Porcupine Software Portal");
+    }
+
     public static void mostrarFormularioContratos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
@@ -294,7 +304,7 @@ public class MainController {
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarWriteNotice);
         helper.setTitle("Crear comunicado...");
     }
-    
+
     public static void mostrarFormularioReplyNotice() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
@@ -342,24 +352,29 @@ public class MainController {
                 //TODO set parameters
                 case TipoEmpleado.COORDINADOR_CONTRATO:
                     ContractCordination cCordination = new ContractCordination();
+                    cCordination.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), cCordination);
                     break;
                 case TipoEmpleado.COORDINADOR_TECNICO_TECNOLOGICO:
                     TTCordination ttcordination = new TTCordination();
+                    ttcordination.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), ttcordination);
                     break;
                 case TipoEmpleado.DIRECTOR_COMERCIAL:
 //                    AddClient addclient = new AddClient();
 //                    DrawingUtilities.drawPanel(psp, psp.getViewport(), addclient);
                     BusinessManagement bmanagement = new BusinessManagement();
+                    bmanagement.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), bmanagement);
                     break;
                 case TipoEmpleado.DIRECTOR_GESTION_HUMANA:
                     HumanManagement hmanagement = new HumanManagement();
+                    hmanagement.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), hmanagement);
                     break;
                 case TipoEmpleado.DIRECTOR_OPERACIONES:
                     OperationsManagement omanagement = new OperationsManagement();
+                    omanagement.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), omanagement);
                     break;
                 case TipoEmpleado.SUBGERENTE:
@@ -369,10 +384,12 @@ public class MainController {
                 //no es mi codigo mas bonito pero parece funcionar
                 case TipoEmpleado.TEMPORAL_ESCOLTA:
                     TemporaryEmployee temployee = new TemporaryEmployee();
+                    temployee.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), temployee);
                     break;
                 case TipoEmpleado.TEMPORAL_GUARDA:
                     TemporaryEmployee temployee2 = new TemporaryEmployee();
+                    temployee2.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), temployee2);
                     break;
                 default:
@@ -641,23 +658,23 @@ public class MainController {
     public static void crearImplemento() {
         ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
         implSeguridadVO.setIdImplemento(new Integer(1).shortValue());
-        implSeguridadVO.setNombreI(agregarImplemento.getjTextFieldNombre().getText());
-        implSeguridadVO.setPrecioUnitarioI(new BigDecimal(agregarImplemento.getjTextFieldValorUnitario().getText()));
-        implSeguridadVO.setCantidad(new Short(agregarImplemento.getjTextFieldCantidad().getText()));
-        implSeguridadVO.setEstadoI(agregarImplemento.getjComboBoxEstado().getSelectedItem().toString());
+        implSeguridadVO.setNombreI(registrarImplemento.getjTextFieldNombre().getText());
+        implSeguridadVO.setPrecioUnitarioI(new BigDecimal(registrarImplemento.getjTextFieldValorUnitario().getText()));
+        implSeguridadVO.setCantidad(new Short(registrarImplemento.getjTextFieldCantidad().getText()));
+        implSeguridadVO.setEstadoI(registrarImplemento.getjComboBoxEstado().getSelectedItem().toString());
         implSeguridadVO.setFechaRegIm(new Date());
-        implSeguridadVO.setDescripcionI(agregarImplemento.getjTextAreaDescripcion().getText());
-        String nombreProveedor = agregarImplemento.getjComboBoxProveedor().getSelectedItem().toString();
+        implSeguridadVO.setDescripcionI(registrarImplemento.getjTextAreaDescripcion().getText());
+        String nombreProveedor = registrarImplemento.getjComboBoxProveedor().getSelectedItem().toString();
         Short idProveedor = ServiceFactory.getInstance().getProveedorService().findName(nombreProveedor);
         implSeguridadVO.setIdPro(idProveedor);
         implSeguridadVO.setCedulaCoordTyT(empleadoActivo.getCedulaEmpleado());
         try {
             ServiceFactory.getInstance().getImplSeguridadService().create(implSeguridadVO);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(agregarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(registrarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        JOptionPane.showMessageDialog(agregarImplemento, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(registrarImplemento, "¡Implemento agregado satisfactoriamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         secondary.setVisible(false);
         secondary = new Secondary();
     }
@@ -671,9 +688,39 @@ public class MainController {
         return lista;
     }
 
-//    public static List<String> obtenerLitsEmpleadosTemporales(){
-//        List<EmplTempVO> listaEmpleados = ServiceFactory.getInstance().
-//    }
+    public static List<String> obtenerListaEmpTemp() {
+        List<EmpTempVO> listaEmpTemp = ServiceFactory.getInstance().getEmpTempService().getList();
+        List<Integer> listaCedulas = new ArrayList<>();
+        for (EmpTempVO empTemp : listaEmpTemp) {
+            listaCedulas.add(empTemp.getCedulaEmpleado());
+        }
+        List<EmpleadosVO> listaEmpleados = new ArrayList<>();
+        for (Integer cedula : listaCedulas) {
+            listaEmpleados.add(ServiceFactory.getInstance().getEmpleadosService().find(cedula));
+        }
+        List<String> empleados = new ArrayList<>();
+        for (EmpleadosVO empleadoVO : listaEmpleados) {
+            empleados.add(empleadoVO.getCedulaEmpleado().toString() + " - " + empleadoVO.getApellidoEmpleado() + " " + empleadoVO.getNombreEmpleado());
+        }
+        return empleados;
+    }
+
+    public static Short obtenerCantidadImplementos(String nombreImplemento) {
+        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(nombreImplemento);
+        ImplSeguridadVO implemento = implementos.get(0);
+        Short cantidad = implemento.getCantidad();
+        return cantidad;
+    }
+
+    public static List<String> obtenerListaImplementos() {
+        List<ImplSeguridadVO> implementosVO = ServiceFactory.getInstance().getImplSeguridadService().getList();
+        List<String> lista = new ArrayList<>();
+        for (ImplSeguridadVO implemento : implementosVO) {
+            lista.add(implemento.getNombreI());
+        }
+        return lista;
+    }
+
     public static void llenarTabla() {
         List<ImplSeguridadVO> implementosList = ServiceFactory.getInstance().getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
         modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
@@ -704,6 +751,12 @@ public class MainController {
         modelTable.fireTableDataChanged();
         List<ImplSeguridadVO> implementos;
         implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
+        if (implementos.isEmpty()) {
+            eliminarImplemento.getjButtonEliminar().setEnabled(false);
+            JOptionPane.showMessageDialog(eliminarImplemento, "¡No se han encontrado resultados!", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            eliminarImplemento.getjButtonEliminar().setEnabled(true);
+        }
         for (ImplSeguridadVO implementoVO : implementos) {
             Object[] datos = {new Short(implementoVO.getIdImplemento()),
                 implementoVO.getNombreI(),
@@ -711,20 +764,18 @@ public class MainController {
                 new Short(implementoVO.getCantidad()),
                 implementoVO.getEstadoI(),
                 implementoVO.getFechaRegIm().toString()};
-            //ServiceFactory.getInstance().getProveedorService().find(new Integer(implementoVO.getIdImplemento())).getNombre()};           
             modelTable.addRow(datos);
         }
         modelTable.fireTableDataChanged();
-        System.out.println("Terminó!!");
     }
 
     public static void borrarImplemento() {
-        int opcion = JOptionPane.showOptionDialog(eliminarImplemento, "Realmente desea eliminar al usuario?", "Confirmación", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "Cancelar"}, "Cancelar");
+        int opcion = JOptionPane.showOptionDialog(eliminarImplemento, "¿Realmente desea eliminar el implemento?", "Confirmación", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "Cancelar"}, "Cancelar");
         switch (opcion) {
             case JOptionPane.OK_OPTION:
                 try {
                     ServiceFactory.getInstance().getImplSeguridadService().delete(new Short(eliminarImplemento.getjTableBusqueda().getValueAt(eliminarImplemento.getjTableBusqueda().getSelectedRow(), 0).toString()));
-                    JOptionPane.showMessageDialog(eliminarImplemento, "¡El implemento se ha eliminado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(eliminarImplemento, "¡El implemento se ha eliminado satisfactoriamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     llenarTabla();
                 } catch (NonexistentEntityException | InsufficientPermissionsException ex) {
                     JOptionPane.showMessageDialog(eliminarImplemento, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -741,9 +792,37 @@ public class MainController {
     }
 
     public static void asignarImplemento() {
+        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService()
+                .findByName(asignarImplementos.getjComboBoxImplemento().getSelectedItem().toString());
+        ImplSeguridadVO implemento = implementos.get(0);
+        Short idImplemento = implemento.getIdImplemento();
+        String[] empleadoSeleccionado = asignarImplementos.getjComboBoxEmpleado().getSelectedItem().toString().split(" ");
+        System.out.println(empleadoSeleccionado[0]);
+        Integer idEmpleadoTemporal = Integer.parseInt(empleadoSeleccionado[0]);
+        Integer idCoordinador = empleadoActivo.getCedulaEmpleado();
+        Integer cantidadAsignada = Integer.parseInt(asignarImplementos.getjTextFieldCantidad().getText());
+        try {
+            DAOFactory.getInstance().getImplSeguridadDAO().asignarImplemento(idImplemento, idEmpleadoTemporal, idCoordinador, cantidadAsignada);
+            JOptionPane.showMessageDialog(asignarImplementos, "¡La asignación del implemento al empleado " + empleadoSeleccionado[2] + ", ha sido exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(asignarImplementos, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
+    public static void adicionarImplemento() {
+        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(adicionarImplemento.getjComboBoxImplemento().getSelectedItem().toString());
+        ImplSeguridadVO implemento = implementos.get(0);
+        Short idImplemento = implemento.getIdImplemento();
+        Integer cantidad = Integer.parseInt(adicionarImplemento.getjTextFieldCantidadAgregada().getText());
+        try {
+            DAOFactory.getInstance().getImplSeguridadDAO().adicionarImplemento(idImplemento, cantidad);
+            JOptionPane.showMessageDialog(adicionarImplemento, "¡Se han agregado " + cantidad + " implementos satisfactoriamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(adicionarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
+        }
+    }
     //IMPLEMENTOS - FIN
+    
     /**
      * Disponible para: Wachiturros Vista principal para este coordinador
      */
@@ -773,7 +852,7 @@ public class MainController {
         contratoVO.setTelefonoCont(agregarContrato.getjTextFieldTelefonoC().getText());
         contratoVO.setCedulaDirComer(empleadoActivo.getCedulaEmpleado());
         contratoVO.setFechaRegCont(new Date());
-        
+
         String nombreCliente = agregarContrato.getjComboBoxCliente().getSelectedItem().toString();
         Short idCliente = ServiceFactory.getInstance().getClienteService().findName(nombreCliente);
         contratoVO.setIdCliente(idCliente);
@@ -788,7 +867,7 @@ public class MainController {
 //        helper.setVisible(false);
 //        helper.dispose(); 
     }
-    
+
     public static List<String> obtenerListaClientes() {
         List<ClienteVO> listaClientes = ServiceFactory.getInstance().getClienteService().getList();
         List<String> lista = new ArrayList<>();

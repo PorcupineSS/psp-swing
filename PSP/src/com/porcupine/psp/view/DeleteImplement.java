@@ -7,6 +7,7 @@ package com.porcupine.psp.view;
 import com.porcupine.psp.controller.MainController;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -19,9 +20,8 @@ import javax.swing.plaf.ComponentUI;
  */
 public class DeleteImplement extends javax.swing.JPanel {
 
-    /**
-     * Creates new form DeleteImplement
-     */
+    public static final String IMPL_SELECCIONADO_VALIDACION = "¡Debe seleccionar un implemento!";
+    
     public DeleteImplement() {
         initComponents();
     }
@@ -105,8 +105,6 @@ public class DeleteImplement extends javax.swing.JPanel {
     public void setListenerList(EventListenerList listenerList) {
         this.listenerList = listenerList;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,7 +126,7 @@ public class DeleteImplement extends javax.swing.JPanel {
 
         jLabel2.setText("jLabel2");
 
-        jLabel1.setText("Buscar por nombre::");
+        jLabel1.setText("Buscar por nombre:");
 
         jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/FindMin.png"))); // NOI18N
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -139,10 +137,7 @@ public class DeleteImplement extends javax.swing.JPanel {
 
         jTableBusqueda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nombre", "Precio Unitario", "Cantidad", "Estado", "Fecha de Registro"
@@ -168,6 +163,7 @@ public class DeleteImplement extends javax.swing.JPanel {
         jButtonEliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonEliminar.setForeground(new java.awt.Color(153, 0, 0));
         jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.setEnabled(false);
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEliminarActionPerformed(evt);
@@ -224,19 +220,21 @@ public class DeleteImplement extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        // TODO add your handling code here:
         MainController.buscar();
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-        MainController.borrarImplemento();
+        if (jTableBusqueda.getSelectedRowCount() != 0) {
+            MainController.borrarImplemento();
+        } else {
+            JOptionPane.showMessageDialog(this, IMPL_SELECCIONADO_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         MainController.helper.setVisible(false);
         MainController.helper.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancelar;

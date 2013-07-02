@@ -667,7 +667,7 @@ public class MainController {
             JOptionPane.showMessageDialog(registrarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        JOptionPane.showMessageDialog(registrarImplemento, "¡Implemento agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(registrarImplemento, "¡Implemento agregado satisfactoriamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         secondary.setVisible(false);
         secondary = new Secondary();
     }
@@ -744,6 +744,12 @@ public class MainController {
         modelTable.fireTableDataChanged();
         List<ImplSeguridadVO> implementos;
         implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
+        if (implementos.isEmpty()) {
+            eliminarImplemento.getjButtonEliminar().setEnabled(false);
+            JOptionPane.showMessageDialog(eliminarImplemento, "¡No se han encontrado resultados!", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            eliminarImplemento.getjButtonEliminar().setEnabled(true);
+        }
         for (ImplSeguridadVO implementoVO : implementos) {
             Object[] datos = {new Short(implementoVO.getIdImplemento()),
                 implementoVO.getNombreI(),
@@ -751,20 +757,18 @@ public class MainController {
                 new Short(implementoVO.getCantidad()),
                 implementoVO.getEstadoI(),
                 implementoVO.getFechaRegIm().toString()};
-            //ServiceFactory.getInstance().getProveedorService().find(new Integer(implementoVO.getIdImplemento())).getNombre()};           
             modelTable.addRow(datos);
         }
         modelTable.fireTableDataChanged();
-        System.out.println("Terminó!!");
     }
 
     public static void borrarImplemento() {
-        int opcion = JOptionPane.showOptionDialog(eliminarImplemento, "Realmente desea eliminar al usuario?", "Confirmación", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "Cancelar"}, "Cancelar");
+        int opcion = JOptionPane.showOptionDialog(eliminarImplemento, "¿Realmente desea eliminar el implemento?", "Confirmación", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "Cancelar"}, "Cancelar");
         switch (opcion) {
             case JOptionPane.OK_OPTION:
                 try {
                     ServiceFactory.getInstance().getImplSeguridadService().delete(new Short(eliminarImplemento.getjTableBusqueda().getValueAt(eliminarImplemento.getjTableBusqueda().getSelectedRow(), 0).toString()));
-                    JOptionPane.showMessageDialog(eliminarImplemento, "¡El implemento se ha eliminado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(eliminarImplemento, "¡El implemento se ha eliminado satisfactoriamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     llenarTabla();
                 } catch (NonexistentEntityException | InsufficientPermissionsException ex) {
                     JOptionPane.showMessageDialog(eliminarImplemento, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -792,7 +796,7 @@ public class MainController {
         Integer cantidadAsignada = Integer.parseInt(asignarImplementos.getjTextFieldCantidad().getText());
         try {
             DAOFactory.getInstance().getImplSeguridadDAO().asignarImplemento(idImplemento, idEmpleadoTemporal, idCoordinador, cantidadAsignada);
-            JOptionPane.showMessageDialog(asignarImplementos, "¡La asignación de implementos al empleado " + empleadoSeleccionado[2] + ", ha sido exitosa!", "¡Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(asignarImplementos, "¡La asignación del implemento al empleado " + empleadoSeleccionado[2] + ", ha sido exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(asignarImplementos, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -805,13 +809,13 @@ public class MainController {
         Integer cantidad = Integer.parseInt(adicionarImplemento.getjTextFieldCantidadAgregada().getText());
         try {
             DAOFactory.getInstance().getImplSeguridadDAO().adicionarImplemento(idImplemento, cantidad);
-            JOptionPane.showMessageDialog(adicionarImplemento, "¡Se han agregado " + cantidad + " implementos satisfactoriamente!", "¡Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(adicionarImplemento, "¡Se han agregado " + cantidad + " implementos satisfactoriamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(adicionarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
         }
     }
-
     //IMPLEMENTOS - FIN
+    
     /**
      * Disponible para: Wachiturros Vista principal para este coordinador
      */

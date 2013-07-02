@@ -294,7 +294,7 @@ public class MainController {
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarWriteNotice);
         helper.setTitle("Crear comunicado...");
     }
-    
+
     public static void mostrarFormularioReplyNotice() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
@@ -670,11 +670,11 @@ public class MainController {
         }
         return lista;
     }
-    
+
     public static List<String> obtenerListaEmpTemp() {
         List<EmpTempVO> listaEmpTemp = ServiceFactory.getInstance().getEmpTempService().getList();
         List<Integer> listaCedulas = new ArrayList<>();
-        for (EmpTempVO empTemp: listaEmpTemp) {
+        for (EmpTempVO empTemp : listaEmpTemp) {
             listaCedulas.add(empTemp.getCedulaEmpleado());
         }
         List<EmpleadosVO> listaEmpleados = new ArrayList<>();
@@ -687,7 +687,7 @@ public class MainController {
         }
         return empleados;
     }
-    
+
     public static List<String> obtenerListaImplementos() {
         List<ImplSeguridadVO> implementosVO = ServiceFactory.getInstance().getImplSeguridadService().getList();
         List<String> lista = new ArrayList<>();
@@ -773,7 +773,12 @@ public class MainController {
         Integer idEmpleadoTemporal = Integer.parseInt(empleadoSeleccionado[0]);
         Integer idCoordinador = empleadoActivo.getCedulaEmpleado();
         Integer cantidadAsignada = Integer.parseInt(asignarImplementos.getjTextFieldCantidad().getText());
-        DAOFactory.getInstance().getImplSeguridadDAO().asignarImplemento(idImplemento, idEmpleadoTemporal, idCoordinador, cantidadAsignada); 
+        try {
+            DAOFactory.getInstance().getImplSeguridadDAO().asignarImplemento(idImplemento, idEmpleadoTemporal, idCoordinador, cantidadAsignada);
+            JOptionPane.showMessageDialog(eliminarImplemento, "¡La asignación de implementos al empleado " + empleadoSeleccionado[2] + ", ha sido exitosa!", "¡Éxito!", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(eliminarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     //IMPLEMENTOS - FIN
@@ -806,7 +811,7 @@ public class MainController {
         contratoVO.setTelefonoCont(agregarContrato.getjTextFieldTelefonoC().getText());
         contratoVO.setCedulaDirComer(empleadoActivo.getCedulaEmpleado());
         contratoVO.setFechaRegCont(new Date());
-        
+
         String nombreCliente = agregarContrato.getjComboBoxCliente().getSelectedItem().toString();
         Short idCliente = ServiceFactory.getInstance().getClienteService().findName(nombreCliente);
         contratoVO.setIdCliente(idCliente);
@@ -821,7 +826,7 @@ public class MainController {
 //        helper.setVisible(false);
 //        helper.dispose(); 
     }
-    
+
     public static List<String> obtenerListaClientes() {
         List<ClienteVO> listaClientes = ServiceFactory.getInstance().getClienteService().getList();
         List<String> lista = new ArrayList<>();

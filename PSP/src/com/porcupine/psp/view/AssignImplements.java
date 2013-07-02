@@ -249,6 +249,11 @@ public class AssignImplements extends javax.swing.JPanel {
         });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         buttonGroupOpcion.add(jRadioButtonAsignar);
         jRadioButtonAsignar.setText("Asignar");
@@ -377,6 +382,11 @@ public class AssignImplements extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, CANTIDAD_ASIG_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonAsignarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        MainController.helper.setVisible(false);
+        MainController.helper.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupOpcion;

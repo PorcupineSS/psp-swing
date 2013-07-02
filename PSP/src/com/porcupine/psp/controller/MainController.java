@@ -768,8 +768,9 @@ public class MainController {
                 .findByName(asignarImplementos.getjComboBoxImplemento().getSelectedItem().toString());
         ImplSeguridadVO implemento = implementos.get(0);
         Short idImplemento = implemento.getIdImplemento();
-        String[] implementoSeleccionado = asignarImplementos.getjComboBoxImplemento().getSelectedItem().toString().split(" ");
-        Integer idEmpleadoTemporal = Integer.parseInt(implementoSeleccionado[0]);
+        String[] empleadoSeleccionado = asignarImplementos.getjComboBoxEmpleado().getSelectedItem().toString().split(" ");
+        System.out.println(empleadoSeleccionado[0]);
+        Integer idEmpleadoTemporal = Integer.parseInt(empleadoSeleccionado[0]);
         Integer idCoordinador = empleadoActivo.getCedulaEmpleado();
         Integer cantidadAsignada = Integer.parseInt(asignarImplementos.getjTextFieldCantidad().getText());
         DAOFactory.getInstance().getImplSeguridadDAO().asignarImplemento(idImplemento, idEmpleadoTemporal, idCoordinador, cantidadAsignada); 

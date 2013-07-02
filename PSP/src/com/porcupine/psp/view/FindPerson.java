@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
 import javax.swing.JList;
 
 /**
@@ -27,8 +28,6 @@ public class FindPerson extends javax.swing.JPanel {
         this.jListResultados = jListResultados;
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,6 +70,11 @@ public class FindPerson extends javax.swing.JPanel {
             String[] strings = { "Resultado 1", "Resultado 2", "..." };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        jListResultados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListResultadosMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(jListResultados);
 
@@ -152,6 +156,11 @@ public class FindPerson extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    private void jListResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListResultadosMouseClicked
+        if (evt.getClickCount() == 2) {
+            MainController.consultarEmpleado();
+        }
+    }//GEN-LAST:event_jListResultadosMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancelar;

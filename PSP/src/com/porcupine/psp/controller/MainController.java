@@ -468,13 +468,13 @@ public class MainController {
         helper2.setVisible(true);
         DrawingUtilities.drawPanel(helper2, helper2.getViewport(), findPerson);
         helper2.setTitle("Responder comunicado...");
-        
+
         List<EmpleadosVO> empleados = ServiceFactory.getInstance().getEmpleadosService().getList();
         ArrayList<String> output = new ArrayList<String>();
-        for (EmpleadosVO each : empleados){
+        for (EmpleadosVO each : empleados) {
             output.add(each.toCoolString());
         }
-        
+
         findPerson.setjListResultados(new javax.swing.JList(output.toArray()));
 
     }
@@ -483,7 +483,9 @@ public class MainController {
         EmpleadosVO empleado = new EmpleadosVO();
 
         //TODO añadir la captura de todos los campos en la interfaz
-        empleado.setCedulaDirector(Integer.parseInt((String) findPerson.getjListResultados().getSelectedValue()));
+        String capturedValue = (String) findPerson.getjListResultados().getSelectedValue();
+        String[] splitted = capturedValue.split(" ");
+        empleado.setCedulaDirector(Integer.parseInt(splitted[0]));
 
         try {
             empleado = ServiceFactory.getInstance().getEmpleadosService().find(empleado.getCedulaEmpleado());
@@ -511,6 +513,13 @@ public class MainController {
         } else {
             crearEmpleado.getjTextFieldDireccion().setEnabled(false);
         }
+        
+        ArrayList<String> telefonos = new ArrayList<String>();
+        for(TelefonosVO each : empleado.getTelsEmpList()){
+            telefonos.add(each.getNumeroTelefonoEmpleado());
+        }
+        
+        crearEmpleado.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
 
         crearEmpleado.getjButtonGuardar().setText("Modificar");
 

@@ -23,6 +23,7 @@ import javax.swing.plaf.ComponentUI;
 public class AssignImplements extends javax.swing.JPanel {
     
     public static final String CANTIDAD_ASIG_IMPL_VALIDACION = "¡La cantidad debe ser un número entero mayor o igual a 0!";
+    public static final String CANTIDAD_DISP_ASIG_IMPL_VALIDACION = "¡La cantidad a asignar debe ser menor o igual a la cantidad disponible!";
     
     /**
      * Creates new form AssignImplements
@@ -189,6 +190,16 @@ public class AssignImplements extends javax.swing.JPanel {
         }
     }
      
+     public boolean validarCantidadDisponible(String str) {
+         Short cantidadDisponible = MainController.obtenerCantidadImplementos(jComboBoxImplemento.getSelectedItem().toString());
+         Short cantidadAAsignar = new Short(str);
+         if (cantidadDisponible >= cantidadAAsignar) {
+             return true;
+         } else {
+             return false;
+         } 
+     }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -214,9 +225,10 @@ public class AssignImplements extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jTextFieldCantidad = new javax.swing.JTextField();
         jButtonDespojar = new javax.swing.JButton();
+        jLabelCantidadActual = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Assign.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Assign1.png"))); // NOI18N
         jLabel1.setText("Asignación de Implementos");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
@@ -278,6 +290,9 @@ public class AssignImplements extends javax.swing.JPanel {
         jButtonDespojar.setText("Despojar");
         jButtonDespojar.setEnabled(false);
 
+        jLabelCantidadActual.setForeground(new java.awt.Color(0, 51, 102));
+        jLabelCantidadActual.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -300,10 +315,6 @@ public class AssignImplements extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(124, 124, 124))
                                     .addComponent(jComboBoxImplemento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
@@ -314,11 +325,18 @@ public class AssignImplements extends javax.swing.JPanel {
                         .addComponent(jRadioButtonDespojar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDespojar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonAsignar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelCantidadActual, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButtonCancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonDespojar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAsignar)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -343,17 +361,19 @@ public class AssignImplements extends javax.swing.JPanel {
                     .addComponent(jComboBoxEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxImplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelCantidadActual)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAsignar)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonDespojar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -367,7 +387,8 @@ public class AssignImplements extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBoxEmpleadoActionPerformed
 
     private void jComboBoxImplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxImplementoActionPerformed
-        // TODO add your handling code here:
+        String cantidadActual = MainController.obtenerCantidadImplementos(jComboBoxImplemento.getSelectedItem().toString()).toString();
+        jLabelCantidadActual.setText("'" + cantidadActual + " disponibles'");
     }//GEN-LAST:event_jComboBoxImplementoActionPerformed
 
     private void jRadioButtonDespojarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDespojarActionPerformed
@@ -377,7 +398,11 @@ public class AssignImplements extends javax.swing.JPanel {
 
     private void jButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignarActionPerformed
         if (validarCantidadAsignada(jTextFieldCantidad.getText())) {
-            MainController.asignarImplemento();
+            if (validarCantidadDisponible(jTextFieldCantidad.getText())) {
+                MainController.asignarImplemento();
+            } else {
+               JOptionPane.showMessageDialog(this, CANTIDAD_DISP_ASIG_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+            }    
         } else {
             JOptionPane.showMessageDialog(this, CANTIDAD_ASIG_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -399,6 +424,7 @@ public class AssignImplements extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelCantidadActual;
     private javax.swing.JRadioButton jRadioButtonAsignar;
     private javax.swing.JRadioButton jRadioButtonDespojar;
     private javax.swing.JSeparator jSeparator1;

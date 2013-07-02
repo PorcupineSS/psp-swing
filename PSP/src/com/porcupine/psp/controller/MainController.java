@@ -73,6 +73,7 @@ public class MainController {
     public static DefaultTableModel modelTable;
     public static AssignImplements asignarImplementos;
     public static AddImplement adicionarImplemento;
+    public static UpdateImplementList listaActualizarImplementos;
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -286,6 +287,15 @@ public class MainController {
         adicionarImplemento = new AddImplement();
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), adicionarImplemento);
+        helper.setTitle("Porcupine Software Portal");
+    }
+    
+    public static void mostrarFormularioListaActualizarImplementos() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        listaActualizarImplementos = new UpdateImplementList();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), listaActualizarImplementos);
         helper.setTitle("Porcupine Software Portal");
     }
 

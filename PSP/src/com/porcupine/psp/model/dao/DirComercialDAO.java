@@ -52,7 +52,7 @@ public class DirComercialDAO implements ICrudDAO<DirComercial, Integer>{
             entityManager = getEntityManager();
             return entityManager.find(DirComercial.class, id);
         } catch (EntityNotFoundException ex) {
-            throw new EntityNotFoundException("El empleado con id " + id + " no existe.");
+            throw new EntityNotFoundException("El Director Comercial con id " + id + " no existe.");
         } finally {
             if (entityManager != null) {
                 entityManager.clear();

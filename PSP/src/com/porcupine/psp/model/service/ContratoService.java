@@ -51,7 +51,7 @@ public class ContratoService implements IService<ContratoVO, Short> {
         entity.setUbicacionC(vo.getUbicacionCont());
         
         if(vo.getIdCliente() != 0){
-           Cliente cliente = DAOFactory.getInstance().getClienteDAO().find((Short) vo.getIdCliente());
+           Cliente cliente = DAOFactory.getInstance().getClienteDAO().find(vo.getIdCliente());
            entity.setIdcl(cliente);
            cliente.getContratoList().add(entity);
         }

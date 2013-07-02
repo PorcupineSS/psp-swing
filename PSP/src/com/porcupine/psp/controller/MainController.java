@@ -352,24 +352,29 @@ public class MainController {
                 //TODO set parameters
                 case TipoEmpleado.COORDINADOR_CONTRATO:
                     ContractCordination cCordination = new ContractCordination();
+                    cCordination.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), cCordination);
                     break;
                 case TipoEmpleado.COORDINADOR_TECNICO_TECNOLOGICO:
                     TTCordination ttcordination = new TTCordination();
+                    ttcordination.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), ttcordination);
                     break;
                 case TipoEmpleado.DIRECTOR_COMERCIAL:
 //                    AddClient addclient = new AddClient();
 //                    DrawingUtilities.drawPanel(psp, psp.getViewport(), addclient);
                     BusinessManagement bmanagement = new BusinessManagement();
+                    bmanagement.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), bmanagement);
                     break;
                 case TipoEmpleado.DIRECTOR_GESTION_HUMANA:
                     HumanManagement hmanagement = new HumanManagement();
+                    hmanagement.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), hmanagement);
                     break;
                 case TipoEmpleado.DIRECTOR_OPERACIONES:
                     OperationsManagement omanagement = new OperationsManagement();
+                    omanagement.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), omanagement);
                     break;
                 case TipoEmpleado.SUBGERENTE:
@@ -379,10 +384,12 @@ public class MainController {
                 //no es mi codigo mas bonito pero parece funcionar
                 case TipoEmpleado.TEMPORAL_ESCOLTA:
                     TemporaryEmployee temployee = new TemporaryEmployee();
+                    temployee.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), temployee);
                     break;
                 case TipoEmpleado.TEMPORAL_GUARDA:
                     TemporaryEmployee temployee2 = new TemporaryEmployee();
+                    temployee2.getjLabelUsername().setText("¡Bienvenido " + empleadoLogin.getNombreEmpleado() + "!");
                     DrawingUtilities.drawPanel(psp, psp.getViewport(), temployee2);
                     break;
                 default:

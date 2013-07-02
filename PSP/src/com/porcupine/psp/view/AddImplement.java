@@ -8,6 +8,7 @@ import com.porcupine.psp.controller.MainController;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.event.EventListenerList;
@@ -18,10 +19,9 @@ import javax.swing.plaf.ComponentUI;
  * @author andres
  */
 public class AddImplement extends javax.swing.JPanel {
+    
+    public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad a agregar debe ser un número entero mayor o igual a 0!";
 
-    /**
-     * Creates new form AddImplement
-     */
     public AddImplement() {
         initComponents();
     }
@@ -136,6 +136,20 @@ public class AddImplement extends javax.swing.JPanel {
 
     public void setListenerList(EventListenerList listenerList) {
         this.listenerList = listenerList;
+    }
+    
+    public boolean validarCantidad(String str) {
+        Short cantidad;
+        try {
+            cantidad = new Short(str);
+            if (cantidad < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -277,11 +291,16 @@ public class AddImplement extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonVerCantidadActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
+        MainController.helper.setVisible(false);
+        MainController.helper.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
-        MainController.adicionarImplemento();
+        if (validarCantidad(jTextFieldCantidadAgregada.getText())) {
+            MainController.adicionarImplemento();
+        } else {
+            JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "¡Advertencia!", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

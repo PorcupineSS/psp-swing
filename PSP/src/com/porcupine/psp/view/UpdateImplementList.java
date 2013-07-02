@@ -21,9 +21,8 @@ import javax.swing.plaf.ComponentUI;
  */
 public class UpdateImplementList extends javax.swing.JPanel {
 
-    /**
-     * Creates new form UpdateImplementList
-     */
+    public static final String IMPL_SELECCIONADO_VALIDACION = "¡Debe seleccionar un implemento!";
+    
     public UpdateImplementList() {
         initComponents();
     }
@@ -42,14 +41,6 @@ public class UpdateImplementList extends javax.swing.JPanel {
 
     public void setjButtonCancelar(JButton jButtonCancelar) {
         this.jButtonCancelar = jButtonCancelar;
-    }
-
-    public JButton getjButtonEliminar() {
-        return jButtonEliminar;
-    }
-
-    public void setjButtonEliminar(JButton jButtonEliminar) {
-        this.jButtonEliminar = jButtonEliminar;
     }
 
     public JLabel getjLabel1() {
@@ -116,6 +107,14 @@ public class UpdateImplementList extends javax.swing.JPanel {
         this.listenerList = listenerList;
     }
 
+    public JButton getjButtonContinuar() {
+        return jButtonContinuar;
+    }
+
+    public void setjButtonContinuar(JButton jButtonContinuar) {
+        this.jButtonContinuar = jButtonContinuar;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -133,7 +132,7 @@ public class UpdateImplementList extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableBusqueda = new javax.swing.JTable();
         jButtonCancelar = new javax.swing.JButton();
-        jButtonEliminar = new javax.swing.JButton();
+        jButtonContinuar = new javax.swing.JButton();
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Update.png"))); // NOI18N
@@ -180,13 +179,13 @@ public class UpdateImplementList extends javax.swing.JPanel {
             }
         });
 
-        jButtonEliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonEliminar.setForeground(new java.awt.Color(0, 102, 102));
-        jButtonEliminar.setText("Continuar");
-        jButtonEliminar.setEnabled(false);
-        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonContinuar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonContinuar.setForeground(new java.awt.Color(0, 102, 102));
+        jButtonContinuar.setText("Continuar");
+        jButtonContinuar.setEnabled(false);
+        jButtonContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEliminarActionPerformed(evt);
+                jButtonContinuarActionPerformed(evt);
             }
         });
 
@@ -201,7 +200,7 @@ public class UpdateImplementList extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEliminar))
+                        .addComponent(jButtonContinuar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,14 +229,14 @@ public class UpdateImplementList extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonEliminar)
+                    .addComponent(jButtonContinuar)
                     .addComponent(jButtonCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        MainController.busquedaCompleta();
+        MainController.busquedaSencilla();
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -245,18 +244,18 @@ public class UpdateImplementList extends javax.swing.JPanel {
         MainController.helper.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+    private void jButtonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContinuarActionPerformed
         if (jTableBusqueda.getSelectedRowCount() != 0) {
             MainController.borrarImplemento();
         } else {
-            //JOptionPane.showMessageDialog(this, IMPL_SELECCIONADO_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, IMPL_SELECCIONADO_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_jButtonEliminarActionPerformed
+    }//GEN-LAST:event_jButtonContinuarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonContinuar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;

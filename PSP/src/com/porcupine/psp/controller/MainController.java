@@ -832,16 +832,20 @@ public class MainController {
         List<ImplSeguridadVO> implementos;
         implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(listaActualizarImplementos.getjTextFieldBuscar().getText());
         if (implementos.isEmpty()) {
-            eliminarImplemento.getjButtonEliminar().setEnabled(false);
-            JOptionPane.showMessageDialog(eliminarImplemento, "¡No se han encontrado resultados!", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            listaActualizarImplementos.getjButtonContinuar().setEnabled(false);
+            JOptionPane.showMessageDialog(listaActualizarImplementos, "¡No se han encontrado resultados!", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            eliminarImplemento.getjButtonEliminar().setEnabled(true);
+            listaActualizarImplementos.getjButtonContinuar().setEnabled(true);
         }
         for (ImplSeguridadVO implementoVO : implementos) {
             Object[] datos = {new Short(implementoVO.getIdImplemento()), implementoVO.getNombreI()};
             modelTable.addRow(datos);
         }
         modelTable.fireTableDataChanged();
+    }
+    
+    public static void actualizarImplemento() {
+    
     }
 
     public static void borrarImplemento() {

@@ -400,10 +400,13 @@ public class CreateEmployee extends javax.swing.JPanel {
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
 
         MainController.registrarEmpleado();
+        MainController.helper.setVisible(false);
+        MainController.helper.dispose();
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        //TODO
+        MainController.helper.setVisible(false);
+        MainController.helper.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jTextFieldCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCCActionPerformed

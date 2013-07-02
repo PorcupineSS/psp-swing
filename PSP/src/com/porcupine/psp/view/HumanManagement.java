@@ -29,7 +29,7 @@ public class HumanManagement extends javax.swing.JPanel {
     public void setjLabelUsername(JLabel jLabelUsername) {
         this.jLabelUsername = jLabelUsername;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -154,7 +154,10 @@ public class HumanManagement extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
-        // TODO add your handling code here:
+        MainController.helper1.setVisible(false);
+        MainController.helper1.dispose();
+        MainController.setEmpleadoActivo(null);
+        MainController.mostrarLogin();
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jButtonFindPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindPersonActionPerformed
@@ -164,7 +167,7 @@ public class HumanManagement extends javax.swing.JPanel {
     private void jButtonCreateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateEmployeeActionPerformed
         // TODO add your handling code here:
         ArrayList<String> empleado = new ArrayList<String>();
-        
+
         empleado.add(TipoEmpleado.DIRECTOR_GESTION_HUMANA);
         empleado.add(TipoEmpleado.DIRECTOR_COMERCIAL);
         empleado.add(TipoEmpleado.DIRECTOR_OPERACIONES);

@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
 import javax.swing.*;
 
 /**
@@ -98,8 +99,6 @@ public class AddClient extends javax.swing.JPanel {
     public void setjTextFieldNombre(JTextField jTextFieldNombre) {
         this.jTextFieldNombre = jTextFieldNombre;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -291,11 +290,14 @@ public class AddClient extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        // TODO add your handling code here:
+        MainController.crearCliente();
+        MainController.helper.setVisible(false);
+        MainController.helper.dispose();
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
+        MainController.helper.setVisible(false);
+        MainController.helper.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jTextFieldCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCCActionPerformed
@@ -305,7 +307,6 @@ public class AddClient extends javax.swing.JPanel {
     private void jButtonEncontrarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncontrarContratoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEncontrarContratoActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonCancelar;

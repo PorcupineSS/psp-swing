@@ -6,9 +6,11 @@ package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
 import com.toedter.calendar.JDateChooser;
+import java.math.BigDecimal;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.event.EventListenerList;
@@ -19,7 +21,16 @@ import javax.swing.plaf.ComponentUI;
  * @author Jeisson Andrés Vergara
  */
 public class AddContract extends javax.swing.JPanel {
-
+    
+    public static final String FECHA_VACIA_CONTRA_VALIDACION = "¡El campo Fecha no debe estar vacío!";
+    public static final String CANT_PER_VACIA_CONTRA_VALIDACION = "¡La cantidad debe ser un numero entero mayor que cero!";
+    public static final String COSTO_VACIO_CONTRA_VALIDACION = "¡El costo debe ser mayor cero!";
+    public static final String UBICACION_VACIA_CONTRA_VALIDACION = "¡Debe ingresar la ubicacion!";
+    public static final String HORARIO_VACIO_CONTRA_VALIDACION = "¡Debe ingresar el horario!";
+    public static final String TIEMPO_VACIO_CONTRA_VALIDACION = "¡El tiempo debe ser un numero mayor a cero!";
+    public static final String CELULAR_VACIO_CONTRA_VALIDACION = "¡Debe ingresar un numero de celular!";
+    public static final String TELEFONO_VACIO_CONTRA_VALIDACION = "¡Debe ingresar un numeros de telefono!";
+       
     /**
      * Creates new form AddContract
      */
@@ -259,6 +270,89 @@ public class AddContract extends javax.swing.JPanel {
         this.listenerList = listenerList;
     }
     
+    //VALIDACIONES
+    
+    public boolean validarFechaVacia(String str) {
+        if (str.length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public boolean validarCantidad(String str) {
+        Short cantidad;
+        try {
+            cantidad = new Short(str);
+            if (cantidad < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean validarCosto(String str) {
+        BigDecimal costo;
+        try {
+            costo = new BigDecimal(str);
+            if (costo.signum() < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean validarUbicacion(String str) {
+        if (str.length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public boolean validarHorario(String str) {
+        if (str.length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public boolean validarTiempo(String str) {
+        Short tiempo;
+        try {
+            tiempo = new Short(str);
+            if (tiempo < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean validarCelular(String str) {
+        if (str.length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public boolean validarTelefono(String str) {
+        if (str.length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -494,7 +588,40 @@ public class AddContract extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldCantPersonActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        MainController.crearContrato();
+        if (validarFechaVacia(getjDateChooserFechaInicio().getDate().toString())) {
+            if(validarCantidad(getjTextFieldCantPerson().getText())){
+                if(validarCosto(getjTextFieldCosto().getText())){
+                    if(validarUbicacion(getjTextFieldUbicacion().getText())){
+                        if(validarHorario(getjTextFieldHorario().getText())){
+                            if(validarTiempo(getjTextFieldTiempo().getText())){
+                                if(validarCelular(getjTextFieldCelularC().getText())){
+                                    if(validarTelefono(getjTextFieldTelefonoC().getText())){
+                                        MainController.crearContrato(); 
+                                    }else{
+                                        JOptionPane.showMessageDialog(this, TELEFONO_VACIO_CONTRA_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                                    }
+                                }else{
+                                    JOptionPane.showMessageDialog(this, CELULAR_VACIO_CONTRA_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                                }
+                            }else{
+                                JOptionPane.showMessageDialog(this, TIEMPO_VACIO_CONTRA_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(this, HORARIO_VACIO_CONTRA_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(this, UBICACION_VACIA_CONTRA_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this, COSTO_VACIO_CONTRA_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, CANT_PER_VACIA_CONTRA_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, FECHA_VACIA_CONTRA_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

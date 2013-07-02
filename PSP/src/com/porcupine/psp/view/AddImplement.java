@@ -281,7 +281,7 @@ public class AddImplement extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
-        
+        MainController.adicionarImplemento();
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

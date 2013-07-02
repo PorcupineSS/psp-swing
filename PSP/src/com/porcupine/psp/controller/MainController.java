@@ -864,7 +864,27 @@ public class MainController {
     }
     
     public static void actualizarImplemento() {
-    
+        ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
+        //implSeguridadVO.setIdImplemento(new Integer(1).shortValue());
+        implSeguridadVO.setNombreI(actualizarImplemento.getjTextFieldNombre().getText());
+        implSeguridadVO.setPrecioUnitarioI(new BigDecimal(actualizarImplemento.getjTextFieldValorUnitario().getText()));
+        implSeguridadVO.setCantidad(new Short(actualizarImplemento.getjTextFieldCantidad().getText()));
+        implSeguridadVO.setEstadoI(actualizarImplemento.getjComboBoxEstado().getSelectedItem().toString());
+        //implSeguridadVO.setFechaRegIm(new Date());
+        implSeguridadVO.setDescripcionI(actualizarImplemento.getjTextAreaDescripcion().getText());
+        String nombreProveedor = actualizarImplemento.getjComboBoxProveedor().getSelectedItem().toString();
+        Short idProveedor = ServiceFactory.getInstance().getProveedorService().findName(nombreProveedor);
+        implSeguridadVO.setIdPro(idProveedor);
+        implSeguridadVO.setCedulaCoordTyT(empleadoActivo.getCedulaEmpleado());
+        try {
+            ServiceFactory.getInstance().getImplSeguridadService().update(implSeguridadVO);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(actualizarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(actualizarImplemento, "¡Implemento actualizado satisfactoriamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        secondary.setVisible(false);
+        secondary = new Secondary();
     }
 
     public static void borrarImplemento() {

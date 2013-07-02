@@ -5,9 +5,14 @@
 package com.porcupine.psp.view;
 
 import com.porcupine.psp.controller.MainController;
+import com.porcupine.psp.model.service.ServiceFactory;
+import com.porcupine.psp.model.vo.ImplSeguridadVO;
+import java.math.BigDecimal;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -22,9 +27,12 @@ import javax.swing.plaf.ComponentUI;
  */
 public class UpdateImplement extends javax.swing.JPanel {
 
-    /**
-     * Creates new form UpdateImplement
-     */
+    public static final String NOMBRE_VACIO_IMPL_VALIDACION = "¡El campo Nombre no debe estar vacío!";
+    public static final String NOMBRE_INCORRECTO_IMPL_VALIDACION = "¡Ya existe un implemento con ese nombre, por favor seleccione otro!";
+    public static final String CANTIDAD_IMPL_VALIDACION = "¡La cantidad debe ser un número entero mayor o igual a 0!";
+    public static final String VALOR_UNITARIO_IMPL_VALIDACION = "¡El valor unitario debe ser un número mayor o igual a $0.0!";
+    public static final String DESCRIPCION_IMPL_VALIDACION = "¡Debe ingresar una descripción!";
+
     public UpdateImplement() {
         initComponents();
     }
@@ -197,6 +205,50 @@ public class UpdateImplement extends javax.swing.JPanel {
         this.listenerList = listenerList;
     }
 
+    public boolean validarNombreVacio(String str) {
+        if (str.length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean validarCantidad(String str) {
+        Short cantidad;
+        try {
+            cantidad = new Short(str);
+            if (cantidad < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean validarDescripcion(String str) {
+        if (str.length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean validarValorUnitario(String str) {
+        BigDecimal precio;
+        try {
+            precio = new BigDecimal(str);
+            if (precio.signum() < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -229,6 +281,11 @@ public class UpdateImplement extends javax.swing.JPanel {
         jButtonActualizar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonActualizar.setForeground(new java.awt.Color(0, 51, 102));
         jButtonActualizar.setText("Actualizar");
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
 
@@ -383,6 +440,28 @@ public class UpdateImplement extends javax.swing.JPanel {
     private void jComboBoxProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProveedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxProveedorActionPerformed
+
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        if (validarNombreVacio(getjTextFieldNombre().getText())) {
+            
+                if (validarValorUnitario(getjTextFieldValorUnitario().getText())) {
+                    if (validarCantidad(getjTextFieldCantidad().getText())) {
+                        if (validarDescripcion(getjTextAreaDescripcion().getText())) {
+                            MainController.actualizarImplemento();
+                        } else {
+                            JOptionPane.showMessageDialog(this, DESCRIPCION_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, CANTIDAD_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, VALOR_UNITARIO_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, NOMBRE_VACIO_IMPL_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;

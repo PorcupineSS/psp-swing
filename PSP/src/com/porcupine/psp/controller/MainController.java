@@ -1110,8 +1110,8 @@ public class MainController {
             return;
         }
         JOptionPane.showMessageDialog(agregarContrato, "¡Contrato agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-//        helper.setVisible(false);
-//        helper.dispose(); 
+        helper.setVisible(false);
+        helper.dispose(); 
     }
     
     public static List<String> obtenerListaContratos() {

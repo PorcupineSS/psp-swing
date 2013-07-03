@@ -61,7 +61,7 @@ public class ContratoService implements IService<ContratoVO, Short> {
             entity.setCedulae(dirComercial);
             
             //Despues de hacer debug en este metodo sale la excepcion
-            dirComercial.getContratoList().add(entity);
+            //dirComercial.getContratoList().add(entity);
             System.out.println("prueba askldnalsfnaiodfh");
         }
         

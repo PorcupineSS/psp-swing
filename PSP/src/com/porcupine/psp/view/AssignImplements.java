@@ -40,14 +40,6 @@ public class AssignImplements extends javax.swing.JPanel {
         this.buttonGroupOpcion = buttonGroupOpcion;
     }
 
-    public JButton getjButton1() {
-        return jButtonDespojar;
-    }
-
-    public void setjButton1(JButton jButton1) {
-        this.jButtonDespojar = jButton1;
-    }
-
     public JButton getjButtonAsignar() {
         return jButtonAsignar;
     }
@@ -112,22 +104,6 @@ public class AssignImplements extends javax.swing.JPanel {
         this.jLabel4 = jLabel4;
     }
 
-    public JRadioButton getjRadioButtonAsignar() {
-        return jRadioButtonAsignar;
-    }
-
-    public void setjRadioButtonAsignar(JRadioButton jRadioButtonAsignar) {
-        this.jRadioButtonAsignar = jRadioButtonAsignar;
-    }
-
-    public JRadioButton getjRadioButtonDespojar() {
-        return jRadioButtonDespojar;
-    }
-
-    public void setjRadioButtonDespojar(JRadioButton jRadioButtonDespojar) {
-        this.jRadioButtonDespojar = jRadioButtonDespojar;
-    }
-
     public JSeparator getjSeparator1() {
         return jSeparator1;
     }
@@ -142,14 +118,6 @@ public class AssignImplements extends javax.swing.JPanel {
 
     public void setjSeparator2(JSeparator jSeparator2) {
         this.jSeparator2 = jSeparator2;
-    }
-
-    public JSeparator getjSeparator3() {
-        return jSeparator3;
-    }
-
-    public void setjSeparator3(JSeparator jSeparator3) {
-        this.jSeparator3 = jSeparator3;
     }
 
     public JTextField getjTextFieldCantidad() {
@@ -219,12 +187,8 @@ public class AssignImplements extends javax.swing.JPanel {
         jButtonAsignar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        jRadioButtonAsignar = new javax.swing.JRadioButton();
-        jRadioButtonDespojar = new javax.swing.JRadioButton();
-        jSeparator3 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldCantidad = new javax.swing.JTextField();
-        jButtonDespojar = new javax.swing.JButton();
         jLabelCantidadActual = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -253,7 +217,6 @@ public class AssignImplements extends javax.swing.JPanel {
         jButtonAsignar.setForeground(new java.awt.Color(0, 102, 0));
         jButtonAsignar.setText("Asignar");
         jButtonAsignar.setToolTipText("");
-        jButtonAsignar.setEnabled(false);
         jButtonAsignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAsignarActionPerformed(evt);
@@ -267,28 +230,13 @@ public class AssignImplements extends javax.swing.JPanel {
             }
         });
 
-        buttonGroupOpcion.add(jRadioButtonAsignar);
-        jRadioButtonAsignar.setText("Asignar");
-        jRadioButtonAsignar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonAsignarActionPerformed(evt);
-            }
-        });
-
-        buttonGroupOpcion.add(jRadioButtonDespojar);
-        jRadioButtonDespojar.setText("Despojar");
-        jRadioButtonDespojar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonDespojarActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Cantidad:");
 
-        jButtonDespojar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonDespojar.setForeground(new java.awt.Color(153, 0, 0));
-        jButtonDespojar.setText("Despojar");
-        jButtonDespojar.setEnabled(false);
+        jTextFieldCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCantidadActionPerformed(evt);
+            }
+        });
 
         jLabelCantidadActual.setForeground(new java.awt.Color(0, 51, 102));
         jLabelCantidadActual.setText(" ");
@@ -298,43 +246,36 @@ public class AssignImplements extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addComponent(jSeparator3)
             .addComponent(jSeparator2)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jComboBoxEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(124, 124, 124))
-                                    .addComponent(jComboBoxImplemento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jRadioButtonAsignar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButtonDespojar))
+                        .addComponent(jLabel1)
+                        .addGap(0, 323, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(348, 507, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabelCantidadActual, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelCantidadActual, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jComboBoxEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(124, 124, 124))
+                                    .addComponent(jComboBoxImplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jButtonCancelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonDespojar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonAsignar)))))
                 .addContainerGap())
@@ -346,12 +287,6 @@ public class AssignImplements extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButtonAsignar)
-                    .addComponent(jRadioButtonDespojar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -366,21 +301,15 @@ public class AssignImplements extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAsignar)
-                    .addComponent(jButtonCancelar)
-                    .addComponent(jButtonDespojar))
-                .addContainerGap())
+                    .addComponent(jButtonCancelar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jRadioButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAsignarActionPerformed
-        this.jButtonAsignar.setEnabled(true);
-        this.jButtonDespojar.setEnabled(false);
-    }//GEN-LAST:event_jRadioButtonAsignarActionPerformed
 
     private void jComboBoxEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpleadoActionPerformed
         // TODO add your handling code here:
@@ -390,11 +319,6 @@ public class AssignImplements extends javax.swing.JPanel {
         String cantidadActual = MainController.obtenerCantidadImplementos(jComboBoxImplemento.getSelectedItem().toString()).toString();
         jLabelCantidadActual.setText("'" + cantidadActual + " disponibles'");
     }//GEN-LAST:event_jComboBoxImplementoActionPerformed
-
-    private void jRadioButtonDespojarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDespojarActionPerformed
-        this.jButtonDespojar.setEnabled(true);
-        this.jButtonAsignar.setEnabled(false);
-    }//GEN-LAST:event_jRadioButtonDespojarActionPerformed
 
     private void jButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignarActionPerformed
         if (validarCantidadAsignada(jTextFieldCantidad.getText())) {
@@ -413,11 +337,14 @@ public class AssignImplements extends javax.swing.JPanel {
         MainController.helper.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    private void jTextFieldCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantidadActionPerformed
+
+    }//GEN-LAST:event_jTextFieldCantidadActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupOpcion;
     private javax.swing.JButton jButtonAsignar;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonDespojar;
     private javax.swing.JComboBox jComboBoxEmpleado;
     private javax.swing.JComboBox jComboBoxImplemento;
     private javax.swing.JLabel jLabel1;
@@ -425,11 +352,8 @@ public class AssignImplements extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelCantidadActual;
-    private javax.swing.JRadioButton jRadioButtonAsignar;
-    private javax.swing.JRadioButton jRadioButtonDespojar;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField jTextFieldCantidad;
     // End of variables declaration//GEN-END:variables
 }

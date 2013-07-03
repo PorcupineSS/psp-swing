@@ -983,6 +983,23 @@ public class MainController {
             JOptionPane.showMessageDialog(asignarImplementos, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public static void despojarImplemento() {
+        List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(asignarImplementos.getjComboBoxImplemento().getSelectedItem().toString());
+        ImplSeguridadVO implemento = implementos.get(0);
+        Short idImplemento = implemento.getIdImplemento();
+        String[] empleadoSeleccionado = asignarImplementos.getjComboBoxEmpleado().getSelectedItem().toString().split(" ");
+        System.out.println(empleadoSeleccionado[0]);
+        Integer idEmpleadoTemporal = Integer.parseInt(empleadoSeleccionado[0]);
+        Integer idCoordinador = empleadoActivo.getCedulaEmpleado();
+        Integer cantidadDespojada = Integer.parseInt(asignarImplementos.getjTextFieldCantidad().getText());
+        try {
+            DAOFactory.getInstance().getImplSeguridadDAO().despojarImplemento(idImplemento, idEmpleadoTemporal, idCoordinador, cantidadDespojada);
+            JOptionPane.showMessageDialog(asignarImplementos, "¡El despojo del implemento al empleado " + empleadoSeleccionado[2] + ", ha sido exitoso!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(asignarImplementos, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     public static void adicionarImplemento() {
         List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(adicionarImplemento.getjComboBoxImplemento().getSelectedItem().toString());

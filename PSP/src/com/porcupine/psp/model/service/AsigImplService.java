@@ -25,7 +25,16 @@ import javax.persistence.EntityNotFoundException;
  * @author User
  */
 public class AsigImplService implements IService<AsigImplVO, Short> {
+    
+    private static AsigImplService instance;
 
+    public static synchronized AsigImplService getInstance() {
+        if (instance == null) {
+            instance = new AsigImplService();
+        }
+        return instance;
+    }
+    
     @Override
     public void create(AsigImplVO vo) throws PreexistingEntityException, NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
         AsigImpl asignacion = new AsigImpl();

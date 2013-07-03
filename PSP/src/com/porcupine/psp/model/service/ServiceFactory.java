@@ -45,6 +45,10 @@ public class ServiceFactory {
     public EmpTempService getEmpTempService() {
         return EmpTempService.getInstance();
     }
+    
+    public AsigImplService getAsigService() {
+        return AsigImplService.getInstance();
+    }
 
     public BitacoraSegService getBitacoraSegService() {
         return BitacoraSegService.getInstance();

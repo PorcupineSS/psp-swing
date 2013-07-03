@@ -268,17 +268,17 @@ public class CreateEmployee extends javax.swing.JPanel {
         if (jTextFieldApellidos.getText().length() < 3 || jTextFieldApellidos.getText().length() > 24) {
             return false;
         }
-        if (jTextFieldSueldo.getText().length() < 6) {
+        if (jTextFieldSueldo.getText().length() < 6 || !jTextFieldSueldo.isEnabled()) {
             return false;
         }
         if (jTextFieldContraseña.getText().length() < 10 || jTextFieldContraseña.getText().length() > 16) {
             return false;
         }
-        if(jListTelefono.getModel().getSize() == 0){
+        if (jListTelefono.getModel().getSize() == 0) {
             return false;
         }
-        
-        
+
+
         return true;
     }
 
@@ -418,10 +418,13 @@ public class CreateEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-
-        MainController.registrarEmpleado();
-        MainController.helper.setVisible(false);
-        MainController.helper.dispose();
+        if (validarCampos()) {
+            MainController.registrarEmpleado();
+            MainController.helper.setVisible(false);
+            MainController.helper.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Revisa los valores ingresados, algo no esta bien!", "Error", JOptionPane.INFORMATION_MESSAGE, null);
+        }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -450,10 +453,10 @@ public class CreateEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     private void jComboBoxTipoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoEmpleadoActionPerformed
-        if (jComboBoxTipoEmpleado.getSelectedItem().toString() == TipoEmpleado.TEMPORAL_ESCOLTA || 
-                jComboBoxTipoEmpleado.getSelectedItem().toString() == TipoEmpleado.TEMPORAL_GUARDA){
+        if (jComboBoxTipoEmpleado.getSelectedItem().toString() == TipoEmpleado.TEMPORAL_ESCOLTA
+                || jComboBoxTipoEmpleado.getSelectedItem().toString() == TipoEmpleado.TEMPORAL_GUARDA) {
             jTextFieldSueldo.setEnabled(true);
-        }else{
+        } else {
             jTextFieldSueldo.setEnabled(false);
         }
     }//GEN-LAST:event_jComboBoxTipoEmpleadoActionPerformed

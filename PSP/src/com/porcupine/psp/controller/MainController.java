@@ -1021,13 +1021,14 @@ public class MainController {
         }
 
         if (!telefonos.isEmpty()) {
-            crearEmpleado.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
+            agregarCliente.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
         }
 
-        crearEmpleado.getjButtonAgregar().setEnabled(false);
-        crearEmpleado.getjButtonRemover().setEnabled(false);
+        agregarCliente.getjTextFieldIdCliente().setText(empleado.getIdCliente().toString());
+        agregarCliente.getjButtonAgregar().setEnabled(false);
+        agregarCliente.getjButtonRemover().setEnabled(false);
 
-        crearEmpleado.getjButtonGuardar().setText("Modificar");
+        agregarCliente.getjButtonGuardar().setText("Modificar");
     }
 
     public void listarImplementos() {

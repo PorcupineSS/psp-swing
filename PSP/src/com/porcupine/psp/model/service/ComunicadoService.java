@@ -44,6 +44,7 @@ public class ComunicadoService implements IService<ComunicadoVO, Integer>{
         entity.setTipoCo(vo.getTipoCom());
         entity.setUrgente(vo.getUrgente());
         
+        //en este metodo salta la excepcion
         if(vo.getCedulaDirOper() != 0){
             DirOperaciones dirOperaciones = DAOFactory.getInstance().getDirOperacionesDAO().find(vo.getCedulaDirOper());
             entity.setDirCedulae(dirOperaciones);

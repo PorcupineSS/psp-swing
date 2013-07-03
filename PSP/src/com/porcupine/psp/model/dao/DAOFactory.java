@@ -88,4 +88,8 @@ public class DAOFactory {
     public AsigImplDAO getAsigImplDAO(){
         return new AsigImplDAO(PU, propierties);
     }
+    
+    public AsignacionCDAO getAsignacionCDAO(){
+        return new AsignacionCDAO(PU, propierties);
+    }
 }

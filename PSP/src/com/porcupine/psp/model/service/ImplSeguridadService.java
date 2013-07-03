@@ -77,18 +77,18 @@ public class ImplSeguridadService implements IService<ImplSeguridadVO, Short> {
         entity.setDescripcionI(vo.getDescripcionI());
         entity.setEstadoI(vo.getEstadoI());
         entity.setFechaRegIm(vo.getFechaRegIm());
-
+        
         if (vo.getIdPro() != null) {
             Proveedor proveedor = DAOFactory.getInstance().getProveedorDAO().find(vo.getIdPro());
             entity.setIdPro(proveedor);
-            proveedor.getImplSeguridadList().set(proveedor.getImplSeguridadList().get(entity.getIdImplemento()).getIdImplemento(), entity);
+            proveedor.getImplSeguridadList().add(entity);
         }
         if (vo.getCedulaCoordTyT() != 0) {
             CoordTYT coordTyT = DAOFactory.getInstance().getCoordTYTDAO().find(vo.getCedulaCoordTyT());
             entity.setCedulae(coordTyT);
-            coordTyT.getImplSeguridadList().set(coordTyT.getImplSeguridadList().get(entity.getIdImplemento()).getIdImplemento(), entity);
-        }
-
+            coordTyT.getImplSeguridadList().add(entity);
+        }     
+        
         DAOFactory.getInstance().getImplSeguridadDAO().update(entity);
     }
 

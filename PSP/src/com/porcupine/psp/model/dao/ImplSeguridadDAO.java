@@ -111,6 +111,8 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
                 entityManager.close();
             }
         }
+        //"UPDATE ImplSeguridad u SET u.nombreI = :nombre, u.precioUnitarioI = :precioUnitario, u.cantidad = :cantidad, u.descripcionI = :descripcion, u.estadoI = :estado").setParameter(nombre, precioUnitario, cantidad, descripcion, estado);
+        
     }
 
     @Override
@@ -211,6 +213,24 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
                 entityManager.close();
             }
         }
-
+    }
+    
+    public void despojarImplemento(Short idImplemento, Integer idEmpleadoTemporal,
+            Integer idCoordinador, Integer cantidadDespojada) {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            Query query = entityManager.createNativeQuery("{call DESPOJAR_IMPLEMENTO"
+                    + " (?, ?, ?, ?)}",
+                    ImplSeguridad.class).setParameter(1, idImplemento).setParameter(2, idEmpleadoTemporal)
+                    .setParameter(3, idCoordinador).setParameter(4, cantidadDespojada);
+            query.getSingleResult();
+        } catch (Exception ex) {
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
     }
 }

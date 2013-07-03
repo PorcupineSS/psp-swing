@@ -76,14 +76,7 @@ public class AddClient extends javax.swing.JPanel {
         this.jListTelefono = jListTelefono;
     }
 
-    public JTextField getjTextFieldCC() {
-        return jTextFieldCC;
-    }
-
-    public void setjTextFieldCC(JTextField jTextFieldCC) {
-        this.jTextFieldCC = jTextFieldCC;
-    }
-
+    
     public JTextField getjTextFieldDireccion() {
         return jTextFieldDireccion;
     }
@@ -123,8 +116,6 @@ public class AddClient extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         jButtonGuardar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldCC = new javax.swing.JTextField();
         jButtonEncontrarContrato = new javax.swing.JButton();
 
         jLabelWindowName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -180,14 +171,6 @@ public class AddClient extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("C.C.:");
-
-        jTextFieldCC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCCActionPerformed(evt);
-            }
-        });
-
         jButtonEncontrarContrato.setText("Encontrar Contrato");
         jButtonEncontrarContrato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,9 +182,8 @@ public class AddClient extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
             .addComponent(jSeparator2)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -210,10 +192,6 @@ public class AddClient extends javax.swing.JPanel {
                         .addComponent(jButtonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonGuardar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(39, 39, 39)
-                        .addComponent(jTextFieldCC))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(14, 14, 14)
@@ -236,18 +214,15 @@ public class AddClient extends javax.swing.JPanel {
                             .addComponent(jTextFieldNombre)
                             .addComponent(jTextFieldDireccion))))
                 .addContainerGap())
+            .addComponent(jSeparator1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelWindowName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(37, 37, 37)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -282,11 +257,27 @@ public class AddClient extends javax.swing.JPanel {
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
         String numero = JOptionPane.showInputDialog("Ingrese el número de teléfono");
-        //jListTelefono.add(numero);
+        
+        
+        DefaultListModel model;
+
+        if (jListTelefono.getModel().getSize() != 0) {
+            model = (DefaultListModel) jListTelefono.getModel();
+        } else {
+            model = new DefaultListModel();
+        }
+        model.addElement(numero);
+        jListTelefono.setModel(model);
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
-        // TODO add your handling code here:
+        DefaultListModel model;
+
+        if (jListTelefono.getModel().getSize() != 0 && jListTelefono.getSelectedValue() != null) {
+            model = (DefaultListModel) jListTelefono.getModel();
+            model.removeElement(jListTelefono.getSelectedValue());
+            jListTelefono.setModel(model);
+        }
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
@@ -300,10 +291,6 @@ public class AddClient extends javax.swing.JPanel {
         MainController.helper.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    private void jTextFieldCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCCActionPerformed
-
     private void jButtonEncontrarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncontrarContratoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEncontrarContratoActionPerformed
@@ -313,7 +300,6 @@ public class AddClient extends javax.swing.JPanel {
     private javax.swing.JButton jButtonEncontrarContrato;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonRemover;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -322,7 +308,6 @@ public class AddClient extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextFieldCC;
     private javax.swing.JTextField jTextFieldDireccion;
     private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables

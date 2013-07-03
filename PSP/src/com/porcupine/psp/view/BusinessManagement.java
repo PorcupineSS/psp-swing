@@ -36,8 +36,6 @@ public class BusinessManagement extends javax.swing.JPanel {
     public void setjButtonVerBitacora(JButton jButtonVerBitacora) {
         this.jButtonVerBitacora = jButtonVerBitacora;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,6 +93,11 @@ public class BusinessManagement extends javax.swing.JPanel {
         jButtonListarClientes.setForeground(new java.awt.Color(0, 51, 0));
         jButtonListarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Find.png"))); // NOI18N
         jButtonListarClientes.setText("Listar Clientes");
+        jButtonListarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListarClientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,6 +210,10 @@ public class BusinessManagement extends javax.swing.JPanel {
     private void jButtonVerBitacoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerBitacoraActionPerformed
         MainController.mostrarFormularioBitacora();
     }//GEN-LAST:event_jButtonVerBitacoraActionPerformed
+
+    private void jButtonListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarClientesActionPerformed
+        MainController.mostrarFormularioEncontrarClientes();
+    }//GEN-LAST:event_jButtonListarClientesActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddClient;
     private javax.swing.JButton jButtonAddContract;

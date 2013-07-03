@@ -269,7 +269,12 @@ public class CreateEmployee extends javax.swing.JPanel {
             return false;
         }
         if (jTextFieldSueldo.getText().length() < 6 || !jTextFieldSueldo.isEnabled()) {
-            return false;
+            try {
+                int s = Integer.parseInt(jTextFieldSueldo.getText());
+            } catch (Exception e) {
+                return false;
+            }
+
         }
         if (jTextFieldContraseña.getText().length() < 10 || jTextFieldContraseña.getText().length() > 16) {
             return false;
@@ -406,15 +411,22 @@ public class CreateEmployee extends javax.swing.JPanel {
         // TODO add your handling code here:
         String numero = JOptionPane.showInputDialog("Ingrese el número de teléfono");
 
-        DefaultListModel model;
+        try {
+            int s = Integer.parseInt(jTextFieldSueldo.getText());
+            DefaultListModel model;
 
-        if (jListTelefono.getModel().getSize() != 0) {
-            model = (DefaultListModel) jListTelefono.getModel();
-        } else {
-            model = new DefaultListModel();
+            if (jListTelefono.getModel().getSize() != 0) {
+                model = (DefaultListModel) jListTelefono.getModel();
+            } else {
+                model = new DefaultListModel();
+            }
+            model.addElement(numero);
+            jListTelefono.setModel(model);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Revisa los valores ingresados, algo no esta bien!", "Error", JOptionPane.INFORMATION_MESSAGE, null);
         }
-        model.addElement(numero);
-        jListTelefono.setModel(model);
+
+
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
@@ -422,7 +434,7 @@ public class CreateEmployee extends javax.swing.JPanel {
             MainController.registrarEmpleado();
             MainController.helper.setVisible(false);
             MainController.helper.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Revisa los valores ingresados, algo no esta bien!", "Error", JOptionPane.INFORMATION_MESSAGE, null);
         }
     }//GEN-LAST:event_jButtonGuardarActionPerformed

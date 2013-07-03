@@ -159,7 +159,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         Empleados empleado = DAOFactory.getInstance().getEmpleadosDAO().find(id);
         if (empleado != null) {
             EmpleadosVO empleadoVO = empleado.toVO();
-            if (empleadoVO.getRol() == TipoEmpleado.PLANTA){//Cambió
+            if (empleadoVO.getRol() == TipoEmpleado.PLANTA) {//Cambió
                 EmpPlantaVO empleadoPlanta = (DAOFactory.getInstance().getEmpPlantaDAO().find(empleado.getCedulae())).toVO();
                 empleadoVO.setSueldoEmpleadoPlanta(Integer.parseInt(empleadoPlanta.getSueldoe().toString()));
             }
@@ -170,8 +170,62 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
     }
 
     @Override
-    public void update(EmpleadosVO vo) throws NonexistentEntityException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void update(EmpleadosVO vo) throws NonexistentEntityException{
+        Empleados entity = new Empleados();
+        entity.setCedulae(vo.getCedulaEmpleado());
+        entity.setNombree(vo.getNombreEmpleado());
+        entity.setApellidoe(vo.getApellidoEmpleado());
+        entity.setContrasenae((vo.getContraseniaEmpleado()));
+        entity.setFechareg(new Date());
+
+        entity.setCoddocume(getPrefix(vo.getRol()) + vo.getCedulaEmpleado().toString());
+
+        List<TelsEmp> telslist = new ArrayList<TelsEmp>();
+        Integer count = 1;
+        for (TelefonosVO each : vo.getTelsEmpList()) {
+
+            TelsEmp r = (TelsEmp) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.EMPLEADO);
+            TelsEmp telemp;
+            if (r == null) {
+                telemp = new TelsEmp();
+//                List<Empleados> empllist = new ArrayList<Empleados>();
+//                empllist.add(entity);
+                telemp.setNumTelefonoE(each.getNumeroTelefonoEmpleado());
+                telemp.setIdTe(DAOFactory.getInstance().getTelefonosDAO().getNewID(1));
+                try {
+                    DAOFactory.getInstance().getTelefonosDAO().create(telemp);
+                } catch (PreexistingEntityException ex) {
+                    Logger.getLogger(EmpleadosService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                telemp = (TelsEmp) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.EMPLEADO);
+                //count++;
+                //TODO Commit
+
+            } else {
+                telemp = DAOFactory.getInstance().getTelefonosDAO().find(r.getIdTe());
+//                List<Empleados> empllist = telemp.getEmpleadosList();
+//
+//                empllist.add(entity);
+//
+//                telemp.setEmpleadosList(empllist);
+//
+//                DAOFactory.getInstance().getTelefonosDAO().update(telemp);
+            }
+            telslist.add(telemp);
+
+        }
+
+        entity.setTelsEmpList(telslist);
+
+        if (vo.getCedulaDirector() != null) {
+            DirGestionHum temp = (DirGestionHum) DAOFactory.getInstance().getEmpleadosDAO().findSpecific(vo.getCedulaDirector(), TipoEmpleado.DIRECTOR_GESTION_HUMANA);
+            entity.setDirCedulae(temp);
+        }
+        try {
+            DAOFactory.getInstance().getEmpleadosDAO().update(entity);
+        } catch (Exception ex) {
+            Logger.getLogger(EmpleadosService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -184,7 +238,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         List<EmpleadosVO> listaVO = new ArrayList<EmpleadosVO>();
         List<Empleados> lista = DAOFactory.getInstance().getEmpleadosDAO().getList();
         for (Empleados empleados : lista) {
-            EmpleadosVO empl= empleados.toVO();
+            EmpleadosVO empl = empleados.toVO();
             listaVO.add(empl);
         }
         return listaVO;

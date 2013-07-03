@@ -21,6 +21,8 @@ import com.porcupine.psp.model.vo.TelefonosVO;
 import com.porcupine.psp.util.TipoTelefono;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityNotFoundException;
 
 /**
@@ -86,7 +88,41 @@ public class ClienteService implements IService<ClienteVO, Short> {
 
     @Override
     public void update(ClienteVO vo) throws NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Cliente entity = new Cliente();
+
+        entity.setDireccioncl(vo.getDireccionCliente());
+        entity.setFechaRegCl(vo.getFechaRegCliente());
+        entity.setIdcl(vo.getIdCliente());
+        entity.setNombrecl(vo.getNombreCliente());
+
+
+        DirComercial director = DAOFactory.getInstance().getDirComercialDAO().find(vo.getCedulaDirector());
+        entity.setCedulae(director);
+
+
+        List<TelsCli> tels = new ArrayList<TelsCli>();
+
+
+        for (TelefonosVO each : vo.getTelsCliList()) {
+            TelsCli emp = (TelsCli) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.CLIENTE);
+            if (emp != null) {
+                tels.add(emp);
+            } else {
+                emp = new TelsCli();
+                emp.setNumTelefonoC(each.getNumeroTelefonoEmpleado());
+                try {
+                    DAOFactory.getInstance().getTelefonosDAO().create(emp);
+                } catch (PreexistingEntityException ex) {
+                    Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                emp = (TelsCli) DAOFactory.getInstance().getTelefonosDAO().findSpecific(each.getNumeroTelefonoEmpleado(), TipoTelefono.CLIENTE);
+                tels.add(emp);
+            }
+
+        }
+
+        entity.setTelsCliList(new ArrayList<TelsCli>());
+        DAOFactory.getInstance().getClienteDAO().update(entity);
     }
 
     @Override

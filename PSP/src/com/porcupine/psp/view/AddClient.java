@@ -76,7 +76,6 @@ public class AddClient extends javax.swing.JPanel {
         this.jListTelefono = jListTelefono;
     }
 
-    
     public JTextField getjTextFieldDireccion() {
         return jTextFieldDireccion;
     }
@@ -257,8 +256,8 @@ public class AddClient extends javax.swing.JPanel {
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
         String numero = JOptionPane.showInputDialog("Ingrese el número de teléfono");
-        
-        
+
+
         DefaultListModel model;
 
         if (jListTelefono.getModel().getSize() != 0) {
@@ -281,9 +280,21 @@ public class AddClient extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        MainController.crearCliente();
-        MainController.helper.setVisible(false);
-        MainController.helper.dispose();
+        if (jButtonGuardar.getText() == "Modificar") {
+            jButtonAgregar.setEnabled(true);
+            jButtonGuardar.setText("Actualizar");
+            jButtonRemover.setEnabled(true);
+            jLabelWindowName.setText("Actualizar Cliente");
+            jListTelefono.setEnabled(true);
+            jTextFieldDireccion.setEnabled(true);
+            jTextFieldNombre.setEnabled(true);
+        }else if (jButtonGuardar.getText() == "Actualizar"){
+            MainController.actualizarEmpleado();
+        }else{
+            MainController.crearCliente();
+            MainController.helper.setVisible(false);
+            MainController.helper.dispose();
+        }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

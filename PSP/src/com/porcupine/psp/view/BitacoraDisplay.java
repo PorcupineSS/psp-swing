@@ -4,6 +4,9 @@
  */
 package com.porcupine.psp.view;
 
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JTable;
+
 /**
  *
  * @author Zergio
@@ -17,6 +20,24 @@ public class BitacoraDisplay extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JDateChooser getjDateChooser1() {
+        return jDateChooser1;
+    }
+
+    public void setjDateChooser1(JDateChooser jDateChooser1) {
+        this.jDateChooser1 = jDateChooser1;
+    }
+
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
+    public void setjTable1(JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

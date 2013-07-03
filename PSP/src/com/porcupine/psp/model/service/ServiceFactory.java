@@ -46,4 +46,8 @@ public class ServiceFactory {
         return EmpTempService.getInstance();
     }
 
+    public BitacoraSegService getBitacoraSegService() {
+        return BitacoraSegService.getInstance();
+    }
+
 }

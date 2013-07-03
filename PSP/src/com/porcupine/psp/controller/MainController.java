@@ -526,7 +526,21 @@ public class MainController {
         DrawingUtilities.drawPanel(helper2, helper2.getViewport(), bitacora);
         helper2.setTitle("Consulta de Bitacora...");
 
-        //TODO Llenar la tabla
+
+        List<BitacoraSegVO> bitacoraList = ServiceFactory.getInstance().getBitacoraSegService().getList();
+        modelTable = (DefaultTableModel) bitacora.getjTable1().getModel();
+        modelTable.getDataVector().removeAllElements();
+        modelTable.fireTableDataChanged();
+
+        for (BitacoraSegVO implSeguridadVO : bitacoraList) {
+            Object[] datos = {implSeguridadVO.getIdOper(),
+                implSeguridadVO.getFechaOper(),
+                implSeguridadVO.getUsuOper(),
+                implSeguridadVO.getMaqOper(),
+                implSeguridadVO.getTablaMod(),
+                implSeguridadVO.getTipoOper()};
+            modelTable.addRow(datos);
+        }
     }
 
     public static void mostrarFormularioListarEmpleados() {
@@ -559,7 +573,7 @@ public class MainController {
         String capturedValue = (String) findPerson.getjListResultados().getSelectedValue();
         String[] splitted = capturedValue.split(" ");
         empleado.setCedulaDirector(Integer.parseInt(splitted[0]));
-        
+
         empleado.setCedulaEmpleado(Integer.parseInt(splitted[0]));
 
         try {
@@ -581,11 +595,11 @@ public class MainController {
         crearEmpleado.getjTextFieldCC().setText(empleado.getCedulaEmpleado().toString());
         crearEmpleado.getjTextFieldCC().setEnabled(false);
         crearEmpleado.getjTextFieldNombres().setText(empleado.getNombreEmpleado());
-        crearEmpleado.getjTextFieldCC().setEnabled(false);
+        crearEmpleado.getjTextFieldNombres().setEnabled(false);
         crearEmpleado.getjTextFieldApellidos().setText(empleado.getApellidoEmpleado());
-        crearEmpleado.getjTextFieldCC().setEnabled(false);
+        crearEmpleado.getjTextFieldApellidos().setEnabled(false);
         crearEmpleado.getjTextFieldContraseña().setEnabled(false);
-//        crearEmpleado.getjTextFieldDireccion().setText(empleado.getDireccionEmpleado());
+
         if (empleado.getRol() == TipoEmpleado.TEMPORAL) {
             crearEmpleado.getjTextFieldDireccion().setText(empleado.getSueldoEmpleadoPlanta().toString());
         }
@@ -844,22 +858,12 @@ public class MainController {
             modelTable.addRow(datos);
         }
     }
-    
+
     public static void llenarTablaBitacora() {
-//        List<BitacoraSegVO> bitacoraList = ServiceFactory.getInstance().getBitacoraSegService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
-//        modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
-//        modelTable.getDataVector().removeAllElements();
-//        modelTable.fireTableDataChanged();
-//
-//        for (ImplSeguridadVO implSeguridadVO : implementosList) {
-//            Object[] datos = {new Short(implSeguridadVO.getIdImplemento()),
-//                implSeguridadVO.getNombreI(),
-//                implSeguridadVO.getPrecioUnitarioI(),
-//                new Short(implSeguridadVO.getCantidad()),
-//                implSeguridadVO.getEstadoI(),
-//                implSeguridadVO.getFechaRegIm().toString()};
-//            modelTable.addRow(datos);
-//        }
+    }
+
+    public static void actualizarEmpleado() {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public void listarImplementos() {

@@ -142,6 +142,10 @@ public class ClienteVO implements IValueObject {
     public void setContratoList(List<ContratoVO> contratoList) {
         this.contratoList = contratoList;
     }
+
+    public String toCoolString() {
+        return (this.getIdCliente() + " - " + this.getNombreCliente());
+    }
     
     
     

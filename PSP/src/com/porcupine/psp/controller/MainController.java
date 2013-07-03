@@ -65,6 +65,7 @@ public class MainController {
     public static WriteNotice writeNotice;
     public static Secondary secondary;
     public static FindPerson findPerson;
+    public static FindClient findClient;
     public static BitacoraDisplay bitacora;
     public static String username;
     public static String selectedDB;
@@ -339,6 +340,28 @@ public class MainController {
         DrawingUtilities.drawPanel(helper, helper.getViewport(), agregarWriteNotice);
         helper.setTitle("Crear comunicado...");
     }
+    
+       
+    
+    public static void mostrarFormularioEncontrarClientes(){
+        helper2 = new Helper();
+        helper2.setLocationRelativeTo(null);
+        findClient = new FindClient();
+        helper2.setVisible(true);
+        DrawingUtilities.drawPanel(helper2, helper2.getViewport(), findClient);
+        helper2.setTitle("Listado de Clientes...");
+
+        List<ClienteVO> clientes = ServiceFactory.getInstance().getClienteService().getList();
+                
+        DefaultListModel model = new DefaultListModel();
+
+        for (ClienteVO each : clientes) {
+            model.addElement(each.toCoolString());
+        }
+       
+        
+        findClient.getjListResultados().setModel(model);
+    }
 
     public static void mostrarFormularioReplyNotice() {
         helper = new Helper();
@@ -508,7 +531,7 @@ public class MainController {
         //TODO Llenar la tabla
     }
 
-    public void mostrarFormularioListarEmpleados() {
+    public static void mostrarFormularioListarEmpleados() {
         helper2 = new Helper();
         helper2.setLocationRelativeTo(null);
         findPerson = new FindPerson();
@@ -517,12 +540,17 @@ public class MainController {
         helper2.setTitle("Responder comunicado...");
 
         List<EmpleadosVO> empleados = ServiceFactory.getInstance().getEmpleadosService().getList();
-        ArrayList<String> output = new ArrayList<String>();
-        for (EmpleadosVO each : empleados) {
-            output.add(each.toCoolString());
-        }
+        
+        DefaultListModel model = new DefaultListModel();
 
-        findPerson.setjListResultados(new javax.swing.JList(output.toArray()));
+        for (EmpleadosVO each : empleados) {
+            model.addElement(each.toCoolString());
+        }
+       
+        
+        findPerson.getjListResultados().setModel(model);
+        
+        
 
     }
 

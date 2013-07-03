@@ -282,11 +282,27 @@ public class AddClient extends javax.swing.JPanel {
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
         String numero = JOptionPane.showInputDialog("Ingrese el número de teléfono");
-        //jListTelefono.add(numero);
+        
+        
+        DefaultListModel model;
+
+        if (jListTelefono.getModel().getSize() != 0) {
+            model = (DefaultListModel) jListTelefono.getModel();
+        } else {
+            model = new DefaultListModel();
+        }
+        model.addElement(numero);
+        jListTelefono.setModel(model);
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
-        // TODO add your handling code here:
+        DefaultListModel model;
+
+        if (jListTelefono.getModel().getSize() != 0 && jListTelefono.getSelectedValue() != null) {
+            model = (DefaultListModel) jListTelefono.getModel();
+            model.removeElement(jListTelefono.getSelectedValue());
+            jListTelefono.setModel(model);
+        }
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed

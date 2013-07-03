@@ -412,7 +412,7 @@ public class CreateEmployee extends javax.swing.JPanel {
         String numero = JOptionPane.showInputDialog("Ingrese el número de teléfono");
 
         try {
-            int s = Integer.parseInt(jTextFieldSueldo.getText());
+            int s = Integer.parseInt(numero);
             DefaultListModel model;
 
             if (jListTelefono.getModel().getSize() != 0) {
@@ -442,9 +442,25 @@ public class CreateEmployee extends javax.swing.JPanel {
         }
 
         if (jButtonGuardar.getText() == "Modificar") {
+            jButtonAgregar.setEnabled(true);
+            jButtonGuardar.setText("Actualizar");
+            jButtonRemover.setEnabled(true);
+            jLabelWindowName.setText("Actualizar Empleado");
+            jListTelefono.setEnabled(true);
+            jTextFieldCC.setEnabled(true);
+            jTextFieldApellidos.setEnabled(true);
+            jTextFieldNombres.setEnabled(true);
+            jTextFieldSueldo.setEnabled(true);
         }
 
         if (jButtonGuardar.getText() == "Actualizar") {
+            if (validarCampos()) {
+                MainController.actualizarEmpleado();
+                MainController.helper.setVisible(false);
+                MainController.helper.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Revisa los valores ingresados, algo no esta bien!", "Error", JOptionPane.INFORMATION_MESSAGE, null);
+            }
         }
 
 

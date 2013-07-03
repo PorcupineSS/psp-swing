@@ -20,6 +20,21 @@ public class AddClient extends javax.swing.JPanel {
         initComponents();
     }
 
+    public boolean validarCampos() {
+        if (jTextFieldNombre.getText().length() < 3 || jTextFieldNombre.getText().length() > 20) {
+            return false;
+        }
+        if (jTextFieldDireccion.getText().length() < 3 || jTextFieldDireccion.getText().length() > 40) {
+            return false;
+        }
+
+        if (jListTelefono.getModel().getSize() == 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     public JButton getjButtonAgregar() {
         return jButtonAgregar;
     }
@@ -254,19 +269,22 @@ public class AddClient extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldDireccionActionPerformed
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-        // TODO add your handling code here:
         String numero = JOptionPane.showInputDialog("Ingrese el número de teléfono");
 
+        try {
+            int s = Integer.parseInt(numero);
+            DefaultListModel model;
 
-        DefaultListModel model;
-
-        if (jListTelefono.getModel().getSize() != 0) {
-            model = (DefaultListModel) jListTelefono.getModel();
-        } else {
-            model = new DefaultListModel();
+            if (jListTelefono.getModel().getSize() != 0) {
+                model = (DefaultListModel) jListTelefono.getModel();
+            } else {
+                model = new DefaultListModel();
+            }
+            model.addElement(numero);
+            jListTelefono.setModel(model);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Revisa los valores ingresados, algo no esta bien!", "Error", JOptionPane.INFORMATION_MESSAGE, null);
         }
-        model.addElement(numero);
-        jListTelefono.setModel(model);
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
@@ -288,12 +306,22 @@ public class AddClient extends javax.swing.JPanel {
             jListTelefono.setEnabled(true);
             jTextFieldDireccion.setEnabled(true);
             jTextFieldNombre.setEnabled(true);
-        }else if (jButtonGuardar.getText() == "Actualizar"){
-            MainController.actualizarEmpleado();
-        }else{
-            MainController.crearCliente();
-            MainController.helper.setVisible(false);
-            MainController.helper.dispose();
+        }
+
+        if (jButtonGuardar.getText() == "Actualizar") {
+            if (validarCampos()) {
+                MainController.actualizarCliente();
+                MainController.helper.setVisible(false);
+                MainController.helper.dispose();
+            }
+        }
+
+        if (jButtonGuardar.getText() == "Guardar") {
+            if (validarCampos()) {
+                MainController.crearCliente();
+                MainController.helper.setVisible(false);
+                MainController.helper.dispose();
+            }
         }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 

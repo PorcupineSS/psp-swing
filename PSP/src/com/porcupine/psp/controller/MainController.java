@@ -866,6 +866,10 @@ public class MainController {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
+    public static void actualizarCliente() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
     public void listarImplementos() {
         secondary.setVisible(true);
         secondary.setTitle("Eliminar Implemento");

@@ -7,6 +7,7 @@ package com.porcupine.psp.view;
 import com.porcupine.psp.controller.MainController;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.util.TipoEmpleado;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.String;
@@ -90,6 +91,7 @@ public class CreateEmployee extends javax.swing.JPanel {
 
         jLabel5.setText("Contraseña:");
 
+        jTextFieldSueldo.setEnabled(false);
         jTextFieldSueldo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldSueldoActionPerformed(evt);
@@ -259,6 +261,27 @@ public class CreateEmployee extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public boolean validarCampos() {
+        if (jTextFieldNombres.getText().length() < 3 || jTextFieldNombres.getText().length() > 20) {
+            return false;
+        }
+        if (jTextFieldApellidos.getText().length() < 3 || jTextFieldApellidos.getText().length() > 24) {
+            return false;
+        }
+        if (jTextFieldSueldo.getText().length() < 6) {
+            return false;
+        }
+        if (jTextFieldContraseña.getText().length() < 10 || jTextFieldContraseña.getText().length() > 16) {
+            return false;
+        }
+        if(jListTelefono.getModel().getSize() == 0){
+            return false;
+        }
+        
+        
+        return true;
+    }
+
     public JButton getjButtonAgregar() {
         return jButtonAgregar;
     }
@@ -291,9 +314,6 @@ public class CreateEmployee extends javax.swing.JPanel {
         this.jButtonRemover = jButtonRemover;
     }
 
-    
-    
-    
     public JButton getjButtonGuardar() {
         return jButtonGuardar;
     }
@@ -430,7 +450,12 @@ public class CreateEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     private void jComboBoxTipoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoEmpleadoActionPerformed
-        // TODO add your handling code here:
+        if (jComboBoxTipoEmpleado.getSelectedItem().toString() == TipoEmpleado.TEMPORAL_ESCOLTA || 
+                jComboBoxTipoEmpleado.getSelectedItem().toString() == TipoEmpleado.TEMPORAL_GUARDA){
+            jTextFieldSueldo.setEnabled(true);
+        }else{
+            jTextFieldSueldo.setEnabled(false);
+        }
     }//GEN-LAST:event_jComboBoxTipoEmpleadoActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;

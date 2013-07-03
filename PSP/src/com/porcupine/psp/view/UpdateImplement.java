@@ -197,14 +197,6 @@ public class UpdateImplement extends javax.swing.JPanel {
         this.listenerList = listenerList;
     }
 
-    public JTextField getjTextFieldFechaRegistro() {
-        return jTextFieldFechaRegistro;
-    }
-
-    public void setjTextFieldFechaRegistro(JTextField jTextFieldFechaRegistro) {
-        this.jTextFieldFechaRegistro = jTextFieldFechaRegistro;
-    }
-
     public JTextField getjTextFieldId() {
         return jTextFieldId;
     }
@@ -284,8 +276,6 @@ public class UpdateImplement extends javax.swing.JPanel {
         jButtonActualizar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel8 = new javax.swing.JLabel();
-        jTextFieldFechaRegistro = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
 
@@ -336,6 +326,11 @@ public class UpdateImplement extends javax.swing.JPanel {
         });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonActualizar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonActualizar.setForeground(new java.awt.Color(0, 51, 102));
@@ -343,15 +338,6 @@ public class UpdateImplement extends javax.swing.JPanel {
         jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonActualizarActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("Fecha de Registro:");
-
-        jTextFieldFechaRegistro.setEnabled(false);
-        jTextFieldFechaRegistro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldFechaRegistroActionPerformed(evt);
             }
         });
 
@@ -368,36 +354,32 @@ public class UpdateImplement extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonActualizar))
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel9))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextFieldValorUnitario)
-                                        .addComponent(jScrollPane1)
-                                        .addComponent(jTextFieldCantidad)
-                                        .addComponent(jTextFieldNombre)
-                                        .addComponent(jComboBoxProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBoxEstado, 0, 226, Short.MAX_VALUE)
-                                        .addComponent(jTextFieldFechaRegistro)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldValorUnitario)
+                                .addComponent(jScrollPane1)
+                                .addComponent(jTextFieldCantidad)
+                                .addComponent(jTextFieldNombre)
+                                .addComponent(jComboBoxProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBoxEstado, 0, 226, Short.MAX_VALUE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonActualizar)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -437,10 +419,6 @@ public class UpdateImplement extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldFechaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -487,9 +465,10 @@ public class UpdateImplement extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
-    private void jTextFieldFechaRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaRegistroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldFechaRegistroActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        MainController.helper.setVisible(false);
+        MainController.helper.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
@@ -503,14 +482,12 @@ public class UpdateImplement extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextAreaDescripcion;
     private javax.swing.JTextField jTextFieldCantidad;
-    private javax.swing.JTextField jTextFieldFechaRegistro;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldValorUnitario;

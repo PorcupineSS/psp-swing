@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JTextField;
@@ -60,8 +61,6 @@ public class FindClient extends javax.swing.JPanel {
     public void setjTextFieldCampoBusqueda(JTextField jTextFieldCampoBusqueda) {
         this.jTextFieldCampoBusqueda = jTextFieldCampoBusqueda;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,8 +94,18 @@ public class FindClient extends javax.swing.JPanel {
         jLabel3.setText("Resultados de la búsqueda...");
 
         jButtonDetalles.setText("Detalles");
+        jButtonDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDetallesActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonBusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/FindMin.png"))); // NOI18N
 
@@ -104,6 +113,11 @@ public class FindClient extends javax.swing.JPanel {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        jListResultados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListResultadosMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(jListResultados);
 
@@ -166,6 +180,21 @@ public class FindClient extends javax.swing.JPanel {
                 .addGap(10, 10, 10))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jListResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListResultadosMouseClicked
+        if (evt.getClickCount() == 2) {
+            MainController.consultarCliente();
+        }
+    }//GEN-LAST:event_jListResultadosMouseClicked
+
+    private void jButtonDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetallesActionPerformed
+        MainController.consultarCliente();
+    }//GEN-LAST:event_jButtonDetallesActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        MainController.helper2.setVisible(false);
+        MainController.helper2.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBusqueda;
     private javax.swing.JButton jButtonCancelar;

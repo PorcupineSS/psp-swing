@@ -7,6 +7,7 @@ package com.porcupine.psp.view;
 import com.porcupine.psp.controller.MainController;
 import com.porcupine.psp.model.vo.EmpleadosVO;
 import com.porcupine.psp.model.vo.TelefonosVO;
+import com.porcupine.psp.util.TipoEmpleado;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.String;
@@ -90,6 +91,7 @@ public class CreateEmployee extends javax.swing.JPanel {
 
         jLabel5.setText("Contraseña:");
 
+        jTextFieldSueldo.setEnabled(false);
         jTextFieldSueldo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldSueldoActionPerformed(evt);
@@ -259,6 +261,32 @@ public class CreateEmployee extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public boolean validarCampos() {
+        if (jTextFieldNombres.getText().length() < 3 || jTextFieldNombres.getText().length() > 20) {
+            return false;
+        }
+        if (jTextFieldApellidos.getText().length() < 3 || jTextFieldApellidos.getText().length() > 24) {
+            return false;
+        }
+        if (jTextFieldSueldo.getText().length() < 6 || !jTextFieldSueldo.isEnabled()) {
+            try {
+                int s = Integer.parseInt(jTextFieldSueldo.getText());
+            } catch (Exception e) {
+                return false;
+            }
+
+        }
+        if (jTextFieldContraseña.getText().length() < 10 || jTextFieldContraseña.getText().length() > 16) {
+            return false;
+        }
+        if (jListTelefono.getModel().getSize() == 0) {
+            return false;
+        }
+
+
+        return true;
+    }
+
     public JButton getjButtonAgregar() {
         return jButtonAgregar;
     }
@@ -291,9 +319,6 @@ public class CreateEmployee extends javax.swing.JPanel {
         this.jButtonRemover = jButtonRemover;
     }
 
-    
-    
-    
     public JButton getjButtonGuardar() {
         return jButtonGuardar;
     }
@@ -386,22 +411,59 @@ public class CreateEmployee extends javax.swing.JPanel {
         // TODO add your handling code here:
         String numero = JOptionPane.showInputDialog("Ingrese el número de teléfono");
 
-        DefaultListModel model;
+        try {
+            int s = Integer.parseInt(numero);
+            DefaultListModel model;
 
-        if (jListTelefono.getModel().getSize() != 0) {
-            model = (DefaultListModel) jListTelefono.getModel();
-        } else {
-            model = new DefaultListModel();
+            if (jListTelefono.getModel().getSize() != 0) {
+                model = (DefaultListModel) jListTelefono.getModel();
+            } else {
+                model = new DefaultListModel();
+            }
+            model.addElement(numero);
+            jListTelefono.setModel(model);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Revisa los valores ingresados, algo no esta bien!", "Error", JOptionPane.INFORMATION_MESSAGE, null);
         }
-        model.addElement(numero);
-        jListTelefono.setModel(model);
+
+
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
 
-        MainController.registrarEmpleado();
-        MainController.helper.setVisible(false);
-        MainController.helper.dispose();
+        if (jButtonGuardar.getText() == "Guardar") {
+            if (validarCampos()) {
+                MainController.registrarEmpleado();
+                MainController.helper.setVisible(false);
+                MainController.helper.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Revisa los valores ingresados, algo no esta bien!", "Error", JOptionPane.INFORMATION_MESSAGE, null);
+            }
+        }
+
+        if (jButtonGuardar.getText() == "Modificar") {
+            jButtonAgregar.setEnabled(true);
+            jButtonGuardar.setText("Actualizar");
+            jButtonRemover.setEnabled(true);
+            jLabelWindowName.setText("Actualizar Empleado");
+            jListTelefono.setEnabled(true);
+            jTextFieldCC.setEnabled(true);
+            jTextFieldApellidos.setEnabled(true);
+            jTextFieldNombres.setEnabled(true);
+            jTextFieldSueldo.setEnabled(true);
+        }
+
+        if (jButtonGuardar.getText() == "Actualizar") {
+            if (validarCampos()) {
+                MainController.actualizarEmpleado();
+                MainController.helper.setVisible(false);
+                MainController.helper.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Revisa los valores ingresados, algo no esta bien!", "Error", JOptionPane.INFORMATION_MESSAGE, null);
+            }
+        }
+
+
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -430,7 +492,12 @@ public class CreateEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     private void jComboBoxTipoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoEmpleadoActionPerformed
-        // TODO add your handling code here:
+        if (jComboBoxTipoEmpleado.getSelectedItem().toString() == TipoEmpleado.TEMPORAL_ESCOLTA
+                || jComboBoxTipoEmpleado.getSelectedItem().toString() == TipoEmpleado.TEMPORAL_GUARDA) {
+            jTextFieldSueldo.setEnabled(true);
+        } else {
+            jTextFieldSueldo.setEnabled(false);
+        }
     }//GEN-LAST:event_jComboBoxTipoEmpleadoActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;

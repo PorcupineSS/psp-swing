@@ -876,6 +876,50 @@ public class MainController {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
+    public static void actualizarCliente() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public static void consultarCliente() {
+        ClienteVO empleado = new ClienteVO();
+
+        //TODO añadir la captura de todos los campos en la interfaz
+        String capturedValue = (String) findClient.getjListResultados().getSelectedValue();
+        String[] splitted = capturedValue.split(" ");
+        empleado.setIdCliente(new Short(splitted[0]));
+
+        
+        try {
+            empleado = ServiceFactory.getInstance().getClienteService().find(empleado.getIdCliente());
+        } catch (Exception ex) {
+            reportarError(ex, findClient);
+        }
+
+        helper1 = new Helper();
+        helper1.setLocationRelativeTo(null);
+        agregarCliente = new AddClient();
+        helper1.setVisible(true);
+        DrawingUtilities.drawPanel(helper1, helper1.getViewport(), agregarCliente);
+        helper1.setTitle("Consulta de cliente...");
+
+        agregarCliente.getjTextFieldDireccion().setText(empleado.getDireccionCliente());
+        agregarCliente.getjTextFieldDireccion().setEnabled(false);
+        agregarCliente.getjTextFieldNombre().setText(empleado.getNombreCliente());
+        agregarCliente.getjTextFieldNombre().setEnabled(false);
+        
+      
+
+        ArrayList<String> telefonos = new ArrayList<String>();
+        for (TelefonosVO each : empleado.getTelsCliList()) {
+            telefonos.add(each.getNumeroTelefonoEmpleado());
+        }
+
+        crearEmpleado.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
+        crearEmpleado.getjListTelefono().setEnabled(false);
+
+        crearEmpleado.getjButtonGuardar().setText("Modificar");
+    }
+
     public void listarImplementos() {
         secondary.setVisible(true);
         secondary.setTitle("Eliminar Implemento");
@@ -1118,13 +1162,5 @@ public class MainController {
     public static void listarComunicacion() {
     }
 
-    public static void listarEmpleados() {
-    }
-
-    public static void eliminarEmpleado() {
-    }
-
-    public static void consultarBitacora() {
-    }
-    //Validación de datos
+      
 }

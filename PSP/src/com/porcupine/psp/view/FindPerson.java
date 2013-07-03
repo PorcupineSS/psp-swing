@@ -81,6 +81,11 @@ public class FindPerson extends javax.swing.JPanel {
         jButtonDetalles.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonDetalles.setForeground(new java.awt.Color(0, 0, 51));
         jButtonDetalles.setText("Detalles");
+        jButtonDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDetallesActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +158,8 @@ public class FindPerson extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
+        MainController.helper2.setVisible(false);
+        MainController.helper2.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jListResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListResultadosMouseClicked
@@ -161,6 +167,10 @@ public class FindPerson extends javax.swing.JPanel {
             MainController.consultarEmpleado();
         }
     }//GEN-LAST:event_jListResultadosMouseClicked
+
+    private void jButtonDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetallesActionPerformed
+        MainController.consultarEmpleado();
+    }//GEN-LAST:event_jButtonDetallesActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancelar;

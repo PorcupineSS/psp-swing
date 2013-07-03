@@ -4,6 +4,12 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JSeparator;
+
 /**
  *
  * @author Jeisson Andrés Vergara
@@ -17,6 +23,80 @@ public class AssignContract extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JButton getjButtonAsignar() {
+        return jButtonAsignar;
+    }
+
+    public void setjButtonAsignar(JButton jButtonAsignar) {
+        this.jButtonAsignar = jButtonAsignar;
+    }
+
+    public JButton getjButtonCancelar() {
+        return jButtonCancelar;
+    }
+
+    public void setjButtonCancelar(JButton jButtonCancelar) {
+        this.jButtonCancelar = jButtonCancelar;
+    }
+
+    public JComboBox getjComboBoxContract() {
+        return jComboBoxContract;
+    }
+
+    public void setjComboBoxContract(JComboBox jComboBoxContract) {
+        this.jComboBoxContract = jComboBoxContract;
+    }
+
+    public JComboBox getjComboBoxEmployee() {
+        return jComboBoxEmployee;
+    }
+
+    public void setjComboBoxEmployee(JComboBox jComboBoxEmployee) {
+        this.jComboBoxEmployee = jComboBoxEmployee;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JSeparator getjSeparator1() {
+        return jSeparator1;
+    }
+
+    public void setjSeparator1(JSeparator jSeparator1) {
+        this.jSeparator1 = jSeparator1;
+    }
+
+    public JSeparator getjSeparator2() {
+        return jSeparator2;
+    }
+
+    public void setjSeparator2(JSeparator jSeparator2) {
+        this.jSeparator2 = jSeparator2;
+    }
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,9 +109,9 @@ public class AssignContract extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jComboBoxEmployee = new javax.swing.JComboBox();
+        jComboBoxEmployee = new javax.swing.JComboBox(MainController.obtenerListaEmpTemp().toArray());
         jLabel3 = new javax.swing.JLabel();
-        jComboBoxContract = new javax.swing.JComboBox();
+        jComboBoxContract = new javax.swing.JComboBox(MainController.obtenerListaContratos().toArray());
         jButtonAsignar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jButtonCancelar = new javax.swing.JButton();
@@ -43,12 +123,9 @@ public class AssignContract extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel2.setText("Seleccionar Empleado:");
 
-        jComboBoxEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Empleado 1", "Empleado 2", "Empleado 3", "Empleado 4", "..." }));
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel3.setText("Seleccionar Contrato:");
 
-        jComboBoxContract.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Contrato 1", "Contrato 2", "Contrato 3", "..." }));
         jComboBoxContract.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxContractActionPerformed(evt);
@@ -65,6 +142,11 @@ public class AssignContract extends javax.swing.JPanel {
         });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -127,6 +209,11 @@ public class AssignContract extends javax.swing.JPanel {
     private void jButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAsignarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        MainController.helper.setVisible(false);
+        MainController.helper.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAsignar;

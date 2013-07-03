@@ -78,6 +78,7 @@ public class MainController {
     public static AddImplement adicionarImplemento;
     public static UpdateImplementList listaActualizarImplementos;
     public static UpdateImplement actualizarImplemento;
+    private static AssignContract asignarContrato;
 
     public static Map getConnectionPropierties() {
         return connectionPropierties;
@@ -368,6 +369,15 @@ public class MainController {
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), crearReplyNotice);
         helper.setTitle("Responder comunicado...");
+    }
+    
+    public static void mostrarFormularioAsignarContrato() {
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
+        asignarContrato = new AssignContract();
+        helper.setVisible(true);
+        DrawingUtilities.drawPanel(helper, helper.getViewport(), asignarContrato);
+        helper.setTitle("Asignar contrato...");
     }
 
     public static void mostrarFormularioCrearCliente() {
@@ -1058,6 +1068,15 @@ public class MainController {
         JOptionPane.showMessageDialog(agregarContrato, "¡Contrato agregado satisfactoriamente!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
 //        helper.setVisible(false);
 //        helper.dispose(); 
+    }
+    
+    public static List<String> obtenerListaContratos() {
+        List<ContratoVO> listaContratos = ServiceFactory.getInstance().getContratoService().getList();
+        List<String> lista = new ArrayList<>();
+        for (ContratoVO contrato : listaContratos) {
+            lista.add(contrato.getUbicacionCont());
+        }
+        return lista;
     }
 
     public static List<String> obtenerListaClientes() {

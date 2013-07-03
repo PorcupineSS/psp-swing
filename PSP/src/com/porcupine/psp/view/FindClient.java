@@ -4,6 +4,10 @@
  */
 package com.porcupine.psp.view;
 
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Zergio
@@ -16,6 +20,48 @@ public class FindClient extends javax.swing.JPanel {
     public FindClient() {
         initComponents();
     }
+
+    public JButton getjButtonBusqueda() {
+        return jButtonBusqueda;
+    }
+
+    public void setjButtonBusqueda(JButton jButtonBusqueda) {
+        this.jButtonBusqueda = jButtonBusqueda;
+    }
+
+    public JButton getjButtonCancelar() {
+        return jButtonCancelar;
+    }
+
+    public void setjButtonCancelar(JButton jButtonCancelar) {
+        this.jButtonCancelar = jButtonCancelar;
+    }
+
+    public JButton getjButtonDetalles() {
+        return jButtonDetalles;
+    }
+
+    public void setjButtonDetalles(JButton jButtonDetalles) {
+        this.jButtonDetalles = jButtonDetalles;
+    }
+
+    public JList getjListResultados() {
+        return jListResultados;
+    }
+
+    public void setjListResultados(JList jListResultados) {
+        this.jListResultados = jListResultados;
+    }
+
+    public JTextField getjTextFieldCampoBusqueda() {
+        return jTextFieldCampoBusqueda;
+    }
+
+    public void setjTextFieldCampoBusqueda(JTextField jTextFieldCampoBusqueda) {
+        this.jTextFieldCampoBusqueda = jTextFieldCampoBusqueda;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

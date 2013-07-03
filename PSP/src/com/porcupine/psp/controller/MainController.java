@@ -65,6 +65,7 @@ public class MainController {
     public static WriteNotice writeNotice;
     public static Secondary secondary;
     public static FindPerson findPerson;
+    public static FindClient findClient;
     public static BitacoraDisplay bitacora;
     public static String username;
     public static String selectedDB;
@@ -340,6 +341,26 @@ public class MainController {
         helper.setTitle("Crear comunicado...");
     }
 
+    public static void mostrarFormularioEncontrarClientes() {
+        helper2 = new Helper();
+        helper2.setLocationRelativeTo(null);
+        findClient = new FindClient();
+        helper2.setVisible(true);
+        DrawingUtilities.drawPanel(helper2, helper2.getViewport(), findClient);
+        helper2.setTitle("Listado de Clientes...");
+
+        List<ClienteVO> clientes = ServiceFactory.getInstance().getClienteService().getList();
+
+        DefaultListModel model = new DefaultListModel();
+
+        for (ClienteVO each : clientes) {
+            model.addElement(each.toCoolString());
+        }
+
+
+        findClient.getjListResultados().setModel(model);
+    }
+
     public static void mostrarFormularioReplyNotice() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
@@ -508,7 +529,7 @@ public class MainController {
         //TODO Llenar la tabla
     }
 
-    public void mostrarFormularioListarEmpleados() {
+    public static void mostrarFormularioListarEmpleados() {
         helper2 = new Helper();
         helper2.setLocationRelativeTo(null);
         findPerson = new FindPerson();
@@ -517,12 +538,17 @@ public class MainController {
         helper2.setTitle("Responder comunicado...");
 
         List<EmpleadosVO> empleados = ServiceFactory.getInstance().getEmpleadosService().getList();
-        ArrayList<String> output = new ArrayList<String>();
+
+        DefaultListModel model = new DefaultListModel();
+
         for (EmpleadosVO each : empleados) {
-            output.add(each.toCoolString());
+            model.addElement(each.toCoolString());
         }
 
-        findPerson.setjListResultados(new javax.swing.JList(output.toArray()));
+
+        findPerson.getjListResultados().setModel(model);
+
+
 
     }
 
@@ -533,6 +559,8 @@ public class MainController {
         String capturedValue = (String) findPerson.getjListResultados().getSelectedValue();
         String[] splitted = capturedValue.split(" ");
         empleado.setCedulaDirector(Integer.parseInt(splitted[0]));
+        
+        empleado.setCedulaEmpleado(Integer.parseInt(splitted[0]));
 
         try {
             empleado = ServiceFactory.getInstance().getEmpleadosService().find(empleado.getCedulaEmpleado());
@@ -543,12 +571,12 @@ public class MainController {
         ArrayList<String> listaRoles = new ArrayList<String>();
         listaRoles.add(empleado.getRol());
 
-        helper = new Helper();
-        helper.setLocationRelativeTo(null);
+        helper1 = new Helper();
+        helper1.setLocationRelativeTo(null);
         crearEmpleado = new CreateEmployee(listaRoles);
-        helper.setVisible(true);
+        helper1.setVisible(true);
         DrawingUtilities.drawPanel(helper1, helper1.getViewport(), crearEmpleado);
-        helper.setTitle("Consulta de empleado...");
+        helper1.setTitle("Consulta de empleado...");
 
         crearEmpleado.getjTextFieldCC().setText(empleado.getCedulaEmpleado().toString());
         crearEmpleado.getjTextFieldCC().setEnabled(false);
@@ -644,7 +672,7 @@ public class MainController {
 
         ClienteVO cliente = new ClienteVO();
 
-        cliente.setIdCliente(new Short(agregarCliente.getjTextFieldCC().getText()));
+
         cliente.setCedulaDirector(empleadoActivo.getCedulaEmpleado());
         cliente.setDireccionCliente(agregarCliente.getjTextFieldDireccion().getText());
         cliente.setFechaRegCliente(new Date());
@@ -815,6 +843,23 @@ public class MainController {
                 implSeguridadVO.getFechaRegIm().toString()};
             modelTable.addRow(datos);
         }
+    }
+    
+    public static void llenarTablaBitacora() {
+//        List<BitacoraSegVO> bitacoraList = ServiceFactory.getInstance().getBitacoraSegService().findByName(eliminarImplemento.getjTextFieldBuscar().getText());
+//        modelTable = (DefaultTableModel) eliminarImplemento.getjTableBusqueda().getModel();
+//        modelTable.getDataVector().removeAllElements();
+//        modelTable.fireTableDataChanged();
+//
+//        for (ImplSeguridadVO implSeguridadVO : implementosList) {
+//            Object[] datos = {new Short(implSeguridadVO.getIdImplemento()),
+//                implSeguridadVO.getNombreI(),
+//                implSeguridadVO.getPrecioUnitarioI(),
+//                new Short(implSeguridadVO.getCantidad()),
+//                implSeguridadVO.getEstadoI(),
+//                implSeguridadVO.getFechaRegIm().toString()};
+//            modelTable.addRow(datos);
+//        }
     }
 
     public void listarImplementos() {

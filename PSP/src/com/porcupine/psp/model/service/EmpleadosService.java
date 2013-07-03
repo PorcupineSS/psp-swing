@@ -160,7 +160,7 @@ public class EmpleadosService implements IService<EmpleadosVO, Integer> {
         if (empleado != null) {
             EmpleadosVO empleadoVO = empleado.toVO();
             if (empleadoVO.getRol() == TipoEmpleado.PLANTA){//Cambió
-                EmpPlantaVO empleadoPlanta = DAOFactory.getInstance().getEmpPlantaDAO().find(id).toVO();
+                EmpPlantaVO empleadoPlanta = (DAOFactory.getInstance().getEmpPlantaDAO().find(empleado.getCedulae())).toVO();
                 empleadoVO.setSueldoEmpleadoPlanta(Integer.parseInt(empleadoPlanta.getSueldoe().toString()));
             }
             return empleadoVO;

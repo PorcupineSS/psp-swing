@@ -1262,9 +1262,6 @@ public class MainController {
     public static void borrarContrato() {
     }
 
-    public static void asignarContrato() {
-    }
-
     public static void crearComunicacion() {
         ComunicadoVO comunicadoVO = new ComunicadoVO();
 

@@ -1225,6 +1225,22 @@ public class MainController {
         helper.dispose(); 
     }
     
+        public static void asignarContrato() {
+//        List<ContratoVO> contratos = ServiceFactory.getInstance().getContratoService().findByName(asignarContrato.getjComboBoxContract().getSelectedItem().toString());
+//        ContratoVO contrato = contratos.get(0);
+//        Short idContrato = contrato.getIdContrato();
+//        String[] empleadoSeleccionado = asignarContrato.getjComboBoxEmployee().getSelectedItem().toString().split(" ");
+//        System.out.println(empleadoSeleccionado[0]);
+//        Integer idEmpleadoTemporal = Integer.parseInt(empleadoSeleccionado[0]);
+//        Integer idCoordinador = empleadoActivo.getCedulaEmpleado();
+//        try {
+//            DAOFactory.getInstance().getContratoDAO().asignarContrato(idContrato, idEmpleadoTemporal, idCoordinador);
+//            JOptionPane.showMessageDialog(asignarImplementos, "¡La asignación del implemento al empleado " + empleadoSeleccionado[2] + ", ha sido exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(asignarImplementos, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+    }
+    
     public static List<String> obtenerListaContratos() {
         List<ContratoVO> listaContratos = ServiceFactory.getInstance().getContratoService().getList();
         List<String> lista = new ArrayList<>();

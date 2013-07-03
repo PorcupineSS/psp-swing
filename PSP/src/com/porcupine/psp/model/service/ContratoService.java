@@ -15,6 +15,8 @@ import com.porcupine.psp.model.entity.Contrato;
 import com.porcupine.psp.model.entity.DirComercial;
 import com.porcupine.psp.model.vo.ContratoVO;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
@@ -132,6 +134,26 @@ public class ContratoService implements IService<ContratoVO, Short> {
     @Override
     public void removeAll() throws NonexistentEntityException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<ContratoVO> findByName(String name) {
+        List<ContratoVO> list = new ArrayList<>();
+        for (Contrato contrato : DAOFactory.getInstance().getContratoDAO().findByName(name)) {
+            list.add((contrato).toVO());
+        }
+        Collections.sort(list, getComparatorContrato());
+        return list;
+    }
+    
+    private Comparator getComparatorContrato(){
+        return new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                ContratoVO i1 = (ContratoVO) o1;
+                ContratoVO i2 = (ContratoVO) o2;
+                return i1.getIdContrato().compareTo(i2.getIdContrato());
+            }
+        };
     }
     
 }

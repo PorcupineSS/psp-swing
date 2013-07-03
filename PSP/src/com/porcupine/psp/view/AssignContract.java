@@ -207,7 +207,7 @@ public class AssignContract extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBoxContractActionPerformed
 
     private void jButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignarActionPerformed
-        // TODO add your handling code here:
+        MainController.asignarContrato();
     }//GEN-LAST:event_jButtonAsignarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

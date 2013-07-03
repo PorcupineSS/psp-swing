@@ -156,5 +156,26 @@ public class ContratoDAO implements ICrudDAO<Contrato, Short> {
             }
         }
     }
+
+    public Iterable<Contrato> findByName(String name) {
+        EntityManager entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            List<Contrato> contratos;
+            Query q = entityManager.createQuery("SELECT u FROM Contrato u "
+                    + "WHERE u.nombreC LIKE :name ").setParameter("name", "%" + name + "%");
+            //Query q = entityManager.createNamedQuery("ImplSeguridad.findByNombreI").setParameter("nombreI", name);
+            contratos = q.getResultList();
+            return contratos;
+        } catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException("¡No existen contratos con nombre: " + name + "!");
+        } finally {
+            if (entityManager != null) {
+                entityManager.clear();
+                entityManager.close();
+            }
+        }
+    }
+        
     
 }

@@ -62,9 +62,12 @@ public class BitacoraDisplay extends javax.swing.JPanel {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Delete.png"))); // NOI18N
         jLabel3.setText("Consulta de Bitacora");
 
+        jDateChooser1.setEnabled(false);
+
         jLabel1.setText("Consultar por fecha:");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/FindMin.png"))); // NOI18N
+        jButton1.setEnabled(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

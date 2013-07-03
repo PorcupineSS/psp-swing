@@ -8,7 +8,9 @@ import com.porcupine.psp.model.dao.DAOFactory;
 import com.porcupine.psp.model.dao.exceptions.DataBaseException;
 import com.porcupine.psp.model.dao.exceptions.InsufficientPermissionsException;
 import com.porcupine.psp.model.dao.exceptions.InternalErrorException;
+import com.porcupine.psp.model.dao.exceptions.InvalidAttributeException;
 import com.porcupine.psp.model.dao.exceptions.NonexistentEntityException;
+import com.porcupine.psp.model.dao.exceptions.RequiredAttributeException;
 import com.porcupine.psp.model.entity.ImplSeguridad;
 import com.porcupine.psp.model.entity.Proveedor;
 import com.porcupine.psp.model.service.ServiceFactory;
@@ -290,7 +292,7 @@ public class MainController {
         DrawingUtilities.drawPanel(helper, helper.getViewport(), adicionarImplemento);
         helper.setTitle("Porcupine Software Portal");
     }
-    
+
     public static void mostrarFormularioListaActualizarImplementos() {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
@@ -299,20 +301,22 @@ public class MainController {
         DrawingUtilities.drawPanel(helper, helper.getViewport(), listaActualizarImplementos);
         helper.setTitle("Porcupine Software Portal");
     }
-    
+
     public static void mostrarFormularioActualizarImplemento(Short idImplemento) throws EntityNotFoundException, InsufficientPermissionsException {
         helper = new Helper();
         helper.setLocationRelativeTo(null);
         actualizarImplemento = new UpdateImplement();
         ImplSeguridadVO implemento = ServiceFactory.getInstance().getImplSeguridadService().find(idImplemento);
+        actualizarImplemento.getjTextFieldId().setText(implemento.getIdImplemento().toString());
         actualizarImplemento.getjTextFieldNombre().setText(implemento.getNombreI());
         actualizarImplemento.getjTextFieldValorUnitario().setText(implemento.getPrecioUnitarioI().toString());
         Short cantidad = implemento.getCantidad();
         actualizarImplemento.getjTextFieldCantidad().setText(cantidad.toString());
         actualizarImplemento.getjComboBoxEstado().setSelectedItem(implemento.getEstadoI());
-        actualizarImplemento.getjTextAreaDescripcion().setText(implemento.getDescripcionI());      
+        actualizarImplemento.getjTextAreaDescripcion().setText(implemento.getDescripcionI());
         ProveedorVO proveedor = ServiceFactory.getInstance().getProveedorService().find(implemento.getIdPro());
         actualizarImplemento.getjComboBoxProveedor().setSelectedItem(proveedor.getNombre());
+        actualizarImplemento.getjTextFieldFechaRegistro().setText(implemento.getFechaRegIm().toString());
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), actualizarImplemento);
         helper.setTitle("Porcupine Software Portal");
@@ -500,7 +504,7 @@ public class MainController {
         helper2.setVisible(true);
         DrawingUtilities.drawPanel(helper2, helper2.getViewport(), bitacora);
         helper2.setTitle("Consulta de Bitacora...");
-        
+
         //TODO Llenar la tabla
     }
 
@@ -843,7 +847,7 @@ public class MainController {
         }
         modelTable.fireTableDataChanged();
     }
-    
+
     public static void busquedaSencilla() {
         modelTable = (DefaultTableModel) listaActualizarImplementos.getjTableBusqueda().getModel();
         modelTable.getDataVector().removeAllElements();
@@ -862,15 +866,16 @@ public class MainController {
         }
         modelTable.fireTableDataChanged();
     }
-    
+
     public static void actualizarImplemento() {
+
         ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
-        //implSeguridadVO.setIdImplemento(new Integer(1).shortValue());
+        implSeguridadVO.setIdImplemento(new Short(actualizarImplemento.getjTextFieldId().getText()));
         implSeguridadVO.setNombreI(actualizarImplemento.getjTextFieldNombre().getText());
         implSeguridadVO.setPrecioUnitarioI(new BigDecimal(actualizarImplemento.getjTextFieldValorUnitario().getText()));
         implSeguridadVO.setCantidad(new Short(actualizarImplemento.getjTextFieldCantidad().getText()));
         implSeguridadVO.setEstadoI(actualizarImplemento.getjComboBoxEstado().getSelectedItem().toString());
-        //implSeguridadVO.setFechaRegIm(new Date());
+        implSeguridadVO.setFechaRegIm(new Date());
         implSeguridadVO.setDescripcionI(actualizarImplemento.getjTextAreaDescripcion().getText());
         String nombreProveedor = actualizarImplemento.getjComboBoxProveedor().getSelectedItem().toString();
         Short idProveedor = ServiceFactory.getInstance().getProveedorService().findName(nombreProveedor);
@@ -878,9 +883,14 @@ public class MainController {
         implSeguridadVO.setCedulaCoordTyT(empleadoActivo.getCedulaEmpleado());
         try {
             ServiceFactory.getInstance().getImplSeguridadService().update(implSeguridadVO);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(actualizarImplemento, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RequiredAttributeException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidAttributeException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InsufficientPermissionsException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
         JOptionPane.showMessageDialog(actualizarImplemento, "¡Implemento actualizado satisfactoriamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         secondary.setVisible(false);

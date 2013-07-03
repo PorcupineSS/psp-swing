@@ -111,6 +111,8 @@ public class ImplSeguridadDAO implements ICrudDAO<ImplSeguridad, Short> {
                 entityManager.close();
             }
         }
+        //"UPDATE ImplSeguridad u SET u.nombreI = :nombre, u.precioUnitarioI = :precioUnitario, u.cantidad = :cantidad, u.descripcionI = :descripcion, u.estadoI = :estado").setParameter(nombre, precioUnitario, cantidad, descripcion, estado);
+        
     }
 
     @Override

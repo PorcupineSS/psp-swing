@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
@@ -20,6 +21,9 @@ import javax.swing.plaf.ComponentUI;
  * @author Jeisson Andrés Vergara
  */
 public class WriteNotice extends javax.swing.JPanel {
+    
+    public static final String COMUNICADO_VACIO_CONTRA_VALIDACION = "¡Debe ingresar el contenido del comunicado!";
+
 
     /**
      * Creates new form WriteNotice
@@ -130,6 +134,14 @@ public class WriteNotice extends javax.swing.JPanel {
 
     public void setListenerList(EventListenerList listenerList) {
         this.listenerList = listenerList;
+    }
+    
+    public boolean validarComunicado(String str) {
+        if (str.length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
     
     /**
@@ -253,7 +265,11 @@ public class WriteNotice extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckBoxUrgenteActionPerformed
 
     private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
-        MainController.crearComunicacion();
+        if(validarComunicado(getjTextAreaComunicado().getText())){
+            MainController.crearComunicacion();
+        }else{
+            JOptionPane.showMessageDialog(this, COMUNICADO_VACIO_CONTRA_VALIDACION, "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonEnviarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

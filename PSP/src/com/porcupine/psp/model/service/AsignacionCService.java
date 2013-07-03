@@ -15,6 +15,7 @@ import com.porcupine.psp.model.entity.Contrato;
 import com.porcupine.psp.model.entity.CoordContrato;
 import com.porcupine.psp.model.entity.EmpTemp;
 import com.porcupine.psp.model.vo.AsignacionCVO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
@@ -42,31 +43,64 @@ public class AsignacionCService implements IService<AsignacionCVO, Short>{
             asignacionC.setCooCedulae(coordinador);
         }
         
-        /*if (vo.getCedulaEmpTemp() != null) {
-            EmpTemp empleado = DAOFactory.getInstance().getEmpTempDAO().find(vo.getCedulaEmpTemp());
-            asignacionC.setEmpTempCedulae(empleado);
-        }*/
+//        if (vo.getCedulaEmpTemp() != null) {
+//            EmpTemp empleado = DAOFactory.getInstance().getEmpTempDAO().find(vo.getCedulaEmpTemp());
+//            asignacionC.setEmpTempCedulae(empleado);
+//        }
         
     }
 
     @Override
     public AsignacionCVO find(Short id) throws EntityNotFoundException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        AsignacionC asignacionC = DAOFactory.getInstance().getAsignacionCDAO().find(id);
+        if (asignacionC != null) {
+            return asignacionC.toVO();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public void update(AsignacionCVO vo) throws NonexistentEntityException, RequiredAttributeException, InvalidAttributeException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        AsignacionC asignacionC = new AsignacionC();
+        
+        asignacionC.setFechaAsignacionC(vo.getFechaAsignacionC());
+        asignacionC.setHorarioAsignado(vo.getHorarioAsignado());
+        asignacionC.setIdAsig(vo.getIdAsig());
+        
+        if (vo.getIdContrato() != null) {
+            Contrato contrato = DAOFactory.getInstance().getContratoDAO().find(new Short(vo.getIdContrato()));
+            asignacionC.setIdContrato(contrato);
+        }
+        
+        if (vo.getCedulaCoordCont() != null) {
+            CoordContrato coordinador = DAOFactory.getInstance().getCoordContratoDAO().find(vo.getCedulaCoordCont());
+            asignacionC.setCooCedulae(coordinador);
+        }
+        
+//        if (vo.getCedulaEmpTemp() != null) {
+//            EmpTemp empleado = DAOFactory.getInstance().getEmpTempDAO().find(vo.getCedulaEmpTemp());
+//            asignacionC.setEmpTempCedulae(empleado);
+//        }
+        
     }
 
     @Override
     public void delete(Short id) throws NonexistentEntityException, InsufficientPermissionsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        AsignacionC asignacionC = DAOFactory.getInstance().getAsignacionCDAO().find(id);
+        if (asignacionC != null) {
+            DAOFactory.getInstance().getAsignacionCDAO().delete(id);
+        }
     }
 
     @Override
     public List<AsignacionCVO> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<AsignacionCVO> listaVO = new ArrayList<AsignacionCVO>();
+        List<AsignacionC> ListaAsignacion = DAOFactory.getInstance().getAsignacionCDAO().getList();
+        for (AsignacionC asignacion : ListaAsignacion) {
+            listaVO.add(asignacion.toVO());
+        }
+        return listaVO;
     }
 
     @Override

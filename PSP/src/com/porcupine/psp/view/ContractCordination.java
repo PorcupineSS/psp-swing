@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
 import javax.swing.JLabel;
 
 
@@ -142,11 +143,14 @@ public class ContractCordination extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
-        // TODO add your handling code here:
+        MainController.psp.setVisible(false);
+        MainController.psp.dispose();
+        MainController.setEmpleadoActivo(null);
+        MainController.mostrarLogin();
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jButtonAssignIContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssignIContractActionPerformed
-        
+        MainController.mostrarFormularioAsignarContrato();
     }//GEN-LAST:event_jButtonAssignIContractActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

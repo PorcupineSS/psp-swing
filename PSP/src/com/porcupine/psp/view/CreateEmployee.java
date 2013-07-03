@@ -430,13 +430,24 @@ public class CreateEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        if (validarCampos()) {
-            MainController.registrarEmpleado();
-            MainController.helper.setVisible(false);
-            MainController.helper.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Revisa los valores ingresados, algo no esta bien!", "Error", JOptionPane.INFORMATION_MESSAGE, null);
+
+        if (jButtonGuardar.getText() == "Guardar") {
+            if (validarCampos()) {
+                MainController.registrarEmpleado();
+                MainController.helper.setVisible(false);
+                MainController.helper.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Revisa los valores ingresados, algo no esta bien!", "Error", JOptionPane.INFORMATION_MESSAGE, null);
+            }
         }
+
+        if (jButtonGuardar.getText() == "Modificar") {
+        }
+
+        if (jButtonGuardar.getText() == "Actualizar") {
+        }
+
+
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

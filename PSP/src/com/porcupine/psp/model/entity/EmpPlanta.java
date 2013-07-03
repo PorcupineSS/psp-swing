@@ -162,7 +162,9 @@ public class EmpPlanta implements Serializable {
         EmpPlantaVO empleado = new EmpPlantaVO();
         empleado.setCedulae(this.getCedulae());
         empleado.setSueldoe(this.getSueldoe());
-        empleado.setEmpleados(this.getEmpleados().getCedulae());
+        if (this.getEmpleados().getCedulae() != null) {
+            empleado.setEmpleados(this.getEmpleados().getCedulae());
+        }
 
         if (this.getCoordContrato() != null) {
             empleado.setCoordContrato(this.getCoordContrato().getCedulae());

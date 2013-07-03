@@ -92,4 +92,8 @@ public class DAOFactory {
     public AsignacionCDAO getAsignacionCDAO(){
         return new AsignacionCDAO(PU, propierties);
     }
+    
+    public BitacoraSegDAO getBitacoraSegDAO() {
+        return new BitacoraSegDAO(PU, propierties);
+    }
 }

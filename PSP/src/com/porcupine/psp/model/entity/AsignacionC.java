@@ -152,14 +152,19 @@ public class AsignacionC implements Serializable {
         
         AsignacionCVO asignacionC = new AsignacionCVO();
         
-        asignacionC.setCedulaCoordCont(getCooCedulae().getCedulae());
-        //asignacionC.setCedulaEmpTemp(empTempCedulae);//Revisar este
+        //asignacionC.setCedulaCoordCont(getCooCedulae().getCedulae());
+        asignacionC.setCedulaEmpTemp(getEmpTempCedulae());//Revisar este
         asignacionC.setFechaAsignacionC(fechaAsignacionC);
         asignacionC.setHorarioAsignado(horarioAsignado);
         asignacionC.setIdAsig(idAsig);
         asignacionC.setIdContrato(getIdContrato().getIdContrato());
         
         //Revisar esto de abajo
+        
+        if (getCooCedulae() != null) {
+            asignacionC.setCedulaCoordCont(getCooCedulae().getCedulae());
+        }
+        
         ArrayList<EmpTempVO> listAsigEmpTempVO = new ArrayList<EmpTempVO>();
         for(EmpTemp entity : getEmpTempList()){
            listAsigEmpTempVO.add(entity.toVO());            

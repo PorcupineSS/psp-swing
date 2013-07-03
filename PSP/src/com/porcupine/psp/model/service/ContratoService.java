@@ -59,7 +59,10 @@ public class ContratoService implements IService<ContratoVO, Short> {
         if(vo.getCedulaDirComer() != 0){
             DirComercial dirComercial = DAOFactory.getInstance().getDirComercialDAO().find(vo.getCedulaDirComer());
             entity.setCedulae(dirComercial);
+            
+            //Despues de hacer debug en este metodo sale la excepcion
             dirComercial.getContratoList().add(entity);
+            System.out.println("prueba askldnalsfnaiodfh");
         }
         
         DAOFactory.getInstance().getContratoDAO().create(entity);

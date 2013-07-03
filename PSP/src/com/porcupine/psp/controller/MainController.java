@@ -303,8 +303,6 @@ public class MainController {
     }
 
     public static void mostrarFormularioActualizarImplemento(Short idImplemento) throws EntityNotFoundException, InsufficientPermissionsException {
-        helper = new Helper();
-        helper.setLocationRelativeTo(null);
         actualizarImplemento = new UpdateImplement();
         ImplSeguridadVO implemento = ServiceFactory.getInstance().getImplSeguridadService().find(idImplemento);
         actualizarImplemento.getjTextFieldId().setText(implemento.getIdImplemento().toString());
@@ -316,7 +314,9 @@ public class MainController {
         actualizarImplemento.getjTextAreaDescripcion().setText(implemento.getDescripcionI());
         ProveedorVO proveedor = ServiceFactory.getInstance().getProveedorService().find(implemento.getIdPro());
         actualizarImplemento.getjComboBoxProveedor().setSelectedItem(proveedor.getNombre());
-        actualizarImplemento.getjTextFieldFechaRegistro().setText(implemento.getFechaRegIm().toString());
+        helper.setVisible(false);
+        helper = new Helper();
+        helper.setLocationRelativeTo(null);
         helper.setVisible(true);
         DrawingUtilities.drawPanel(helper, helper.getViewport(), actualizarImplemento);
         helper.setTitle("Porcupine Software Portal");
@@ -868,7 +868,6 @@ public class MainController {
     }
 
     public static void actualizarImplemento() {
-
         ImplSeguridadVO implSeguridadVO = new ImplSeguridadVO();
         implSeguridadVO.setIdImplemento(new Short(actualizarImplemento.getjTextFieldId().getText()));
         implSeguridadVO.setNombreI(actualizarImplemento.getjTextFieldNombre().getText());

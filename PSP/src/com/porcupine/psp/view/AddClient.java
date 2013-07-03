@@ -20,6 +20,14 @@ public class AddClient extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JTextField getjTextFieldIdCliente() {
+        return jTextFieldIdCliente;
+    }
+
+    public void setjTextFieldIdCliente(JTextField jTextFieldIdCliente) {
+        this.jTextFieldIdCliente = jTextFieldIdCliente;
+    }
+
     public boolean validarCampos() {
         if (jTextFieldNombre.getText().length() < 3 || jTextFieldNombre.getText().length() > 20) {
             return false;
@@ -131,6 +139,7 @@ public class AddClient extends javax.swing.JPanel {
         jButtonGuardar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonEncontrarContrato = new javax.swing.JButton();
+        jTextFieldIdCliente = new javax.swing.JTextField();
 
         jLabelWindowName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelWindowName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/AddClient.png"))); // NOI18N
@@ -192,6 +201,13 @@ public class AddClient extends javax.swing.JPanel {
             }
         });
 
+        jTextFieldIdCliente.setEnabled(false);
+        jTextFieldIdCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIdClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,7 +242,10 @@ public class AddClient extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldNombre)
-                            .addComponent(jTextFieldDireccion))))
+                            .addComponent(jTextFieldDireccion)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextFieldIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addComponent(jSeparator1)
         );
@@ -235,8 +254,10 @@ public class AddClient extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelWindowName)
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jTextFieldIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -333,6 +354,10 @@ public class AddClient extends javax.swing.JPanel {
     private void jButtonEncontrarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncontrarContratoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEncontrarContratoActionPerformed
+
+    private void jTextFieldIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIdClienteActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonCancelar;
@@ -348,6 +373,7 @@ public class AddClient extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextFieldDireccion;
+    private javax.swing.JTextField jTextFieldIdCliente;
     private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
 }

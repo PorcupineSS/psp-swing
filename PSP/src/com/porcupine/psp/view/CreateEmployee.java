@@ -276,6 +276,14 @@ public class CreateEmployee extends javax.swing.JPanel {
             }
 
         }
+        if (jTextFieldCC.getText().length() < 2 || jTextFieldCC.getText().length() > 12) {
+            try {
+                int s = Integer.parseInt(jTextFieldCC.getText());
+            } catch (Exception e) {
+                return false;
+            }
+
+        }
         if (jTextFieldContraseña.getText().length() < 10 || jTextFieldContraseña.getText().length() > 16) {
             return false;
         }

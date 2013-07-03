@@ -621,8 +621,12 @@ public class MainController {
             telefonos.add(each.getNumeroTelefonoEmpleado());
         }
 
-        crearEmpleado.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
-        crearEmpleado.getjListTelefono().setEnabled(false);
+        if (!telefonos.isEmpty()) {
+            crearEmpleado.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
+        }
+
+        crearEmpleado.getjButtonAgregar().setEnabled(false);
+        crearEmpleado.getjButtonRemover().setEnabled(false);
 
         crearEmpleado.getjButtonGuardar().setText("Modificar");
 
@@ -873,11 +877,113 @@ public class MainController {
     }
 
     public static void actualizarEmpleado() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        EmpleadosVO empleado = new EmpleadosVO();
+        empleado.setNombreEmpleado(crearEmpleado.getjTextFieldNombres().getText());
+        empleado.setApellidoEmpleado(crearEmpleado.getjTextFieldApellidos().getText());
+        empleado.setCedulaEmpleado(Integer.parseInt(crearEmpleado.getjTextFieldCC().getText()));
+        empleado.setContraseniaEmpleado(crearEmpleado.getjTextFieldContraseña().getText());
+        empleado.setRol(crearEmpleado.getjComboBoxTipoEmpleado().getSelectedItem().toString());
+
+        //No hay problema en bd si es nulo
+        if (getEmpleadoActivo() != null) {
+            empleado.setCedulaDirector(getEmpleadoActivo().getCedulaEmpleado());
+        }
+        //Vos Externos
+
+        if (agregarCliente.getjListTelefono().getModel().getSize() != 0) {
+
+            DefaultListModel model = (DefaultListModel) crearEmpleado.getjListTelefono().getModel();
+
+            ArrayList<String> tels = new ArrayList<String>();
+            for (int x = 0; x < model.size(); x++) {
+                String tel = (String) model.elementAt(x);
+                tels.add(tel);
+            }
+
+
+
+            //Se agrega cada telefono
+            List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+            for (String each : tels) {
+
+                TelefonosVO temp = new TelefonosVO();
+                temp.setNumeroTelefonoEmpleado(each);
+                telefonos.add(temp);
+
+            }
+
+            empleado.setTelsEmpList(telefonos);
+
+        }
+
+        try {
+            ServiceFactory.getInstance().getEmpleadosService().update(empleado);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            int opcion = JOptionPane.showOptionDialog(crearEmpleado, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
+            switch (opcion) {
+                case JOptionPane.OK_OPTION:
+                    reportarError(ex, crearEmpleado);
+                    break;
+                case JOptionPane.CANCEL_OPTION:
+                    break;
+            }
+            return;
+        }
     }
 
     public static void actualizarCliente() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        ClienteVO cliente = new ClienteVO();
+
+
+        cliente.setCedulaDirector(empleadoActivo.getCedulaEmpleado());
+        cliente.setDireccionCliente(agregarCliente.getjTextFieldDireccion().getText());
+        cliente.setFechaRegCliente(new Date());
+        cliente.setIdCliente(new Short(agregarCliente.getjTextFieldIdCliente().getText()));
+        //No debería ser necesario
+        //cliente.setIdCliente(Short.MIN_VALUE);
+        cliente.setNombreCliente(agregarCliente.getjTextFieldNombre().getText());
+
+        if (agregarCliente.getjListTelefono().getModel().getSize() != 0) {
+
+            DefaultListModel model = (DefaultListModel) agregarCliente.getjListTelefono().getModel();
+
+            ArrayList<String> tels = new ArrayList<String>();
+            for (int x = 0; x < model.size(); x++) {
+                String tel = (String) model.elementAt(x);
+                tels.add(tel);
+            }
+
+            //Se agrega cada telefono
+            List<TelefonosVO> telefonos = new ArrayList<TelefonosVO>();
+            for (String each : tels) {
+
+                TelefonosVO temp = new TelefonosVO();
+                temp.setNumeroTelefonoEmpleado(each);
+                telefonos.add(temp);
+
+            }
+
+            cliente.setTelsCliList(telefonos);
+
+        }
+
+
+
+        try {
+            ServiceFactory.getInstance().getClienteService().update(cliente);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            int opcion = JOptionPane.showOptionDialog(agregarCliente, ex.getMessage() + "\n" + ex.getCause().getMessage(), "Error", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Reportar Error", "Cancelar"}, "Cancelar");
+            switch (opcion) {
+                case JOptionPane.OK_OPTION:
+                    reportarError(ex, agregarCliente);
+                    break;
+                case JOptionPane.CANCEL_OPTION:
+                    break;
+            }
+            return;
+        }
     }
 
     public static void consultarCliente() {
@@ -888,7 +994,7 @@ public class MainController {
         String[] splitted = capturedValue.split(" ");
         empleado.setIdCliente(new Short(splitted[0]));
 
-        
+
         try {
             empleado = ServiceFactory.getInstance().getClienteService().find(empleado.getIdCliente());
         } catch (Exception ex) {
@@ -906,18 +1012,23 @@ public class MainController {
         agregarCliente.getjTextFieldDireccion().setEnabled(false);
         agregarCliente.getjTextFieldNombre().setText(empleado.getNombreCliente());
         agregarCliente.getjTextFieldNombre().setEnabled(false);
-        
-      
+
+
 
         ArrayList<String> telefonos = new ArrayList<String>();
         for (TelefonosVO each : empleado.getTelsCliList()) {
             telefonos.add(each.getNumeroTelefonoEmpleado());
         }
 
-        crearEmpleado.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
-        crearEmpleado.getjListTelefono().setEnabled(false);
+        if (!telefonos.isEmpty()) {
+            agregarCliente.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
+        }
 
-        crearEmpleado.getjButtonGuardar().setText("Modificar");
+        agregarCliente.getjTextFieldIdCliente().setText(empleado.getIdCliente().toString());
+        agregarCliente.getjButtonAgregar().setEnabled(false);
+        agregarCliente.getjButtonRemover().setEnabled(false);
+
+        agregarCliente.getjButtonGuardar().setText("Modificar");
     }
 
     public void listarImplementos() {
@@ -1037,7 +1148,7 @@ public class MainController {
             JOptionPane.showMessageDialog(asignarImplementos, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public static void despojarImplemento() {
         List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(asignarImplementos.getjComboBoxImplemento().getSelectedItem().toString());
         ImplSeguridadVO implemento = implementos.get(0);
@@ -1161,6 +1272,4 @@ public class MainController {
 
     public static void listarComunicacion() {
     }
-
-      
 }

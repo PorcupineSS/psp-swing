@@ -611,8 +611,12 @@ public class MainController {
             telefonos.add(each.getNumeroTelefonoEmpleado());
         }
 
-        crearEmpleado.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
-        crearEmpleado.getjListTelefono().setEnabled(false);
+        if (!telefonos.isEmpty()) {
+            crearEmpleado.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
+        }
+        
+        crearEmpleado.getjButtonAgregar().setEnabled(false);
+        crearEmpleado.getjButtonRemover().setEnabled(false);
 
         crearEmpleado.getjButtonGuardar().setText("Modificar");
 
@@ -878,7 +882,7 @@ public class MainController {
         String[] splitted = capturedValue.split(" ");
         empleado.setIdCliente(new Short(splitted[0]));
 
-        
+
         try {
             empleado = ServiceFactory.getInstance().getClienteService().find(empleado.getIdCliente());
         } catch (Exception ex) {
@@ -896,16 +900,20 @@ public class MainController {
         agregarCliente.getjTextFieldDireccion().setEnabled(false);
         agregarCliente.getjTextFieldNombre().setText(empleado.getNombreCliente());
         agregarCliente.getjTextFieldNombre().setEnabled(false);
-        
-      
+
+
 
         ArrayList<String> telefonos = new ArrayList<String>();
         for (TelefonosVO each : empleado.getTelsCliList()) {
             telefonos.add(each.getNumeroTelefonoEmpleado());
         }
 
-        crearEmpleado.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
-        crearEmpleado.getjListTelefono().setEnabled(false);
+        if (!telefonos.isEmpty()) {
+            crearEmpleado.setjListTelefono(new javax.swing.JList(telefonos.toArray()));
+        }
+        
+        crearEmpleado.getjButtonAgregar().setEnabled(false);
+        crearEmpleado.getjButtonRemover().setEnabled(false);
 
         crearEmpleado.getjButtonGuardar().setText("Modificar");
     }
@@ -1027,7 +1035,7 @@ public class MainController {
             JOptionPane.showMessageDialog(asignarImplementos, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public static void despojarImplemento() {
         List<ImplSeguridadVO> implementos = ServiceFactory.getInstance().getImplSeguridadService().findByName(asignarImplementos.getjComboBoxImplemento().getSelectedItem().toString());
         ImplSeguridadVO implemento = implementos.get(0);
@@ -1142,6 +1150,4 @@ public class MainController {
 
     public static void listarComunicacion() {
     }
-
-      
 }

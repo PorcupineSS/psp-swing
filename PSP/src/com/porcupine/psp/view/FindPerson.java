@@ -54,10 +54,13 @@ public class FindPerson extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/Find.png"))); // NOI18N
         jLabel1.setText("Buscar Persona");
 
+        jTextFieldBuscar.setEnabled(false);
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel2.setText("Por favor ingresar C.C. o Código:");
 
         jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/FindMin.png"))); // NOI18N
+        jButtonBuscar.setEnabled(false);
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscarActionPerformed(evt);

@@ -108,6 +108,9 @@ public class FindClient extends javax.swing.JPanel {
         });
 
         jButtonBusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/porcupine/psp/resources/FindMin.png"))); // NOI18N
+        jButtonBusqueda.setEnabled(false);
+
+        jTextFieldCampoBusqueda.setEnabled(false);
 
         jListResultados.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };

@@ -4,6 +4,7 @@
  */
 package com.porcupine.psp.view;
 
+import com.porcupine.psp.controller.MainController;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JTable;
 
@@ -94,6 +95,11 @@ public class BitacoraDisplay extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jButtonCerrar.setText("Cerrar");
+        jButtonCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -145,6 +151,12 @@ public class BitacoraDisplay extends javax.swing.JPanel {
                 .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
+        MainController.helper2.setVisible(false);
+        MainController.helper2.dispose();
+    }//GEN-LAST:event_jButtonCerrarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCerrar;

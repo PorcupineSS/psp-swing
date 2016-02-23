@@ -155,7 +155,7 @@ public class MainController {
     }
 
     //</editor-fold>
-    //Clases de muestra
+    //Clases de muestra//
     public static void mostrarLogin() {
         psp = new Psp();
         psp.setLocationRelativeTo(null);
